@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:practice_themes/src/utils/constants/constant.dart';
-import 'package:practice_themes/src/utils/themes/themedata.dart';
-import 'package:practice_themes/src/screens/home.dart';
+import 'package:sample_application/src/utils/constants/constant.dart';
+import 'package:sample_application/src/utils/themes/themedata.dart';
+import 'package:sample_application/src/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
