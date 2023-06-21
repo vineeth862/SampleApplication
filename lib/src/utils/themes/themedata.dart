@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 final ThemeData theme = ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: Colors.deepPurple,
   fontFamily: 'Lato',
   colorScheme: const ColorScheme(
-    primary: Color.fromRGBO(206, 147, 216, 1), // Light purple color
-    primaryContainer: Color.fromRGBO(176, 94, 191, 1),
+    primary: Color.fromRGBO(199, 96, 218, 1), // Light purple color
+    primaryContainer: Color(0xFFBA61CA),
     secondary: Color.fromRGBO(206, 147, 216, 1), // Light purple color
     secondaryContainer: Color.fromRGBO(176, 94, 191, 1),
     surface: Colors.white,
@@ -13,7 +15,7 @@ final ThemeData theme = ThemeData(
     onPrimary: Colors.white,
     onSecondary: Colors.white,
     onSurface: Colors.black,
-    onBackground: Colors.black,
+    onBackground: Color.fromARGB(253, 31, 30, 30),
     onError: Colors.white,
     brightness: Brightness.light,
   ),
