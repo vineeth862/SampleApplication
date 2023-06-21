@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_themes/src/screens/signup.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -9,12 +10,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void onSelectSignup(BuildContext context) {
+    //Navigator.of(context).push(route)
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => SignupPage(),
+      ),
+    );
   }
 
   @override
@@ -31,25 +34,20 @@ class _HomePageState extends State<HomePage> {
         ),
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        actions: [
+          TextButton(
+            onPressed: () {
+              onSelectSignup(context);
+            },
+            child: Text(
+              'Sign Up',
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }

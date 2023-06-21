@@ -5,10 +5,10 @@ final ThemeData theme = ThemeData(
   primarySwatch: Colors.deepPurple,
   fontFamily: 'Lato',
   colorScheme: const ColorScheme(
-    primary: Color.fromRGBO(199, 96, 218, 1), // Light purple color
-    primaryContainer: Color(0xFFBA61CA),
-    secondary: Color.fromRGBO(206, 147, 216, 1), // Light purple color
-    secondaryContainer: Color.fromRGBO(176, 94, 191, 1),
+    primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
+    primaryContainer: Color.fromRGBO(176, 113, 187, 1),
+    secondary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
+    secondaryContainer: Color.fromRGBO(176, 113, 187, 1),
     surface: Colors.white,
     background: Colors.white,
     error: Colors.red,
