@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practice_themes/src/screens/signup.dart';
+import 'package:sample_application/src/screens/login.dart';
+import "package:sample_application/src/screens/signup.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -16,6 +17,16 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (ctx) => SignupPage(),
+      ),
+    );
+  }
+
+  void onSelectLogin(BuildContext context) {
+    //Navigator.of(context).push(route)
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => LoginScreen(),
       ),
     );
   }
@@ -41,6 +52,18 @@ class _HomePageState extends State<HomePage> {
             },
             child: Text(
               'Sign Up',
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              onSelectLogin(context);
+            },
+            child: Text(
+              'Login',
               style: Theme.of(context)
                   .textTheme
                   .displayLarge!

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/screens/login.dart';
 //import 'package:http/http.dart' as http;
 
 //import 'package:get/get.dart';
@@ -50,6 +51,16 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
 
+  void onSelectLogin(BuildContext context) {
+    //Navigator.of(context).push(route)
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => LoginScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //final controller = Get.put(AuthenticationRepository());
@@ -81,70 +92,85 @@ class _SignupPageState extends State<SignupPage> {
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const SizedBox(height: 10.0),
-                    TextFormField(
-                      controller: NameController,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Name field cannot be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15.0),
-                    TextFormField(
-                      controller: EmailController,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email),
-                        //errorText: emailExists ? 'Email already exists' : null,
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty || value == null) {
-                          return "Email field cannot be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15.0),
-                    TextFormField(
-                      controller: phoneNoController,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Mobile No.',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.phone),
+                    Container(
+                      height: 45,
+                      child: TextFormField(
+                        controller: NameController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          labelText: 'Name',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.person),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Name field cannot be empty";
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     const SizedBox(height: 15.0),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock),
+                    Container(
+                      height: 45,
+                      child: TextFormField(
+                        controller: EmailController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email),
+                          //errorText: emailExists ? 'Email already exists' : null,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty || value == null) {
+                            return "Email field cannot be empty";
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     const SizedBox(height: 15.0),
-                    TextFormField(
-                      controller: confirmPasswordController,
-                      obscureText: true,
-                      onChanged: (_) => validatePasswords(),
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.fingerprint),
-                        errorText:
-                            passwordMatch ? null : 'Passwords do not match',
+                    Container(
+                      height: 45,
+                      child: TextFormField(
+                        controller: phoneNoController,
+                        obscureText: false,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Mobile No.',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.phone),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15.0),
+                    Container(
+                      height: 45,
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.lock),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15.0),
+                    Container(
+                      height: 45,
+                      child: TextFormField(
+                        controller: confirmPasswordController,
+                        obscureText: true,
+                        onChanged: (_) => validatePasswords(),
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          border: const OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.fingerprint),
+                          errorText:
+                              passwordMatch ? null : 'Passwords do not match',
+                        ),
                       ),
                     ),
                     const SizedBox(height: 30.0),
@@ -167,15 +193,27 @@ class _SignupPageState extends State<SignupPage> {
                         padding: EdgeInsets.symmetric(horizontal: 100.0),
                       ),
                     ),
-                    const SizedBox(height: 10.0),
-                    TextButton(
-                      onPressed: () {
-                        // Navigate to login page
-                      },
-                      child: Text(
-                        'Already have an account? Log in',
-                        style: Theme.of(context).textTheme.titleLarge!,
-                      ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 45,
+                        ),
+                        Text("Already have an account?"),
+                        TextButton(
+                          onPressed: () {
+                            onSelectLogin(context);
+                          },
+                          child: Text(
+                            'Login',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
