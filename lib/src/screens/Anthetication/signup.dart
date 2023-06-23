@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/screens/login.dart';
+import 'package:sample_application/src/screens/Anthetication/login.dart';
 //import 'package:http/http.dart' as http;
 
 //import 'package:get/get.dart';

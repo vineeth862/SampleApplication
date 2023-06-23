@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/screens/login.dart';
-import "package:sample_application/src/screens/signup.dart";
+import 'package:sample_application/src/screens/Anthetication/login.dart';
+import 'package:sample_application/src/screens/Anthetication/signup.dart';
 import 'package:sample_application/src/screens/Search/auto_sugestion_search_field.dart';
 
 class HomePage extends StatefulWidget {

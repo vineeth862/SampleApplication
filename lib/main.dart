@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'src/screens/home.dart';
+import 'src/screens/Anthetication/home.dart';
 import 'src/utils/constants/constant.dart';
 import 'src/utils/themes/themedata.dart';
 
