@@ -1,6 +1,8 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:sample_application/src/screens/forgot_password_mail.dart";
+import "package:sample_application/src/screens/forgot_password_mobile.dart";
 import "package:sample_application/src/screens/signup.dart";
+import "package:get/get.dart";
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -111,13 +113,101 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextButton(
                         onPressed: () {
                           showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
                             context: context,
                             builder: (context) => Container(
+                              padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [Icon(Icons.email_outlined)],
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Text(
+                                        "Select one of the option given below to reset your password,",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!),
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Get.to(() => ForgotPasswordMail());
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.grey.shade200),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.mail_outline_rounded,
+                                            size: 60,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("E-Mail",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayMedium),
+                                              Text(
+                                                  "Reset via Mail Verification",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyLarge)
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Get.to(() => ForgotPasswordMobile());
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.grey.shade200),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.phone_android_rounded,
+                                            size: 60,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Mobile No",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayMedium),
+                                              Text("Reset via otp Verification",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyLarge)
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -154,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 45,
+                          width: 50,
                         ),
                         Text("Don't have an account?"),
                         TextButton(

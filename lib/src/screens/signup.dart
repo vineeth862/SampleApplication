@@ -158,19 +158,16 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     const SizedBox(height: 15.0),
-                    Container(
-                      height: 45,
-                      child: TextFormField(
-                        controller: confirmPasswordController,
-                        obscureText: true,
-                        onChanged: (_) => validatePasswords(),
-                        decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.fingerprint),
-                          errorText:
-                              passwordMatch ? null : 'Passwords do not match',
-                        ),
+                    TextFormField(
+                      controller: confirmPasswordController,
+                      obscureText: true,
+                      onChanged: (_) => validatePasswords(),
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.fingerprint),
+                        errorText:
+                            passwordMatch ? null : 'Passwords do not match',
                       ),
                     ),
                     const SizedBox(height: 30.0),

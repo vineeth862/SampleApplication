@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.3.1
+  get: ^4.6.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -46,6 +47,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_otp_text_field: ^1.1.0+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -62,6 +64,7 @@ flutter:
   assets:
     - assets/images/Lab_Single_Person.jpg
     - assets/images/Lab_two_people.jpg
+    - assets/images/rotation.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
