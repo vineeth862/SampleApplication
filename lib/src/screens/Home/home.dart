@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.dart';
 import 'package:sample_application/src/screens/Home/home_service.dart';
@@ -54,19 +55,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           TextButton(
             onPressed: () {
-              globalservice.navigate(context, const SignupPage());
-            },
-            child: Text(
-              'Sign Up',
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge!
-                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              globalservice.navigate(context, const LoginScreen());
+              globalservice.navigate(context, const Welcomesignin());
             },
             child: Text(
               'Login',
