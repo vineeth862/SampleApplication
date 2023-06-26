@@ -65,58 +65,54 @@ class ForgotPasswordMail extends StatelessWidget {
                         // Perform signup logic if form is valid
                         _saveItem();
                         showModalBottomSheet(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            context: context,
-                            builder: (context) => Container(
-                                  padding: EdgeInsets.all(10),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "OTP",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayLarge,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        "Please enter the OTP sent at support888@gmail.com",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      OtpTextField(
-                                        numberOfFields: 4,
-                                        filled: true,
-                                        fillColor:
-                                            Colors.black.withOpacity(0.1),
-                                        keyboardType: TextInputType.number,
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text("Submit"),
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                20.0), // Set the border radius value
-                                          ),
-                                          primary: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 100.0),
-                                        ),
-                                      ),
-                                    ],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          context: context,
+                          builder: (context) => Container(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "OTP",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Please enter the OTP sent at support888@gmail.com",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                const SizedBox(height: 20),
+                                OtpTextField(
+                                  numberOfFields: 4,
+                                  filled: true,
+                                  fillColor: Colors.black.withOpacity(0.1),
+                                  keyboardType: TextInputType.number,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text("Submit"),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          20.0), // Set the border radius value
+                                    ),
+                                    primary:
+                                        Theme.of(context).colorScheme.primary,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 100.0),
                                   ),
-                                ));
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       child: Text('Get OTP', style: TextStyle(fontSize: 20)),
                       style: ElevatedButton.styleFrom(

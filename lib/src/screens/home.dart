@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/screens/Anthetication/home_signup.dart';
 import 'package:sample_application/src/screens/Anthetication/login.dart';
 import 'package:sample_application/src/screens/Anthetication/signup.dart';
 import 'package:sample_application/src/screens/Search/auto_sugestion_search_field.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) => const SignupPage(),
+        builder: (ctx) => const HomeSignup(),
       ),
     );
   }

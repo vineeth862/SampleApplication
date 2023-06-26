@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 import 'package:sample_application/src/screens/Anthetication/login.dart';
 //import 'package:http/http.dart' as http;
-
+import 'package:get/get.dart';
 //import 'package:get/get.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -26,7 +27,12 @@ class _SignupPageState extends State<SignupPage> {
   var _confirmedPassword = '';
 
   void _saveItem() {
-    _formKey.currentState!.validate();
+    if (_formKey.currentState!.validate()) {
+      _email = EmailController.text.trim();
+      _password = confirmPasswordController.text.trim();
+      AuthenticationRepository.instance
+          .createUserWithEmailAndPassword(_email, _password);
+    }
   }
   //     _enteredName = NameController.text;
   //     _email = EmailController.text.trim();
