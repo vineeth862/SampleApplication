@@ -8,7 +8,7 @@ final ThemeData theme = ThemeData(
     primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
     primaryContainer: Color.fromRGBO(176, 113, 187, 1),
     secondary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
-    secondaryContainer: Color.fromRGBO(176, 113, 187, 1),
+    secondaryContainer: Color.fromRGBO(237, 177, 248, 0.855),
     surface: Colors.white,
     background: Colors.white,
     error: Colors.red,
@@ -60,5 +60,12 @@ final ThemeData theme = ThemeData(
     height: 48.0,
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+  ),
+  cardTheme: CardTheme(
+    elevation: 2.0,
+    color: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8.0),
+    ),
   ),
 );

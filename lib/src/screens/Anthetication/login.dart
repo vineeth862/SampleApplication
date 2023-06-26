@@ -4,6 +4,8 @@ import "package:sample_application/src/screens/Anthetication/forgot_password_mai
 import "package:sample_application/src/screens/Anthetication/forgot_password_mobile.dart";
 import "package:sample_application/src/screens/Anthetication/signup.dart";
 
+import "../../utils/helper_widgets/text_form_field.dart";
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -70,40 +72,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const SizedBox(height: 15.0),
-                    TextFormField(
+                    InputField(
                       controller: EmailController,
                       obscureText: false,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Name field cannot be empty";
-                        }
-                        return null;
-                      },
+                      errorMsg: "Name field cannot be empty",
+                      label: 'Email',
+                      icon: Icons.person,
                     ),
                     const SizedBox(height: 15.0),
-                    TextFormField(
+                    InputField(
                       controller: PasswordController,
                       obscureText: !isPasswordVisible,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isPasswordVisible = !isPasswordVisible;
-                            });
-                          },
-                          child: Icon(
-                            isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
+                      errorMsg: "Password field cannot be empty",
+                      label: 'Password',
+                      icon: Icons.person,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        child: Icon(
+                          isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                       ),
                     ),
