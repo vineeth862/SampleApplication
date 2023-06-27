@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
+import 'package:countries_flag/countries_flag.dart';
+import 'package:sample_application/src/authentication/authentication_repository.dart';
+import 'package:sample_application/src/authentication/otp_controller.dart';
 //import 'package:sample_application/src/otp_controller.dart';
 //import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 
@@ -16,10 +19,13 @@ class _WelcomesigninState extends State<Welcomesignin> {
   TextEditingController MobileNumberController = TextEditingController();
   var _enteredMobileNumber = '';
   var otp;
-  // void _saveItem() {
-  //   _enteredMobileNumber = MobileNumberController.text.trim();
-  //   AuthenticationRepository.instance.PhoneNumberAuth(_enteredMobileNumber);
-  // }
+  var Controller = Get.put(otpController());
+  void _saveItem() {
+    _enteredMobileNumber = MobileNumberController.text.trim();
+    _enteredMobileNumber = "+91" + _enteredMobileNumber.toString();
+    AuthenticationRepository.instance.PhoneNumberAuth(_enteredMobileNumber);
+    print(_enteredMobileNumber);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,24 +90,52 @@ class _WelcomesigninState extends State<Welcomesignin> {
             ),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: TextFormField(
-                key: _formKey,
-                controller: MobileNumberController,
-                obscureText: false,
-                //keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Mobile No.',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  prefixIcon: Icon(Icons.phone),
-                ),
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CountriesFlag(
+                        Flags.india,
+                        width: 30,
+                        height: 25,
+                        alignment: Alignment.center,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      key: _formKey,
+                      controller: MobileNumberController,
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Mobile No.',
+                        prefixText: '+91 ',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        prefixIcon: Icon(Icons.phone),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
-                //_saveItem();
+                _saveItem();
                 showModalBottomSheet(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -128,17 +162,17 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.1),
                           keyboardType: TextInputType.number,
-                          // onSubmit: (code) {
-                          //   otp = code;
-                          //   otpController.instance.verifyOtpController(otp);
-                          // },
+                          onSubmit: (code) {
+                            otp = code;
+                            otpController.instance.verifyOtpController(otp);
+                          },
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //otpController.instance.verifyOtpController(otp);
+                            otpController.instance.verifyOtpController(otp);
                           },
                           child: Text("Submit"),
                           style: ElevatedButton.styleFrom(
