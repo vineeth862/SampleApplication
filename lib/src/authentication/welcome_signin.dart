@@ -8,6 +8,8 @@ import 'package:sample_application/src/authentication/authentication_repository.
 import 'package:sample_application/src/authentication/otp_controller.dart';
 import 'package:sample_application/src/authentication/pin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/home.dart';
+import 'package:sample_application/src/utils/constants/textconstant.dart';
 //import 'package:sample_application/src/otp_controller.dart';
 //import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 
@@ -68,7 +70,13 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           color: Colors.black,
                           size: 30,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          globalservice.navigate(
+                              context,
+                              const HomePage(
+                                title: appTitle,
+                              ));
+                        },
                       ),
                     ],
                   ),
@@ -173,9 +181,9 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           child: Pinput(
                             length: 6,
                             focusNode: focusNode,
-                            androidSmsAutofillMethod:
-                                AndroidSmsAutofillMethod.smsUserConsentApi,
-                            //listenForMultipleSmsOnAndroid: true,
+                            // androidSmsAutofillMethod:
+                            //     AndroidSmsAutofillMethod.smsUserConsentApi,
+                            // listenForMultipleSmsOnAndroid: true,
                             //filled: true,
                             //fillColor: Colors.black.withOpacity(0.1),
                             keyboardType: TextInputType.number,
