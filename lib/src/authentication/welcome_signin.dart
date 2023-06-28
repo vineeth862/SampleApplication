@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
+import 'package:pinput/pinput.dart';
 import 'package:sample_application/src/authentication/authentication_repository.dart';
 import 'package:sample_application/src/authentication/otp_controller.dart';
+import 'package:sample_application/src/authentication/pin.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
 //import 'package:sample_application/src/otp_controller.dart';
 //import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 
@@ -16,10 +20,16 @@ class Welcomesignin extends StatefulWidget {
 
 class _WelcomesigninState extends State<Welcomesignin> {
   final _formKey = GlobalKey<FormState>();
+  final focusNode = FocusNode();
   TextEditingController MobileNumberController = TextEditingController();
+  GlobalService globalservice = GlobalService();
   var _enteredMobileNumber = '';
   var otp;
   var Controller = Get.put(otpController());
+  void _validate() {
+    _formKey.currentState!.validate();
+  }
+
   void _saveItem() {
     _enteredMobileNumber = MobileNumberController.text.trim();
     _enteredMobileNumber = "+91" + _enteredMobileNumber.toString();
@@ -136,6 +146,8 @@ class _WelcomesigninState extends State<Welcomesignin> {
             ElevatedButton(
               onPressed: () {
                 _saveItem();
+
+                //globalservice.navigate(context, const PinputExample());
                 showModalBottomSheet(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -153,25 +165,32 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           height: 20,
                         ),
                         Text(
-                          "Please enter the OTP sent at support888@gmail.com",
+                          "Please enter the OTP sent to registered phone number",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         const SizedBox(height: 20),
-                        OtpTextField(
-                          numberOfFields: 6,
-                          filled: true,
-                          fillColor: Colors.black.withOpacity(0.1),
-                          keyboardType: TextInputType.number,
-                          onSubmit: (code) {
-                            otp = code;
-                            otpController.instance.verifyOtpController(otp);
-                          },
+                        GestureDetector(
+                          child: Pinput(
+                            length: 6,
+                            focusNode: focusNode,
+                            androidSmsAutofillMethod:
+                                AndroidSmsAutofillMethod.smsUserConsentApi,
+                            //listenForMultipleSmsOnAndroid: true,
+                            //filled: true,
+                            //fillColor: Colors.black.withOpacity(0.1),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              otp = value;
+                              otpController.instance.verifyOtpController(otp);
+                            },
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            _validate();
                             otpController.instance.verifyOtpController(otp);
                           },
                           child: Text("Submit"),
