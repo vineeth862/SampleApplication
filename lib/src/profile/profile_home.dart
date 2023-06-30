@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/profile/edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -8,10 +9,12 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalService globalservice = GlobalService();
-    Widget _CustomTextButton(Icon icon, String label_text) {
+    Widget _CustomTextButton(Icon icon, String label_text, final pageDetails) {
       return TextButton.icon(
           icon: icon,
-          onPressed: () {},
+          onPressed: () {
+            //globalservice.navigate(context, pageDetails);
+          },
           label: Text(
             label_text,
             style: Theme.of(context)
@@ -74,12 +77,15 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
+                              onPressed: () {
+                                globalservice.navigate(
+                                    context, EditProfileScreen());
+                              },
+                              icon: const Icon(
                                 Icons.edit,
                                 size: 20,
                               ), //icon data for elevated button
-                              label: Text("Edit Profile"),
+                              label: const Text("Edit Profile"),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
@@ -93,11 +99,11 @@ class ProfileScreen extends StatelessWidget {
                             const SizedBox(width: 20),
                             ElevatedButton.icon(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.badge,
                                 size: 20,
                               ), //icon data for elevated button
-                              label: Text(
+                              label: const Text(
                                 "Bookings",
                               ),
                               style: ElevatedButton.styleFrom(
@@ -133,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -172,18 +178,20 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          _CustomTextButton(const Icon(Icons.home),
+                              "My Address Book", EditProfileScreen()),
+                          const Divider(color: Colors.black, thickness: 0.2),
                           _CustomTextButton(
-                              Icon(Icons.home), "My Address Book"),
-                          Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(
-                              Icon(Icons.settings_suggest_sharp), "Settings"),
-                          Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(
-                              Icon(Icons.help_sharp), "Help or Support"),
-                          Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(
-                              Icon(Icons.menu_book_sharp), "About Us"),
-                          Divider(color: Colors.black, thickness: 0.2)
+                              const Icon(Icons.settings_suggest_sharp),
+                              "Settings",
+                              EditProfileScreen()),
+                          const Divider(color: Colors.black, thickness: 0.2),
+                          _CustomTextButton(const Icon(Icons.help_sharp),
+                              "Help or Support", EditProfileScreen()),
+                          const Divider(color: Colors.black, thickness: 0.2),
+                          _CustomTextButton(const Icon(Icons.menu_book_sharp),
+                              "About Us", EditProfileScreen()),
+                          const Divider(color: Colors.black, thickness: 0.2)
                         ],
                       ),
                     )),

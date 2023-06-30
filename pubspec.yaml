@@ -45,8 +45,8 @@ dependencies:
   countries_flag: ^1.0.0
   pinput: ^2.2.31
   cloud_firestore: ^4.8.0
-
-
+  image_picker: ^1.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -76,6 +76,8 @@ flutter:
     - assets/images/Lab_two_people.jpg
     - assets/images/rotation.png
     - assets/images/user.png
+    - assets/images/home_flash_image.png
+    - assets/images/cover_image.jpg
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
