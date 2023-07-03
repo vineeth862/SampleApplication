@@ -40,31 +40,31 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      // appBar: AppBar(
-      //   title: Text(
-      //     widget.title,
-      //     style: Theme.of(context)
-      //         .textTheme
-      //         .displayLarge!
-      //         .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-      //   ),
-      //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      //   backgroundColor: Theme.of(context).colorScheme.primary,
-      //   actions: [
-      //     TextButton(
-      //       onPressed: () {
-      //         globalservice.navigate(context, const Welcomesignin());
-      //       },
-      //       child: Text(
-      //         'Login',
-      //         style: Theme.of(context)
-      //             .textTheme
-      //             .displayLarge!
-      //             .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: Theme.of(context)
+              .textTheme
+              .displayLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+        ),
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          TextButton(
+            onPressed: () {
+              globalservice.navigate(context, const Welcomesignin());
+            },
+            child: Text(
+              'Login',
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
+        ],
+      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
