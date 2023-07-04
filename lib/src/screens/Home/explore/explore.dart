@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/auto_sugestion_search_field.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/card_detail_page.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/helper_widgets/card.dart';
 import 'explore.service.dart';
@@ -19,9 +22,15 @@ class _ExploreState extends State<Explore> {
   @override
   void initState() {
     super.initState();
+    exploreService.getSuggetionList("");
+    // QuerySnapshot querySnapshot =
+    //     await FirebaseFirestore.instance.collection("laboratory").get();
+    // print("documents are listed here...........");
+    // print(querySnapshot.docs);
     setState(() {
       exploreService.filterCardList([], null);
     });
+    // print(this.globalservice.fetchData("laboratory"));
   }
 
   final List<String> imgList = [
@@ -36,43 +45,33 @@ class _ExploreState extends State<Explore> {
   loadList() {
     imageSliders = imgList
         .map((item) => Container(
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(200, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0)
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0),
-                            child: Text(
-                              'No. ${imgList.indexOf(item)} image',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+              margin: const EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                      Positioned(
+                        bottom: 0.0,
+                        left: 0.0,
+                        right: 0.0,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(200, 0, 0, 0),
+                                Color.fromARGB(0, 0, 0, 0)
+                              ],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
                             ),
                           ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20.0),
                         ),
-                      ],
-                    )),
-              ),
+                      ),
+                    ],
+                  )),
             ))
         .toList();
   }
@@ -87,19 +86,41 @@ class _ExploreState extends State<Explore> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
             alignment: Alignment.center,
-            child: AutoSuggestSearchField(filterd: (match, selectedCard) {
-              setState(() {
-                exploreService.filterCardList(match, selectedCard);
-              });
-            }),
+            child: GestureDetector(
+              onTap: () {
+                this.globalservice.navigate(context,
+                    SearchBarPage(filterd: (match, selectedCard) {
+                  setState(() {
+                    exploreService.filterCardList(match, selectedCard);
+                  });
+                }));
+              },
+              child: const TextField(
+                decoration: InputDecoration(
+                  enabled: false,
+                  hintText: 'Search  Any Labs OR Test',
+                  prefixIcon: Icon(Icons.search),
+                  contentPadding: EdgeInsets.all(16),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100))),
+                ),
+              ),
+            ),
           ),
           CarouselSlider(
             disableGesture: true,
             options: CarouselOptions(
               height: 100,
-              autoPlay: true,
-              aspectRatio: 2.0,
+              aspectRatio: 16 / 9,
+              viewportFraction: 1.0,
+              enableInfiniteScroll: false,
+              autoPlay: true, // Enable auto-playing of slides
+              autoPlayInterval: const Duration(
+                  seconds: 5), // Set the duration between auto-playing slides
+              autoPlayAnimationDuration: const Duration(microseconds: 1),
+              autoPlayCurve: Curves.easeInOutQuart,
               enlargeCenterPage: true,
+              pauseAutoPlayOnTouch: true,
             ),
             items: imageSliders,
           ),
@@ -113,8 +134,10 @@ class _ExploreState extends State<Explore> {
               itemBuilder: (BuildContext context, int index) {
                 return CardWidget(
                     title: exploreService.cardList[index].name,
-                    description:
-                        exploreService.cardList[index].test.toString());
+                    description: exploreService.cardList[index].test.toString(),
+                    onTap: (value) {
+                      globalservice.navigate(context, CardDetailPage());
+                    });
               },
             ),
           )

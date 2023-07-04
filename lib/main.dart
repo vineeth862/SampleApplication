@@ -9,10 +9,10 @@ import 'src/utils/themes/themedata.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sample_application/firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
