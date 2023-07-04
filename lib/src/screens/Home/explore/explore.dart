@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/auto_sugestion_search_field.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/card_detail_page.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
 import '../../../global_service/global_service.dart';

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sample_application/src/authentication/authentication_repository.dart';
 import 'package:sample_application/src/authentication/otp_controller.dart';
-import 'package:sample_application/src/authentication/pin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
@@ -129,7 +126,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -143,7 +140,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         prefixText: '+91 ',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        prefixIcon: Icon(Icons.phone),
+                        prefixIcon: const Icon(Icons.phone),
                       ),
                     ),
                   ),
@@ -161,7 +158,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                       borderRadius: BorderRadius.circular(20)),
                   context: context,
                   builder: (context) => Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -169,7 +166,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           "OTP",
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Text(
@@ -201,14 +198,16 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             _validate();
                             otpController.instance.verifyOtpController(otp);
                           },
-                          child: Text("Submit"),
+                          child: const Text("Submit"),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20.0), // Set the border radius value
                             ),
-                            primary: Theme.of(context).colorScheme.primary,
-                            padding: EdgeInsets.symmetric(horizontal: 100.0),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 100.0),
                           ),
                         ),
                       ],
@@ -216,14 +215,14 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   ),
                 );
               },
-              child: Text('Continue', style: TextStyle(fontSize: 20)),
+              child: const Text('Continue', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                       20.0), // Set the border radius value
                 ),
                 primary: Theme.of(context).colorScheme.primary,
-                padding: EdgeInsets.symmetric(horizontal: 100.0),
+                padding: const EdgeInsets.symmetric(horizontal: 100.0),
               ),
             ),
           ]),

@@ -22,9 +22,6 @@ class AuthenticationRepository extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    print("Hii");
-    print(user);
-    print(firebaseUser.value);
     user == null
         ? Get.offAll(() => const Welcomesignin())
         : Get.offAll(() => const HomePage(title: appTitle));
@@ -73,10 +70,10 @@ class AuthenticationRepository extends GetxController {
     );
   }
 
-  Future<bool> verifyOTP(String OTP) async {
+  Future<bool> verifyOTP(String otp) async {
     var credentials = await _auth.signInWithCredential(
         PhoneAuthProvider.credential(
-            verificationId: verificationId.value, smsCode: OTP));
+            verificationId: verificationId.value, smsCode: otp));
     return credentials.user != null ? true : false;
   }
 

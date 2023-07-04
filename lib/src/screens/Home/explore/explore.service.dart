@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 import '../models/lab.dart';
 
 class ExploreService {
@@ -16,7 +14,7 @@ class ExploreService {
   ];
   List<Lab> cardList = [];
   void clearSearch() {
-    print("Clear Pressed.");
+    // print("Clear Pressed.");
   }
 
   List<Lab> getSuggetionList(String match) {
