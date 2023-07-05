@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
+import 'package:sample_application/src/utils/helper_widgets/list_tile.dart';
 
 class TestListScreen extends StatelessWidget {
-  final List<String> suggestions = [
-    'Suggestion 1',
-    'Suggestion 2',
-    'Suggestion 3',
-  ];
-
   TestListScreen({super.key});
 
   @override
@@ -17,9 +12,10 @@ class TestListScreen extends StatelessWidget {
     return ListView.builder(
       itemCount: searchState.filteredTests.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(searchState.filteredTests[index].test.toString()),
-        );
+        return CustomListTile(
+            title: searchState.filteredTests.elementAt(index),
+            icon: Icons.medical_services,
+            subtitle: "test");
       },
     );
   }

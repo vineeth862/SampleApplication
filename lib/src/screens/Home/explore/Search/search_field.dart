@@ -34,7 +34,7 @@ class _SearchBarPageState extends State<SearchBarPage>
   }
 
   void switchToTab(int tabIndex) {
-    _tabController.animateTo(1);
+    _tabController.animateTo(tabIndex);
   }
 
   @override
@@ -80,6 +80,15 @@ class _SearchBarPageState extends State<SearchBarPage>
                 onChanged: (value) {
                   _isInputEmpty = value.isEmpty;
                   searchState.search(value.trim());
+                  if (value.trim().isNotEmpty &&
+                      searchState.filteredTests.isEmpty &&
+                      searchState.filteredLabs.isNotEmpty) {
+                    switchToTab(0);
+                  } else if (value.trim().isNotEmpty &&
+                      searchState.filteredTests.isNotEmpty &&
+                      searchState.filteredLabs.isEmpty) {
+                    switchToTab(1);
+                  }
                 },
               ),
             ),

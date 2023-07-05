@@ -14,9 +14,9 @@ class SearchListState with ChangeNotifier {
     Lab(name: "lab9", test: ["test1", "test2", "test3", "test8"]),
   ];
   List<Lab> filteredLabs = [];
-  List<Lab> filteredTests = [];
+  late Set<String> filteredTests = {};
 
-  List<Lab> get gettestList {
+  Set<String> get gettestList {
     return filteredTests;
   }
 
@@ -25,17 +25,18 @@ class SearchListState with ChangeNotifier {
   }
 
   void search(value) {
+    filteredTests = {};
+    filteredLabs = [];
+
     // here we are filtering labs based on the input value and assigned to the filteredLabs.
     filteredLabs = labList
         .where((element) => element.name.trim().contains(value.trim()))
         .toList();
     // here we are filtering labs based on the input value and assigned to the filtered tests.
-    filteredTests = labList
-        .where((element) => element.test
-            .where((element) =>
-                element.toString().contains(value.trim().toString()))
-            .isNotEmpty)
-        .toList();
+    labList.forEach((element) => element.test.forEach((element) => {
+          if (element.toString().contains(value.trim().toString()))
+            {filteredTests.add(element)}
+        }));
 
     notifyListeners();
   }
