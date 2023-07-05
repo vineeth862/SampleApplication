@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/authentication/welcome_signin.dart';
+import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.dart';

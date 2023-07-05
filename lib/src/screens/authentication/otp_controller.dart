@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sample_application/src/authentication/authentication_repository.dart';
+import 'package:sample_application/src/screens/authentication/authentication_repository.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
 

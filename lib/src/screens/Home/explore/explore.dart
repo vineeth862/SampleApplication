@@ -1,9 +1,13 @@
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/card_detail_page.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/Cards/card_detail_page.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/helper_widgets/card.dart';
+import 'Search/Provider/search_provider.dart';
 import 'explore.service.dart';
 
 class Explore extends StatefulWidget {
@@ -17,27 +21,21 @@ class _ExploreState extends State<Explore> {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
 
-  @override
-  void initState() {
-    super.initState();
-    exploreService.getSuggetionList("");
-    // QuerySnapshot querySnapshot =
-    //     await FirebaseFirestore.instance.collection("laboratory").get();
-    // print("documents are listed here...........");
-    // print(querySnapshot.docs);
-    setState(() {
-      exploreService.filterCardList([], null);
-    });
-    // print(this.globalservice.fetchData("laboratory"));
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   setState(() {
+  //     exploreService.filterCardList([], null);
+  //   });
+  // }
 
   final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+    // 'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    // 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    // 'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    // 'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
   late List<Widget> imageSliders = [];
   loadList() {
@@ -76,6 +74,7 @@ class _ExploreState extends State<Explore> {
 
   @override
   build(BuildContext context) {
+    final searchState = Provider.of<SearchListState>(context);
     loadList();
     return Container(
       width: double.infinity,
@@ -86,12 +85,7 @@ class _ExploreState extends State<Explore> {
             alignment: Alignment.center,
             child: GestureDetector(
               onTap: () {
-                this.globalservice.navigate(context,
-                    SearchBarPage(filterd: (match, selectedCard) {
-                  setState(() {
-                    exploreService.filterCardList(match, selectedCard);
-                  });
-                }));
+                globalservice.navigate(context, const SearchBarPage());
               },
               child: const TextField(
                 decoration: InputDecoration(
@@ -125,14 +119,14 @@ class _ExploreState extends State<Explore> {
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: exploreService.cardList.length,
+              itemCount: searchState.labList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return CardWidget(
-                    title: exploreService.cardList[index].name,
-                    description: exploreService.cardList[index].test.toString(),
+                    title: searchState.labList[index].name,
+                    description: searchState.labList[index].test.toString(),
                     onTap: (value) {
                       globalservice.navigate(context, CardDetailPage());
                     });
