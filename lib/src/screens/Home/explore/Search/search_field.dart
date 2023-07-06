@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filterd_test_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filtered_lab_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
+import 'package:sample_application/src/utils/themes/themedata.dart';
 
 class SearchBarPage extends StatefulWidget {
   const SearchBarPage({super.key});
@@ -42,6 +43,8 @@ class _SearchBarPageState extends State<SearchBarPage>
     final searchState = Provider.of<SearchListState>(context);
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: theme,
+      themeMode: ThemeMode.light,
       home: DefaultTabController(
         length: 2,
         child: Scaffold(

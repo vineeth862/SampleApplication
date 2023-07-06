@@ -19,7 +19,7 @@ class CardWidget extends StatelessWidget {
       width: double.maxFinite,
       child: GestureDetector(
         onTap: () {
-          this.onTap({title: this.title, description: this.description});
+          onTap({title: title, description: description});
         },
         child: Card(
           elevation: 2.0,

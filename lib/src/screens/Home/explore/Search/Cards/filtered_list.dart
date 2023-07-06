@@ -11,11 +11,16 @@ class FilteredCardlistPage extends StatelessWidget {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
   String title;
+  String category;
 
-  FilteredCardlistPage({super.key, required this.title});
+  FilteredCardlistPage(
+      {super.key, required this.title, required this.category});
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
+    List<dynamic> list = searchState.getTestCardList.isEmpty
+        ? searchState.getLabCardList
+        : searchState.getTestCardList;
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -25,16 +30,16 @@ class FilteredCardlistPage extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: searchState.labList.length,
+              itemCount: list.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return CardWidget(
-                    title: searchState.labList[index].name,
-                    description: searchState.labList[index].test.toString(),
+                    title: list[index].name,
+                    description: list[index].test.toString(),
                     onTap: (value) {
-                      globalservice.navigate(context, CardDetailPage());
+                      globalservice.navigate(context, const CardDetailPage());
                     });
               },
             ),

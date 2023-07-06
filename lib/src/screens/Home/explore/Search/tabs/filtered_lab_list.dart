@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/Cards/filtered_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
 
 import '../../../../../utils/helper_widgets/list_tile.dart';
@@ -12,17 +14,27 @@ class LabListScreen extends StatelessWidget {
   ];
 
   LabListScreen({super.key});
-
+  GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     return ListView.builder(
-      itemCount: searchState.filteredLabs.length,
+      itemCount: searchState.getlabSuggetionList.length,
       itemBuilder: (context, index) {
         return CustomListTile(
-            title: searchState.filteredLabs[index].name,
-            icon: Icons.store_outlined,
-            subtitle: "lab");
+          title: searchState.getlabSuggetionList[index].name,
+          icon: Icons.store_outlined,
+          subtitle: "lab",
+          onTap: (title) async {
+            await searchState.cardClicked(title);
+            globalservice.navigate(
+                context,
+                FilteredCardlistPage(
+                  title: title,
+                  category: "lab",
+                ));
+          },
+        );
       },
     );
   }

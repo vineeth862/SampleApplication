@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/models/lab.dart';
+import 'package:sample_application/src/screens/Home/models/lab_card.dart';
+import 'package:sample_application/src/screens/Home/models/test_card.dart';
 
 class SearchListState with ChangeNotifier {
   List<Lab> labList = [
@@ -16,11 +18,11 @@ class SearchListState with ChangeNotifier {
   List<Lab> filteredLabs = [];
   late Set<String> filteredTests = {};
 
-  Set<String> get gettestList {
+  Set<String> get gettestSuggetionList {
     return filteredTests;
   }
 
-  List<Lab> get getlabList {
+  List<Lab> get getlabSuggetionList {
     return filteredLabs;
   }
 
@@ -39,5 +41,55 @@ class SearchListState with ChangeNotifier {
         }));
 
     notifyListeners();
+  }
+
+  List<LabCard> filteredLabCardList = [];
+
+  List<TestCard> filteredTestCardList = [];
+
+  List<LabCard> get getLabCardList {
+    return filteredLabCardList;
+  }
+
+  set setLabCardList(value) {
+    // here filtering all lab based on the test
+    filteredLabCardList = labList
+        .where((element) {
+          return element.test.contains(value.toString());
+        })
+        .map((e) => LabCard(name: e.name, test: value))
+        .toList();
+  }
+
+  List<TestCard> get getTestCardList {
+    return filteredTestCardList;
+  }
+
+  set setTestCardList(value) {
+    // here choosing all the test in perticular lab
+    List list = labList.where((element) {
+      return element.name.toString() == value.toString();
+    }).toList();
+
+    if (list.isNotEmpty) {
+      filteredTestCardList = labList
+          .where((element) {
+            return element.name.toString() == value.toString();
+          })
+          .elementAt(0)
+          .test
+          .map((e) => TestCard(name: value, test: e.toString()))
+          .toList();
+    }
+  }
+
+  cardClicked(value) {
+    filteredTestCardList = [];
+    filteredLabCardList = [];
+
+    setLabCardList = value;
+    setTestCardList = value;
+    notifyListeners();
+    return;
   }
 }
