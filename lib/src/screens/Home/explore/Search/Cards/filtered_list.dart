@@ -4,7 +4,7 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Cards/card_detail_page.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.service.dart';
-import 'package:sample_application/src/utils/helper_widgets/card.dart';
+import 'package:sample_application/src/utils/helper_widgets/lab_card.dart';
 
 // ignore: must_be_immutable
 class FilteredCardlistPage extends StatelessWidget {
@@ -28,14 +28,12 @@ class FilteredCardlistPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: GridView.builder(
+            child: ListView.builder(
+              shrinkWrap: true,
               padding: const EdgeInsets.all(10),
               itemCount: list.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
               itemBuilder: (BuildContext context, int index) {
-                return CardWidget(
+                return LabCardWidget(
                     title: list[index].name,
                     description: list[index].test.toString(),
                     onTap: (value) {
