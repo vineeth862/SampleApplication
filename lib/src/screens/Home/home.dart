@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
-import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.dart';
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        elevation: 0,
+        elevation: 2,
         title: TextButton.icon(
           icon: Icon(Icons.location_on),
           label: Text(

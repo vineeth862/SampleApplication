@@ -13,13 +13,44 @@ class _CardDetailPageState extends State<CardDetailPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Card Detail"),
+          iconTheme: IconThemeData(color: Color.fromRGBO(176, 113, 187, 1)),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: const Text(
+            "Test Details",
+            style: TextStyle(color: Color.fromRGBO(176, 113, 187, 1)),
+          ),
         ),
         body: Container(
           padding: const EdgeInsets.all(8),
-          child: const Column(children: [
-            Center(child: Text("CardDetailPage")),
-          ]),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Container(
+                    width: 300,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes the shadow position
+                        ),
+                      ],
+                    ),
+                    child: const Card(
+                      child: Center(
+                        child: Text(
+                          'Hello, Flutter!',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ]),
         ),
       ),
     );

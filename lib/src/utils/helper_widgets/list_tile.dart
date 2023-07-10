@@ -30,6 +30,7 @@ class CustomListTile extends StatelessWidget {
           onTap(title);
         },
         leading: Icon(icon),
+        iconColor: Theme.of(context).colorScheme.primary,
         title: Text(title),
         subtitle: Text(subtitle),
       ),

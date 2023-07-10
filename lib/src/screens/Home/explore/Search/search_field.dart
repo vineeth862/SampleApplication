@@ -48,9 +48,11 @@ class _SearchBarPageState extends State<SearchBarPage>
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
+              color: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -62,6 +64,9 @@ class _SearchBarPageState extends State<SearchBarPage>
                 decoration: InputDecoration(
                   hintText: 'Search  Any Labs OR Test',
                   filled: true,
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
                   prefixIcon: const Icon(Icons.search),
                   contentPadding: const EdgeInsets.fromLTRB(-20, 0, 5, 0),
@@ -79,7 +84,7 @@ class _SearchBarPageState extends State<SearchBarPage>
                   border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(100))),
                 ),
-                style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
+                // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
                 onChanged: (value) {
                   _isInputEmpty = value.isEmpty;
                   searchState.search(value.trim());
@@ -95,11 +100,12 @@ class _SearchBarPageState extends State<SearchBarPage>
                 },
               ),
             ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            automaticallyImplyLeading: false,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            // automaticallyImplyLeading: false,
             bottom: TabBar(
               controller: _tabController,
-              indicatorColor: Colors.white,
+              labelColor: Theme.of(context).colorScheme.primary,
+              // indicatorColor: Colors.white,
               tabs: const [Tab(text: 'Labs'), Tab(text: 'Tests')],
             ),
           ),

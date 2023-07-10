@@ -48,8 +48,16 @@ class LabCardWidget extends StatelessWidget {
                       ),
                       label: const Text("add"),
                       style: ElevatedButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Adjust the border radius as needed
+                          side: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary), // Set the outline color
                         ),
                       ),
                     ),
@@ -76,9 +84,10 @@ class LabCardWidget extends StatelessWidget {
                   ],
                 ),
                 const ListTile(
+                  enabled: true,
+                  contentPadding: EdgeInsets.all(0),
                   title: Text("view more details"),
                   textColor: Color.fromARGB(255, 255, 181, 71),
-                  trailing: Icon(Icons.keyboard_arrow_down),
                 )
               ],
             ),

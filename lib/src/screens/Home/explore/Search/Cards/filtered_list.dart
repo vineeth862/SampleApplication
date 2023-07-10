@@ -23,7 +23,12 @@ class FilteredCardlistPage extends StatelessWidget {
         : searchState.getTestCardList;
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
+        title: Text(
+          title,
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: Column(
         children: [
