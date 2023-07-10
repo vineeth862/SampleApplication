@@ -268,6 +268,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     String mobilenumber = _mobilenumbercontroller!.text;
     String gender = _selectedGender;
+
     // Perform the necessary actions to save the changes
     // to the user's profile, such as making an API request.
     Get.snackbar("Success", "Profile changes saved.", colorText: Colors.black);

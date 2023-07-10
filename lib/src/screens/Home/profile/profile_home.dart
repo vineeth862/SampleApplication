@@ -26,11 +26,12 @@ class ProfileScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Profile',
-          ),
-        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        // appBar: AppBar(
+        //   title: const Text(
+        //     'Profile',
+        //   ),
+        // ),
         //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
         //   backgroundColor: Theme.of(context).colorScheme.primary,
         // ),
@@ -38,6 +39,33 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                child: Row(
+                  children: [
+                    Text(
+                      "|",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.red.shade700,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Profile",
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
