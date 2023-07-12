@@ -50,6 +50,12 @@ final ThemeData theme = ThemeData(
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
     ),
+    titleSmall: TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: Color.fromARGB(255, 96, 95, 95)),
   ),
   appBarTheme: const AppBarTheme(),
   buttonTheme: ButtonThemeData(

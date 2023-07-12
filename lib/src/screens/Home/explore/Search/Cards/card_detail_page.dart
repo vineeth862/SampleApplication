@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
+import '../../../models/lab_card.dart';
 
 class CardDetailPage extends StatefulWidget {
-  const CardDetailPage({super.key});
-
+  CardDetailPage({super.key, required this.lab});
+  LabCard lab;
   @override
   State<CardDetailPage> createState() => _CardDetailPageState();
 }
 
 class _CardDetailPageState extends State<CardDetailPage> {
+  GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
+    final searchState = Provider.of<SearchListState>(context);
+    List<dynamic> list = searchState.getTestCardList.isEmpty
+        ? searchState.getLabCardList
+        : searchState.getTestCardList;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Color.fromRGBO(176, 113, 187, 1)),
+          iconTheme:
+              const IconThemeData(color: Color.fromRGBO(176, 113, 187, 1)),
           backgroundColor: Theme.of(context).colorScheme.background,
           title: const Text(
             "Test Details",
@@ -22,35 +32,229 @@ class _CardDetailPageState extends State<CardDetailPage> {
         ),
         body: Container(
           padding: const EdgeInsets.all(8),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Container(
-                    width: 300,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes the shadow position
-                        ),
+          child: ListView(children: [
+            Card(
+              elevation: 2.0,
+              shape: Theme.of(context).cardTheme.shape,
+              color: Theme.of(context).cardTheme.color,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Information",
+                        style: Theme.of(context).textTheme.displayLarge),
+                    const Divider(
+                      height: 10,
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("test : ",
+                            style: Theme.of(context).textTheme.labelLarge),
+                        Text("HIV",
+                            style: Theme.of(context).textTheme.titleSmall)
                       ],
                     ),
-                    child: const Card(
-                      child: Center(
-                        child: Text(
-                          'Hello, Flutter!',
-                          style: TextStyle(fontSize: 20),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("lab : ",
+                            style: Theme.of(context).textTheme.labelLarge),
+                        Text("anandh",
+                            style: Theme.of(context).textTheme.titleSmall)
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("Sample Required : ",
+                            style: Theme.of(context).textTheme.labelLarge),
+                        Text("blood, urine",
+                            style: Theme.of(context).textTheme.titleSmall)
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("Recommended Gender : ",
+                            style: Theme.of(context).textTheme.labelLarge),
+                        Text("male, female",
+                            style: Theme.of(context).textTheme.titleSmall)
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("start at : ",
+                            style: Theme.of(context).textTheme.labelLarge),
+                        Expanded(
+                          child: ListTile(
+                            leading: Icon(Icons.currency_rupee,
+                                size: 23, weight: 50, color: Colors.black),
+                            horizontalTitleGap: -18.0,
+                            title: Text("3564",
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("BOOK"),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
+                          foregroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                8.0), // Adjust the border radius as needed
+                            side: BorderSide(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary), // Set the outline color
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ]),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2.0,
+              shape: Theme.of(context).cardTheme.shape,
+              color: Theme.of(context).cardTheme.color,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Preperation",
+                        style: Theme.of(context).textTheme.displayLarge),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(
+                      height: 10,
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Text("note : ",
+                        //     style: Theme.of(context).textTheme.labelLarge),
+                        Text("* no preperation required...",
+                            style: Theme.of(context).textTheme.titleSmall)
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2.0,
+              shape: Theme.of(context).cardTheme.shape,
+              color: Theme.of(context).cardTheme.color,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Need help ?",
+                        style: Theme.of(context).textTheme.displayLarge),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(
+                      height: 10,
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.call_outlined),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          children: [
+                            Text("Call our health adviser to book",
+                                style: Theme.of(context).textTheme.labelLarge),
+                            Text("our team of experts will guid you",
+                                style: Theme.of(context).textTheme.titleSmall)
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2.0,
+              shape: Theme.of(context).cardTheme.shape,
+              color: Theme.of(context).cardTheme.color,
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Freequently booked together",
+                        style: Theme.of(context).textTheme.displayLarge),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(
+                      height: 10,
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
     );

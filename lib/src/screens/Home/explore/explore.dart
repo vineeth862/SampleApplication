@@ -120,20 +120,24 @@ class _ExploreState extends State<Explore> {
             ),
             items: imageSliders,
           ),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemCount: searchState.labList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return LabCardWidget(
-                    title: searchState.labList[index].name,
-                    description: searchState.labList[index].test.toString(),
-                    onTap: (value) {
-                      globalservice.navigate(context, CardDetailPage());
-                    });
-              },
-            ),
-          )
+          // Expanded(
+          //   child: ListView.builder(
+          //     padding: const EdgeInsets.all(10),
+          //     itemCount: searchState.labList.length,
+          //     itemBuilder: (BuildContext context, int index) {
+          //       return LabCardWidget(
+          //           title: searchState.labList[index].name,
+          //           description: searchState.labList[index].test.toString(),
+          //           onTap: (value) {
+          //             globalservice.navigate(
+          //                 context,
+          //                 CardDetailPage(
+          //                   lab: searchState.labList[index],
+          //                 ));
+          //           });
+          //     },
+          //   ),
+          // )
         ],
       ),
     );

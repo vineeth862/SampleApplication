@@ -40,20 +40,22 @@ class LabCardWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const Spacer(),
-                    ElevatedButton.icon(
+                    ElevatedButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
-                        size: 20,
-                      ),
-                      label: const Text("add"),
+                      // icon: const Icon(
+                      //   Icons.add,
+                      //   size: 20,
+                      // ),
+                      child: const Text("BOOK"),
+
                       style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.all(0),
                         foregroundColor: Theme.of(context).colorScheme.primary,
                         backgroundColor:
                             Theme.of(context).colorScheme.background,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                              20.0), // Adjust the border radius as needed
+                              8.0), // Adjust the border radius as needed
                           side: BorderSide(
                               color: Theme.of(context)
                                   .colorScheme

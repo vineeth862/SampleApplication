@@ -6,6 +6,8 @@ import 'package:sample_application/src/screens/Home/explore/Search/Provider/sear
 import 'package:sample_application/src/screens/Home/explore/explore.service.dart';
 import 'package:sample_application/src/utils/helper_widgets/lab_card.dart';
 
+import '../../../models/lab.dart';
+
 // ignore: must_be_immutable
 class FilteredCardlistPage extends StatelessWidget {
   ExploreService exploreService = ExploreService();
@@ -42,7 +44,11 @@ class FilteredCardlistPage extends StatelessWidget {
                     title: list[index].name,
                     description: list[index].test.toString(),
                     onTap: (value) {
-                      globalservice.navigate(context, const CardDetailPage());
+                      globalservice.navigate(
+                          context,
+                          CardDetailPage(
+                            lab: list[index],
+                          ));
                     });
               },
             ),
