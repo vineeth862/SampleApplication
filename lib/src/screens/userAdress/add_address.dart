@@ -17,12 +17,26 @@ class AddAdress extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Enter Complete Address",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
+              child: Row(
+                children: [
+                  InkWell(
+                      child: Icon(Icons.keyboard_double_arrow_down),
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
+                  SizedBox(
+                    width: 45,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Enter Complete Address",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(

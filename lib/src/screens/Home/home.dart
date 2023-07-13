@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        elevation: 2,
+        elevation: 0,
         title: TextButton.icon(
           icon: Icon(Icons.location_on),
           label: Text(

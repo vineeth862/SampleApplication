@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/userAdress/add_address.dart';
 
-class InitialAdress extends StatefulWidget {
-  const InitialAdress({super.key});
+class AdressBook extends StatefulWidget {
+  const AdressBook({super.key});
 
   @override
-  State<InitialAdress> createState() => _InitialAdressState();
+  State<AdressBook> createState() => _AdressBookState();
 }
 
-class _InitialAdressState extends State<InitialAdress> {
+class _AdressBookState extends State<AdressBook> {
   GlobalService globalservice = GlobalService();
   List<String> items = List.generate(18,
       (index) => '4/5, 1st cross road, Byrappa Layout, whitefield, Bangalore');
-
   int visibleItemCount = 5;
 
   void _loadMoreItems() {
@@ -58,7 +57,7 @@ class _InitialAdressState extends State<InitialAdress> {
                     SizedBox(width: 5),
                     Expanded(
                       child: Text(
-                        "Choose Your Location",
+                        "Address Book",
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -82,43 +81,6 @@ class _InitialAdressState extends State<InitialAdress> {
               ),
               Divider(
                 height: 3,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.gps_fixed,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "Use Current Location",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        )),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 5,
               ),
               InkWell(
                 onTap: () {

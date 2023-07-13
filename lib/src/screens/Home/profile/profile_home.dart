@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/profile/adress_book.dart';
 import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
+import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,19 +11,36 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalService globalservice = GlobalService();
-    Widget _CustomTextButton(Icon icon, String label_text, final pageDetails) {
-      return TextButton.icon(
-          icon: icon,
-          onPressed: () {
-            //globalservice.navigate(context, pageDetails);
-          },
-          label: Text(
-            label_text,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(fontSize: 15, fontWeight: FontWeight.bold),
-          ));
+    Widget _CustomTextButton(
+        IconData icon, String label_text, final pageDetails) {
+      return InkWell(
+        onTap: () {
+          globalservice.navigate(context, pageDetails);
+        },
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Icon(
+                    icon,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: ListTile(
+                      title: Text(label_text),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
     }
 
     return SafeArea(
@@ -182,10 +201,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 250,
+                    height: 232,
                     decoration: BoxDecoration(
                         border: Border.all(
                           color: Theme.of(context)
@@ -202,28 +221,29 @@ class ProfileScreen extends StatelessWidget {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight),
                         borderRadius: BorderRadius.circular(20.0)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _CustomTextButton(const Icon(Icons.home),
-                              "My Address Book", EditProfileScreen()),
-                          const Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(
-                              const Icon(Icons.settings_suggest_sharp),
-                              "Settings",
-                              EditProfileScreen()),
-                          const Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(const Icon(Icons.help_sharp),
-                              "Help or Support", EditProfileScreen()),
-                          const Divider(color: Colors.black, thickness: 0.2),
-                          _CustomTextButton(const Icon(Icons.menu_book_sharp),
-                              "About Us", EditProfileScreen()),
-                          const Divider(color: Colors.black, thickness: 0.2)
-                        ],
-                      ),
-                    )),
-              ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _CustomTextButton(
+                            Icons.home, "My Address Book", AdressBook()),
+                        const Divider(
+                          color: Colors.black,
+                          thickness: 0.2,
+                          height: 1,
+                        ),
+                        _CustomTextButton(Icons.settings_suggest_sharp,
+                            "Settings", EditProfileScreen()),
+                        const Divider(
+                            color: Colors.black, thickness: 0.2, height: 1),
+                        _CustomTextButton(Icons.help_sharp, "Help or Support",
+                            EditProfileScreen()),
+                        const Divider(
+                            color: Colors.black, thickness: 0.2, height: 1),
+                        _CustomTextButton(Icons.menu_book_sharp, "About Us",
+                            EditProfileScreen()),
+                      ],
+                    ),
+                  )),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
