@@ -8,6 +8,7 @@ import 'package:sample_application/src/screens/Home/home_service.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/screens/orderTracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,10 +32,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     ProfileScreen(),
     Explore(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    OrderTrackerHome()
   ];
 
   void _onItemTapped(int index) {
