@@ -1,23 +1,23 @@
 class Lab {
   late String name;
 
-  late List<String> test;
+  List<String> test;
 
-  late List<String> sample;
+  List<String> sample;
 
-  late String tat;
+  String tat;
 
-  late List<String> preperation;
+  List<String> preperation;
 
-  late List suggestionTest;
+  List suggestionTest;
 
   Lab(
-      {required List suggestionTest,
-      required List preperation,
-      required String tat,
-      required List sample,
-      required List<String> test,
-      required String name});
+      {required this.suggestionTest,
+      required this.preperation,
+      required this.tat,
+      required this.sample,
+      required this.test,
+      required this.name});
 
 // @override
   // String toString() {

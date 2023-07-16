@@ -8,7 +8,7 @@ final ThemeData theme = ThemeData(
     primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
     primaryContainer: Color.fromRGBO(176, 113, 187, 1),
     secondary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
-    secondaryContainer: Color.fromRGBO(237, 177, 248, 0.855),
+    secondaryContainer: Color.fromRGBO(255, 247, 255, 1),
     surface: Colors.white,
     background: Colors.white,
     error: Colors.red,
@@ -21,11 +21,11 @@ final ThemeData theme = ThemeData(
   ),
   textTheme: const TextTheme(
     displayLarge: TextStyle(
-      fontSize: 24.0,
-      fontWeight: FontWeight.bold,
-      fontStyle: FontStyle.normal,
-      decoration: TextDecoration.none,
-    ),
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: Colors.black87),
     displayMedium: TextStyle(
       fontSize: 22.0,
       fontWeight: FontWeight.bold,

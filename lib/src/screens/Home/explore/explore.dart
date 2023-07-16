@@ -9,6 +9,8 @@ import 'package:sample_application/src/utils/helper_widgets/lab_card.dart';
 import '../../../global_service/global_service.dart';
 import 'Search/Provider/search_provider.dart';
 import 'explore.service.dart';
+import 'explore_category.dart';
+import 'explore_why-us.dart';
 
 class Explore extends StatefulWidget {
   const Explore({super.key});
@@ -78,67 +80,174 @@ class _ExploreState extends State<Explore> {
     loadList();
     return Container(
       width: double.infinity,
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(),
-            child: GestureDetector(
-              onTap: () {
-                globalservice.navigate(context, const SearchBarPage());
-              },
-              child: TextField(
-                decoration: InputDecoration(
-                  enabled: false,
-                  hintText: 'Search for Lab/Tests',
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).colorScheme.primary,
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(),
+                child: GestureDetector(
+                  onTap: () {
+                    globalservice.navigate(context, const SearchBarPage());
+                  },
+                  child: TextField(
+                    decoration: InputDecoration(
+                      enabled: false,
+                      hintText: 'Search for Lab/Tests',
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      contentPadding: EdgeInsets.all(16),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                    ),
                   ),
-                  contentPadding: EdgeInsets.all(16),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
                 ),
               ),
-            ),
+              SizedBox(
+                height: 15,
+              ),
+              MySlider(),
+              SizedBox(
+                height: 25,
+              ),
+              // CarouselSlider(
+              //   disableGesture: true,
+              //   options: CarouselOptions(
+              //     height: 100,
+              //     aspectRatio: 16 / 9,
+              //     viewportFraction: 1.0,
+              //     enableInfiniteScroll: false,
+              //     autoPlay: true, // Enable auto-playing of slides
+              //     autoPlayInterval: const Duration(
+              //         seconds:
+              //             5), // Set the duration between auto-playing slides
+              //     autoPlayAnimationDuration: const Duration(microseconds: 1),
+              //     autoPlayCurve: Curves.easeInOutQuart,
+              //     enlargeCenterPage: true,
+              //     pauseAutoPlayOnTouch: true,
+              //   ),
+              //   items: imageSliders,
+              // ),
+              // Expanded(
+              //   child: ListView.builder(
+              //     padding: const EdgeInsets.all(10),
+              //     itemCount: searchState.labList.length,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return LabCardWidget(
+              //           title: searchState.labList[index].name,
+              //           description: searchState.labList[index].test.toString(),
+              //           onTap: (value) {
+              //             globalservice.navigate(
+              //                 context,
+              //                 CardDetailPage(
+              //                   lab: searchState.labList[index],
+              //                 ));
+              //           });
+              //     },
+              //   ),
+              // )
+              // Container(
+              //   height: 400,
+              //   child: Card(
+              //     elevation: 2.0,
+              //     shape: Theme.of(context).cardTheme.shape,
+              //     color: Theme.of(context).cardTheme.color,
+              //     clipBehavior: Clip.antiAliasWithSaveLayer,
+              //     child:
+              //   ),
+              // ),
+              Container(
+                width: double.infinity,
+                height: 380,
+                // padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 25,
+                            height: 25,
+                            child: Image.asset('./assets/images/flask.jpg',
+                                fit: BoxFit.cover),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Popular test",
+                              style: Theme.of(context).textTheme.displayLarge),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // const Divider(
+                    //   height: 10,
+                    //   thickness: 1,
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    // ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GridView.count(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          physics: NeverScrollableScrollPhysics(),
+                          childAspectRatio:
+                              1, // Adjust the aspect ratio to control the card height
+                          children: [
+                            LabTestCategoryCard(
+                                'Blood Tests', '', './assets/images/blood.png'),
+                            LabTestCategoryCard('Urin Tests', '',
+                                './assets/images/urin-test.avif'),
+                            LabTestCategoryCard(
+                                'cogh test', '', './assets/images/cogh.jpg'),
+                            LabTestCategoryCard('metabolic test', '',
+                                './assets/images/test1.jpg'),
+                            LabTestCategoryCard(
+                                'covid -19', '', './assets/images/corona.jpg'),
+                            LabTestCategoryCard('Thyroid panel', '',
+                                './assets/images/test1.jpg'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            child: Image.asset('./assets/images/lab1.png',
+                                fit: BoxFit.cover),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("Popular lab",
+                              style: Theme.of(context).textTheme.displayLarge),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          CarouselSlider(
-            disableGesture: true,
-            options: CarouselOptions(
-              height: 100,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1.0,
-              enableInfiniteScroll: false,
-              autoPlay: true, // Enable auto-playing of slides
-              autoPlayInterval: const Duration(
-                  seconds: 5), // Set the duration between auto-playing slides
-              autoPlayAnimationDuration: const Duration(microseconds: 1),
-              autoPlayCurve: Curves.easeInOutQuart,
-              enlargeCenterPage: true,
-              pauseAutoPlayOnTouch: true,
-            ),
-            items: imageSliders,
-          ),
-          // Expanded(
-          //   child: ListView.builder(
-          //     padding: const EdgeInsets.all(10),
-          //     itemCount: searchState.labList.length,
-          //     itemBuilder: (BuildContext context, int index) {
-          //       return LabCardWidget(
-          //           title: searchState.labList[index].name,
-          //           description: searchState.labList[index].test.toString(),
-          //           onTap: (value) {
-          //             globalservice.navigate(
-          //                 context,
-          //                 CardDetailPage(
-          //                   lab: searchState.labList[index],
-          //                 ));
-          //           });
-          //     },
-          //   ),
-          // )
-        ],
+        ),
       ),
     );
   }

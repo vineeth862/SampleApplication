@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sample Application',
       theme: theme,
       themeMode: ThemeMode.light,
       home: const HomePage(
