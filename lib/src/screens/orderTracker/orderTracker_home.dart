@@ -28,14 +28,14 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Row(
                 children: [
-                  Text(
+                  const Text(
                     "|",
                     style: TextStyle(
                         color: Colors.red,
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(
                     "Your Bookings",
                     style: Theme.of(context)
@@ -46,7 +46,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -76,7 +76,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight),
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(20.0),
                             bottomRight: Radius.circular(20.0),
                           ),
@@ -111,7 +111,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                           .copyWith(
                                               fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 60,
                                     ),
                                     Expanded(
@@ -120,7 +120,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         //   Icons.wifi_protected_setup_sharp,
                                         //   size: 15,
                                         // ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.done_all_rounded,
                                           size: 15,
                                           color: Colors.black,
@@ -153,7 +153,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                             //   height: 5,
                             //   thickness: 1,
                             // ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Padding(
@@ -193,17 +193,17 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                             //     },
                             //   ),
                             // ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               child: Text("Thyroid"),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               child: Text("Thyroid"),
                             ),
-                            Divider(
+                            const Divider(
                               height: 5,
                             ),
                             Row(
@@ -217,16 +217,16 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         Theme.of(context).textTheme.bodySmall,
                                   ),
                                 ),
-                                SizedBox(width: 70),
+                                const SizedBox(width: 70),
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8),
                                     child: ElevatedButton(
                                       onPressed: () {},
-                                      child: Text("Track Order"),
+                                      child: const Text("Track Order"),
                                       style: ElevatedButton.styleFrom(
-                                          minimumSize: Size(10, 30),
+                                          minimumSize: const Size(10, 30),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -242,7 +242,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       )
                     ],

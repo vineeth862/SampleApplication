@@ -50,6 +50,7 @@ dependencies:
   geolocator: ^9.0.2
   geocoding: ^2.1.0
   carousel_indicator: ^1.0.6
+  intl: ^0.17.0
   
 dev_dependencies:
   flutter_test:
