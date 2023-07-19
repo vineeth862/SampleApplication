@@ -4,13 +4,15 @@ class LabCardWidget extends StatelessWidget {
   final String title;
   final String description;
 
-  late Function(Object card) onTap;
+  late Function(Object card) tapOnCard;
+  late Function(String test) tapOnButton;
 
   LabCardWidget(
       {super.key,
       required this.title,
       required this.description,
-      required this.onTap});
+      required this.tapOnCard,
+      required this.tapOnButton});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LabCardWidget extends StatelessWidget {
       width: double.infinity,
       child: GestureDetector(
         onTap: () {
-          onTap({title: title, description: description});
+          tapOnCard({title: title, description: description});
         },
         child: Card(
           elevation: 2.0,
@@ -41,7 +43,9 @@ class LabCardWidget extends StatelessWidget {
                     ),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        tapOnButton("");
+                      },
                       // icon: const Icon(
                       //   Icons.add,
                       //   size: 20,

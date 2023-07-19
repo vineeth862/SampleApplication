@@ -1,13 +1,9 @@
 // ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/Cards/card_detail_page.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
-import 'package:sample_application/src/utils/helper_widgets/lab_card.dart';
 import '../../../global_service/global_service.dart';
-import 'Search/Provider/search_provider.dart';
+import '../../../utils/Provider/search_provider.dart';
 import 'explore.service.dart';
 import 'explore_category.dart';
 import 'explore_why-us.dart';
@@ -23,61 +19,10 @@ class _ExploreState extends State<Explore> {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   setState(() {
-  //     exploreService.filterCardList([], null);
-  //   });
-  // }
-
-  final List<String> imgList = [
-    // 'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    // 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    // 'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    // 'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
-  late List<Widget> imageSliders = [];
-  loadList() {
-    imageSliders = imgList
-        .map((item) => Container(
-              margin: const EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                        ),
-                      ),
-                    ],
-                  )),
-            ))
-        .toList();
-  }
-
   @override
   build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
-    loadList();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -86,9 +31,17 @@ class _ExploreState extends State<Explore> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
+              SizedBox(
+                height: 10,
+              ),
+              MySlider(),
+              SizedBox(
+                height: 25,
+              ),
+              // search
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                // padding:
+                //     const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(),
                 child: GestureDetector(
@@ -111,138 +64,154 @@ class _ExploreState extends State<Explore> {
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 45,
               ),
-              MySlider(),
-              SizedBox(
-                height: 25,
+              Card(
+                child: Container(
+                  width: double.infinity,
+                  height: 340,
+                  // padding: const EdgeInsets.all(16.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                child: Image.asset('./assets/images/flask.jpg',
+                                    fit: BoxFit.cover),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text("Popular test",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Expanded(
+                          child: GridView.count(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                            physics: NeverScrollableScrollPhysics(),
+                            childAspectRatio:
+                                0.9, // Adjust the aspect ratio to control the card height
+                            children: [
+                              LabTestCategoryCard('Blood Tests', '',
+                                  './assets/images/blood.png'),
+                              LabTestCategoryCard('Urin Tests', '',
+                                  './assets/images/urin-test.avif'),
+                              LabTestCategoryCard(
+                                  'cogh test', '', './assets/images/cogh.jpg'),
+                              LabTestCategoryCard('metabolic test', '',
+                                  './assets/images/test1.jpg'),
+                              LabTestCategoryCard('covid -19', '',
+                                  './assets/images/corona.jpg'),
+                              LabTestCategoryCard('Thyroid panel', '',
+                                  './assets/images/test1.jpg'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              // CarouselSlider(
-              //   disableGesture: true,
-              //   options: CarouselOptions(
-              //     height: 100,
-              //     aspectRatio: 16 / 9,
-              //     viewportFraction: 1.0,
-              //     enableInfiniteScroll: false,
-              //     autoPlay: true, // Enable auto-playing of slides
-              //     autoPlayInterval: const Duration(
-              //         seconds:
-              //             5), // Set the duration between auto-playing slides
-              //     autoPlayAnimationDuration: const Duration(microseconds: 1),
-              //     autoPlayCurve: Curves.easeInOutQuart,
-              //     enlargeCenterPage: true,
-              //     pauseAutoPlayOnTouch: true,
-              //   ),
-              //   items: imageSliders,
-              // ),
-              // Expanded(
-              //   child: ListView.builder(
-              //     padding: const EdgeInsets.all(10),
-              //     itemCount: searchState.labList.length,
-              //     itemBuilder: (BuildContext context, int index) {
-              //       return LabCardWidget(
-              //           title: searchState.labList[index].name,
-              //           description: searchState.labList[index].test.toString(),
-              //           onTap: (value) {
-              //             globalservice.navigate(
-              //                 context,
-              //                 CardDetailPage(
-              //                   lab: searchState.labList[index],
-              //                 ));
-              //           });
-              //     },
-              //   ),
-              // )
-              // Container(
-              //   height: 400,
-              //   child: Card(
-              //     elevation: 2.0,
-              //     shape: Theme.of(context).cardTheme.shape,
-              //     color: Theme.of(context).cardTheme.color,
-              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-              //     child:
-              //   ),
-              // ),
-              Container(
-                width: double.infinity,
-                height: 380,
-                // padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 25,
-                            height: 25,
-                            child: Image.asset('./assets/images/flask.jpg',
-                                fit: BoxFit.cover),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text("Popular test",
-                              style: Theme.of(context).textTheme.displayLarge),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // const Divider(
-                    //   height: 10,
-                    //   thickness: 1,
-                    //   indent: 10,
-                    //   endIndent: 10,
-                    // ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GridView.count(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                          physics: NeverScrollableScrollPhysics(),
-                          childAspectRatio:
-                              0.9, // Adjust the aspect ratio to control the card height
+
+              Card(
+                child: Container(
+                  height: 200,
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
                           children: [
-                            LabTestCategoryCard(
-                                'Blood Tests', '', './assets/images/blood.png'),
-                            LabTestCategoryCard('Urin Tests', '',
-                                './assets/images/urin-test.avif'),
-                            LabTestCategoryCard(
-                                'cogh test', '', './assets/images/cogh.jpg'),
-                            LabTestCategoryCard('metabolic test', '',
-                                './assets/images/test1.jpg'),
-                            LabTestCategoryCard(
-                                'covid -19', '', './assets/images/corona.jpg'),
-                            LabTestCategoryCard('Thyroid panel', '',
-                                './assets/images/test1.jpg'),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              child: Image.asset('./assets/images/lab1.png',
+                                  fit: BoxFit.cover),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("Popular lab",
+                                style:
+                                    Theme.of(context).textTheme.displayLarge),
+                            const SizedBox(
+                              height: 20,
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            child: Image.asset('./assets/images/lab1.png',
-                                fit: BoxFit.cover),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text("Popular lab",
-                              style: Theme.of(context).textTheme.displayLarge),
-                        ],
+                      const SizedBox(
+                        height: 30,
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GridView.count(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 20,
+                            physics: NeverScrollableScrollPhysics(),
+                            childAspectRatio: 80 /
+                                20, // Adjust the aspect ratio to control the card height
+                            children: [
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-logo1.jpeg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-logo2.jpeg',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-log3.jpeg',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-log4.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-log5.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                child: Image.asset(
+                                  './assets/images/lab-log6.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

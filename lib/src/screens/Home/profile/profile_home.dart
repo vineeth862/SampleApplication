@@ -3,7 +3,7 @@ import 'package:sample_application/src/profile/adress_book.dart';
 import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
-import 'package:sample_application/src/screens/slotBooking.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -257,7 +257,7 @@ class ProfileScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle edit profile button press
-                  globalservice.navigate(context, const SlotBooking());
+                  // globalservice.navigate(context, const SlotBooking());
                 },
                 child: const Text('SlotBooking'),
               ),

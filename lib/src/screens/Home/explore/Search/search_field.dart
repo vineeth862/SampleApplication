@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filterd_test_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filtered_lab_list.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/Provider/search_provider.dart';
+import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/utils/themes/themedata.dart';
 
 class SearchBarPage extends StatefulWidget {
@@ -109,11 +109,33 @@ class _SearchBarPageState extends State<SearchBarPage>
               tabs: const [Tab(text: 'Labs'), Tab(text: 'Tests')],
             ),
           ),
-          body: TabBarView(
-            controller: _tabController,
+          body: Stack(
             children: [
-              Center(child: LabListScreen()),
-              Center(child: TestListScreen()),
+              TabBarView(
+                controller: _tabController,
+                children: [
+                  Center(child: LabListScreen()),
+                  Center(child: TestListScreen()),
+                ],
+              ),
+              // Positioned(
+              //   bottom: 0,
+              //   right: 0,
+              //   left: 0,
+              //   child: Card(
+              //     elevation: 4.0,
+              //     child: Container(
+              //       height: 120,
+              //       child: Padding(
+              //         padding: EdgeInsets.all(16.0),
+              //         child: Text(
+              //           'This is a card',
+              //           style: TextStyle(fontSize: 18.0),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

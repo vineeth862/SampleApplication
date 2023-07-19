@@ -11,13 +11,16 @@ class Lab {
 
   List suggestionTest;
 
+  String testCode;
+
   Lab(
       {required this.suggestionTest,
       required this.preperation,
       required this.tat,
       required this.sample,
       required this.test,
-      required this.name});
+      required this.name,
+      required this.testCode});
 
 // @override
   // String toString() {

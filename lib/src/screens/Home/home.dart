@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
@@ -8,8 +9,12 @@ import 'package:sample_application/src/screens/Home/home_service.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:sample_application/src/screens/orderTracker/orderTracker_home.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
+
+import '../../utils/Provider/selected_test_provider.dart';
+import '../../utils/helper_widgets/slot-booking-card.dart';
+import 'order_tracker/step1/step1.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -67,6 +72,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedTest = Provider.of<SelectedTestState>(context);
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -97,7 +103,22 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Theme.of(context).colorScheme.background,
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: Stack(
+        children: [
+          _widgetOptions.elementAt(_selectedIndex),
+          Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: selectedTest.getSelectedTest.isNotEmpty
+                  ? SlotBookingCard(
+                      title: "2 item Selected",
+                      content: "test1 selected ",
+                      navigate: StepOneToBookTest(),
+                    )
+                  : Card()),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
