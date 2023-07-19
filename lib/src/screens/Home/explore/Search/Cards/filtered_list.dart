@@ -71,8 +71,8 @@ class FilteredCardlistPage extends StatelessWidget {
                 elevation: 4.0,
                 child: selectedTest.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
-                        title: "2 item Selected",
-                        content: "test1 selected ",
+                        title: "1 Test",
+                        content: "view details^",
                         navigate: StepOneToBookTest(),
                       )
                     : Card()),

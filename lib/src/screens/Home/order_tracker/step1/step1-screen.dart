@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
-
+import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
+import '../../explore/Search/Cards/filtered_list.dart';
 
 class StepOneScreen extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
   bool isOthersButtonSelected = false;
   TextEditingController _namecontroller = TextEditingController();
   TextEditingController _agecontroller = TextEditingController();
-
+  GlobalService globalservice = GlobalService();
   @override
   void initState() {
     super.initState();
@@ -195,6 +195,14 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         icon: Icon(Icons.delete_outlined)),
                   ),
                   ListTile(
+                    onTap: () {
+                      this.globalservice.navigate(
+                          context,
+                          FilteredCardlistPage(
+                            category: 'test',
+                            title: "test",
+                          ));
+                    },
                     title: Text(
                       "Add more test",
                       style: TextStyle(

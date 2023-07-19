@@ -76,8 +76,8 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                 elevation: 4.0,
                 child: selectedTest.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
-                        title: "2 item Selected",
-                        content: "test1 selected ",
+                        title: "Your Location",
+                        content: "Mariyappanapalya",
                         navigate: StepThreeToBookTest(),
                       )
                     : Card()),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-screen.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../step1/step1.dart';
@@ -74,8 +72,8 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
               elevation: 4.0,
               child: selectedTest.getSelectedTest.isNotEmpty
                   ? SlotBookingCard(
-                      title: "2 item Selected",
-                      content: "test1 selected ",
+                      title: "Collection at",
+                      content: "20th jul| 06:45 AM",
                       navigate: StepOneToBookTest(),
                     )
                   : Card()),
