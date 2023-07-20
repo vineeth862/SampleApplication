@@ -105,7 +105,7 @@ class _ExploreState extends State<Explore> {
                             crossAxisSpacing: 4.0,
                             physics: NeverScrollableScrollPhysics(),
                             childAspectRatio:
-                                0.9, // Adjust the aspect ratio to control the card height
+                                0.8, // Adjust the aspect ratio to control the card height
                             children: [
                               LabTestCategoryCard('Blood Tests', '',
                                   './assets/images/blood.png'),
@@ -127,7 +127,13 @@ class _ExploreState extends State<Explore> {
                   ),
                 ),
               ),
-
+              SizedBox(
+                height: 10,
+              ),
+              MySlider(),
+              SizedBox(
+                height: 25,
+              ),
               Card(
                 child: Container(
                   height: 200,

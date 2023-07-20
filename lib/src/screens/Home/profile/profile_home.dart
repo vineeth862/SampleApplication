@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/profile/adress_book.dart';
+import 'package:sample_application/src/screens/authentication/logout.dart';
 import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
@@ -233,7 +234,7 @@ class ProfileScreen extends StatelessWidget {
                           height: 1,
                         ),
                         _CustomTextButton(Icons.settings_suggest_sharp,
-                            "Settings", EditProfileScreen()),
+                            "Settings", LogoutScreen()),
                         const Divider(
                             color: Colors.black, thickness: 0.2, height: 1),
                         _CustomTextButton(Icons.help_sharp, "Help or Support",
