@@ -141,7 +141,8 @@ class SearchListState with ChangeNotifier {
           })
           .elementAt(0)
           .test
-          .map((e) => TestCard(name: value, test: e.toString()))
+          .map((e) =>
+              TestCard(name: value, test: e.toString(), testSelcted: false))
           .toList();
     }
   }

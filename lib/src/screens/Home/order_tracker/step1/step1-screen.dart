@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/screens/Home/models/lab_card.dart';
+import 'package:sample_application/src/screens/Home/models/test_card.dart';
 import '../../../../global_service/global_service.dart';
+import '../../../../utils/Provider/search_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filtered_list.dart';
@@ -20,6 +23,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
   TextEditingController _namecontroller = TextEditingController();
   TextEditingController _agecontroller = TextEditingController();
   GlobalService globalservice = GlobalService();
+  SearchListState? searchState;
+  LabCard? filteredTest;
   @override
   void initState() {
     super.initState();
@@ -38,9 +43,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
     super.dispose();
   }
 
+  Column generateListTileBody(test) {
+    filteredTest = searchState!.filteredLabCardList
+        .where((element) => element.testCode.toString() == test)
+        .elementAt(0);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [Text(filteredTest!.name), Text("135")],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
+    searchState = Provider.of<SearchListState>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,19 +197,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text("Selected Test"), Text("135")],
-                    ),
-                    iconColor: Theme.of(context).colorScheme.primary,
-                    leading: Icon(Icons.medical_services),
-                    trailing: IconButton(
-                        onPressed: () {
-                          selectedTest.removeTest("03");
-                        },
-                        icon: Icon(Icons.delete_outlined)),
-                  ),
+                  ...selectedTest.getSelectedTest
+                      .map(
+                        (test) => ListTile(
+                          title: generateListTileBody(test),
+                          iconColor: Theme.of(context).colorScheme.primary,
+                          leading: Icon(Icons.medical_services),
+                          trailing: IconButton(
+                              onPressed: () {
+                                selectedTest.removeTest(filteredTest!.testCode);
+                              },
+                              icon: Icon(Icons.delete_outlined)),
+                        ),
+                      )
+                      .toList(),
                   ListTile(
                     onTap: () {
                       this.globalservice.navigate(

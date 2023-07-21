@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LabCardWidget extends StatelessWidget {
   final String title;
   final String description;
-
+  final bool isTestSelected;
   late Function(Object card) tapOnCard;
   late Function(String test) tapOnButton;
 
@@ -12,7 +12,8 @@ class LabCardWidget extends StatelessWidget {
       required this.title,
       required this.description,
       required this.tapOnCard,
-      required this.tapOnButton});
+      required this.tapOnButton,
+      required this.isTestSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,16 @@ class LabCardWidget extends StatelessWidget {
                       //   Icons.add,
                       //   size: 20,
                       // ),
-                      child: const Text("BOOK"),
+                      child: isTestSelected ? Text("BOOK") : Text("BOOKED"),
 
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(0),
-                        foregroundColor: Theme.of(context).colorScheme.primary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
+                        foregroundColor: isTestSelected
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.background,
+                        backgroundColor: isTestSelected
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               8.0), // Adjust the border radius as needed

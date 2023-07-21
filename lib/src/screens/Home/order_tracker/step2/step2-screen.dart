@@ -43,39 +43,6 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                child: Row(
-                  children: [
-                    InkWell(
-                      child: Icon(Icons.keyboard_double_arrow_down_rounded),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        "Choose Your Location",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.cancel,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    )
-                  ],
-                ),
-              ),
               SizedBox(
                 height: 10,
               ),

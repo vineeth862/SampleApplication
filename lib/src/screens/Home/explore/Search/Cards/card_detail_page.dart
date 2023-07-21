@@ -138,15 +138,25 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              selectedTest.addTest("03");
+                              if (selectedTest.getSelectedTest.contains("03")) {
+                                selectedTest.removeTest("03");
+                              } else {
+                                selectedTest.addTest("03");
+                              }
                             },
-                            child: const Text("BOOK"),
+                            child: !selectedTest.getSelectedTest.contains("03")
+                                ? Text("BOOK")
+                                : Text("BOOKED"),
                             style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(0),
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.primary,
+                              padding: EdgeInsets.all(0),
+                              foregroundColor: !selectedTest.getSelectedTest
+                                      .contains("03")
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.background,
                               backgroundColor:
-                                  Theme.of(context).colorScheme.background,
+                                  !selectedTest.getSelectedTest.contains("03")
+                                      ? Theme.of(context).colorScheme.onPrimary
+                                      : Theme.of(context).colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     8.0), // Adjust the border radius as needed
@@ -273,7 +283,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
                 left: 0,
                 child: selectedTest.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
-                        title: "2 item Selected",
+                        title:
+                            "${selectedTest.getSelectedTest.length} item Selected",
                         content: "test1 selected ",
                         navigate: StepOneToBookTest(),
                       )
