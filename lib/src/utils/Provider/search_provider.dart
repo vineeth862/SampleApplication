@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/screens/Home/models/lab.dart';
-import 'package:sample_application/src/screens/Home/models/lab_card.dart';
-import 'package:sample_application/src/screens/Home/models/test_card.dart';
+import 'package:sample_application/src/screens/Home/models/lab/lab.dart';
+import 'package:sample_application/src/screens/Home/models/lab/lab_card.dart';
+import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 
 class SearchListState with ChangeNotifier {
   List<Lab> labList = [

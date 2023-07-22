@@ -14,7 +14,7 @@ class StepOneToBookTest extends StatefulWidget {
 
 class _StepOneToBookTest extends State<StepOneToBookTest> {
   // Add your state variables and methods here
-
+  bool expandDetails = false;
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
@@ -71,13 +71,19 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             bottom: 0,
             right: 0,
             left: 0,
-            child: Card(
-                elevation: 4.0,
+            child: Container(
                 child: selectedTest.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
-                        title: "1 Member Added",
-                        content: " 310",
-                        navigate: StepTwoToBookTest(),
+                        title:
+                            "${selectedTest.getSelectedTest.length} item Selected",
+                        content: "view details^",
+                        navigate: StepOneToBookTest(),
+                        hyperLink: true,
+                        expandDetail: () {
+                          setState(() {
+                            expandDetails = true;
+                          });
+                        },
                       )
                     : Card()),
           ),

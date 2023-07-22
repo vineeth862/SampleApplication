@@ -4,7 +4,7 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../../../models/lab_card.dart';
+import '../../../models/lab/lab_card.dart';
 import '../../../order_tracker/step1/step1-screen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
@@ -17,6 +17,7 @@ class CardDetailPage extends StatefulWidget {
 
 class _CardDetailPageState extends State<CardDetailPage> {
   GlobalService globalservice = GlobalService();
+  bool expandDetails = false;
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
@@ -285,8 +286,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
                     ? SlotBookingCard(
                         title:
                             "${selectedTest.getSelectedTest.length} item Selected",
-                        content: "test1 selected ",
+                        content: "view Details",
                         navigate: StepOneToBookTest(),
+                        hyperLink: true,
+                        expandDetail: () {
+                          setState(() {
+                            expandDetails = true;
+                          });
+                        },
                       )
                     : Card()),
           ],

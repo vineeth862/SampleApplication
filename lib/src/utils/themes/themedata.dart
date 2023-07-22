@@ -5,21 +5,21 @@ final ThemeData theme = ThemeData(
   primarySwatch: Colors.deepPurple,
   fontFamily: 'Lato',
   colorScheme: const ColorScheme(
-    primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
-    primaryContainer: Color.fromRGBO(176, 113, 187, 1),
-    secondary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
-    secondaryContainer: Color.fromRGBO(255, 247, 255, 1),
-    tertiary: Color.fromRGBO(211, 172, 218, 1),
-    surface: Colors.white,
-    background: Colors.white,
-    error: Colors.red,
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
-    onSurface: Colors.black,
-    onBackground: Color.fromARGB(253, 31, 30, 30),
-    onError: Colors.white,
-    brightness: Brightness.light,
-  ),
+      primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
+      primaryContainer: Color.fromRGBO(176, 113, 187, 1),
+      secondary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
+      secondaryContainer: Color.fromRGBO(255, 247, 255, 1),
+      tertiary: Color.fromRGBO(211, 172, 218, 1),
+      surface: Colors.white,
+      background: Colors.white,
+      error: Colors.red,
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onSurface: Colors.black,
+      onBackground: Color.fromARGB(253, 31, 30, 30),
+      onError: Colors.white,
+      brightness: Brightness.light,
+      outlineVariant: Colors.orangeAccent),
   textTheme: const TextTheme(
     displayLarge: TextStyle(
         fontSize: 20.0,
@@ -61,8 +61,8 @@ final ThemeData theme = ThemeData(
   appBarTheme: const AppBarTheme(),
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
-    buttonColor:
-        Color.fromRGBO(176, 113, 187, 1), // Change to your desired button color
+    buttonColor: const Color.fromRGBO(
+        176, 113, 187, 1), // Change to your desired button color
     disabledColor: Colors.grey, // Change to your desired disabled button color
     minWidth: 120.0,
     height: 48.0,

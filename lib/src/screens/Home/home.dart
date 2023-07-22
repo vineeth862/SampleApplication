@@ -70,6 +70,8 @@ class _HomePageState extends State<HomePage> {
     loaddata();
   }
 
+  bool expandDetails = false;
+
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
@@ -112,9 +114,16 @@ class _HomePageState extends State<HomePage> {
               left: 0,
               child: selectedTest.getSelectedTest.isNotEmpty
                   ? SlotBookingCard(
-                      title: "2 item Selected",
-                      content: "test1 selected ",
+                      title:
+                          "${selectedTest.getSelectedTest.length} item Selected",
+                      content: "view Details",
                       navigate: StepOneToBookTest(),
+                      hyperLink: true,
+                      expandDetail: () {
+                        setState(() {
+                          expandDetails = true;
+                        });
+                      },
                     )
                   : Card()),
         ],
