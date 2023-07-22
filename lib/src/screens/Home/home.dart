@@ -13,6 +13,7 @@ import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_h
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 
 import '../../utils/Provider/selected_test_provider.dart';
+import '../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../utils/helper_widgets/slot-booking-card.dart';
 import 'order_tracker/step1/step1.dart';
 
@@ -109,23 +110,31 @@ class _HomePageState extends State<HomePage> {
         children: [
           _widgetOptions.elementAt(_selectedIndex),
           Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: selectedTest.getSelectedTest.isNotEmpty
-                  ? SlotBookingCard(
-                      title:
-                          "${selectedTest.getSelectedTest.length} item Selected",
-                      content: "view Details",
-                      navigate: StepOneToBookTest(),
-                      hyperLink: true,
-                      expandDetail: () {
-                        setState(() {
-                          expandDetails = true;
-                        });
-                      },
-                    )
-                  : Card()),
+            bottom: 100,
+            right: 0,
+            left: 0,
+            child: SwipeableContainer(key: UniqueKey()),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Container(
+                child: selectedTest.getSelectedTest.isNotEmpty
+                    ? SlotBookingCard(
+                        title:
+                            "${selectedTest.getSelectedTest.length} item Selected",
+                        content: "view details",
+                        navigate: StepOneToBookTest(),
+                        hyperLink: true,
+                        expandDetail: () {
+                          setState(() {
+                            expandDetails = true;
+                          });
+                        },
+                      )
+                    : Card()),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

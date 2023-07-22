@@ -4,6 +4,7 @@ import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-sc
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../../../../utils/Provider/selected_test_provider.dart';
+import '../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../step2/step2.dart';
 
@@ -68,6 +69,12 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
         child: Stack(children: [
           StepOneScreen(),
           Positioned(
+            bottom: 100,
+            right: 0,
+            left: 0,
+            child: SwipeableContainer(key: UniqueKey()),
+          ),
+          Positioned(
             bottom: 0,
             right: 0,
             left: 0,
@@ -76,8 +83,8 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                     ? SlotBookingCard(
                         title:
                             "${selectedTest.getSelectedTest.length} item Selected",
-                        content: "view details^",
-                        navigate: StepOneToBookTest(),
+                        content: "view details",
+                        navigate: StepTwoToBookTest(),
                         hyperLink: true,
                         expandDetail: () {
                           setState(() {

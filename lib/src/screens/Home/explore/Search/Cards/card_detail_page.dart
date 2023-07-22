@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
+import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../../../models/lab/lab_card.dart';
 import '../../../order_tracker/step1/step1-screen.dart';
@@ -279,23 +280,31 @@ class _CardDetailPageState extends State<CardDetailPage> {
               ]),
             ),
             Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: selectedTest.getSelectedTest.isNotEmpty
-                    ? SlotBookingCard(
-                        title:
-                            "${selectedTest.getSelectedTest.length} item Selected",
-                        content: "view Details",
-                        navigate: StepOneToBookTest(),
-                        hyperLink: true,
-                        expandDetail: () {
-                          setState(() {
-                            expandDetails = true;
-                          });
-                        },
-                      )
-                    : Card()),
+              bottom: 100,
+              right: 0,
+              left: 0,
+              child: SwipeableContainer(key: UniqueKey()),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                  child: selectedTest.getSelectedTest.isNotEmpty
+                      ? SlotBookingCard(
+                          title:
+                              "${selectedTest.getSelectedTest.length} item Selected",
+                          content: "view details",
+                          navigate: StepOneToBookTest(),
+                          hyperLink: true,
+                          expandDetail: () {
+                            setState(() {
+                              expandDetails = true;
+                            });
+                          },
+                        )
+                      : Card()),
+            ),
           ],
         ),
       ),
