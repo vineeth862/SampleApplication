@@ -52,54 +52,61 @@ class _SearchBarPageState extends State<SearchBarPage>
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
+              alignment: Alignment.bottomCenter,
               color: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            title: Container(
-              alignment: Alignment.centerLeft,
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search  Any Labs OR Test',
-                  filled: true,
-                  hintStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+            actions: [
+              Container(
+                padding: EdgeInsets.only(left: 0, top: 10, right: 35),
+                width: MediaQuery.of(context).size.width * 0.85,
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    hintText: 'Search  Any Labs OR Test',
+                    filled: true,
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    fillColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
+                    prefixIcon: const Icon(Icons.search),
+                    contentPadding: const EdgeInsets.fromLTRB(-20, 0, 5, 0),
+                    suffixIcon: _searchController.value.text.isEmpty
+                        ? null
+                        : IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              setState(() {
+                                _searchController.clear();
+                                searchState.search("");
+                              });
+                            },
+                          ),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                    ),
                   ),
-                  fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
-                  prefixIcon: const Icon(Icons.search),
-                  contentPadding: const EdgeInsets.fromLTRB(-20, 0, 5, 0),
-                  suffixIcon: _isInputEmpty
-                      ? null
-                      : IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            setState(() {
-                              _searchController.clear();
-                              searchState.search("");
-                            });
-                          },
-                        ),
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(100))),
+                  // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
+                  onChanged: (value) {
+                    _isInputEmpty = value.isEmpty;
+                    searchState.search(value.trim());
+                    if (value.trim().isNotEmpty &&
+                        searchState.filteredTests.isEmpty &&
+                        searchState.filteredLabs.isNotEmpty) {
+                      switchToTab(0);
+                    } else if (value.trim().isNotEmpty &&
+                        searchState.filteredTests.isNotEmpty &&
+                        searchState.filteredLabs.isEmpty) {
+                      switchToTab(1);
+                    }
+                  },
                 ),
-                // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
-                onChanged: (value) {
-                  _isInputEmpty = value.isEmpty;
-                  searchState.search(value.trim());
-                  if (value.trim().isNotEmpty &&
-                      searchState.filteredTests.isEmpty &&
-                      searchState.filteredLabs.isNotEmpty) {
-                    switchToTab(0);
-                  } else if (value.trim().isNotEmpty &&
-                      searchState.filteredTests.isNotEmpty &&
-                      searchState.filteredLabs.isEmpty) {
-                    switchToTab(1);
-                  }
-                },
               ),
-            ),
+            ],
             backgroundColor: Theme.of(context).colorScheme.background,
             // automaticallyImplyLeading: false,
             bottom: TabBar(
@@ -118,24 +125,6 @@ class _SearchBarPageState extends State<SearchBarPage>
                   Center(child: TestListScreen()),
                 ],
               ),
-              // Positioned(
-              //   bottom: 0,
-              //   right: 0,
-              //   left: 0,
-              //   child: Card(
-              //     elevation: 4.0,
-              //     child: Container(
-              //       height: 120,
-              //       child: Padding(
-              //         padding: EdgeInsets.all(16.0),
-              //         child: Text(
-              //           'This is a card',
-              //           style: TextStyle(fontSize: 18.0),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

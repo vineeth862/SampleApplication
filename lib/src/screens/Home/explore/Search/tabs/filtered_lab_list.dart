@@ -5,6 +5,7 @@ import 'package:sample_application/src/screens/Home/explore/Search/Cards/filtere
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 
 import '../../../../../utils/helper_widgets/list_tile.dart';
+import '../../../../../utils/helper_widgets/no_result_found.dart';
 
 class LabListScreen extends StatelessWidget {
   final List<String> suggestions = [
@@ -18,24 +19,29 @@ class LabListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
-    return ListView.builder(
-      itemCount: searchState.getlabSuggetionList.length,
-      itemBuilder: (context, index) {
-        return CustomListTile(
-          title: searchState.getlabSuggetionList[index].name,
-          icon: Icons.store_outlined,
-          subtitle: "lab",
-          onTap: (title) async {
-            await searchState.cardClicked(title);
-            globalservice.navigate(
-                context,
-                FilteredCardlistPage(
-                  title: title,
-                  category: "lab",
-                ));
-          },
-        );
-      },
-    );
+    return searchState.getlabSuggetionList.isEmpty
+        ? SingleChildScrollView(
+            child: NoResultFoundCard(
+            title: 'No available lab in this search',
+          ))
+        : ListView.builder(
+            itemCount: searchState.getlabSuggetionList.length,
+            itemBuilder: (context, index) {
+              return CustomListTile(
+                title: searchState.getlabSuggetionList[index].name,
+                icon: Icons.store_outlined,
+                subtitle: "lab",
+                onTap: (title) async {
+                  await searchState.cardClicked(title);
+                  globalservice.navigate(
+                      context,
+                      FilteredCardlistPage(
+                        title: title,
+                        category: "lab",
+                      ));
+                },
+              );
+            },
+          );
   }
 }
