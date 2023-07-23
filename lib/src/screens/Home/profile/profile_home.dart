@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/profile/adress_book.dart';
-import 'package:sample_application/src/screens/authentication/logout.dart';
-import 'package:sample_application/src/screens/authentication/welcome_signin.dart';
+import 'package:sample_application/src/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';

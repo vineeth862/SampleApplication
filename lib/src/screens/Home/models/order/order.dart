@@ -1,9 +1,9 @@
 import '../booked.dart';
 import '../test/test.dart';
-import '../user.dart';
+import '../../../../authentication/models/user.dart';
 
 class Order {
-  String? orderNuber;
+  String? orderNumber;
   int? carrierCode;
   String? carrierName;
   int? statusCode;
@@ -11,8 +11,8 @@ class Order {
   String? createdDate;
   int? totalPrice;
   bool? self;
-  User? user;
-  User? patient;
+  Users? user;
+  Users? patient;
   List<Test>? tests;
   Booked? booked;
   String? specificInstruction;

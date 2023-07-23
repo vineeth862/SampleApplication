@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sample_application/src/screens/authentication/authentication_repository.dart';
-import 'package:sample_application/src/screens/authentication/otp_controller.dart';
+import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
+import 'package:sample_application/src/authentication/auth_validation/otp_controller.dart';
+import 'package:sample_application/src/authentication/models/user.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
+import '../models/user.dart';
+import '../user_repository.dart';
 //import 'package:sample_application/src/otp_controller.dart';
 //import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 
@@ -20,11 +24,13 @@ class Welcomesignin extends StatefulWidget {
 class _WelcomesigninState extends State<Welcomesignin> {
   final _formKey = GlobalKey<FormState>();
   final focusNode = FocusNode();
-  TextEditingController MobileNumberController = TextEditingController();
-  TextEditingController NameController = TextEditingController();
+  TextEditingController mobileNumberController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   GlobalService globalservice = GlobalService();
-  var _enteredMobileNumber = '';
-  var _enteredName = '';
+  UserRepository userRepository = UserRepository();
+  Users user = Users();
+  // var _enteredMobileNumber = '';
+  // var _enteredName = '';
   var otp;
   var Controller = Get.put(otpController());
   void _validate() {
@@ -32,12 +38,9 @@ class _WelcomesigninState extends State<Welcomesignin> {
   }
 
   void _saveItem() {
-    _enteredMobileNumber = MobileNumberController.text.trim();
-    _enteredName = NameController.text;
-    //print(_enteredName);
-    _enteredMobileNumber = "+91" + _enteredMobileNumber.toString();
-    AuthenticationRepository.instance.PhoneNumberAuth(_enteredMobileNumber);
-    print(_enteredMobileNumber);
+    user.mobile = "+91" + mobileNumberController.text.trim();
+    user.userName = nameController.text.trim();
+    AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
   }
 
   @override
@@ -176,7 +179,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             child: SizedBox(
                               height: 50,
                               child: TextFormField(
-                                controller: MobileNumberController,
+                                controller: mobileNumberController,
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
@@ -217,7 +220,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                               height: 50,
                               child: TextFormField(
                                 //key: _formKey,
-                                controller: NameController,
+                                controller: nameController,
                                 obscureText: false,
 
                                 decoration: InputDecoration(
@@ -239,7 +242,6 @@ class _WelcomesigninState extends State<Welcomesignin> {
             ElevatedButton(
               onPressed: () {
                 _saveItem();
-
                 //globalservice.navigate(context, const PinputExample());
                 showModalBottomSheet(
                   shape: RoundedRectangleBorder(
@@ -274,7 +276,8 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               otp = value;
-                              otpController.instance.verifyOtpController(otp);
+                              otpController.instance
+                                  .verifyOtpController(otp, user);
                             },
                           ),
                         ),
@@ -284,7 +287,9 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         ElevatedButton(
                           onPressed: () {
                             _validate();
-                            otpController.instance.verifyOtpController(otp);
+
+                            otpController.instance
+                                .verifyOtpController(otp, user);
                           },
                           child: const Text("Submit"),
                           style: ElevatedButton.styleFrom(
