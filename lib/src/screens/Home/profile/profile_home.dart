@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/profile/adress_book.dart';
 import 'package:sample_application/src/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -48,14 +46,6 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        // appBar: AppBar(
-        //   title: const Text(
-        //     'Profile',
-        //   ),
-        // ),
-        //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        //   backgroundColor: Theme.of(context).colorScheme.primary,
-        // ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

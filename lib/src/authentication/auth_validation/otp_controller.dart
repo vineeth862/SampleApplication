@@ -9,7 +9,6 @@ class otpController extends GetxController {
   static otpController get instance => Get.find();
   UserRepository userRepository = UserRepository();
   void verifyOtpController(String otp, Users user) async {
-    userRepository.createUser(user);
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
       Get.offAll(HomePage(title: appTitle));
