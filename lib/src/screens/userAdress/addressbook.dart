@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sample_application/src/authentication/models/address.dart';
+import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/userAdress/add_address.dart';
 
@@ -11,8 +14,39 @@ class AdressBook extends StatefulWidget {
 
 class _AdressBookState extends State<AdressBook> {
   GlobalService globalservice = GlobalService();
-  List<String> items = List.generate(18,
-      (index) => '4/5, 1st cross road, Byrappa Layout, whitefield, Bangalore');
+  var Controller = Get.put((UserRepository()));
+
+  concatenatedAddressList() async {
+    List<Map<String, dynamic>> items2 =
+        await UserRepository.instance.getAdress();
+    bool dataPresent = false;
+    List<String> fullAddress = [];
+    items2.forEach((location) {
+      String new1 = '';
+      if (location["houseNumber"] != null) {
+        new1 += "House Number:" + location["houseNumber"] + ", ";
+      }
+      if (location["floorNumber"] != null) {
+        new1 += "Floor Number" + location["floorNumber"] + ", ";
+      }
+      new1 += location["fullAddress"] + "-";
+      new1 += location["pincode"];
+
+      fullAddress.add(new1);
+    });
+    setState(() {
+      items = fullAddress;
+      if (items.length != 0) {
+        dataPresent = true;
+      }
+    });
+  }
+
+  // List<String> items1 = List.generate(18,
+  //     (index) => '4/5, 1st cross road, Byrappa Layout, whitefield, Bangalore');
+  late List<String> items = [];
+  bool isButtonEnabled = false;
+  bool isItemsNotPresent = false;
   int visibleItemCount = 5;
 
   void _loadMoreItems() {
@@ -26,13 +60,21 @@ class _AdressBookState extends State<AdressBook> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    concatenatedAddressList();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(items);
     bool isButtonEnabled = false;
     bool isItemsNotPresent = false;
     if (items.length == 0) {
       isItemsNotPresent = true;
     }
-    if (items.length < visibleItemCount) {
+    if (items.length < visibleItemCount && isItemsNotPresent == false) {
       visibleItemCount = items.length;
     }
     if (visibleItemCount < items.length) {

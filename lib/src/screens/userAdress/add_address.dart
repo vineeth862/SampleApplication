@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/authentication/models/address.dart';
+import 'package:sample_application/src/authentication/user_repository.dart';
+import 'package:get/get.dart';
 
 class AddAdress extends StatelessWidget {
   AddAdress({super.key});
   final _formKey = GlobalKey<FormState>();
+  var Controller = Get.put(UserRepository());
+  address addressObj = address();
   TextEditingController FullAdress = TextEditingController();
   TextEditingController PinCode = TextEditingController();
   TextEditingController HouseNumber = TextEditingController();
   TextEditingController FloorNumber = TextEditingController();
+
+  void saveAdress() {
+    addressObj.fullAddress = FullAdress.text.trim();
+    addressObj.pincode = PinCode.text.trim();
+    if (HouseNumber.text.isNotEmpty) {
+      addressObj.houseNumber = HouseNumber.text.trim();
+    }
+    if (FloorNumber.text.isNotEmpty) {
+      addressObj.floorNumber = FloorNumber.text.trim();
+    }
+
+    UserRepository.instance.updateAdress(addressObj);
+    UserRepository.instance.getAdress();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +102,11 @@ class AddAdress extends StatelessWidget {
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        saveAdress();
+
+                        Navigator.pop(context);
+                      },
                       child: const Text("Submit"),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
