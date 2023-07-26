@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/models/address.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class AddAdress extends StatelessWidget {
   AddAdress({super.key});
   final _formKey = GlobalKey<FormState>();
   var Controller = Get.put(UserRepository());
+  GlobalService globalservice = GlobalService();
   address addressObj = address();
   TextEditingController FullAdress = TextEditingController();
   TextEditingController PinCode = TextEditingController();
@@ -104,8 +107,8 @@ class AddAdress extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         saveAdress();
-
-                        Navigator.pop(context);
+                        globalservice.navigate(context, AdressBook());
+                        //Navigator.pop(context);
                       },
                       child: const Text("Submit"),
                       style: ElevatedButton.styleFrom(

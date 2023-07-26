@@ -66,6 +66,15 @@ class _AdressBookState extends State<AdressBook> {
     concatenatedAddressList();
   }
 
+  //Remove address in local and databse
+  void _removeItem(int index) {
+    setState(() {
+      String f = items[index];
+      items.removeAt(index);
+      UserRepository.instance.deleteAddress(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print(items);
@@ -80,6 +89,7 @@ class _AdressBookState extends State<AdressBook> {
     if (visibleItemCount < items.length) {
       isButtonEnabled = true;
     }
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -203,35 +213,39 @@ class _AdressBookState extends State<AdressBook> {
                             1, // Add 1 for the "Load More" button
                         itemBuilder: (context, index) {
                           if (index < visibleItemCount) {
-                            return InkWell(
-                              onTap: () {},
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          Icons.home,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                            return Container(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 10),
+                                      Icon(
+                                        Icons.home,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: ListTile(
+                                          title: Text(items[index]),
                                         ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: ListTile(
-                                            title: Text(items[index]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      height: 10,
-                                    )
-                                  ],
-                                ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _removeItem(index);
+                                        },
+                                        child: Icon(Icons.delete,
+                                            color: Colors.red.shade900),
+                                      )
+                                    ],
+                                  ),
+                                  Divider(
+                                    height: 10,
+                                  )
+                                ],
                               ),
                             );
                           } else {

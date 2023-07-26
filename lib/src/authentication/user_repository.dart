@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sample_application/src/authentication/models/address.dart';
@@ -62,5 +64,15 @@ class UserRepository extends GetxController {
       print("Document does not exist.");
     }
     //return items1;
+  }
+
+  deleteAddress(index) async {
+    String userKey = globalservice.getCurrentUser();
+
+    final data = await _db.collection("user").doc(userKey).get();
+    List<dynamic> locationArray = data.data()?['locations'];
+
+    locationArray.removeAt(index);
+    _db.collection("user").doc(userKey).update({"locations": locationArray});
   }
 }
