@@ -6,7 +6,6 @@ import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../../../models/lab/lab_card.dart';
-import '../../../order_tracker/step1/step1-screen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class CardDetailPage extends StatefulWidget {

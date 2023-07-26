@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
-// import 'package:sample_application/src/screens/Anthetication/exceptions/signup_email_password_exception.dart';
-// import 'package:sample_application/src/screens/Anthetication/signup.dart';
-// import 'package:sample_application/src/screens/home.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -27,27 +24,6 @@ class AuthenticationRepository extends GetxController {
         ? Get.offAll(() => const Welcomesignin())
         : Get.offAll(() => const HomePage(title: appTitle));
   }
-
-  // Future<void> createUserWithEmailAndPassword(
-  //     String email, String password) async {
-  //   try {
-  //     await _auth.createUserWithEmailAndPassword(
-  //         email: email, password: password);
-  //     firebaseUser.value != null
-  //         ? Get.offAll(() => HomePage(
-  //               title: appTitle,
-  //             ))
-  //         : Get.offAll(() => const SignupPage());
-  //   } on FirebaseAuthException catch (e) {
-  //     final ex = SignupEmailPasswordFailure.code(e.code);
-  //     print("Firebase Auth Exception -${ex.message}");
-  //     throw ex;
-  //   } catch (_) {
-  //     const ex = SignupEmailPasswordFailure();
-  //     print("Exception -${ex.message}");
-  //     throw ex;
-  //   }
-  // }
 
   Future<void> PhoneNumberAuth(String MobileNumber) async {
     await _auth.verifyPhoneNumber(

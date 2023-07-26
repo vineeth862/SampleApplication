@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
@@ -9,10 +8,7 @@ import 'package:sample_application/src/authentication/models/user.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
-import '../models/user.dart';
 import '../user_repository.dart';
-//import 'package:sample_application/src/otp_controller.dart';
-//import 'package:sample_application/src/screens/Anthetication/authentication_repositry.dart';
 
 class Welcomesignin extends StatefulWidget {
   const Welcomesignin({super.key});
@@ -29,8 +25,6 @@ class _WelcomesigninState extends State<Welcomesignin> {
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
   Users user = Users();
-  // var _enteredMobileNumber = '';
-  // var _enteredName = '';
   var otp;
   var Controller = Get.put(otpController());
   void _validate() {
@@ -67,31 +61,6 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             title: appTitle,
                           ));
                     },
-                    // child: Row(
-                    //   children: [
-                    //     const Text(
-                    //       'Skip',
-                    //       style: TextStyle(
-                    //         color: Colors.black,
-                    //         fontSize: 16,
-                    //       ),
-                    //     ),
-                    //     IconButton(
-                    //       icon: const Icon(
-                    //         Icons.skip_next,
-                    //         color: Colors.black,
-                    //         size: 30,
-                    //       ),
-                    //       onPressed: () {
-                    //         globalservice.navigate(
-                    //             context,
-                    //             const HomePage(
-                    //               title: appTitle,
-                    //             ));
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
                     child: OutlinedButton(
                       onPressed: () {
                         globalservice.navigate(
@@ -268,11 +237,6 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           child: Pinput(
                             length: 6,
                             focusNode: focusNode,
-                            // androidSmsAutofillMethod:
-                            //     AndroidSmsAutofillMethod.smsUserConsentApi,
-                            // listenForMultipleSmsOnAndroid: true,
-                            //filled: true,
-                            //fillColor: Colors.black.withOpacity(0.1),
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               otp = value;
