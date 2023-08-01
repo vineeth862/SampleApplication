@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sample_application/src/authentication/user_repository.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/profile/change_mobileNumber.dart';
 
 enum Gender { Male, Female, Other }
 
@@ -11,21 +15,22 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  GlobalService globalservice = GlobalService();
+  var Controller = Get.put((UserRepository()));
   TextEditingController? _nameController;
   TextEditingController? _emailController;
   TextEditingController? _mobilenumbercontroller;
   TextEditingController? _locationController;
   File? _profileImage;
   var items = ['Male', 'Female', 'Others', 'Not to disclose'];
+  Map<String, dynamic> sampleData = {};
   //Gender _selectedGender = Gender.Male;
   String _selectedGender = "Male";
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
-    _emailController = TextEditingController();
-    _mobilenumbercontroller = TextEditingController();
-    _locationController = TextEditingController();
+
+    getData();
   }
 
   @override
@@ -46,6 +51,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         _profileImage = File(pickedImage.path);
       });
     }
+  }
+
+  Future<Map<String, dynamic>> getData() async {
+    Map<String, dynamic> sampleDatatemp =
+        await UserRepository.instance.getUserData();
+    setState(() {
+      _nameController = TextEditingController(text: sampleDatatemp['userName']);
+      if (sampleDatatemp['email'] != null) {
+        _emailController = TextEditingController(text: sampleDatatemp['email']);
+      } else {
+        _emailController = TextEditingController();
+      }
+      _mobilenumbercontroller =
+          TextEditingController(text: sampleDatatemp['mobile']);
+      if (sampleDatatemp['gender'] != null) {
+        _selectedGender = sampleDatatemp['gender'];
+      }
+    });
+
+    //setState(() {
+    sampleData = sampleDatatemp;
+    //});
+    return sampleDatatemp;
   }
 
   @override
@@ -187,7 +215,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           suffix: InkWell(
                             child: Text("change",
                                 style: TextStyle(color: Colors.red.shade600)),
-                            onTap: () {},
+                            onTap: () {
+                              globalservice.navigate(
+                                  context, changeMobileNumber());
+                            },
                           ),
                           labelText: 'Mobile Number',
                           border: OutlineInputBorder(
@@ -261,13 +292,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  void _saveProfileChanges() {
+  void _saveProfileChanges() async {
+    final _db = FirebaseFirestore.instance;
     // Save the changes made to the user's profile
     String name = _nameController!.text;
     String email = _emailController!.text;
 
     String mobilenumber = _mobilenumbercontroller!.text;
     String gender = _selectedGender;
+
+    String userKey = globalservice.getCurrentUser();
+    await _db
+        .collection("user")
+        .doc(userKey)
+        .update({'userName': name, "email": email, 'gender': gender});
 
     // Perform the necessary actions to save the changes
     // to the user's profile, such as making an API request.

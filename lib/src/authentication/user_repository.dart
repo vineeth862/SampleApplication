@@ -23,6 +23,31 @@ class UserRepository extends GetxController {
     });
   }
 
+  updateUser(Users user, String oldUserKey) async {
+    print(oldUserKey);
+    final oldDocumentRef = _db.collection("user").doc(oldUserKey);
+    oldDocumentRef.update({"mobile": user.mobile});
+    print(oldDocumentRef);
+    final oldDocumentSnapshot = await oldDocumentRef.get();
+    print(oldDocumentSnapshot);
+    final data = oldDocumentSnapshot.data();
+    data?['locations'];
+
+    print(user.mobile);
+
+    final newDocumentRef = _db.collection("user").doc(user.mobile);
+    await newDocumentRef
+        .set(data!)
+        .whenComplete(() =>
+            Get.snackbar("Success", "Your Mobile Number Changed Successfully"))
+        .catchError((error, stackTrace) {
+      Get.snackbar("Failed", "Something went wrong");
+    });
+
+    // Step 3: Delete the old document (optional)
+    await oldDocumentRef.delete();
+  }
+
   updateAdress(address addressObj) async {
     String userKey = globalservice.getCurrentUser();
     await _db
@@ -74,5 +99,23 @@ class UserRepository extends GetxController {
 
     locationArray.removeAt(index);
     _db.collection("user").doc(userKey).update({"locations": locationArray});
+  }
+
+  Future<Map<String, dynamic>> getUserData() async {
+    String userKey = globalservice.getCurrentUser();
+    Map<String, dynamic> data = {};
+    final _db = FirebaseFirestore.instance;
+    DocumentSnapshot<Map<String, dynamic>> userdata =
+        await _db.collection("user").doc(userKey).get();
+    data['userName'] = userdata.data()?['userName'];
+    data['email'] = userdata.data()?['email'];
+    data['gender'] = userdata.data()?['gender'];
+    String mobile = userdata.data()?['mobile'];
+    data['mobile'] = mobile.substring(3);
+    // data.add(userdata.data()?['userName']);
+    // data.add(userdata.data()?['email']);
+    // data.add(userKey);
+    print(data);
+    return data;
   }
 }
