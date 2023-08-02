@@ -5,7 +5,7 @@ class LabCard {
 
   @override
   String toString() {
-    return 'TestCard{name: $name,test: $test}';
+    return 'TestCard{name: $name,test: $test, $testCode}';
   }
 
   LabCard({required this.name, required this.test, required this.testCode});

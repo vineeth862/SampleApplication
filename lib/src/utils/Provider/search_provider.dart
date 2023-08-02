@@ -135,14 +135,15 @@ class SearchListState with ChangeNotifier {
     }).toList();
 
     if (list.isNotEmpty) {
-      filteredTestCardList = labList
-          .where((element) {
-            return element.name.toString() == value.toString();
-          })
-          .elementAt(0)
-          .test
-          .map((e) =>
-              TestCard(name: value, test: e.toString(), testSelcted: false))
+      Lab cardObject = labList.where((element) {
+        return element.name.toString() == value.toString();
+      }).elementAt(0);
+      filteredTestCardList = cardObject.test
+          .map((e) => TestCard(
+              name: value,
+              test: e.toString(),
+              testSelcted: false,
+              testCode: cardObject.testCode))
           .toList();
     }
   }

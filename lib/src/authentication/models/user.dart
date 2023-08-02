@@ -5,6 +5,8 @@ class Users {
   String? mobile;
   String? email;
   List<String>? orders;
+  String? created;
+  String? lastSignedIn;
 
   Users(
       {this.uId,
@@ -12,7 +14,9 @@ class Users {
       this.email,
       this.mobile,
       this.location,
-      this.orders});
+      this.orders,
+      this.created,
+      this.lastSignedIn});
   toJson() {
     return {
       "userName": userName,
@@ -20,7 +24,9 @@ class Users {
       "mobile": mobile,
       "uId": uId,
       "location": location,
-      "orders": orders
+      "orders": orders,
+      "created": created,
+      "lastSignedIn": lastSignedIn
     };
   }
 }

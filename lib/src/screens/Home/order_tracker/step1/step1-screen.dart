@@ -32,6 +32,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
 
   void loadUserName(name) {
     _namecontroller.setText(name);
+    // this.globalservice.getCurrentUser();
     print(selectedGender);
     print(_agecontroller.text);
   }

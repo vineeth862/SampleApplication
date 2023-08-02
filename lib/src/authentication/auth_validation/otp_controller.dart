@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
@@ -14,7 +15,13 @@ class otpController extends GetxController {
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
       Get.offAll(HomePage(title: appTitle));
-      print(user.mobile);
+      var authUser = FirebaseAuth.instance.currentUser;
+      if (authUser != null) {
+        user.uId = authUser.uid;
+        user.created = authUser.metadata.creationTime.toString();
+        user.lastSignedIn = authUser.metadata.lastSignInTime.toString();
+      }
+
       userRepository.createUser(user);
     } else {
       Get.back();
@@ -22,7 +29,7 @@ class otpController extends GetxController {
   }
 
   void verifyOtpControllerNumberChange(String otp, Users user) async {
-    String oldUserKey = globalservice.getCurrentUser();
+    String oldUserKey = globalservice.getCurrentUserKey();
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
       Get.offAll(HomePage(title: appTitle));

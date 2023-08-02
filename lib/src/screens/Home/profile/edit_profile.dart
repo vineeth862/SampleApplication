@@ -301,7 +301,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     String mobilenumber = _mobilenumbercontroller!.text;
     String gender = _selectedGender;
 
-    String userKey = globalservice.getCurrentUser();
+    String userKey = globalservice.getCurrentUserKey();
     await _db
         .collection("user")
         .doc(userKey)

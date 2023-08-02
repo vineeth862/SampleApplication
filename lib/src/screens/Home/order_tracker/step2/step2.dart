@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-screen.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step2/step2-screen.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 

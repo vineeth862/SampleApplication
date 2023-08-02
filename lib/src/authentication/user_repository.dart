@@ -49,7 +49,7 @@ class UserRepository extends GetxController {
   }
 
   updateAdress(address addressObj) async {
-    String userKey = globalservice.getCurrentUser();
+    String userKey = globalservice.getCurrentUserKey();
     await _db
         .collection("user")
         .doc(userKey) //need to change this
@@ -73,7 +73,7 @@ class UserRepository extends GetxController {
   }
 
   getAdress() async {
-    String userKey = globalservice.getCurrentUser();
+    String userKey = globalservice.getCurrentUserKey();
     final data = await _db.collection("user").doc(userKey).get();
     //print(data.data()?.containsKey("locations"));
     //print(data.data()?['locations']);
@@ -92,7 +92,7 @@ class UserRepository extends GetxController {
   }
 
   deleteAddress(index) async {
-    String userKey = globalservice.getCurrentUser();
+    String userKey = globalservice.getCurrentUserKey();
 
     final data = await _db.collection("user").doc(userKey).get();
     List<dynamic> locationArray = data.data()?['locations'];
@@ -102,7 +102,8 @@ class UserRepository extends GetxController {
   }
 
   Future<Map<String, dynamic>> getUserData() async {
-    String userKey = globalservice.getCurrentUser();
+    String userKey = globalservice.getCurrentUserKey();
+
     Map<String, dynamic> data = {};
     final _db = FirebaseFirestore.instance;
     DocumentSnapshot<Map<String, dynamic>> userdata =

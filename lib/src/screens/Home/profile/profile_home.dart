@@ -5,6 +5,10 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
+import '../../../utils/db-operation/db_operations.dart';
+
+// import '../../../utils/db-operation/db_operations.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -251,6 +255,18 @@ class ProfileScreen extends StatelessWidget {
                   // globalservice.navigate(context, const SlotBooking());
                 },
                 child: const Text('SlotBooking'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, GitHubRepositoriesScreen());
+
+                  // print("uploadClicked");
+                  // dbOperations db = dbOperations();
+                  // db.loadDataList();
+                },
+                child: const Text('uploadList'),
               ),
             ],
           ),
