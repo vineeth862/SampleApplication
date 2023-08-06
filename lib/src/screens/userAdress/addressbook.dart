@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/models/address.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/userAdress/add_address.dart';
 
 class AdressBook extends StatefulWidget {
@@ -103,7 +104,7 @@ class _AdressBookState extends State<AdressBook> {
                     InkWell(
                       child: Icon(Icons.keyboard_double_arrow_down_rounded),
                       onTap: () {
-                        Navigator.pop(context);
+                        globalservice.navigate(context, ProfileScreen());
                       },
                     ),
                     SizedBox(width: 5),
@@ -118,7 +119,7 @@ class _AdressBookState extends State<AdressBook> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        globalservice.navigate(context, ProfileScreen());
                       },
                       child: Icon(
                         Icons.cancel,

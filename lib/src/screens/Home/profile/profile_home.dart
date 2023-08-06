@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
@@ -256,7 +257,6 @@ class ProfileScreen extends StatelessWidget {
                 },
                 child: const Text('SlotBooking'),
               ),
-              const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
                   // Handle edit profile button press
@@ -267,6 +267,14 @@ class ProfileScreen extends StatelessWidget {
                   // db.loadDataList();
                 },
                 child: const Text('uploadList'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, OrderTrackingScreen());
+                },
+                child: const Text('Order Tracking'),
               ),
             ],
           ),

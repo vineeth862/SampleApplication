@@ -20,7 +20,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController? _nameController;
   TextEditingController? _emailController;
   TextEditingController? _mobilenumbercontroller;
-  TextEditingController? _locationController;
+
   File? _profileImage;
   var items = ['Male', 'Female', 'Others', 'Not to disclose'];
   Map<String, dynamic> sampleData = {};
@@ -38,7 +38,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _nameController!.dispose();
     _emailController!.dispose();
     _mobilenumbercontroller!.dispose();
-    _locationController!.dispose();
+
     super.dispose();
   }
 
