@@ -72,7 +72,16 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             bottom: 100,
             right: 0,
             left: 0,
-            child: SwipeableContainer(key: UniqueKey()),
+            child: SwipeableContainer(
+                key: UniqueKey(),
+                removeTest: (testCode) {
+                  setState(() {
+                    selectedTest.removeTest(testCode);
+                    if (selectedTest.getSelectedTest.isEmpty) {
+                      selectedTest.setDetailExpanded(false);
+                    }
+                  });
+                }),
           ),
           Positioned(
             bottom: 0,

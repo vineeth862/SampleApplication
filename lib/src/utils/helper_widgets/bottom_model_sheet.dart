@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 
 import '../../global_service/global_service.dart';
 import '../../screens/Home/explore/Search/Cards/filtered_list.dart';
-import '../../screens/Home/models/lab/lab_card.dart';
 import '../Provider/search_provider.dart';
 
 class SwipeableContainer extends StatefulWidget {
-  SwipeableContainer({super.key});
+  SwipeableContainer({super.key, required this.removeTest});
+  Function(Test testCode) removeTest;
   @override
   _SwipeableContainerState createState() => _SwipeableContainerState();
 }
@@ -17,7 +19,7 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
   double _swipeStartY = 0.0;
   GlobalService globalservice = GlobalService();
   SearchListState? searchState;
-  LabCard? filteredTest;
+  Test? filteredTest;
   void _onVerticalDragStart(DragStartDetails details) {
     _swipeStartY = details.globalPosition.dy;
   }
@@ -28,13 +30,16 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
     });
   }
 
-  Column generateListTileBody(test) {
-    filteredTest = searchState!.filteredLabCardList
-        .where((element) => element.testCode.toString() == test)
-        .elementAt(0);
+  Column generateListTileBody(Test test) {
+    // filteredTest = searchState!.filteredTestCardList.where((element) {
+    //   print(element.testCode.toString());
+    //   print(test);
+    //   print((element.testCode.toString() == test));
+    //   return true;
+    // }).first;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(filteredTest!.name), Text("135")],
+      children: [Text(test.testname), Text(test.price)],
     );
   }
 
@@ -85,7 +90,7 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                   "Your Cart",
                   style: Theme.of(context)
                       .textTheme
-                      .bodyLarge!
+                      .displayLarge!
                       .copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                 ),
@@ -103,8 +108,9 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                               leading: Icon(Icons.medical_services),
                               trailing: IconButton(
                                   onPressed: () {
-                                    selectedTest
-                                        .removeTest(filteredTest!.testCode);
+                                    setState(() {
+                                      widget.removeTest(test);
+                                    });
                                   },
                                   icon: Icon(Icons.delete_outlined)),
                             ),

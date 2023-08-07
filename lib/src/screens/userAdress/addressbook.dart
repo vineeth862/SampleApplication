@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sample_application/src/authentication/models/address.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';

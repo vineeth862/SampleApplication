@@ -48,6 +48,12 @@ class UserRepository extends GetxController {
     await oldDocumentRef.delete();
   }
 
+  getUser() async {
+    String userKey = globalservice.getCurrentUserKey();
+    final data = await _db.collection("user").doc(userKey).get();
+    return data;
+  }
+
   updateAdress(address addressObj) async {
     String userKey = globalservice.getCurrentUserKey();
     await _db

@@ -31,7 +31,9 @@ class LabListScreen extends StatelessWidget {
                 title: searchState.getlabSuggetionList[index].name,
                 icon: Icons.store_outlined,
                 subtitle: "lab",
-                onTap: (title) async {
+                labCode: searchState.getlabSuggetionList[index].name,
+                testCode: '',
+                onTap: (title, labCode, tesCode) async {
                   await searchState.cardClicked(title);
                   globalservice.navigate(
                       context,

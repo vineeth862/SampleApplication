@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../../../models/lab/lab_card.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class CardDetailPage extends StatefulWidget {
-  CardDetailPage({super.key, required this.lab});
-  LabCard lab;
+  CardDetailPage({super.key, required this.test});
+  Test test;
   @override
   State<CardDetailPage> createState() => _CardDetailPageState();
 }
@@ -66,8 +66,13 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("test : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text("HIV",
-                                style: Theme.of(context).textTheme.titleSmall)
+                            Expanded(
+                              child: Text(widget.test.testname,
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  style:
+                                      Theme.of(context).textTheme.titleSmall),
+                            )
                           ],
                         ),
                         const SizedBox(
@@ -78,7 +83,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("lab : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text("anandh",
+                            Text(widget.test.labCode,
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
@@ -90,7 +95,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Sample Required : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text("blood, urine",
+                            Text(widget.test.sampletypename,
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
@@ -119,7 +124,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 leading: Icon(Icons.currency_rupee,
                                     size: 23, weight: 50, color: Colors.black),
                                 horizontalTitleGap: -18.0,
-                                title: Text("3564",
+                                title: Text(widget.test.price,
                                     textAlign: TextAlign.left,
                                     style: Theme.of(context)
                                         .textTheme
@@ -139,25 +144,27 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (selectedTest.getSelectedTest.contains("03")) {
-                                selectedTest.removeTest("03");
+                              if (selectedTest.getSelectedTest
+                                  .contains(widget.test)) {
+                                selectedTest.removeTest(widget.test);
                               } else {
-                                selectedTest.addTest("03");
+                                selectedTest.addTest(widget.test);
                               }
                             },
-                            child: !selectedTest.getSelectedTest.contains("03")
+                            child: !selectedTest.getSelectedTest
+                                    .contains(widget.test)
                                 ? Text("BOOK")
                                 : Text("BOOKED"),
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.all(0),
                               foregroundColor: !selectedTest.getSelectedTest
-                                      .contains("03")
+                                      .contains(widget.test)
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.background,
-                              backgroundColor:
-                                  !selectedTest.getSelectedTest.contains("03")
-                                      ? Theme.of(context).colorScheme.onPrimary
-                                      : Theme.of(context).colorScheme.primary,
+                              backgroundColor: !selectedTest.getSelectedTest
+                                      .contains(widget.test)
+                                  ? Theme.of(context).colorScheme.onPrimary
+                                  : Theme.of(context).colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     8.0), // Adjust the border radius as needed
@@ -282,7 +289,16 @@ class _CardDetailPageState extends State<CardDetailPage> {
               bottom: 100,
               right: 0,
               left: 0,
-              child: SwipeableContainer(key: UniqueKey()),
+              child: SwipeableContainer(
+                  key: UniqueKey(),
+                  removeTest: (tesCode) {
+                    setState(() {
+                      selectedTest.removeTest(tesCode);
+                      if (selectedTest.getSelectedTest.isEmpty) {
+                        selectedTest.setDetailExpanded(false);
+                      }
+                    });
+                  }),
             ),
             Positioned(
               bottom: 0,

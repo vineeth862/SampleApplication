@@ -6,6 +6,7 @@ class LabCardWidget extends StatelessWidget {
   final bool isTestSelected;
   late Function(Object card) tapOnCard;
   late Function(String test) tapOnButton;
+  final String price;
 
   LabCardWidget(
       {super.key,
@@ -13,7 +14,8 @@ class LabCardWidget extends StatelessWidget {
       required this.description,
       required this.tapOnCard,
       required this.tapOnButton,
-      required this.isTestSelected});
+      required this.isTestSelected,
+      required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +36,18 @@ class LabCardWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        title.length > 20 ? title : title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                     const Spacer(),
                     ElevatedButton(
@@ -83,10 +90,12 @@ class LabCardWidget extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
-                    Text(description),
+                    Text(description.length > 20
+                        ? description.substring(0, 20) + '...'
+                        : description),
                     const Spacer(),
                     Container(
-                      child: const Text("price"),
+                      child: Text(price),
                     )
                     // ListTile(
                     //   leading: Icon(Icons.lock_clock_outlined),

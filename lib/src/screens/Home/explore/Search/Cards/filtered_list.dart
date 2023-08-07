@@ -23,7 +23,6 @@ class FilteredCardlistPage extends StatefulWidget {
 
 class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
   ExploreService exploreService = ExploreService();
-
   GlobalService globalservice = GlobalService();
   bool expandDetails = false;
   @override
@@ -53,16 +52,17 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {
                     return LabCardWidget(
-                        title: list[index].name,
+                        title: list[index]?.name,
                         description: list[index].test.toString(),
+                        price: list[index]?.price,
                         isTestSelected: !selectedTest.getSelectedTest
-                            .contains(list[index].testCode),
+                            .contains(list[index]?.testObject),
                         tapOnButton: (test) {
                           if (selectedTest.getSelectedTest
-                              .contains(list[index].testCode))
-                            selectedTest.removeTest(list[index].testCode);
+                              .contains(list[index]?.testObject))
+                            selectedTest.removeTest(list[index]?.testObject);
                           else
-                            selectedTest.addTest(list[index].testCode);
+                            selectedTest.addTest(list[index]?.testObject);
 
                           if (selectedTest.getSelectedTest.isEmpty) {
                             selectedTest.setDetailExpanded(false);
@@ -72,7 +72,7 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
                           globalservice.navigate(
                               context,
                               CardDetailPage(
-                                lab: list[index],
+                                test: list[index].testObject,
                               ));
                         });
                   },
@@ -84,7 +84,16 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
             bottom: 100,
             right: 0,
             left: 0,
-            child: SwipeableContainer(key: UniqueKey()),
+            child: SwipeableContainer(
+                key: UniqueKey(),
+                removeTest: (tesCode) {
+                  setState(() {
+                    selectedTest.removeTest(tesCode);
+                    if (selectedTest.getSelectedTest.isEmpty) {
+                      selectedTest.setDetailExpanded(false);
+                    }
+                  });
+                }),
           ),
           Positioned(
             bottom: 0,

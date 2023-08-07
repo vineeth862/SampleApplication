@@ -21,16 +21,25 @@ class TestListScreen extends StatelessWidget {
             itemCount: searchState.gettestSuggetionList.length,
             itemBuilder: (context, index) {
               return CustomListTile(
-                title: searchState.gettestSuggetionList.elementAt(index),
+                title:
+                    searchState.gettestSuggetionList.elementAt(index).testname,
                 icon: Icons.medical_services,
-                subtitle: "test",
-                onTap: (title) async {
-                  await searchState.cardClicked(title);
+                labCode:
+                    searchState.gettestSuggetionList.elementAt(index).labCode,
+                testCode: searchState.gettestSuggetionList
+                    .elementAt(index)
+                    .hf_test_code,
+                subtitle:
+                    searchState.gettestSuggetionList.elementAt(index).labCode,
+                onTap: (title, labCode, testCode) async {
+                  await searchState.cardClicked(testCode);
                   globalservice.navigate(
                       context,
                       FilteredCardlistPage(
                         title: title,
-                        category: "test",
+                        category: searchState.gettestSuggetionList
+                            .elementAt(index)
+                            .test_code,
                       ));
                 },
               );

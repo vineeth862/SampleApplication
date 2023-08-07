@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/instance_manager.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/screens/Home/models/lab/lab_card.dart';
+import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import '../../../../authentication/user_repository.dart';
 import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/search_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
@@ -23,16 +25,26 @@ class _StepOneScreenState extends State<StepOneScreen> {
   TextEditingController _agecontroller = TextEditingController();
   GlobalService globalservice = GlobalService();
   SearchListState? searchState;
-  LabCard? filteredTest;
+  Test? filteredTest;
   @override
   void initState() {
     super.initState();
-    this.loadUserName("Pramod CR");
+
+    this.loadUserName('');
   }
 
-  void loadUserName(name) {
-    _namecontroller.setText(name);
-    // this.globalservice.getCurrentUser();
+  void loadUserName(name) async {
+    if (isMySelfButtonSelected) {
+      var user = await Get.put(UserRepository()).getUser();
+
+      String name = user.data()?['userName'];
+      if (name != null && name.isNotEmpty) {
+        _namecontroller.setText(name);
+      }
+    } else {
+      _namecontroller.setText(name);
+    }
+
     print(selectedGender);
     print(_agecontroller.text);
   }
@@ -43,13 +55,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
     super.dispose();
   }
 
-  Column generateListTileBody(test) {
-    filteredTest = searchState!.filteredLabCardList
-        .where((element) => element.testCode.toString() == test)
-        .elementAt(0);
+  Column generateListTileBody(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(filteredTest!.name), Text("135")],
+      children: [Text(test.testname), Text(test.price)],
     );
   }
 
@@ -205,7 +214,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           leading: Icon(Icons.medical_services),
                           trailing: IconButton(
                               onPressed: () {
-                                selectedTest.removeTest(filteredTest!.testCode);
+                                selectedTest.removeTest(test);
                               },
                               icon: Icon(Icons.delete_outlined)),
                         ),

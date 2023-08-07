@@ -38,11 +38,10 @@ class GlobalService {
   }
 
   // Future<DocumentSnapshot<Map<String, dynamic>>> getCurrentUser() async {
-  //   final _auth = FirebaseAuth.instance;
+  //   final userKey = getCurrentUserKey();
 
-  //   var userKey =
-  //       await _db.collection("user").doc(_auth.currentUser!.uid).get();
-  //   print(userKey);
-  //   return userKey;
+  //   var user = await _db.collection("user").doc(userKey).get();
+  //   print(user);
+  //   return user;
   // }
 }

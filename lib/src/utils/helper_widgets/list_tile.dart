@@ -4,13 +4,17 @@ class CustomListTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
-  late Function(String title) onTap;
+  late Function(String title, String labCode, String testCode) onTap;
+  final String labCode;
+  final String testCode;
   CustomListTile(
       {super.key,
       required this.title,
       required this.subtitle,
       required this.icon,
-      required this.onTap});
+      required this.onTap,
+      required this.labCode,
+      required this.testCode});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class CustomListTile extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          onTap(title);
+          onTap(title, labCode, testCode);
         },
         leading: Icon(icon),
         iconColor: Theme.of(context).colorScheme.primary,
