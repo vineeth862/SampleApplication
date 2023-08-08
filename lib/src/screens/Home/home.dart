@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
+import 'package:sample_application/src/utils/Provider/address_provider.dart';
 
 import '../../utils/Provider/selected_test_provider.dart';
 import '../../utils/helper_widgets/bottom_model_sheet.dart';
@@ -18,18 +19,20 @@ import '../../utils/helper_widgets/slot-booking-card.dart';
 import 'order_tracker/step1/step1.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  bool shouldCallInit = true;
   HomeService homeService = HomeService();
   GlobalService globalservice = GlobalService();
   var Controller = Get.put(UserCurrentLocation());
-  String Adress = "Fetching adress...";
+  final myController = Get.find<UserCurrentLocation>();
+  RxString Adress = "Fetching adress...".obs;
+
   String postalCode = "";
   String Locality = "";
   int _selectedIndex = 1;
@@ -50,31 +53,35 @@ class _HomePageState extends State<HomePage> {
   void _onChangeOfPostalCode(String postalCode) {
     if (mounted) {
       setState(() {
-        postalCode = postalCode;
+        Adress = Adress;
       });
     }
   }
 
-  void loaddata() async {
-    Position pos = await UserCurrentLocation.instance.determinePosition();
-    List<Placemark> add = await UserCurrentLocation.instance.GetFullAdress(pos);
-    Placemark place = add[0];
-    postalCode = place.postalCode.toString();
-    Locality = place.locality.toString();
-    Adress = postalCode + ', ' + Locality;
-    _onChangeOfPostalCode(postalCode);
-  }
+  // void loaddata() async {
+  //   Position pos = await UserCurrentLocation.instance.determinePosition();
+  //   List<Placemark> add = await UserCurrentLocation.instance.GetFullAdress(pos);
+  //   Placemark place = add[0];
+  //   postalCode = place.postalCode.toString();
+  //   Locality = place.locality.toString();
+  //   Adress = postalCode + ', ' + Locality;
+  //   _onChangeOfPostalCode(Adress);
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    loaddata();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   loaddata();
+  // }
 
   bool expandDetails = false;
 
   @override
   Widget build(BuildContext context) {
+    //final appState = context.read<AppState>();
+    //final appState = Provider.of<AppState>(context);
+
     final selectedTest = Provider.of<SelectedTestState>(context);
     return SafeArea(
         child: Scaffold(
@@ -83,13 +90,30 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         title: TextButton.icon(
           icon: Icon(Icons.location_on),
-          label: Text(
-            Adress,
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
+          // label: Consumer<AppState>(
+          //   builder: (context, appState, child) {
+          //     return Text(
+          //       '${appState.globalString}',
+          //       style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          //             color: Theme.of(context)
+          //                 .colorScheme
+          //                 .primary
+          //                 .withOpacity(0.8),
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //     );
+          //   },
+          //   //appState.globalString,
+          // ),
+          label: Obx(() => Text(myController.globalString.value)),
+
+          // label: Text(
+          //   "${myController.globalString.value}",
+          //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          //         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          // ),
           onPressed: () {
             globalservice.navigate(context, InitialAdress());
           },
