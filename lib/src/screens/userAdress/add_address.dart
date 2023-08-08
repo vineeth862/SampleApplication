@@ -6,7 +6,9 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class AddAdress extends StatelessWidget {
-  AddAdress({super.key});
+  AddAdress({super.key, required this.routeInfo});
+
+  final Widget routeInfo;
   final _formKey = GlobalKey<FormState>();
   var Controller = Get.put(UserRepository());
   GlobalService globalservice = GlobalService();
@@ -44,7 +46,8 @@ class AddAdress extends StatelessWidget {
                   InkWell(
                       child: Icon(Icons.keyboard_double_arrow_down),
                       onTap: () {
-                        Navigator.pop(context);
+                        //Navigator.pop(context);
+                        globalservice.navigate(context, routeInfo);
                       }),
                   SizedBox(
                     width: 45,
@@ -107,7 +110,7 @@ class AddAdress extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         saveAdress();
-                        globalservice.navigate(context, AdressBook());
+                        globalservice.navigate(context, routeInfo);
                         //Navigator.pop(context);
                       },
                       child: const Text("Submit"),

@@ -55,19 +55,11 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   right: 0,
                   child: GestureDetector(
                     onTap: () {
-                      globalservice.navigate(
-                          context,
-                          const HomePage(
-                            title: appTitle,
-                          ));
+                      globalservice.navigate(context, const HomePage());
                     },
                     child: OutlinedButton(
                       onPressed: () {
-                        globalservice.navigate(
-                            context,
-                            const HomePage(
-                              title: appTitle,
-                            ));
+                        globalservice.navigate(context, const HomePage());
                       },
                       child: Text(
                         "SKIP",

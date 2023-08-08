@@ -2,10 +2,25 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+import '../utils/Provider/address_provider.dart';
+
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
-
-  String postalCode = "Fetching adress...";
+  RxString globalString = 'Initial Value'.obs;
+  //final appState = AppState();
+  String? postalCode;
+  String? locality;
+  String adress = "Fetching adress...";
+  //RxString globalString = 'Initial Value'.obs;
+  bool hasInitialValueChanged = false;
+  void updateGlobalString(String newValue) {
+    if (!hasInitialValueChanged) {
+      hasInitialValueChanged = true;
+      // Perform your one-time operation here
+      print('Performing one-time operation');
+      globalString.value = newValue;
+    }
+  }
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
@@ -53,6 +68,11 @@ class UserCurrentLocation extends GetxController {
     return placemark;
   }
 
+  @override
+  void onReady() {
+    loaddata();
+  }
+
   loaddata() async {
     Position pos = await UserCurrentLocation.instance.determinePosition();
     //print(pos.latitude);
@@ -60,7 +80,10 @@ class UserCurrentLocation extends GetxController {
     print(add);
     Placemark place = add[0];
     postalCode = place.postalCode.toString();
-
+    locality = place.locality.toString();
+    adress = postalCode! + ', ' + locality!;
     //print(fulladd.Name);
+    updateGlobalString(adress);
+    print(globalString.value);
   }
 }

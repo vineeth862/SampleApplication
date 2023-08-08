@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/profile/adress_book.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/userAdress/add_address.dart';
+import 'package:sample_application/src/screens/userAdress/address_operation.dart';
 
 class AdressBook extends StatefulWidget {
   const AdressBook({super.key});
@@ -103,7 +105,8 @@ class _AdressBookState extends State<AdressBook> {
                     InkWell(
                       child: Icon(Icons.keyboard_double_arrow_down_rounded),
                       onTap: () {
-                        globalservice.navigate(context, ProfileScreen());
+                        Navigator.pop(context);
+                        //globalservice.navigate(context, ProfileScreen());
                       },
                     ),
                     SizedBox(width: 5),
@@ -118,7 +121,8 @@ class _AdressBookState extends State<AdressBook> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        globalservice.navigate(context, ProfileScreen());
+                        Navigator.pop(context);
+                        //globalservice.navigate(context, ProfileScreen());
                       },
                       child: Icon(
                         Icons.cancel,
@@ -128,137 +132,140 @@ class _AdressBookState extends State<AdressBook> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(
-                height: 3,
-              ),
-              InkWell(
-                onTap: () {
-                  globalservice.navigate(context, AddAdress());
-                },
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "Add Address",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        )),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 5,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    "Saved addresses",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              isItemsNotPresent
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "No Saved Address",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        Divider(
-                          height: 20,
-                        )
-                      ],
-                    )
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: ListView.builder(
-                        itemCount: visibleItemCount +
-                            1, // Add 1 for the "Load More" button
-                        itemBuilder: (context, index) {
-                          if (index < visibleItemCount) {
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 10),
-                                      Icon(
-                                        Icons.home,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Expanded(
-                                        child: ListTile(
-                                          title: Text(items[index]),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          _removeItem(index);
-                                        },
-                                        child: Icon(Icons.delete,
-                                            color: Colors.red.shade900),
-                                      )
-                                    ],
-                                  ),
-                                  Divider(
-                                    height: 10,
-                                  )
-                                ],
-                              ),
-                            );
-                          } else {
-                            return isButtonEnabled
-                                ? ElevatedButton(
-                                    onPressed: _loadMoreItems,
-                                    child: Text('Load More'),
-                                  )
-                                : null;
-                          }
-                        },
-                      ),
-                    )
+              addressOperation(
+                routeDetails: AdressBook(),
+              )
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // Divider(
+              //   height: 3,
+              // ),
+              // InkWell(
+              //   onTap: () {
+              //     globalservice.navigate(context, AddAdress());
+              //   },
+              //   child: Container(
+              //     alignment: Alignment.bottomLeft,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: Row(
+              //         children: [
+              //           Icon(
+              //             Icons.add,
+              //             color: Theme.of(context).colorScheme.primary,
+              //           ),
+              //           SizedBox(
+              //             width: 10,
+              //           ),
+              //           Expanded(
+              //               child: Text(
+              //             "Add Address",
+              //             style: Theme.of(context)
+              //                 .textTheme
+              //                 .bodyLarge!
+              //                 .copyWith(
+              //                     color: Theme.of(context).colorScheme.primary),
+              //           )),
+              //           Icon(
+              //             Icons.arrow_forward_ios_rounded,
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Divider(
+              //   height: 5,
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   alignment: Alignment.centerLeft,
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //     child: Text(
+              //       "Saved addresses",
+              //       style: Theme.of(context)
+              //           .textTheme
+              //           .titleLarge!
+              //           .copyWith(fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // isItemsNotPresent
+              //     ? Column(
+              //         children: [
+              //           SizedBox(
+              //             height: 10,
+              //           ),
+              //           Text(
+              //             "No Saved Address",
+              //             style: Theme.of(context).textTheme.titleLarge,
+              //           ),
+              //           Divider(
+              //             height: 20,
+              //           )
+              //         ],
+              //       )
+              //     : SizedBox(
+              //         height: MediaQuery.of(context).size.height * 0.6,
+              //         width: MediaQuery.of(context).size.width * 0.9,
+              //         child: ListView.builder(
+              //           itemCount: visibleItemCount +
+              //               1, // Add 1 for the "Load More" button
+              //           itemBuilder: (context, index) {
+              //             if (index < visibleItemCount) {
+              //               return Container(
+              //                 child: Column(
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         SizedBox(width: 10),
+              //                         Icon(
+              //                           Icons.home,
+              //                           color: Theme.of(context)
+              //                               .colorScheme
+              //                               .primary,
+              //                         ),
+              //                         SizedBox(
+              //                           width: 10,
+              //                         ),
+              //                         Expanded(
+              //                           child: ListTile(
+              //                             title: Text(items[index]),
+              //                           ),
+              //                         ),
+              //                         GestureDetector(
+              //                           onTap: () {
+              //                             _removeItem(index);
+              //                           },
+              //                           child: Icon(Icons.delete,
+              //                               color: Colors.red.shade900),
+              //                         )
+              //                       ],
+              //                     ),
+              //                     Divider(
+              //                       height: 10,
+              //                     )
+              //                   ],
+              //                 ),
+              //               );
+              //             } else {
+              //               return isButtonEnabled
+              //                   ? ElevatedButton(
+              //                       onPressed: _loadMoreItems,
+              //                       child: Text('Load More'),
+              //                     )
+              //                   : null;
+              //             }
+              //           },
+              //         ),
+              //       )
             ],
           ),
         ),

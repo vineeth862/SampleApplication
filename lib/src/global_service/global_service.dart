@@ -6,6 +6,13 @@ import 'package:get/get.dart';
 
 class GlobalService {
   final _db = FirebaseFirestore.instance;
+
+  String userInitialAddress = "";
+  //String get globalString => _userInitialAddress;
+  // set globalString(String newValue) {
+  //   _userInitialAddress = newValue;
+  // }
+
   void navigate(BuildContext context, Widget widget) {
     Navigator.push(
       context,
@@ -44,4 +51,14 @@ class GlobalService {
   //   print(user);
   //   return user;
   // }
+  // static final GlobalService _instance = GlobalService._privateConstructor();
+
+  // GlobalService._privateConstructor();
+
+  // static GlobalService get instance => _instance;
+
+  // String get globalString => userInitialAddress;
+
+  // set globalString(String newValue) {
+  //   userInitialAddress = newValue;}
 }

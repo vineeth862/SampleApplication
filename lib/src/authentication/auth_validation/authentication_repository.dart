@@ -22,7 +22,7 @@ class AuthenticationRepository extends GetxController {
     print(user);
     user == null
         ? Get.offAll(() => const Welcomesignin())
-        : Get.offAll(() => const HomePage(title: appTitle));
+        : Get.offAll(() => const HomePage());
   }
 
   Future<void> PhoneNumberAuth(String MobileNumber) async {

@@ -14,7 +14,7 @@ class otpController extends GetxController {
   void verifyOtpController(String otp, Users user) async {
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
-      Get.offAll(HomePage(title: appTitle));
+      Get.offAll(HomePage());
       var authUser = FirebaseAuth.instance.currentUser;
       if (authUser != null) {
         user.uId = authUser.uid;
@@ -32,7 +32,7 @@ class otpController extends GetxController {
     String oldUserKey = globalservice.getCurrentUserKey();
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
-      Get.offAll(HomePage(title: appTitle));
+      Get.offAll(HomePage());
       print(user.mobile);
       userRepository.updateUser(user, oldUserKey);
     } else {
