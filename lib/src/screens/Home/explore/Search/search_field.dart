@@ -91,9 +91,9 @@ class _SearchBarPageState extends State<SearchBarPage>
                     ),
                   ),
                   // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
-                  onChanged: (value) {
+                  onChanged: (value) async {
                     _isInputEmpty = value.isEmpty;
-                    searchState.search(value.trim());
+                    await searchState.search(value.trim());
                     if (value.trim().isNotEmpty &&
                         searchState.filteredTests.isEmpty &&
                         searchState.filteredLabs.isNotEmpty) {

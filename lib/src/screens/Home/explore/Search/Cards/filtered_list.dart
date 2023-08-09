@@ -64,6 +64,8 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
                           else
                             selectedTest.addTest(list[index]?.testObject);
 
+                          globalservice.navigate(context, StepOneToBookTest());
+
                           if (selectedTest.getSelectedTest.isEmpty) {
                             selectedTest.setDetailExpanded(false);
                           }

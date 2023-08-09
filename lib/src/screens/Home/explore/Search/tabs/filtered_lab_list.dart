@@ -8,12 +8,6 @@ import '../../../../../utils/helper_widgets/list_tile.dart';
 import '../../../../../utils/helper_widgets/no_result_found.dart';
 
 class LabListScreen extends StatelessWidget {
-  final List<String> suggestions = [
-    'Suggestion 1',
-    'Suggestion 2',
-    'Suggestion 3',
-  ];
-
   LabListScreen({super.key});
   GlobalService globalservice = GlobalService();
   @override
@@ -28,10 +22,10 @@ class LabListScreen extends StatelessWidget {
             itemCount: searchState.getlabSuggetionList.length,
             itemBuilder: (context, index) {
               return CustomListTile(
-                title: searchState.getlabSuggetionList[index].name,
+                title: searchState.getlabSuggetionList[index].labName,
                 icon: Icons.store_outlined,
                 subtitle: "lab",
-                labCode: searchState.getlabSuggetionList[index].name,
+                labCode: searchState.getlabSuggetionList[index].labName,
                 testCode: '',
                 onTap: (title, labCode, tesCode) async {
                   await searchState.cardClicked(title);

@@ -5,6 +5,8 @@ import 'package:sample_application/src/screens/Home/models/lab/lab_card.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 
+import '../../screens/Home/models/lab/branchDetails.dart';
+
 class SearchListState with ChangeNotifier {
   List<Lab> filteredLabs = [];
   List<Test> filteredTests = [];
@@ -17,27 +19,41 @@ class SearchListState with ChangeNotifier {
     return filteredLabs;
   }
 
-  void search(String value) async {
+  search(String value) async {
     filteredTests = [];
     filteredLabs = [];
     // final _db = FirebaseFirestore.instance;
-    var result = await FirebaseFirestore.instance
+    var testList = await FirebaseFirestore.instance
         .collection('test')
         .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
-        .where('testname', isLessThanOrEqualTo: value.toUpperCase() + 'z')
+        .where('testname', isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
         .get();
-    if (result.docs.isNotEmpty) {
-      filteredTests = result.docs.map((doc) {
+
+    var labList = await FirebaseFirestore.instance
+        .collection('lab')
+        .where('labName', isGreaterThanOrEqualTo: value)
+        .where('labName', isLessThanOrEqualTo: value + '\uf8ff')
+        .get();
+
+    if (testList.docs.isNotEmpty) {
+      filteredTests = testList.docs.map((doc) {
         return testObjectConverter(doc);
       }).toList();
     }
+
     // // here we are filtering labs based on the input value and assigned to the filteredLabs.
+    if (labList.docs.isNotEmpty) {
+      filteredLabs = labList.docs.map((doc) {
+        return labObjectConverter(doc);
+      }).toList();
+    }
     // filteredLabs = labList
     //     .where((element) => element.name.trim().contains(value.trim()))
     //     .toList();
     // // here we are filtering labs based on the input value and assigned to the filtered tests.
 
     notifyListeners();
+    return "";
   }
 
   List<LabCard> filteredLabCardList = [];
@@ -108,6 +124,25 @@ class SearchListState with ChangeNotifier {
     // setLabCardList = labCode;
     setTestCardList(code);
     return;
+  }
+
+  Lab labObjectConverter(lab) {
+    return Lab(
+        labName: lab['labName'].toString(),
+        branchDetails: branchDetailsObjectConverter(lab['branchDetails']),
+        test: [...lab['test']]);
+  }
+
+  List<BranchDetails> branchDetailsObjectConverter(List obj) {
+    List<BranchDetails> list = [];
+    obj.forEach((e) {
+      list.add(BranchDetails(
+          availablePincodeDetails: [...e['availablePincodeDetails']],
+          fullAddress: e['fullAddress'],
+          locality: e['locality'],
+          pincode: e['pincode']));
+    });
+    return list;
   }
 
   Test testObjectConverter(test) {
