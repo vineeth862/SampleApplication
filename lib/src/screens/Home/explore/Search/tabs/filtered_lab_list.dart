@@ -25,10 +25,10 @@ class LabListScreen extends StatelessWidget {
                 title: searchState.getlabSuggetionList[index].labName,
                 icon: Icons.store_outlined,
                 subtitle: "lab",
-                labCode: searchState.getlabSuggetionList[index].labName,
+                labCode: searchState.getlabSuggetionList[index].hf_lab_code,
                 testCode: '',
                 onTap: (title, labCode, tesCode) async {
-                  await searchState.cardClicked(title);
+                  await searchState.cardClicked(labCode, false);
                   globalservice.navigate(
                       context,
                       FilteredCardlistPage(

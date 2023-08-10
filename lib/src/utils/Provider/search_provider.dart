@@ -64,24 +64,36 @@ class SearchListState with ChangeNotifier {
     return filteredLabCardList;
   }
 
-  set setLabCardList(value) {
-    // here filtering all lab based on the test
-    // filteredLabCardList = labList
-    //     .where((element) {
-    //       return element.test.contains(value.toString());
-    //     })
-    //     .map((e) => LabCard(name: e.name, test: value, testCode: e.testCode))
-    //     .toList();
+  setLabCardList(labCode) async {
+    var result = await FirebaseFirestore.instance
+        .collection('lab')
+        .where('labName', isEqualTo: labCode)
+        .get();
+    if (result.docs.isNotEmpty) {
+      // Lab cardObject = result.docs.where((element) {
+      //   return element.name.toString() == value.toString();
+      // }).elementAt(0);
+      filteredTestCardList = result.docs
+          .map((e) => TestCard(
+              name: e.data()?['testname'],
+              test: e.data()?['tat'],
+              testSelcted: false,
+              testCode: e.data()?['hf_test_code'],
+              price: e.data()['price'].toString(),
+              testObject: testObjectConverter(e)))
+          .toList();
+    }
+    notifyListeners();
   }
 
   List<TestCard> get getTestCardList {
     return filteredTestCardList;
   }
 
-  setTestCardList(testCode) async {
+  setTestCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
         .collection('test')
-        .where('hf_test_code', isEqualTo: testCode)
+        .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {
       // Lab cardObject = result.docs.where((element) {
@@ -117,12 +129,17 @@ class SearchListState with ChangeNotifier {
     // }
   }
 
-  cardClicked(code) {
+  cardClicked(String code, bool test) {
     filteredTestCardList = [];
     filteredLabCardList = [];
 
-    // setLabCardList = labCode;
-    setTestCardList(code);
+    if (test) {
+      setTestCardList(code, 'hf_test_code');
+    } else {
+      setTestCardList(code, 'labCode');
+      // setLabCardList(code);
+    }
+
     return;
   }
 
@@ -130,7 +147,8 @@ class SearchListState with ChangeNotifier {
     return Lab(
         labName: lab['labName'].toString(),
         branchDetails: branchDetailsObjectConverter(lab['branchDetails']),
-        test: [...lab['test']]);
+        test: [...lab['test']],
+        hf_lab_code: lab['hf_lab_code']);
   }
 
   List<BranchDetails> branchDetailsObjectConverter(List obj) {
@@ -150,7 +168,7 @@ class SearchListState with ChangeNotifier {
       frequency: test['frequency'].toString(),
       hf_test_code: test['hf_test_code'].toString(),
       labCode: test['labCode'].toString(),
-      labName: test['labCode'].toString(),
+      labName: test['labName'].toString(),
       method: test['method'].toString(),
       price: test['price'].toString(),
       sampleContainer: test['sampleContainer'].toString(),

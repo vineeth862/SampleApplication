@@ -29,9 +29,7 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
-    List<dynamic> list = searchState.getTestCardList.isEmpty
-        ? searchState.getLabCardList
-        : searchState.getTestCardList;
+    List<dynamic> list = searchState.getTestCardList;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),

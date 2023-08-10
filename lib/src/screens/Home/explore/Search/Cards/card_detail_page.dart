@@ -83,7 +83,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("lab : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text(widget.test.labCode,
+                            Text(widget.test.labName,
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
