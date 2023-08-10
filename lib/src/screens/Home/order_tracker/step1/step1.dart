@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-screen.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
+import '../../explore/Search/search_field.dart';
 import '../step2/step2.dart';
 
 class StepOneToBookTest extends StatefulWidget {
@@ -16,6 +18,7 @@ class StepOneToBookTest extends StatefulWidget {
 class _StepOneToBookTest extends State<StepOneToBookTest> {
   // Add your state variables and methods here
   bool expandDetails = false;
+  GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
@@ -77,8 +80,10 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                 removeTest: (testCode) {
                   setState(() {
                     selectedTest.removeTest(testCode);
+
                     if (selectedTest.getSelectedTest.isEmpty) {
                       selectedTest.setDetailExpanded(false);
+                      this.globalservice.navigate(context, SearchBarPage());
                     }
                   });
                 }),

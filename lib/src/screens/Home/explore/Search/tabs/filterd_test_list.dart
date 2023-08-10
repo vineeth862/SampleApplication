@@ -30,7 +30,7 @@ class TestListScreen extends StatelessWidget {
                     .elementAt(index)
                     .hf_test_code,
                 subtitle:
-                    searchState.gettestSuggetionList.elementAt(index).labCode,
+                    searchState.gettestSuggetionList.elementAt(index).labName,
                 onTap: (title, labCode, testCode) async {
                   await searchState.cardClicked(testCode, true);
                   globalservice.navigate(

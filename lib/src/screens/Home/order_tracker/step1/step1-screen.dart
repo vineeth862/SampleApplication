@@ -10,6 +10,7 @@ import '../../../../utils/Provider/search_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filtered_list.dart';
+import '../../explore/Search/search_field.dart';
 
 class StepOneScreen extends StatefulWidget {
   @override
@@ -44,9 +45,6 @@ class _StepOneScreenState extends State<StepOneScreen> {
     } else {
       _namecontroller.setText(name);
     }
-
-    print(selectedGender);
-    print(_agecontroller.text);
   }
 
   @override
@@ -91,9 +89,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           text: "My Self",
                           onPressed: () {
                             setState(() {
-                              this.loadUserName("Pramod CR");
                               isMySelfButtonSelected = true;
                               isOthersButtonSelected = false;
+                              this.loadUserName("");
                             });
                           },
                           primaryColor: Theme.of(context).colorScheme.primary,
@@ -109,9 +107,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           text: "Others",
                           onPressed: () {
                             setState(() {
-                              this.loadUserName("");
                               isMySelfButtonSelected = false;
                               isOthersButtonSelected = true;
+                              this.loadUserName("");
                             });
                           },
                           primaryColor: Theme.of(context).colorScheme.primary,
@@ -215,19 +213,28 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           trailing: IconButton(
                               onPressed: () {
                                 selectedTest.removeTest(test);
+                                if (selectedTest.getSelectedTest.length == 0) {
+                                  this
+                                      .globalservice
+                                      .navigate(context, SearchBarPage());
+                                }
                               },
                               icon: Icon(Icons.delete_outlined)),
                         ),
                       )
                       .toList(),
                   ListTile(
-                    onTap: () {
-                      this.globalservice.navigate(
-                          context,
-                          FilteredCardlistPage(
-                            category: 'test',
-                            title: "test",
-                          ));
+                    onTap: () async {
+                      if (selectedTest.getSelectedTest.length > 0) {
+                        var lab = selectedTest.getSelectedTest[0];
+                        await searchState?.cardClicked(lab.labCode, false);
+                        this.globalservice.navigate(
+                            context,
+                            FilteredCardlistPage(
+                              title: lab.labName,
+                              category: "lab",
+                            ));
+                      }
                     },
                     title: Text(
                       "Add more test",

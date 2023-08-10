@@ -4,7 +4,6 @@ import 'package:sample_application/src/screens/Home/models/lab/lab.dart';
 import 'package:sample_application/src/screens/Home/models/lab/lab_card.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
-
 import '../../screens/Home/models/lab/branchDetails.dart';
 
 class SearchListState with ChangeNotifier {
