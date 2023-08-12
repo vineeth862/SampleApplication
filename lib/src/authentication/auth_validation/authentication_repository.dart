@@ -19,7 +19,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    print(user);
+    //print(user);
     user == null
         ? Get.offAll(() => const Welcomesignin())
         : Get.offAll(() => const HomePage());
@@ -61,5 +61,8 @@ class AuthenticationRepository extends GetxController {
     } catch (_) {}
   }
 
-  Future<void> logout() async => await _auth.signOut();
+  Future<void> logout() async {
+    await _auth.signOut();
+    Get.offAll(() => const HomePage());
+  }
 }

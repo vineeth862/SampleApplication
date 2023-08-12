@@ -4,6 +4,7 @@ import 'package:sample_application/src/authentication/auth_validation/welcome_si
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
+import 'package:sample_application/src/screens/order/orderSummary.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 import '../../../utils/db-operation/db_operations.dart';
@@ -275,6 +276,13 @@ class ProfileScreen extends StatelessWidget {
                   globalservice.navigate(context, OrderTrackingScreen());
                 },
                 child: const Text('Order Tracking'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, OrderSummaryPage());
+                },
+                child: const Text('Order Summary'),
               ),
             ],
           ),

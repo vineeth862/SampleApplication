@@ -12,28 +12,34 @@ class UserRepository extends GetxController {
   final _db = FirebaseFirestore.instance;
   GlobalService globalservice = GlobalService();
   createUser(Users user) async {
-    await _db
-        .collection("user")
-        .doc(user.mobile)
-        .set(user.toJson())
-        .whenComplete(() => Get.snackbar("Success", "Your account is created"))
-        .catchError((error, stackTrace) {
-      Get.snackbar("Failed", "Something went wrong");
-      // print(_db.collection('user').snapshots().length.toString());
-    });
+    DocumentSnapshot userPresent =
+        await _db.collection("user").doc(user.mobile).get();
+
+    if (!userPresent.exists) {
+      await _db
+          .collection("user")
+          .doc(user.mobile)
+          .set(user.toJson())
+          .whenComplete(
+              () => Get.snackbar("Success", "Your account is created"))
+          .catchError((error, stackTrace) {
+        Get.snackbar("Failed", "Something went wrong");
+        // print(_db.collection('user').snapshots().length.toString());
+      });
+    }
   }
 
   updateUser(Users user, String oldUserKey) async {
-    print(oldUserKey);
+    //print(oldUserKey);
     final oldDocumentRef = _db.collection("user").doc(oldUserKey);
     oldDocumentRef.update({"mobile": user.mobile});
-    print(oldDocumentRef);
+    //print(oldDocumentRef);
     final oldDocumentSnapshot = await oldDocumentRef.get();
-    print(oldDocumentSnapshot);
+    //print(oldDocumentSnapshot);
     final data = oldDocumentSnapshot.data();
     data?['locations'];
 
-    print(user.mobile);
+    //print(user.mobile);
 
     final newDocumentRef = _db.collection("user").doc(user.mobile);
     await newDocumentRef

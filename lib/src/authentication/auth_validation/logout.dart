@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 
 class LogoutScreen extends StatefulWidget {
   const LogoutScreen({super.key});
@@ -28,7 +29,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                   // Perform logout logic here
                   // For demonstration purposes, we just print a message
                   print('Logged out successfully.');
-                  Navigator.pop(context); // Close the bottom sheet
+                  AuthenticationRepository.instance.logout();
                 },
                 child: Text('Yes, Logout'),
               ),
