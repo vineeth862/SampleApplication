@@ -9,7 +9,8 @@ import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/search_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
-import '../../explore/Search/Cards/filtered_list.dart';
+import '../../explore/Search/Cards/filter-lab-list.dart';
+import '../../explore/Search/Cards/filter-test-list.dart';
 import '../../explore/Search/search_field.dart';
 
 class StepOneScreen extends StatefulWidget {
@@ -230,9 +231,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         await searchState?.cardClicked(lab.labCode, false);
                         this.globalservice.navigate(
                             context,
-                            FilteredCardlistPage(
+                            FilteredLabCardlistPage(
                               title: lab.labName,
-                              category: "lab",
+                              labCode: lab.labCode,
+                              location: "location",
                             ));
                       }
                     },

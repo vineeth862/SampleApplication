@@ -2,26 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Cards/card_detail_page.dart';
+import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.service.dart';
-import 'package:sample_application/src/utils/helper_widgets/lab_card.dart';
+import 'package:sample_application/src/utils/helper_widgets/test_card.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../../../order_tracker/step1/step1.dart';
 
-class FilteredCardlistPage extends StatefulWidget {
+class FilteredTestCardlistPage extends StatefulWidget {
   String title;
   String category;
 
-  FilteredCardlistPage(
+  FilteredTestCardlistPage(
       {super.key, required this.title, required this.category});
 
   @override
-  State<FilteredCardlistPage> createState() => _FilteredCardlistPageState();
+  State<FilteredTestCardlistPage> createState() =>
+      _FilteredTestCardlistPageState();
 }
 
-class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
+class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
   bool expandDetails = false;
@@ -29,7 +31,7 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
-    List<dynamic> list = searchState.getTestCardList;
+    List<TestCard> list = searchState.getTestCardList;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
@@ -49,10 +51,10 @@ class _FilteredCardlistPageState extends State<FilteredCardlistPage> {
                   padding: const EdgeInsets.all(10),
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return LabCardWidget(
-                        title: list[index]?.name,
+                    return TestCardWidget(
+                        title: list[index].name,
                         description: list[index].test.toString(),
-                        price: list[index]?.price,
+                        price: list[index].price,
                         isTestSelected: !selectedTest.getSelectedTest
                             .contains(list[index]?.testObject),
                         tapOnButton: (test) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/Cards/filtered_list.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/Cards/filter-test-list.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/list_tile.dart';
 import '../../../../../utils/helper_widgets/no_result_found.dart';
@@ -35,7 +35,7 @@ class TestListScreen extends StatelessWidget {
                   await searchState.cardClicked(testCode, true);
                   globalservice.navigate(
                       context,
-                      FilteredCardlistPage(
+                      FilteredTestCardlistPage(
                         title: title,
                         category: searchState.gettestSuggetionList
                             .elementAt(index)

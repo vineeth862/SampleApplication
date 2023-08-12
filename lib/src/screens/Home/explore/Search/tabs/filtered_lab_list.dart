@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/screens/Home/explore/Search/Cards/filtered_list.dart';
+import 'package:sample_application/src/screens/Home/explore/Search/Cards/filter-test-list.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 
 import '../../../../../utils/helper_widgets/list_tile.dart';
 import '../../../../../utils/helper_widgets/no_result_found.dart';
+import '../Cards/filter-lab-list.dart';
 
 class LabListScreen extends StatelessWidget {
   LabListScreen({super.key});
@@ -31,10 +32,12 @@ class LabListScreen extends StatelessWidget {
                   await searchState.cardClicked(labCode, false);
                   globalservice.navigate(
                       context,
-                      FilteredCardlistPage(
-                        title: title,
-                        category: "lab",
-                      ));
+                      FilteredLabCardlistPage(
+                          title: searchState.getlabSuggetionList[index].labName,
+                          location: searchState.getlabSuggetionList[index]
+                              .branchDetails[0].locality,
+                          labCode: searchState
+                              .getlabSuggetionList[index].hf_lab_code));
                 },
               );
             },

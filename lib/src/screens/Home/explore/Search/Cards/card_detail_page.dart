@@ -22,9 +22,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
-    List<dynamic> list = searchState.getTestCardList.isEmpty
-        ? searchState.getLabCardList
-        : searchState.getTestCardList;
+    List<dynamic> list = searchState.getTestCardList;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

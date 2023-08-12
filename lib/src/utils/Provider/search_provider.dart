@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/models/lab/lab.dart';
-import 'package:sample_application/src/screens/Home/models/lab/lab_card.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 import '../../screens/Home/models/lab/branchDetails.dart';
@@ -20,48 +19,75 @@ class SearchListState with ChangeNotifier {
 
   search(String value) async {
     filteredTests = [];
-    filteredLabs = [];
-    // final _db = FirebaseFirestore.instance;
-    var testList = await FirebaseFirestore.instance
-        .collection('test')
-        .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
-        .where('testname', isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
-        .get();
+    // filteredLabs = [];
+    if (value.isNotEmpty) {
+      // final _db = FirebaseFirestore.instance;
+      var testList = await FirebaseFirestore.instance
+          .collection('test')
+          .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
+          .where('testname',
+              isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
+          .get();
 
-    var labList = await FirebaseFirestore.instance
-        .collection('lab')
-        .where('labName', isGreaterThanOrEqualTo: value)
-        .where('labName', isLessThanOrEqualTo: value + '\uf8ff')
-        .get();
+      var labList = await FirebaseFirestore.instance.collection('lab').get();
 
-    if (testList.docs.isNotEmpty) {
-      filteredTests = testList.docs.map((doc) {
-        return testObjectConverter(doc);
-      }).toList();
+      if (testList.docs.isNotEmpty) {
+        filteredTests = testList.docs.map((doc) {
+          return testObjectConverter(doc);
+        }).toList();
+      }
+
+      // here we are filtering labs based on the input value and assigned to the filteredLabs.
+      if (labList.docs.isNotEmpty) {
+        filteredLabs = labList.docs.where((element) {
+          return element
+              .data()['labName']
+              .toString()
+              .toLowerCase()
+              .contains(value.toString().toLowerCase());
+        }).map((doc) {
+          return labObjectConverter(doc);
+        }).toList();
+      }
+      // filteredLabs = labList
+      //     .where((element) => element.name.trim().contains(value.trim()))
+      //     .toList();
+      // // here we are filtering labs based on the input value and assigned to the filtered tests.
     }
-
-    // // here we are filtering labs based on the input value and assigned to the filteredLabs.
-    if (labList.docs.isNotEmpty) {
-      filteredLabs = labList.docs.map((doc) {
-        return labObjectConverter(doc);
-      }).toList();
-    }
-    // filteredLabs = labList
-    //     .where((element) => element.name.trim().contains(value.trim()))
-    //     .toList();
-    // // here we are filtering labs based on the input value and assigned to the filtered tests.
-
     notifyListeners();
     return "";
   }
 
-  List<LabCard> filteredLabCardList = [];
+  searchTest(String value, String labCode) async {
+    filteredTestCardList = [];
+    var result = await FirebaseFirestore.instance
+        .collection('test')
+        .where("labCode", isEqualTo: labCode)
+        .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
+        .where('testname', isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
+        .get();
+    if (result.docs.isNotEmpty) {
+      filteredTestCardList = result.docs
+          .map((e) => TestCard(
+              name: e.data()['testname'],
+              test: e.data()['tat'],
+              testSelcted: false,
+              testCode: e.data()['hf_test_code'],
+              price: e.data()['price'].toString(),
+              testObject: testObjectConverter(e)))
+          .toList();
+    }
+    notifyListeners();
+    return "";
+  }
+
+  // List<LabCard> filteredLabCardList = [];
 
   List<TestCard> filteredTestCardList = [];
 
-  List<LabCard> get getLabCardList {
-    return filteredLabCardList;
-  }
+  // List<LabCard> get getLabCardList {
+  //   return filteredLabCardList;
+  // }
 
   setLabCardList(labCode) async {
     var result = await FirebaseFirestore.instance
@@ -74,10 +100,10 @@ class SearchListState with ChangeNotifier {
       // }).elementAt(0);
       filteredTestCardList = result.docs
           .map((e) => TestCard(
-              name: e.data()?['testname'],
-              test: e.data()?['tat'],
+              name: e.data()['testname'],
+              test: e.data()['tat'],
               testSelcted: false,
-              testCode: e.data()?['hf_test_code'],
+              testCode: e.data()['hf_test_code'],
               price: e.data()['price'].toString(),
               testObject: testObjectConverter(e)))
           .toList();
@@ -95,42 +121,22 @@ class SearchListState with ChangeNotifier {
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {
-      // Lab cardObject = result.docs.where((element) {
-      //   return element.name.toString() == value.toString();
-      // }).elementAt(0);
       filteredTestCardList = result.docs
           .map((e) => TestCard(
-              name: e.data()?['testname'],
-              test: e.data()?['tat'],
+              name: e.data()['testname'],
+              test: e.data()['tat'],
               testSelcted: false,
-              testCode: e.data()?['hf_test_code'],
+              testCode: e.data()['hf_test_code'],
               price: e.data()['price'].toString(),
               testObject: testObjectConverter(e)))
           .toList();
     }
     notifyListeners();
-    // here choosing all the test in perticular lab
-    // List list = labList.where((element) {
-    //   return element.name.toString() == value.toString();
-    // }).toList();
-
-    // if (list.isNotEmpty) {
-    //   Lab cardObject = labList.where((element) {
-    //     return element.name.toString() == value.toString();
-    //   }).elementAt(0);
-    //   filteredTestCardList = cardObject.test
-    //       .map((e) => TestCard(
-    //           name: value,
-    //           test: e.toString(),
-    //           testSelcted: false,
-    //           testCode: cardObject.testCode))
-    //       .toList();
-    // }
   }
 
   cardClicked(String code, bool test) {
     filteredTestCardList = [];
-    filteredLabCardList = [];
+    // filteredLabCardList = [];
 
     if (test) {
       setTestCardList(code, 'hf_test_code');

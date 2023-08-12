@@ -4,7 +4,8 @@ import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 
 import '../../global_service/global_service.dart';
-import '../../screens/Home/explore/Search/Cards/filtered_list.dart';
+import '../../screens/Home/explore/Search/Cards/filter-lab-list.dart';
+import '../../screens/Home/explore/Search/Cards/filter-test-list.dart';
 import '../Provider/search_provider.dart';
 
 class SwipeableContainer extends StatefulWidget {
@@ -125,9 +126,10 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                       await searchState?.cardClicked(lab.labCode, false);
                       this.globalservice.navigate(
                           context,
-                          FilteredCardlistPage(
+                          FilteredLabCardlistPage(
                             title: lab.labName,
-                            category: "lab",
+                            labCode: lab.labCode,
+                            location: "location",
                           ));
                     }
                     setState(() {
