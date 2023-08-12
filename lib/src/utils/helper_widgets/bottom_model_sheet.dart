@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
-import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
 import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 
 import '../../global_service/global_service.dart';
@@ -120,13 +119,17 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                   ),
                 ),
                 ListTile(
-                  onTap: () {
-                    this.globalservice.navigate(
-                        context,
-                        FilteredCardlistPage(
-                          category: 'test',
-                          title: "test",
-                        ));
+                  onTap: () async {
+                    if (selectedTest.getSelectedTest.length > 0) {
+                      var lab = selectedTest.getSelectedTest[0];
+                      await searchState?.cardClicked(lab.labCode, false);
+                      this.globalservice.navigate(
+                          context,
+                          FilteredCardlistPage(
+                            title: lab.labName,
+                            category: "lab",
+                          ));
+                    }
                     setState(() {
                       selectedTest.toggelDetailExpanded();
                     });
