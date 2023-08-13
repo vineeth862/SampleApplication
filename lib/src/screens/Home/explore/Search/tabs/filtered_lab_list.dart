@@ -25,7 +25,7 @@ class LabListScreen extends StatelessWidget {
               return CustomListTile(
                 title: searchState.getlabSuggetionList[index].labName,
                 icon: Icons.store_outlined,
-                subtitle: "lab",
+                //subtitle: "lab",
                 labCode: searchState.getlabSuggetionList[index].hf_lab_code,
                 testCode: '',
                 onTap: (title, labCode, tesCode) async {

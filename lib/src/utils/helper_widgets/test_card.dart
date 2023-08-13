@@ -32,7 +32,7 @@ class TestCardWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -81,6 +81,20 @@ class TestCardWidget extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16.0),
+                Text(
+                  title.length > 20 ? title : title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  style: const TextStyle(
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   children: [
                     Icon(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
   final String title;
-  final String subtitle;
+  //final String subtitle;
   final IconData icon;
   late Function(String title, String labCode, String testCode) onTap;
   final String labCode;
@@ -10,7 +10,7 @@ class CustomListTile extends StatelessWidget {
   CustomListTile(
       {super.key,
       required this.title,
-      required this.subtitle,
+      //required this.subtitle,
       required this.icon,
       required this.onTap,
       required this.labCode,
@@ -36,7 +36,7 @@ class CustomListTile extends StatelessWidget {
         leading: Icon(icon),
         iconColor: Theme.of(context).colorScheme.primary,
         title: Text(title),
-        subtitle: Text(subtitle),
+        //subtitle: Text(subtitle),
       ),
     );
   }
