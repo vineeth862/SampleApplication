@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
@@ -7,7 +9,8 @@ class OrderTrackingScreen extends StatefulWidget {
 }
 
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
-  String currentStatus = 'Delivering Sample to Lab'; // Initial status
+  GlobalService globalservice = GlobalService();
+  String currentStatus = 'Collection Scheduled'; // Initial status
   String orderPlacedTime = "27/10/1999 10:57 AM";
   String samplePickupTime = "27/10/1999 10:57 AM";
   final List<String> trackingStatus = [
@@ -19,82 +22,135 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Order Tracking'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "OrderID:123456",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                _buildProgressLine(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: trackingStatus.length,
-                    itemBuilder: (context, index) {
-                      if (index == 1) {
-                        // "Collection Scheduled" step
-                        return _buildCollectionScheduledContainer(
-                            trackingStatus.indexOf(currentStatus));
-                      } else {
-                        // Other steps
-                        return Column(
-                          children: [
-                            ListTile(
-                              // leading: Icon(
-                              //   index <= trackingStatus.indexOf(currentStatus)
-                              //       ? Icons.check_circle
-                              //       : Icons.radio_button_unchecked,
-                              //   color: index <= trackingStatus.indexOf(currentStatus)
-                              //       ? Colors.green
-                              //       : Colors.grey,
-                              // ),
-                              title: Text(
-                                trackingStatus[index],
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                              subtitle: index == 0
-                                  ? Text('Order placed time: $orderPlacedTime')
-                                  : null,
-                              trailing:
-                                  index == trackingStatus.indexOf(currentStatus)
-                                      ? Icon(Icons.chevron_right)
-                                      : null,
-                              onTap: () {
-                                // setState(() {
-                                //   currentStatus = trackingStatus[index];
-                                // });
-                              },
-                            ),
-                            if (index < trackingStatus.length - 1)
-                              Divider(
-                                thickness: 2.0,
-                                indent: 16.0,
-                                endIndent: 16.0,
-                              ),
-                            // ElevatedButton(
-                            //   onPressed: sendWhatsAppMessage,
-                            //   child: Text('Send WhatsApp Message'),
-                            // ),
-                          ],
-                        );
-                      }
-                    },
+    return SafeArea(
+      child: Scaffold(
+        // appBar: AppBar(
+        //   title: Text('Order Tracking'),
+        // ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 120,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 20, 104, 23),
+                  Color.fromARGB(255, 17, 137, 21)
+                ]),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Center(
+                      child: Text(
+                        "Thanks For Choosing",
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Center(
+                      child: Text(
+                        "Health Fine",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: Colors.white, fontSize: 40),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "OrderID:123456",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  _buildProgressLine(),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: trackingStatus.length,
+                      itemBuilder: (context, index) {
+                        if (index == 1) {
+                          // "Collection Scheduled" step
+                          return _buildCollectionScheduledContainer(
+                              trackingStatus.indexOf(currentStatus));
+                        } else {
+                          // Other steps
+                          return Column(
+                            children: [
+                              ListTile(
+                                // leading: Icon(
+                                //   index <= trackingStatus.indexOf(currentStatus)
+                                //       ? Icons.check_circle
+                                //       : Icons.radio_button_unchecked,
+                                //   color: index <= trackingStatus.indexOf(currentStatus)
+                                //       ? Colors.green
+                                //       : Colors.grey,
+                                // ),
+                                title: Text(
+                                  trackingStatus[index],
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                subtitle: index == 0
+                                    ? Text(
+                                        'Order placed time: $orderPlacedTime')
+                                    : null,
+                                trailing: index ==
+                                        trackingStatus.indexOf(currentStatus)
+                                    ? Icon(Icons.chevron_right)
+                                    : null,
+                                onTap: () {
+                                  // setState(() {
+                                  //   currentStatus = trackingStatus[index];
+                                  // });
+                                },
+                              ),
+                              if (index < trackingStatus.length - 1)
+                                Divider(
+                                  thickness: 2.0,
+                                  indent: 16.0,
+                                  endIndent: 16.0,
+                                ),
+                              // ElevatedButton(
+                              //   onPressed: sendWhatsAppMessage,
+                              //   child: Text('Send WhatsApp Message'),
+                              // ),
+                            ],
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //OutlinedButton(onPressed: () {}, child: HomePage())
+            Divider(
+              thickness: 2,
+            ),
+            Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      globalservice.navigate(context, HomePage());
+                    },
+                    child: Text("Return to Homepage"))),
+            Divider(
+              thickness: 2,
+            ),
+          ],
+        ),
       ),
     );
   }

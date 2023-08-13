@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 import 'package:sample_application/src/screens/order/paymentGateway.dart';
 
 class OrderSummaryPage extends StatefulWidget {
@@ -160,7 +161,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    globalservice.navigate(context, PaymentScreen());
+                    globalservice.navigate(context, OrderTrackingScreen());
                   },
                   child: Text('Proceed to Payment'),
                 ),

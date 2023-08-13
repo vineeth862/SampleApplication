@@ -143,7 +143,7 @@ class _StepThreeScreen extends State<StepThreeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<DateTime> nextSixDates = List<DateTime>.generate(
-      12,
+      5,
       (index) => DateTime.now().add(Duration(days: index)),
     );
     final List<TimeOfDay> availableTimes = List<TimeOfDay>.generate(

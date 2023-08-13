@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sample_application/src/screens/userAdress/address_operation.dart';
+import 'package:sample_application/src/screens/userAdress/address_operation_step2.dart';
 import '../../../../global_service/global_service.dart';
 import '../../../userAdress/add_address.dart';
 
@@ -39,57 +40,62 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
     if (visibleItemCount < items.length) {
       isButtonEnabled = true;
     }
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Divider(
-                height: 3,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.gps_fixed,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "Use Current Location",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        )),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 5,
-              ),
-              addressOperation(
-                routeDetails: StepTwoScreen(),
-              )
+    return addressOperationStepTwo(
+      routeDetails: StepTwoScreen(),
+    );
+  }
+}
+    // return SafeArea(
+    //   child: Scaffold(
+    //     body: SingleChildScrollView(
+    //       child: Column(
+    //         children: [
+    //           SizedBox(
+    //             height: 10,
+    //           ),
+    //           Divider(
+    //             height: 3,
+    //           ),
+    //           InkWell(
+    //             onTap: () {
+    //               Navigator.pop(context);
+    //             },
+    //             child: Container(
+    //               alignment: Alignment.bottomLeft,
+    //               child: Padding(
+    //                 padding: const EdgeInsets.all(15.0),
+    //                 child: Row(
+    //                   children: [
+    //                     Icon(
+    //                       Icons.gps_fixed,
+    //                       color: Theme.of(context).colorScheme.primary,
+    //                     ),
+    //                     SizedBox(
+    //                       width: 10,
+    //                     ),
+    //                     Expanded(
+    //                         child: Text(
+    //                       "Use Current Location",
+    //                       style: Theme.of(context)
+    //                           .textTheme
+    //                           .bodyLarge!
+    //                           .copyWith(
+    //                               color: Theme.of(context).colorScheme.primary),
+    //                     )),
+    //                     Icon(
+    //                       Icons.arrow_forward_ios_rounded,
+    //                     )
+    //                   ],
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //           Divider(
+    //             height: 5,
+    //           ),
+    //           addressOperation(
+    //             routeDetails: StepTwoScreen(),
+    //           )
               // InkWell(
               //   onTap: () {
               //     globalservice.navigate(
@@ -215,10 +221,10 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
               //           },
               //         ),
               //       )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
