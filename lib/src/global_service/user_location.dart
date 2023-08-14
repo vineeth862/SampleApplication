@@ -6,8 +6,9 @@ import '../utils/Provider/address_provider.dart';
 
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
-  RxString globalString = 'Initial Value'.obs;
-  //final appState = AppState();
+  RxString globalString = 'Fetching adress...'.obs;
+  final appState = AppState();
+  //final appStates = Provider.of<AppState>(context);
   String? postalCode;
   String? locality;
   String adress = "Fetching adress...";
@@ -16,6 +17,7 @@ class UserCurrentLocation extends GetxController {
   void updateGlobalString(String newValue) {
     if (!hasInitialValueChanged) {
       hasInitialValueChanged = true;
+      appState.updateGlobalStringValue(newValue);
       // Perform your one-time operation here
       print('Performing one-time operation');
       globalString.value = newValue;

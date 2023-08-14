@@ -29,6 +29,9 @@ class _WelcomesigninState extends State<Welcomesignin> {
   var Controller = Get.put(otpController());
   void _validate() {
     _formKey.currentState!.validate();
+    // if (_formKey.currentState!.validate()) {
+    //   _saveItem();
+    // }
   }
 
   void _saveItem() {
@@ -137,9 +140,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             width: 10,
                           ),
                           Expanded(
-                            child: SizedBox(
-                              height: 50,
-                              child: TextFormField(
+                            child: TextFormField(
                                 controller: mobileNumberController,
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
@@ -151,8 +152,18 @@ class _WelcomesigninState extends State<Welcomesignin> {
                                       borderRadius: BorderRadius.circular(20)),
                                   //prefixIcon: const Icon(Icons.phone),
                                 ),
-                              ),
-                            ),
+                                validator: (value) {
+                                  if (value!.isEmpty || value == null) {
+                                    return 'Please Enter Mobile Number';
+                                  }
+                                  if (value.length != 10) {
+                                    return 'Mobile Number must be 10 digits';
+                                  }
+                                  if (!value.isNumericOnly) {
+                                    return 'Mobile Number must be digits';
+                                  }
+                                  return null;
+                                }),
                           ),
                         ],
                       ),
@@ -177,21 +188,24 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             width: 10,
                           ),
                           Expanded(
-                            child: SizedBox(
-                              height: 50,
-                              child: TextFormField(
-                                //key: _formKey,
-                                controller: nameController,
-                                obscureText: false,
+                            child: TextFormField(
+                              //key: _formKey,
+                              controller: nameController,
+                              obscureText: false,
 
-                                decoration: InputDecoration(
-                                  labelText: 'Full Name',
-                                  //prefixText: '+91 ',
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  //prefixIcon: const Icon(Icons.person_2),
-                                ),
+                              decoration: InputDecoration(
+                                labelText: 'Full Name',
+                                //prefixText: '+91 ',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                //prefixIcon: const Icon(Icons.person_2),
                               ),
+                              validator: (value) {
+                                if (value!.isEmpty || value == null) {
+                                  return 'Please Enter Name';
+                                }
+                                return null;
+                              },
                             ),
                           ),
                         ],
@@ -202,67 +216,71 @@ class _WelcomesigninState extends State<Welcomesignin> {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
-                _saveItem();
+                _validate();
+
                 //globalservice.navigate(context, const PinputExample());
-                showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  context: context,
-                  builder: (context) => Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "OTP",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Please enter the OTP sent to registered phone number",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                          child: Pinput(
-                            length: 6,
-                            focusNode: focusNode,
-                            keyboardType: TextInputType.number,
-                            validator: (value) {
-                              otp = value;
+                if (_formKey.currentState!.validate()) {
+                  _saveItem();
+                  showModalBottomSheet(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    context: context,
+                    builder: (context) => Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "OTP",
+                            style: Theme.of(context).textTheme.displayLarge,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Please enter the OTP sent to registered phone number",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const SizedBox(height: 20),
+                          GestureDetector(
+                            child: Pinput(
+                              length: 6,
+                              focusNode: focusNode,
+                              keyboardType: TextInputType.number,
+                              validator: (value) {
+                                otp = value.toString();
+                                // otpController.instance
+                                //     .verifyOtpController(otp, user);
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _validate();
+
                               otpController.instance
                                   .verifyOtpController(otp, user);
                             },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            _validate();
-
-                            otpController.instance
-                                .verifyOtpController(otp, user);
-                          },
-                          child: const Text("Submit"),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  20.0), // Set the border radius value
+                            child: const Text("Submit"),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Set the border radius value
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 100.0),
                             ),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 100.0),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
               child: const Text('Continue', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(

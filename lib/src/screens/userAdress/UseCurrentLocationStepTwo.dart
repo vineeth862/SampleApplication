@@ -48,7 +48,7 @@ class UseCurrentLocationStepTwo extends StatelessWidget {
                   InkWell(
                       child: Icon(Icons.keyboard_double_arrow_down),
                       onTap: () {
-                        //Navigator.pop(context);
+                        Navigator.pop(context);
                         //globalservice.navigate(context, routeInfo);
                       }),
                   SizedBox(

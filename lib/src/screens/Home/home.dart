@@ -80,56 +80,42 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //final appState = context.read<AppState>();
-    //final appState = Provider.of<AppState>(context);
+    //final appStates = Provider.of<AppState>(context);
 
     final selectedTest = Provider.of<SelectedTestState>(context);
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        elevation: 0,
-        title: TextButton.icon(
-          icon: Icon(Icons.location_on),
-          // label: Consumer<AppState>(
-          //   builder: (context, appState, child) {
-          //     return Text(
-          //       '${appState.globalString}',
-          //       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          //             color: Theme.of(context)
-          //                 .colorScheme
-          //                 .primary
-          //                 .withOpacity(0.8),
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //     );
-          //   },
-          //   //appState.globalString,
-          // ),
-          label: Obx(() => Text(myController.globalString.value)),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   title: TextButton.icon(
+      //     icon: Icon(Icons.location_on),
+      //     label: Text(appStates
+      //         .globalString), // label: Obx(() => Text(myController.globalString.value)),
 
-          // label: Text(
-          //   "${myController.globalString.value}",
-          //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          //         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          // ),
-          onPressed: () {
-            globalservice.navigate(context, InitialAdress());
-          },
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.rocket,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          )
-        ],
-        foregroundColor: Theme.of(context).colorScheme.background,
-        backgroundColor: Theme.of(context).colorScheme.background,
-      ),
+      //     // label: Text(
+      //     //   "${myController.globalString.value}",
+      //     //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+      //     //         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+      //     //         fontWeight: FontWeight.bold,
+      //     //       ),
+      //     // ),
+      //     onPressed: () {
+      //       globalservice.navigate(context, InitialAdress());
+      //     },
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: Icon(
+      //         Icons.rocket,
+      //         color: Theme.of(context).colorScheme.primary,
+      //       ),
+      //     )
+      //   ],
+      //   foregroundColor: Theme.of(context).colorScheme.background,
+      //   backgroundColor: Theme.of(context).colorScheme.background,
+      // ),
       body: Stack(
         children: [
           _widgetOptions.elementAt(_selectedIndex),

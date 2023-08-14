@@ -24,7 +24,7 @@ class otpController extends GetxController {
 
       userRepository.createUser(user);
     } else {
-      Get.back();
+      Get.snackbar("Error", "Something went wrong try again");
     }
   }
 
@@ -36,7 +36,7 @@ class otpController extends GetxController {
       print(user.mobile);
       userRepository.updateUser(user, oldUserKey);
     } else {
-      Get.back();
+      Get.snackbar("Error", "Something went wrong try again");
     }
   }
 }

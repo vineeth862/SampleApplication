@@ -5,7 +5,7 @@ class AppState extends ChangeNotifier {
 
   String get globalString => _globalString;
 
-  void updateGlobalString(String newValue) {
+  void updateGlobalStringValue(String newValue) {
     _globalString = newValue;
     notifyListeners();
   }

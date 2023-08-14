@@ -1,6 +1,6 @@
 import '../booked.dart';
 import '../test/test.dart';
-import '../../../../authentication/models/user.dart';
+import 'package:sample_application/src/authentication/models/user.dart';
 
 class Order {
   String? orderNumber;

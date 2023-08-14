@@ -105,8 +105,8 @@ class _AdressBookState extends State<AdressBook> {
                     InkWell(
                       child: Icon(Icons.keyboard_double_arrow_down_rounded),
                       onTap: () {
-                        Navigator.pop(context);
-                        //globalservice.navigate(context, ProfileScreen());
+                        //Navigator.pop(context);
+                        globalservice.navigate(context, ProfileScreen());
                       },
                     ),
                     SizedBox(width: 5),
@@ -121,8 +121,8 @@ class _AdressBookState extends State<AdressBook> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
-                        //globalservice.navigate(context, ProfileScreen());
+                        //Navigator.pop(context);
+                        globalservice.navigate(context, ProfileScreen());
                       },
                       child: Icon(
                         Icons.cancel,
