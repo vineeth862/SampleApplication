@@ -22,7 +22,7 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
   var Controller = Get.put(otpController());
-  Users user = Users();
+  User user = User();
   var otp;
   void _validate() {
     _formKey.currentState!.validate();

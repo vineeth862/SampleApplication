@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/order-repository/orderRepository.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
-import 'package:sample_application/src/screens/order/paymentGateway.dart';
+
+import '../../../../utils/Provider/selected_order_provider.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   @override
@@ -12,22 +17,33 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   GlobalService globalservice = GlobalService();
   bool showAllItems = false;
   int maxVisibleItems = 3;
-  final Map<String, dynamic> orderItems = {
-    'orderNumber': '12345',
-    'items': [
-      {'name': 'Item 1', 'price': 20.0, 'quantity': 2},
-      {'name': 'Item 2', 'price': 15.0, 'quantity': 3},
-      {'name': 'Item 1', 'price': 20.0, 'quantity': 2},
-      // {'name': 'Item 2', 'price': 15.0, 'quantity': 3},
-      // {'name': 'Item 1', 'price': 20.0, 'quantity': 2},
-      // {'name': 'Item 2', 'price': 15.0, 'quantity': 3},
-      // {'name': 'Item 1', 'price': 20.0, 'quantity': 2},
-      // {'name': 'Item 2', 'price': 150.0, 'quantity': 3},
-    ],
-    'totalAmount': 85.0,
-    'address': '1234 Main St, City, Country',
-    'slot': '27/10/2023 4pm-5pm'
-  };
+  OrderRepository orderRepo = OrderRepository();
+  Map<String, dynamic> orderItems = {};
+  var selectedOrder;
+
+  void loadData(Order order) async {
+    var totalAmmount = 0;
+    var address = "";
+    var orderNumber = "";
+    List items = [];
+    order.tests?.forEach((Test test) {
+      items.add({'name': test.testname, 'price': test.price});
+      totalAmmount += int.parse(test.price);
+    });
+
+    order.totalPrice = totalAmmount;
+    String id = await orderRepo.createOrder(order);
+    setState(() {
+      orderItems = {
+        'orderNumber': id,
+        'items': items,
+        'totalAmount': totalAmmount,
+        'address': order?.address,
+        'slot': order?.booked?.slot
+      };
+    });
+  }
+
   void calculateTotalAmount() {
     double total = 0.0;
     for (var item in orderItems['items']) {
@@ -39,7 +55,19 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    var future = new Future.delayed(const Duration(milliseconds: 1000))
+        .then((value) => this.loadData(
+              selectedOrder.getOrder,
+            ));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    selectedOrder = Provider.of<SelectedOrderState>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Order Summary'),
@@ -57,7 +85,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
             //   ),
             // ),
             SizedBox(height: 16),
-            Text('Order Number: ${orderItems['orderNumber']}',
+            Text(
+                'Order Number: ${orderItems == null ? "" : orderItems['orderNumber']}',
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
@@ -84,7 +113,9 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
-                  Text(orderItems['address']),
+                  Text(orderItems == null
+                      ? ""
+                      : orderItems['address'].toString()),
                   SizedBox(
                     height: 10,
                   ),
@@ -94,7 +125,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           .titleLarge!
                           .copyWith(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
-                  Text(orderItems['slot']),
+                  Text(orderItems == null ? "" : orderItems['slot'].toString()),
                 ],
               ),
             ),
@@ -112,7 +143,11 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                 // itemCount: maxVisibleItems < orderItems['items'].length
                 //     ? maxVisibleItems + 1
                 //     : orderItems['items'].length,
-                itemCount: orderItems['items'].length,
+                itemCount: orderItems == null
+                    ? 0
+                    : orderItems['items'] == null
+                        ? 0
+                        : orderItems['items'].length,
                 itemBuilder: (context, index) {
                   // if (index == maxVisibleItems) {
                   //   return TextButton(

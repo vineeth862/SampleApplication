@@ -308,8 +308,13 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           title:
                               "${selectedTest.getSelectedTest.length} item Selected",
                           content: "view details",
-                          navigate: StepOneToBookTest(),
                           hyperLink: true,
+                          buttonClicked: () {
+                            GlobalService().navigate(
+                              context,
+                              StepOneToBookTest(),
+                            );
+                          },
                           expandDetail: () {
                             setState(() {
                               expandDetails = true;

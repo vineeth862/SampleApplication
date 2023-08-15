@@ -5,13 +5,9 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.dart';
 import 'package:sample_application/src/screens/Home/home_service.dart';
-
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
-import 'package:sample_application/src/utils/Provider/address_provider.dart';
 
 import '../../utils/Provider/selected_test_provider.dart';
 import '../../utils/helper_widgets/bottom_model_sheet.dart';
@@ -142,7 +138,9 @@ class _HomePageState extends State<HomePage> {
                         title:
                             "${selectedTest.getSelectedTest.length} item Selected",
                         content: "view details",
-                        navigate: StepOneToBookTest(),
+                        buttonClicked: () {
+                          globalservice.navigate(context, StepOneToBookTest());
+                        },
                         hyperLink: true,
                         expandDetail: () {
                           setState(() {

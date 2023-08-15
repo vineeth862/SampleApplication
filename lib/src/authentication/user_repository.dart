@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sample_application/src/authentication/models/address.dart';
@@ -11,7 +9,7 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
   GlobalService globalservice = GlobalService();
-  createUser(Users user) async {
+  createUser(User user) async {
     DocumentSnapshot userPresent =
         await _db.collection("user").doc(user.mobile).get();
 
@@ -29,7 +27,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  updateUser(Users user, String oldUserKey) async {
+  updateUser(User user, String oldUserKey) async {
     //print(oldUserKey);
     final oldDocumentRef = _db.collection("user").doc(oldUserKey);
     oldDocumentRef.update({"mobile": user.mobile});

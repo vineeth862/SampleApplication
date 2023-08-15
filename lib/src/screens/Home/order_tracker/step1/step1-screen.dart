@@ -3,19 +3,28 @@ import 'package:flutter/services.dart';
 import 'package:get/instance_manager.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/authentication/models/user.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
 import '../../../../authentication/user_repository.dart';
 import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/search_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filter-lab-list.dart';
-import '../../explore/Search/Cards/filter-test-list.dart';
 import '../../explore/Search/search_field.dart';
 
 class StepOneScreen extends StatefulWidget {
+  StepOneScreen();
+  final screen = _StepOneScreenState();
+
   @override
-  _StepOneScreenState createState() => _StepOneScreenState();
+  _StepOneScreenState createState() => screen;
+
+  Future<bool> btnClicked() async {
+    return await screen.UpdateWidget();
+  }
 }
 
 class _StepOneScreenState extends State<StepOneScreen> {
@@ -27,6 +36,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
   TextEditingController _agecontroller = TextEditingController();
   GlobalService globalservice = GlobalService();
   SearchListState? searchState;
+  SelectedOrderState? selectedOrder;
+  SelectedTestState? selectedTest;
   Test? filteredTest;
   @override
   void initState() {
@@ -54,6 +65,32 @@ class _StepOneScreenState extends State<StepOneScreen> {
     super.dispose();
   }
 
+  Future<bool> UpdateWidget() async {
+    if (selectedOrder != null) {
+      Order order = selectedOrder!.getOrder;
+      order.self = isMySelfButtonSelected;
+      order.tests = selectedTest!.getSelectedTest;
+      if (isMySelfButtonSelected) {
+        var user = await Get.put(UserRepository()).getUser();
+        order.user?.gender = selectedGender;
+        order.user?.gender = selectedGender;
+        order.user = User(
+            userName: user.data()?['userName'],
+            age: _agecontroller.text,
+            gender: selectedGender,
+            mobile: user.data()?['mobile']);
+      } else {
+        order.user = User(
+            userName: _namecontroller.text,
+            age: _agecontroller.text,
+            gender: selectedGender);
+      }
+
+      selectedOrder!.setOrder = order;
+    }
+    return true;
+  }
+
   Column generateListTileBody(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,8 +100,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedTest = Provider.of<SelectedTestState>(context);
+    selectedTest = Provider.of<SelectedTestState>(context);
     searchState = Provider.of<SearchListState>(context);
+    selectedOrder = Provider.of<SelectedOrderState>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +243,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...selectedTest.getSelectedTest
+                  ...selectedTest!.getSelectedTest
                       .map(
                         (test) => ListTile(
                           title: generateListTileBody(test),
@@ -213,8 +251,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           leading: Icon(Icons.medical_services),
                           trailing: IconButton(
                               onPressed: () {
-                                selectedTest.removeTest(test);
-                                if (selectedTest.getSelectedTest.length == 0) {
+                                selectedTest!.removeTest(test);
+                                if (selectedTest!.getSelectedTest.length == 0) {
                                   this
                                       .globalservice
                                       .navigate(context, SearchBarPage());
@@ -226,8 +264,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       .toList(),
                   ListTile(
                     onTap: () async {
-                      if (selectedTest.getSelectedTest.length > 0) {
-                        var lab = selectedTest.getSelectedTest[0];
+                      if (selectedTest!.getSelectedTest.length > 0) {
+                        var lab = selectedTest!.getSelectedTest[0];
                         await searchState?.cardClicked(lab.labCode, false);
                         this.globalservice.navigate(
                             context,

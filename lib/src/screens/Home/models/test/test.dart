@@ -27,4 +27,21 @@ class Test {
       required this.test_code,
       required this.test_des,
       required this.testname});
+  toJson() {
+    return {
+      "frequency": frequency,
+      "hf_test_code": hf_test_code,
+      "labCode": labCode,
+      "labName": labName,
+      "method": method,
+      "price": price,
+      "sampleContainer": sampleContainer,
+      "sampletypename": sampletypename,
+      "tat": tat,
+      "testProcessingDays": testProcessingDays,
+      "test_code": test_code,
+      "test_des": test_des,
+      "testname": testname
+    };
+  }
 }

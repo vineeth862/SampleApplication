@@ -6,6 +6,7 @@ import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/utils/Provider/address_provider.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
+import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 import 'src/screens/Home/home.dart';
 import 'src/utils/themes/themedata.dart';
@@ -21,6 +22,7 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => SearchListState()),
     ChangeNotifierProvider(create: (_) => SelectedTestState()),
+    ChangeNotifierProvider(create: (_) => SelectedOrderState()),
     ChangeNotifierProvider(create: (_) => AppState()),
   ], child: const MyApp()));
 }

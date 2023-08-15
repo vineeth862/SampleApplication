@@ -6,16 +6,18 @@ import '../../global_service/global_service.dart';
 class SlotBookingCard extends StatefulWidget {
   final String title;
   final String content;
-  final Widget navigate;
+  // final Widget navigate;
   final bool hyperLink;
   Function() expandDetail;
+  Function() buttonClicked;
 
   SlotBookingCard(
       {required this.title,
       required this.content,
-      required this.navigate,
+      // required this.navigate,
       required this.hyperLink,
-      required this.expandDetail});
+      required this.expandDetail,
+      required this.buttonClicked});
 
   @override
   State<SlotBookingCard> createState() => _SlotBookingCardState();
@@ -94,7 +96,8 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
             SizedBox(width: 16.0),
             ElevatedButton(
               onPressed: () {
-                this.globalservice.navigate(context, widget.navigate);
+                widget.buttonClicked();
+                // this.globalservice.navigate(context, widget.navigate);
                 // Button press logic
               },
               child: Text(

@@ -6,11 +6,12 @@ class TestCard {
   final bool testSelcted;
   final String testCode;
   final String price;
+  final String labName;
   final Test testObject;
 
   @override
   String toString() {
-    return 'TestCard{name: $name,test: $test,testSelected: $testSelcted, testCode:$testCode, price:$price}';
+    return 'TestCard{name: $name,test: $test,testSelected: $testSelcted, testCode:$testCode, price:$price , labName:$labName}';
   }
 
   TestCard(
@@ -19,5 +20,6 @@ class TestCard {
       required this.testSelcted,
       required this.testCode,
       required this.price,
+      required this.labName,
       required this.testObject});
 }

@@ -144,6 +144,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                 return TestCardWidget(
                     title: list[index].name,
                     description: list[index].test.toString(),
+                    labName: list[index].labName,
                     price: list[index].price,
                     isTestSelected: !selectedTest.getSelectedTest
                         .contains(list[index]?.testObject),

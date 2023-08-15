@@ -54,6 +54,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                     return TestCardWidget(
                         title: list[index].name,
                         description: list[index].test.toString(),
+                        labName: list[index].labName,
                         price: list[index].price,
                         isTestSelected: !selectedTest.getSelectedTest
                             .contains(list[index]?.testObject),
@@ -107,8 +108,13 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                         title:
                             "${selectedTest.getSelectedTest.length} item Selected",
                         content: "view details",
-                        navigate: StepOneToBookTest(),
                         hyperLink: true,
+                        buttonClicked: () {
+                          GlobalService().navigate(
+                            context,
+                            StepOneToBookTest(),
+                          );
+                        },
                         expandDetail: () {
                           setState(() {
                             expandDetails = true;

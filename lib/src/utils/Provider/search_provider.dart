@@ -72,6 +72,7 @@ class SearchListState with ChangeNotifier {
               name: e.data()['testname'],
               test: e.data()['tat'],
               testSelcted: false,
+              labName: e.data()['labName'],
               testCode: e.data()['hf_test_code'],
               price: e.data()['price'].toString(),
               testObject: testObjectConverter(e)))
@@ -103,6 +104,7 @@ class SearchListState with ChangeNotifier {
               name: e.data()['testname'],
               test: e.data()['tat'],
               testSelcted: false,
+              labName: e.data()['labName'],
               testCode: e.data()['hf_test_code'],
               price: e.data()['price'].toString(),
               testObject: testObjectConverter(e)))
@@ -128,6 +130,7 @@ class SearchListState with ChangeNotifier {
               testSelcted: false,
               testCode: e.data()['hf_test_code'],
               price: e.data()['price'].toString(),
+              labName: e.data()['labName'],
               testObject: testObjectConverter(e)))
           .toList();
     }

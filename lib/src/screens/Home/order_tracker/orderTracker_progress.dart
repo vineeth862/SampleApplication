@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
   @override

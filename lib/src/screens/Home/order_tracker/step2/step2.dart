@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step2/step2-screen.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -15,9 +16,17 @@ class StepTwoToBookTest extends StatefulWidget {
 class _StepTwoToBookTest extends State<StepTwoToBookTest> {
   // Add your state variables and methods here
   bool expandDetails = false;
+  String selectedAdress = "";
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
+    final screen = StepTwoScreen(
+      addressChanged: (address) {
+        setState(() {
+          selectedAdress = address;
+        });
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
@@ -66,7 +75,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
       body: Container(
         height: double.infinity,
         child: Stack(children: [
-          StepTwoScreen(),
+          screen,
           Positioned(
             bottom: 0,
             right: 0,
@@ -75,8 +84,13 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                 child: selectedTest.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
                         title: "Your Location",
-                        content: "Mariyappanapalya",
-                        navigate: StepThreeToBookTest(),
+                        content: selectedAdress,
+                        buttonClicked: () async {
+                          if (selectedAdress.isNotEmpty) {
+                            GlobalService()
+                                .navigate(context, StepThreeToBookTest());
+                          }
+                        },
                         hyperLink: false,
                         expandDetail: () {
                           setState(() {

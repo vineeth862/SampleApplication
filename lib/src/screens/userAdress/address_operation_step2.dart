@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/profile/adress_book.dart';
 import 'package:sample_application/src/screens/userAdress/UseCurrentLocationStepTwo.dart';
 import 'package:sample_application/src/screens/userAdress/addAddressStepTwo.dart';
-import 'package:sample_application/src/screens/userAdress/add_address.dart';
 
 class addressOperationStepTwo extends StatefulWidget {
   final Widget routeDetails;
-  addressOperationStepTwo({super.key, required this.routeDetails});
+  final Function(String address) addressSelected;
+  addressOperationStepTwo(
+      {super.key, required this.routeDetails, required this.addressSelected});
 
   @override
   State<addressOperationStepTwo> createState() =>
@@ -223,7 +223,9 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                         itemBuilder: (context, index) {
                           if (index < visibleItemCount) {
                             return InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                widget.addressSelected(items[index]);
+                              },
                               child: Container(
                                 child: Column(
                                   children: [

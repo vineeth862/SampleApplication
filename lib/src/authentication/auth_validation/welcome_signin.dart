@@ -24,7 +24,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
   TextEditingController nameController = TextEditingController();
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
-  Users user = Users();
+  User user = User();
   var otp;
   var Controller = Get.put(otpController());
   void _validate() {

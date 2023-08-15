@@ -4,6 +4,7 @@ class TestCardWidget extends StatelessWidget {
   final String title;
   final String description;
   final bool isTestSelected;
+  final String labName;
   late Function(Object card) tapOnCard;
   late Function(String test) tapOnButton;
   final String price;
@@ -15,6 +16,7 @@ class TestCardWidget extends StatelessWidget {
       required this.tapOnCard,
       required this.tapOnButton,
       required this.isTestSelected,
+      required this.labName,
       required this.price});
 
   @override
@@ -38,7 +40,7 @@ class TestCardWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        title.length > 20 ? title : title,
+                        title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
@@ -82,7 +84,7 @@ class TestCardWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 16.0),
                 Text(
-                  title.length > 20 ? title : title,
+                  labName.length > 20 ? labName : labName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,

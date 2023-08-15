@@ -21,6 +21,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
   GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
+    final widget = StepOneScreen();
     final selectedTest = Provider.of<SelectedTestState>(context);
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +71,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
       body: Container(
         height: double.infinity,
         child: Stack(children: [
-          StepOneScreen(),
+          widget,
           Positioned(
             bottom: 100,
             right: 0,
@@ -98,8 +99,11 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                         title:
                             "${selectedTest.getSelectedTest.length} item Selected",
                         content: "view details",
-                        navigate: StepTwoToBookTest(),
                         hyperLink: true,
+                        buttonClicked: () async {
+                          await widget.btnClicked();
+                          globalservice.navigate(context, StepTwoToBookTest());
+                        },
                         expandDetail: () {
                           setState(() {
                             expandDetails = true;

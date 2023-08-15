@@ -1,11 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/screens/Home/models/booked.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
-import 'package:sample_application/src/screens/order/orderSummary.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/order-summary/orderSummary.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import '../../../../global_service/global_service.dart';
+import '../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../step1/step1.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart'
+    as order;
 
 class StepThreeToBookTest extends StatefulWidget {
   @override
@@ -15,9 +20,33 @@ class StepThreeToBookTest extends StatefulWidget {
 class _StepThreeToBookTest extends State<StepThreeToBookTest> {
   // Add your state variables and methods here
   bool expandDetails = false;
+  String selectedslot = "";
+  GlobalService globalservice = GlobalService();
+  late Booked booked;
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
+    final screen = StepThreeScreen(
+      slotSelected: (date, time) {
+        setState(() {
+          selectedslot = date.year.toString() +
+              "-" +
+              date.month.toString() +
+              "-" +
+              date.day.toString() +
+              "   " +
+              time.hour.toString() +
+              " : " +
+              "00";
+          booked = Booked(
+              bookedDate: date.toString(),
+              bookedSlot: time.toString(),
+              slot: selectedslot);
+        });
+        // print(time);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
@@ -64,7 +93,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
       ),
       body: Stack(children: [
-        StepThreeScreen(),
+        screen,
         Positioned(
           bottom: 0,
           right: 0,
@@ -73,9 +102,19 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
               child: selectedTest.getSelectedTest.isNotEmpty
                   ? SlotBookingCard(
                       title: "Collection at",
-                      content: "20th jul| 06:45 AM",
-                      navigate: OrderSummaryPage(),
+                      content: selectedslot,
                       hyperLink: false,
+                      buttonClicked: () {
+                        order.Order orderObject = selectedOrder.getOrder;
+                        if (selectedslot.isNotEmpty) {
+                          orderObject.booked = booked;
+                          selectedOrder.setOrder = orderObject;
+                          this
+                              .globalservice
+                              .navigate(context, OrderSummaryPage());
+                        }
+                        // OrderSummaryPage()
+                      },
                       expandDetail: () {
                         setState(() {
                           expandDetails = true;

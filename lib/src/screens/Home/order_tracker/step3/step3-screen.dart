@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../utils/Provider/selected_order_provider.dart';
 
 class StepThreeScreen extends StatefulWidget {
-  const StepThreeScreen({super.key});
+  final screen = _StepThreeScreen();
+  StepThreeScreen({super.key, required this.slotSelected});
+  Function(DateTime date, TimeOfDay time) slotSelected;
 
   @override
   State<StepThreeScreen> createState() => _StepThreeScreen();
 }
 
 class _StepThreeScreen extends State<StepThreeScreen> {
+  SelectedOrderState? selectedOrder;
+
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
 
@@ -41,12 +48,14 @@ class _StepThreeScreen extends State<StepThreeScreen> {
   void _selectDate(DateTime date) {
     setState(() {
       selectedDate = date;
+      widget.slotSelected(selectedDate!, selectedTime!);
     });
   }
 
   void _selectTime(TimeOfDay time) {
     setState(() {
       selectedTime = time;
+      widget.slotSelected(selectedDate!, selectedTime!);
     });
   }
 
@@ -142,6 +151,8 @@ class _StepThreeScreen extends State<StepThreeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    selectedOrder = Provider.of<SelectedOrderState>(context);
+
     final List<DateTime> nextSixDates = List<DateTime>.generate(
       5,
       (index) => DateTime.now().add(Duration(days: index)),
