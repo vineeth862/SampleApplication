@@ -9,7 +9,7 @@ class OrderTrackerHome extends StatefulWidget {
 
 class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   var sBoxHeight;
-  List<String> items = List.generate(3, (index) => 'Thyroid');
+  List<String> items = List.generate(4, (index) => 'Thyroid');
   @override
   Widget build(BuildContext context) {
     //CHNAGE THIS LOGIC IN FUTURE
@@ -167,42 +167,16 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
                             ),
-                            // SizedBox(
-                            //   height: MediaQuery.of(context).size.height *
-                            //       sBoxHeight,
-                            //   width: MediaQuery.of(context).size.width * 0.9,
-                            //   child: ListView.builder(
-                            //     //itemExtent: 40,
-                            //     itemCount: items
-                            //         .length, //ITEMS MEANS TEST PRESENT INSIDE A ORDER
-                            //     itemBuilder: (context, index) {
-                            //       return Row(
-                            //         children: [
-                            //           Expanded(
-                            //             child: ListTile(
-                            //               title: Text(
-                            //                 items[index],
-                            //                 style: Theme.of(context)
-                            //                     .textTheme
-                            //                     .bodySmall,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ],
-                            //       );
-                            //     },
-                            //   ),
-                            // ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("Thyroid"),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("Thyroid"),
-                            ),
+
+                            ...items.map((item) => Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Text(item),
+                                  ),
+                                )),
+
                             const Divider(
                               height: 5,
                             ),

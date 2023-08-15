@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
+import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import 'package:sample_application/src/utils/Provider/address_provider.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/search_provider.dart';
@@ -47,7 +48,9 @@ class _ExploreState extends State<Explore> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          globalservice.navigate(context, InitialAdress());
+                        },
                         icon: Icon(Icons.location_on),
                         label: Obx(() => Text(
                               myController.globalString.value,
