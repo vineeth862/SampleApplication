@@ -4,9 +4,9 @@ import 'package:countries_flag/countries_flag.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/authentication/auth_validation/otp_controller.dart';
-import 'package:sample_application/src/authentication/models/user.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/user/user.dart';
 
 class changeMobileNumber extends StatefulWidget {
   const changeMobileNumber({super.key});

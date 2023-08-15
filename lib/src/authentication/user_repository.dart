@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sample_application/src/authentication/models/address.dart';
-import 'package:sample_application/src/authentication/models/user.dart';
+import 'package:sample_application/src/screens/Home/models/user/address.dart';
+import 'package:sample_application/src/screens/Home/models/user/user.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 
 class UserRepository extends GetxController {
@@ -50,6 +50,34 @@ class UserRepository extends GetxController {
 
     // Step 3: Delete the old document (optional)
     await oldDocumentRef.delete();
+  }
+
+  getOrderIds() async {
+    String userKey = globalservice.getCurrentUserKey();
+    var user = await _db.collection("user").doc(userKey).get();
+
+    if (user.data()?['orders'] != null) {
+      return user.data()?['orders'] as List;
+    } else {
+      return [] as List;
+    }
+  }
+
+  addOrderIdsToUser(orderId) async {
+    String userKey = globalservice.getCurrentUserKey();
+
+    List orders = await this.getOrderIds();
+    orders.add(orderId);
+    //need to change this
+    await _db
+        .collection("user")
+        .doc(userKey)
+        .set({"orders": orders}, SetOptions(merge: true))
+        .whenComplete(() => print("order added to user"))
+        .catchError((error, stackTrace) {
+          print("Something went wrong");
+        });
+    return true;
   }
 
   getUser() async {

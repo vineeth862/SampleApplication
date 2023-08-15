@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Cards/card_detail_page.dart';
-import 'package:sample_application/src/screens/Home/models/test/test_card.dart';
+import 'package:sample_application/src/screens/Home/models/test/testcard.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.service.dart';
 import 'package:sample_application/src/utils/helper_widgets/test_card.dart';

@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'labcard.g.dart';
+
+@JsonSerializable()
 class LabCard {
   final String name;
   final String test;
@@ -5,15 +9,13 @@ class LabCard {
   final String labCode;
   final String location;
 
-  @override
-  String toString() {
-    return 'TestCard{name: $name,test: $test, $testCode , labCode: $labCode}';
-  }
-
   LabCard(
       {required this.name,
       required this.test,
       required this.testCode,
       required this.labCode,
       required this.location});
+  factory LabCard.fromJson(Map<String, dynamic> json) =>
+      _$LabCardFromJson(json);
+  Map<String, dynamic> toJson() => _$LabCardToJson(this);
 }

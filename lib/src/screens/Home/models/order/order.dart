@@ -1,9 +1,13 @@
 // import 'package:sample_application/src/screens/Home/models/order/payment.dart';
 
-import '../booked.dart';
-import '../test/test.dart';
-import 'package:sample_application/src/authentication/models/user.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:sample_application/src/screens/Home/models/user/user.dart';
 
+import 'booked.dart';
+import '../test/test.dart';
+part 'order.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Order {
   String? orderNumber;
   int? carrierCode;
@@ -39,23 +43,6 @@ class Order {
     this.user,
   });
 
-  toJson() {
-    return {
-      "orderNumber": orderNumber,
-      "carrierCode": carrierCode,
-      "carrierName": carrierName,
-      "statusCode": statusCode,
-      "statusLabel": statusLabel,
-      "createdDate": createdDate,
-      "totalPrice": totalPrice,
-      "self": self,
-      "user": user?.toJson(),
-      "patient": patient?.toJson(),
-      "tests": [...tests!.map((e) => e.toJson())],
-      "booked": booked?.toJson(),
-      "specificInstruction": specificInstruction,
-      // "payment": payment,
-      "address": address,
-    };
-  }
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
 }

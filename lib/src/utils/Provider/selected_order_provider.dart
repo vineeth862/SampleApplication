@@ -12,4 +12,8 @@ class SelectedOrderState extends ChangeNotifier {
   set setOrder(Order order) {
     this.order = order;
   }
+
+  void resetOrder() {
+    order = Order();
+  }
 }

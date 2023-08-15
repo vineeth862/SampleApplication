@@ -5,7 +5,7 @@ import '../../../../../global_service/global_service.dart';
 import '../../../../../utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/test_card.dart';
-import '../../../models/test/test_card.dart';
+import '../../../models/test/testcard.dart';
 import '../../../order_tracker/step1/step1.dart';
 import '../../explore.service.dart';
 import 'card_detail_page.dart';

@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
-
-import '../models/user.dart';
+import '../../screens/Home/models/user/user.dart';
 import '../user_repository.dart';
 
 class otpController extends GetxController {

@@ -1,4 +1,6 @@
+// import 'package:json_annotation/json_annotation.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
+part 'testcard.g.dart';
 
 class TestCard {
   final String name;
@@ -9,11 +11,6 @@ class TestCard {
   final String labName;
   final Test testObject;
 
-  @override
-  String toString() {
-    return 'TestCard{name: $name,test: $test,testSelected: $testSelcted, testCode:$testCode, price:$price , labName:$labName}';
-  }
-
   TestCard(
       {required this.name,
       required this.test,
@@ -22,4 +19,8 @@ class TestCard {
       required this.price,
       required this.labName,
       required this.testObject});
+
+  factory TestCard.fromJson(Map<String, dynamic> json) =>
+      _$TestCardFromJson(json);
+  Map<String, dynamic> toJson() => _$TestCardToJson(this);
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/screens/Home/models/booked.dart';
+import 'package:sample_application/src/screens/Home/models/order/booked.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-summary/orderSummary.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';

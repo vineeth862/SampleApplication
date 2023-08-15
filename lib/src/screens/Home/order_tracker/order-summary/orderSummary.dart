@@ -19,7 +19,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   int maxVisibleItems = 3;
   OrderRepository orderRepo = OrderRepository();
   Map<String, dynamic> orderItems = {};
-  var selectedOrder;
+  late SelectedOrderState selectedOrder;
 
   void loadData(Order order) async {
     var totalAmmount = 0;
@@ -196,6 +196,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    selectedOrder.resetOrder();
                     globalservice.navigate(context, OrderTrackingScreen());
                   },
                   child: Text('Proceed to Payment'),

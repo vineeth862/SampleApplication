@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/order-repository/orderRepository.dart';
+
+import '../../../authentication/user_repository.dart';
+import '../models/test/test.dart';
 
 class OrderTrackerHome extends StatefulWidget {
   const OrderTrackerHome({super.key});
@@ -8,16 +13,27 @@ class OrderTrackerHome extends StatefulWidget {
 }
 
 class _OrderTrackerHomeState extends State<OrderTrackerHome> {
-  var sBoxHeight;
-  List<String> items = List.generate(4, (index) => 'Thyroid');
+  // List items = List.generate(4, (index) => ' ');
+  List<Order> orders = [];
+  loadData() async {
+    final orderIds = await UserRepository().getOrderIds();
+    final getOrder = await OrderRepository().fetchAllOrders(orderIds);
+    setState(() {
+      orders = getOrder;
+    });
+  }
+
+  @override
+  void initState() {
+    this.loadData();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     //CHNAGE THIS LOGIC IN FUTURE
-    if (items.length > 1) {
-      sBoxHeight = 0.15;
-    } else {
-      sBoxHeight = 0.07;
-    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -54,8 +70,8 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                   0.75, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
               width: MediaQuery.of(context).size.width * 0.9,
               child: ListView.builder(
-                itemCount:
-                    8, //GET THE COUNT OF BOOKING DONE BY USER AND UPDATE HERE
+                itemCount: orders
+                    .length, //GET THE COUNT OF BOOKING DONE BY USER AND UPDATE HERE
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -103,7 +119,9 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Anand Diagnostics", //CHANGE THE NAME TO PARTICULAR LAB NAME
+                                      orders[index]
+                                          .tests![0]
+                                          .labName, //CHANGE THE NAME TO PARTICULAR LAB NAME
                                       textAlign: TextAlign.start,
                                       style: Theme.of(context)
                                           .textTheme
@@ -127,7 +145,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         ),
                                         onPressed: () {},
                                         label: Text(
-                                          "Completed",
+                                          orders[index].statusLabel!,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!
@@ -167,16 +185,14 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
                             ),
-
-                            ...items.map((item) => Padding(
+                            ...orders[index].tests!.map((Test item) => Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 4.0),
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
-                                    child: Text(item),
+                                    child: Text(item.testname),
                                   ),
                                 )),
-
                             const Divider(
                               height: 5,
                             ),
@@ -186,7 +202,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
                                   child: Text(
-                                    "27-10-1999 11:45:00",
+                                    orders[index].booked!.slot!,
                                     style:
                                         Theme.of(context).textTheme.bodySmall,
                                   ),

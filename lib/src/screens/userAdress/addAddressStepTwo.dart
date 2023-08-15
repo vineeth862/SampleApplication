@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/authentication/models/address.dart';
+import 'package:sample_application/src/screens/Home/models/user/address.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/global_service/user_location.dart';
-import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 class AddAdressStepTwo extends StatelessWidget {
   AddAdressStepTwo({super.key});
