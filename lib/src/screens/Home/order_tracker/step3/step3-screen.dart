@@ -227,14 +227,11 @@ class _StepThreeScreen extends State<StepThreeScreen> {
         //   ),
         // ),
         availableTimes.isEmpty
-            ? const Padding(
+            ? Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'No available times to show.',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontStyle: FontStyle.italic,
-                  ),
+                  'No available slots. Please check for the next day slots',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               )
             : SizedBox(
@@ -268,26 +265,26 @@ class _StepThreeScreen extends State<StepThreeScreen> {
         // ),
 
         SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 100.0),
-          child: ElevatedButton(
-            onPressed: () {
-              print('Selected Date: $selectedDate');
-              print('Selected Time: $selectedTime');
-            },
-            child: const Text("Book Slot"),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(10.0), // Set the border radius value
-              ),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 45.0,
-              ),
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 100.0),
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       print('Selected Date: $selectedDate');
+        //       print('Selected Time: $selectedTime');
+        //     },
+        //     child: const Text("Book Slot"),
+        //     style: ElevatedButton.styleFrom(
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius:
+        //             BorderRadius.circular(10.0), // Set the border radius value
+        //       ),
+        //       backgroundColor: Theme.of(context).colorScheme.primary,
+        //       padding: const EdgeInsets.symmetric(
+        //         horizontal: 45.0,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

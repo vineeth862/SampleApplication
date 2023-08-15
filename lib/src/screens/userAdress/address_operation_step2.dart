@@ -80,6 +80,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
     });
   }
 
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     bool isButtonEnabled = false;
@@ -215,7 +216,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                       ],
                     )
                   : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
+                      height: MediaQuery.of(context).size.height * 0.7,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: ListView.builder(
                         itemCount: visibleItemCount +
@@ -225,35 +226,59 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                             return InkWell(
                               onTap: () {
                                 widget.addressSelected(items[index]);
+                                selectedIndex = index;
                               },
                               child: Container(
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          Icons.home,
-                                          color: Theme.of(context)
+                                    Container(
+                                      color: selectedIndex == index
+                                          ? Theme.of(context)
                                               .colorScheme
-                                              .primary,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: ListTile(
-                                            title: Text(items[index]),
+                                              .tertiary
+                                              .withOpacity(0.2)
+                                          : Colors.transparent,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 10),
+                                          Icon(
+                                            Icons.home,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                           ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            _removeItem(index);
-                                          },
-                                          child: Icon(Icons.delete,
-                                              color: Colors.red.shade900),
-                                        )
-                                      ],
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: ListTile(
+                                              title: selectedIndex == index
+                                                  ? Text(
+                                                      items[index],
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleLarge!
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary),
+                                                    )
+                                                  : Text(items[index],
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleLarge),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              _removeItem(index);
+                                            },
+                                            child: Icon(Icons.delete,
+                                                color: Colors.red.shade900),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                     Divider(
                                       height: 10,

@@ -23,7 +23,7 @@ class otpController extends GetxController {
 
       userRepository.createUser(user);
     } else {
-      Get.snackbar("Error", "Something went wrong try again");
+      Get.snackbar("Error", "Invalid OTP, Enter a Valid OTP");
     }
   }
 
@@ -32,7 +32,7 @@ class otpController extends GetxController {
     var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
     if (isVerified) {
       Get.offAll(HomePage());
-      print(user.mobile);
+
       userRepository.updateUser(user, oldUserKey);
     } else {
       Get.snackbar("Error", "Something went wrong try again");

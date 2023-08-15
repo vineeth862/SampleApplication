@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step2/step2-screen.dart';
@@ -89,6 +90,9 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                           if (selectedAdress.isNotEmpty) {
                             GlobalService()
                                 .navigate(context, StepThreeToBookTest());
+                          } else {
+                            Get.snackbar(
+                                "Info", "Please select any one address");
                           }
                         },
                         hyperLink: false,

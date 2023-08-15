@@ -19,6 +19,7 @@ class AuthenticationRepository extends GetxController {
 
   _setInitialScreen(User? user) {
     print(user);
+    print("redirecting now---------------------");
     user == null
         ? Get.offAll(() => const Welcomesignin())
         : Get.offAll(() => const HomePage());

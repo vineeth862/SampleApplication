@@ -101,8 +101,10 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                         content: "view details",
                         hyperLink: true,
                         buttonClicked: () async {
-                          await widget.btnClicked();
-                          globalservice.navigate(context, StepTwoToBookTest());
+                          if (await widget.btnClicked()) {
+                            globalservice.navigate(
+                                context, StepTwoToBookTest());
+                          }
                         },
                         expandDetail: () {
                           setState(() {
