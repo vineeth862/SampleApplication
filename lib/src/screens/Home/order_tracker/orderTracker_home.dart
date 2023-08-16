@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-repository/orderRepository.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 
 import '../../../authentication/user_repository.dart';
+import '../../../global_service/global_service.dart';
 import '../models/test/test.dart';
+import 'orderTracker_progress.dart';
 
 class OrderTrackerHome extends StatefulWidget {
   const OrderTrackerHome({super.key});
@@ -14,6 +17,7 @@ class OrderTrackerHome extends StatefulWidget {
 
 class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   // List items = List.generate(4, (index) => ' ');
+  GlobalService globalservice = GlobalService();
   List<Order> orders = [];
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
@@ -21,6 +25,18 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
     setState(() {
       orders = getOrder;
     });
+  }
+
+  void navigate(Order order, context) {
+    if (order.statusCode == 1) {
+      this.globalservice.navigate(context, PaymentScreeen());
+    } else if (order.statusCode == 2) {
+      this.globalservice.navigate(
+          context,
+          OrderTrackingScreen(
+            order: order,
+          ));
+    }
   }
 
   @override
@@ -118,20 +134,23 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    Text(
-                                      orders[index]
-                                          .tests![0]
-                                          .labName, //CHANGE THE NAME TO PARTICULAR LAB NAME
-                                      textAlign: TextAlign.start,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold),
+                                    Expanded(
+                                      child: Text(
+                                        orders[index]
+                                            .tests![0]
+                                            .labName, //CHANGE THE NAME TO PARTICULAR LAB NAME
+                                        // textAlign: TextAlign.start,
+                                        maxLines: 5,
+                                        overflow: TextOverflow.visible,
+                                        softWrap: true,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      width: 60,
-                                    ),
+                                    // Spacer(),
                                     Expanded(
                                       child: TextButton.icon(
                                         // icon: Icon(
@@ -213,7 +232,9 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8),
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        navigate(orders[index], context);
+                                      },
                                       child: const Text("Track Order"),
                                       style: ElevatedButton.styleFrom(
                                           minimumSize: const Size(10, 30),
