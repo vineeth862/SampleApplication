@@ -7,6 +7,7 @@ import 'package:sample_application/src/screens/Home/order_tracker/order-reposito
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 
 import '../../../../utils/Provider/selected_order_provider.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   Map<String, dynamic> orderItems = {};
   late SelectedOrderState selectedOrder;
 
-  void loadData(Order order) async {
+  void loadData(Order order, String id) async {
     var totalAmmount = 0;
     var address = "";
     var orderNumber = "";
@@ -32,200 +33,222 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
     });
 
     order.totalPrice = totalAmmount;
-    String id = await orderRepo.createOrder(order);
-    setState(() {
-      orderItems = {
-        'orderNumber': id,
-        'items': items,
-        'totalAmount': totalAmmount,
-        'address': order?.address,
-        'slot': order?.booked?.slot
-      };
-    });
+    // String id = await orderRepo.createOrder(order);
+
+    orderItems = {
+      'orderNumber': id,
+      'items': items,
+      'totalAmount': totalAmmount,
+      'address': order?.address,
+      'slot': order?.booked?.slot
+    };
+    // setState(() {
+    //   orderItems = {
+    //     'orderNumber': id,
+    //     'items': items,
+    //     'totalAmount': totalAmmount,
+    //     'address': order?.address,
+    //     'slot': order?.booked?.slot
+    //   };
+    // });
   }
 
   void calculateTotalAmount() {
     double total = 0.0;
+
     for (var item in orderItems['items']) {
-      total += item['price'] * item['quantity'];
+      print(item);
+      total += int.parse(item['price']); //* item['quantity'];
     }
     setState(() {
       orderItems['totalAmount'] = total;
     });
   }
 
-  bool _showBuffering = true;
-  @override
-  void initState() {
-    // TODO: implement initState
-    var future = new Future.delayed(const Duration(milliseconds: 1000))
-        .then((value) => this.loadData(
-              selectedOrder.getOrder,
-            ));
-    _startBufferingTimer();
-    super.initState();
+  Widget doOperation(context, order) {
+    return FutureBuilder<String>(
+        future: orderRepo.createOrder(order),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadingIndicator(
+              indicatorType: Indicator.ballRotateChase,
+              colors: const [Colors.blue],
+            );
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return summaryScreenBody(
+                context, selectedOrder.orderDetails, snapshot.data.toString());
+          }
+        });
+
+    //String id = await orderRepo.createOrder(order);
   }
 
-  void _startBufferingTimer() {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _showBuffering = false;
-      });
-    });
+  Widget summaryScreenBody(context, orderData, String id) {
+    loadData(orderData, id);
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Text(
+          //   'Order Details',
+          //   style: TextStyle(
+          //     fontSize: 24,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          SizedBox(height: 16),
+          Text(
+              'Order Number: ${orderItems == null ? "" : orderItems['orderNumber']}',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold)),
+          SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+                gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 150, 224, 153),
+                  Color.fromARGB(255, 22, 190, 28),
+                ])),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Sample collection address',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                Text(
+                    orderItems == null ? "" : orderItems['address'].toString()),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Booked Slot',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Text(orderItems == null ? "" : orderItems['slot'].toString()),
+              ],
+            ),
+          ),
+          Divider(thickness: 2),
+          SizedBox(height: 16),
+          Text(
+            'Items',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              // itemCount: maxVisibleItems < orderItems['items'].length
+              //     ? maxVisibleItems + 1
+              //     : orderItems['items'].length,
+              itemCount: orderItems == null
+                  ? 0
+                  : orderItems['items'] == null
+                      ? 0
+                      : orderItems['items'].length,
+              itemBuilder: (context, index) {
+                // if (index == maxVisibleItems) {
+                //   return TextButton(
+                //     onPressed: () {
+                //       setState(() {
+                //         maxVisibleItems = orderItems['items'].length;
+                //       });
+                //     },
+                //     child: Text(
+                //       'Load More',
+                //       style: TextStyle(
+                //         color: Colors.blue,
+                //       ),
+                //     ),
+                //   );
+                // }
+                final item = orderItems['items'][index];
+                return ListTile(
+                  leading: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      setState(() {
+                        orderItems['items'].removeAt(index);
+                        calculateTotalAmount();
+                      });
+                    },
+                  ),
+                  title: Text(item['name']),
+                  subtitle: Text('Quantity: ${item['quantity']}'),
+                  trailing: Text('\$${item['price']}'),
+                );
+              },
+            ),
+          ),
+
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total: \Rs. ${orderItems['totalAmount']}',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  selectedOrder.resetOrder();
+                  globalservice.navigate(context, OrderTrackingScreen());
+                },
+                child: Text('Proceed to Payment'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     selectedOrder = Provider.of<SelectedOrderState>(context);
-
-    return _showBuffering
-        ? Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.red,
-              strokeWidth: 8,
-            ), // Show buffering widget
-          )
-        : Scaffold(
-            appBar: AppBar(
-              title: Text('Order Summary'),
-            ),
-            body: Container(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Text(
-                  //   'Order Details',
-                  //   style: TextStyle(
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  SizedBox(height: 16),
-                  Text(
-                      'Order Number: ${orderItems == null ? "" : orderItems['orderNumber']}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 16),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8.0),
-                        gradient: LinearGradient(colors: [
-                          Color.fromARGB(255, 150, 224, 153),
-                          Color.fromARGB(255, 22, 190, 28),
-                        ])),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Sample collection address',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Text(orderItems == null
-                            ? ""
-                            : orderItems['address'].toString()),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text('Booked Slot',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        SizedBox(height: 8),
-                        Text(orderItems == null
-                            ? ""
-                            : orderItems['slot'].toString()),
-                      ],
-                    ),
-                  ),
-                  Divider(thickness: 2),
-                  SizedBox(height: 16),
-                  Text(
-                    'Items',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      // itemCount: maxVisibleItems < orderItems['items'].length
-                      //     ? maxVisibleItems + 1
-                      //     : orderItems['items'].length,
-                      itemCount: orderItems == null
-                          ? 0
-                          : orderItems['items'] == null
-                              ? 0
-                              : orderItems['items'].length,
-                      itemBuilder: (context, index) {
-                        // if (index == maxVisibleItems) {
-                        //   return TextButton(
-                        //     onPressed: () {
-                        //       setState(() {
-                        //         maxVisibleItems = orderItems['items'].length;
-                        //       });
-                        //     },
-                        //     child: Text(
-                        //       'Load More',
-                        //       style: TextStyle(
-                        //         color: Colors.blue,
-                        //       ),
-                        //     ),
-                        //   );
-                        // }
-                        final item = orderItems['items'][index];
-                        return ListTile(
-                          leading: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              setState(() {
-                                orderItems['items'].removeAt(index);
-                                calculateTotalAmount();
-                              });
-                            },
-                          ),
-                          title: Text(item['name']),
-                          subtitle: Text('Quantity: ${item['quantity']}'),
-                          trailing: Text('\$${item['price']}'),
-                        );
-                      },
-                    ),
-                  ),
-
-                  Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total: \Rs. ${orderItems['totalAmount']}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          selectedOrder.resetOrder();
-                          globalservice.navigate(
-                              context, OrderTrackingScreen());
-                        },
-                        child: Text('Proceed to Payment'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
+    //print(selectedOrder.getOrder);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Order Summary'),
+      ),
+      body: Center(
+        child: FutureBuilder<void>(
+          future: selectedOrder.fetchOrderDetails(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return LoadingIndicator(
+                indicatorType: Indicator.ballRotateChase,
+                colors: const [Colors.blue],
+              );
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return doOperation(context, selectedOrder.orderDetails);
+              // return Text(
+              //     'Order Details: ${selectedOrder.orderDetails!.address}');
+            }
+          },
+        ),
+      ),
+    );
   }
 }

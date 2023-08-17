@@ -54,6 +54,7 @@ dependencies:
   step_progress_indicator: ^1.0.2
   http: ^0.13.3
   url_launcher: ^6.1.12
+  loading_indicator: ^3.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
