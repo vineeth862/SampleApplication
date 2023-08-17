@@ -70,9 +70,12 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
         future: orderRepo.createOrder(order),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return LoadingIndicator(
-              indicatorType: Indicator.ballRotateChase,
-              colors: const [Colors.blue],
+            return Padding(
+              padding: const EdgeInsets.all(150.0),
+              child: LoadingIndicator(
+                indicatorType: Indicator.ballPulse,
+                colors: [Theme.of(context).colorScheme.primary],
+              ),
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -235,9 +238,13 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           future: selectedOrder.fetchOrderDetails(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return LoadingIndicator(
-                indicatorType: Indicator.ballRotateChase,
-                colors: const [Colors.blue],
+              return Padding(
+                padding: const EdgeInsets.all(150.0),
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballPulse,
+                  colors: [Theme.of(context).colorScheme.primary],
+                  strokeWidth: 10,
+                ),
               );
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
