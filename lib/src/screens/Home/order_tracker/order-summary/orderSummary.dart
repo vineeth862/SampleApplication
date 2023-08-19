@@ -5,6 +5,7 @@ import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-repository/orderRepository.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 
 import '../../../../utils/Provider/selected_order_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -57,7 +58,6 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
     double total = 0.0;
 
     for (var item in orderItems['items']) {
-      print(item);
       total += int.parse(item['price']); //* item['quantity'];
     }
     setState(() {
@@ -214,7 +214,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
               ElevatedButton(
                 onPressed: () {
                   selectedOrder.resetOrder();
-                  globalservice.navigate(context, OrderTrackingScreen());
+                  globalservice.navigate(context, PaymentScreeen());
                 },
                 child: Text('Proceed to Payment'),
               ),

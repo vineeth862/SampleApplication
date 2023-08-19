@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/home.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-summary/orderSummary.dart';
@@ -143,7 +145,13 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 20),
                             ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                globalservice.navigate(
+                                    context,
+                                    HomePage(
+                                      index: 2,
+                                    ));
+                              },
                               icon: const Icon(
                                 Icons.badge,
                                 size: 20,

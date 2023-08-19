@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/utils/Provider/address_provider.dart';
+import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
@@ -24,6 +25,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => SelectedTestState()),
     ChangeNotifierProvider(create: (_) => SelectedOrderState()),
     ChangeNotifierProvider(create: (_) => AppState()),
+    ChangeNotifierProvider(create: (_) => LoadingProvider()),
   ], child: const MyApp()));
 }
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Sample Application',
       theme: theme,
       themeMode: ThemeMode.light,
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

@@ -15,13 +15,13 @@ import '../../utils/helper_widgets/slot-booking-card.dart';
 import 'order_tracker/step1/step1.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key, this.index});
+  int? index;
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   bool shouldCallInit = true;
   HomeService homeService = HomeService();
   GlobalService globalservice = GlobalService();
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   String postalCode = "";
   String Locality = "";
-  int _selectedIndex = 1;
+  int selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -42,7 +42,13 @@ class _HomePageState extends State<HomePage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
+    });
+  }
+
+  void returnedFromOtherScreen(int index) {
+    setState(() {
+      selectedIndex = index;
     });
   }
 
@@ -77,7 +83,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //final appState = context.read<AppState>();
     //final appStates = Provider.of<AppState>(context);
-
+    if (widget.index != null) {
+      setState(() {
+        selectedIndex = int.parse(widget.index.toString());
+        widget.index = null;
+      });
+    }
     final selectedTest = Provider.of<SelectedTestState>(context);
     return SafeArea(
         child: Scaffold(
@@ -114,7 +125,7 @@ class _HomePageState extends State<HomePage> {
       // ),
       body: Stack(
         children: [
-          _widgetOptions.elementAt(_selectedIndex),
+          _widgetOptions.elementAt(selectedIndex),
           Positioned(
             bottom: 100,
             right: 0,
@@ -167,7 +178,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Order Tracker',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary,
         onTap: _onItemTapped,
       ),

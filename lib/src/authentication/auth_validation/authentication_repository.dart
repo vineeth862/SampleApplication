@@ -13,7 +13,7 @@ class AuthenticationRepository extends GetxController {
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
+    //firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
   }
 
@@ -22,7 +22,7 @@ class AuthenticationRepository extends GetxController {
     print("redirecting now---------------------");
     user == null
         ? Get.offAll(() => const Welcomesignin())
-        : Get.offAll(() => const HomePage());
+        : Get.offAll(() => HomePage());
   }
 
   Future<void> PhoneNumberAuth(String MobileNumber) async {
@@ -68,6 +68,6 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> logout() async {
     await _auth.signOut();
-    Get.offAll(() => const HomePage());
+    Get.offAll(() => HomePage());
   }
 }
