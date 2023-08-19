@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../screens/Home/models/test/test.dart';
 
 class SelectedTestState with ChangeNotifier {
-  final List<Test> selectedTest = [];
+  List<Test> selectedTest = [];
   bool _detailExpanded = false;
 
   List<Test> get getSelectedTest {
@@ -20,6 +20,14 @@ class SelectedTestState with ChangeNotifier {
     notifyListeners();
   }
 
+  void removeAllTest() {
+    this.selectedTest.clear();
+    print(selectedTest);
+    selectedTest = [];
+    // setDetailExpanded(false);
+    notifyListeners();
+  }
+
   bool get isDetailExpanded {
     return _detailExpanded;
   }
@@ -31,5 +39,6 @@ class SelectedTestState with ChangeNotifier {
 
   void setDetailExpanded(value) {
     _detailExpanded = value;
+    notifyListeners();
   }
 }

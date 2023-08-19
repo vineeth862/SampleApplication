@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step2/step2-screen.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../step3/step3.dart';
@@ -20,7 +19,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
   String selectedAdress = "";
   @override
   Widget build(BuildContext context) {
-    final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     final screen = StepTwoScreen(
       addressChanged: (address) {
         setState(() {

@@ -22,7 +22,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
   @override
   Widget build(BuildContext context) {
     final widget = StepOneScreen();
-    final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/booked.dart';
@@ -25,8 +24,9 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
   late Booked booked;
   @override
   Widget build(BuildContext context) {
-    final selectedTest = Provider.of<SelectedTestState>(context);
-    final selectedOrder = Provider.of<SelectedOrderState>(context);
+    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
+    final selectedOrder =
+        Provider.of<SelectedOrderState>(context, listen: true);
     final screen = StepThreeScreen(
       slotSelected: (date, time) {
         setState(() {
@@ -104,11 +104,13 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                       title: "Collection at",
                       content: selectedslot,
                       hyperLink: false,
-                      buttonClicked: () {
+                      buttonClicked: () async {
                         order.Order orderObject = selectedOrder.getOrder;
                         if (selectedslot.isNotEmpty) {
                           orderObject.booked = booked;
                           selectedOrder.setOrder = orderObject;
+
+                          await selectedOrder.docInIt();
                           this
                               .globalservice
                               .navigate(context, OrderSummaryPage());

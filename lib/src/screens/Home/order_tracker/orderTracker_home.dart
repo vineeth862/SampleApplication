@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/order-repository/orderRepository.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 
 import '../../../authentication/user_repository.dart';
 import '../../../global_service/global_service.dart';
+import '../../../utils/Provider/selected_order_provider.dart';
 import '../models/test/test.dart';
 import 'orderTracker_progress.dart';
 
@@ -22,12 +22,16 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   // List items = List.generate(4, (index) => ' ');
   bool isLoading = true;
   GlobalService globalservice = GlobalService();
+  late SelectedOrderState selectedOrder;
+  late LoadingProvider loadingProvider;
   List<Order> orders = [];
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
-    final getOrder = await OrderRepository().fetchAllOrders(orderIds);
+    final getOrder = await selectedOrder.fetchAllOrders(orderIds);
+
     setState(() {
       orders = getOrder;
+      loadingProvider.stopLoading();
     });
   }
 
@@ -45,20 +49,19 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
 
   @override
   void initState() {
-    this.loadData();
+    Future.delayed(Duration.zero, () {
+      loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+      loadingProvider.startLoading();
+      this.loadData();
+    });
+
     // TODO: implement initState
     super.initState();
-    final loadingProvider =
-        Provider.of<LoadingProvider>(context, listen: false);
-    loadingProvider.startLoading();
-
-    Future.delayed(Duration(seconds: 1), () {
-      loadingProvider.stopLoading();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    selectedOrder = Provider.of<SelectedOrderState>(context);
     //CHNAGE THIS LOGIC IN FUTURE
     final loadingProvider = Provider.of<LoadingProvider>(context);
     return loadingProvider.isLoading
