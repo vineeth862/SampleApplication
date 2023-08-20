@@ -25,8 +25,8 @@ class _ExploreState extends State<Explore> {
 
   @override
   build(BuildContext context) {
-    final searchState = Provider.of<SearchListState>(context);
-    final appStates = Provider.of<AppState>(context);
+    //final searchState = Provider.of<SearchListState>(context);
+    //final appStates = Provider.of<AppState>(context);
     final myController = Get.find<UserCurrentLocation>();
     return Container(
       width: double.infinity,

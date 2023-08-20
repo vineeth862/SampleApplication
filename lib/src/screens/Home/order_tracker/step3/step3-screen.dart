@@ -3,11 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/Provider/selected_order_provider.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart'
+    as order;
 
 class StepThreeScreen extends StatefulWidget {
   final screen = _StepThreeScreen();
   StepThreeScreen({super.key, required this.slotSelected});
-  Function(DateTime date, TimeOfDay time) slotSelected;
+  Function(DateTime date, TimeOfDay? time) slotSelected;
 
   @override
   State<StepThreeScreen> createState() => _StepThreeScreen();
@@ -22,8 +24,34 @@ class _StepThreeScreen extends State<StepThreeScreen> {
   @override
   void initState() {
     super.initState();
+    final selectedOrder =
+        Provider.of<SelectedOrderState>(context, listen: false);
+
+    order.Order orderObject = selectedOrder.getOrder;
+
+    bool dateTimePresent = orderObject.booked?.bookedDate != null;
+
     selectedDate = DateTime.now();
     selectedTime = TimeOfDay.now();
+    //Future.delayed(Duration(seconds: 1));
+    if (dateTimePresent) {
+      String datePresent = orderObject.booked!.bookedDate.toString();
+      String timePresent = orderObject.booked!.bookedSlot.toString();
+      selectedDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(datePresent);
+      selectedTime = TimeOfDay(
+          hour: int.parse(timePresent.split(":")[0]),
+          minute: int.parse(timePresent.split(":")[1]));
+      //selectedTime = TimeOfDay(hour: 00, minute: 00);
+      Future.delayed(Duration.zero, () {
+        _selectDate(selectedDate!);
+      });
+      Future.delayed(Duration.zero, () {
+        selectedTime = TimeOfDay(
+            hour: int.parse(timePresent.split(":")[0]),
+            minute: int.parse(timePresent.split(":")[1]));
+        _selectTime(selectedTime!);
+      });
+    }
   }
 
   void _showTimePicker() async {
@@ -48,7 +76,9 @@ class _StepThreeScreen extends State<StepThreeScreen> {
   void _selectDate(DateTime date) {
     setState(() {
       selectedDate = date;
-      widget.slotSelected(selectedDate!, selectedTime!);
+      selectedTime = null;
+      ;
+      widget.slotSelected(selectedDate!, selectedTime);
     });
   }
 
@@ -151,10 +181,12 @@ class _StepThreeScreen extends State<StepThreeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    selectedOrder = Provider.of<SelectedOrderState>(context);
+    final selectedOrder =
+        Provider.of<SelectedOrderState>(context, listen: true);
+    //order.Order orderObject = selectedOrder.getOrder;
 
     final List<DateTime> nextSixDates = List<DateTime>.generate(
-      5,
+      7,
       (index) => DateTime.now().add(Duration(days: index)),
     );
     final List<TimeOfDay> availableTimes = List<TimeOfDay>.generate(

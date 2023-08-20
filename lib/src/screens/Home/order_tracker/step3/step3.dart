@@ -27,24 +27,41 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     final selectedOrder =
         Provider.of<SelectedOrderState>(context, listen: true);
+    order.Order orderObject = selectedOrder.getOrder;
+
     final screen = StepThreeScreen(
       slotSelected: (date, time) {
-        setState(() {
-          selectedslot = date.year.toString() +
-              "-" +
-              date.month.toString() +
-              "-" +
-              date.day.toString() +
-              "   " +
-              time.hour.toString() +
-              " : " +
-              "00";
-          booked = Booked(
-              bookedDate: date.toString(),
-              bookedSlot: time.toString(),
-              slot: selectedslot);
-        });
-        // print(time);
+        if (time != null) {
+          setState(() {
+            selectedslot = date.year.toString() +
+                "-" +
+                date.month.toString() +
+                "-" +
+                date.day.toString() +
+                "   " +
+                time!.hour.toString() +
+                " : " +
+                "00";
+            booked = Booked(
+                bookedDate: date.toString(),
+                bookedSlot: time.hour.toString() + ":" + time.minute.toString(),
+                slot: selectedslot);
+          });
+          // print(time);
+        } else {
+          setState(() {
+            selectedslot = date.year.toString() +
+                "-" +
+                date.month.toString() +
+                "-" +
+                date.day.toString();
+
+            booked = Booked(
+                bookedDate: date.toString(),
+                bookedSlot: time.toString(),
+                slot: selectedslot);
+          });
+        }
       },
     );
     return Scaffold(

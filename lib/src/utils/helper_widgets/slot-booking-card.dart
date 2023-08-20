@@ -86,9 +86,11 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                             widget.expandDetail();
                             selectedTest.toggelDetailExpanded();
                           })
-                      : Text(
-                          widget.content,
-                          style: TextStyle(fontSize: 16.0),
+                      : Expanded(
+                          child: Text(
+                            widget.content,
+                            style: TextStyle(fontSize: 16.0),
+                          ),
                         ),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/explore/explore_exp.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.dart';
 import 'package:sample_application/src/screens/Home/home_service.dart';
@@ -36,7 +37,8 @@ class HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     ProfileScreen(),
-    Explore(),
+    //Explore(),
+    exploreExp(),
     OrderTrackerHome()
   ];
 
