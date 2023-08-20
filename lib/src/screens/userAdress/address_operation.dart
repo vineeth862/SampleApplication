@@ -19,6 +19,7 @@ class addressOperation extends StatefulWidget {
 class _addressOperationState extends State<addressOperation> {
   GlobalService globalservice = GlobalService();
   var Controller = Get.put((UserRepository()));
+  late LoadingProvider loadingProvider;
 
   concatenatedAddressList() async {
     List<Map<String, dynamic>> items2 =
@@ -66,11 +67,12 @@ class _addressOperationState extends State<addressOperation> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.delayed(Duration.zero, () {
+      loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+      loadingProvider.startLoading();
+      concatenatedAddressList();
+    });
 
-    final loadingProvider =
-        Provider.of<LoadingProvider>(context, listen: false);
-    loadingProvider.startLoading();
-    concatenatedAddressList();
     Future.delayed(Duration(seconds: 1), () {
       loadingProvider.stopLoading();
     });
@@ -103,7 +105,7 @@ class _addressOperationState extends State<addressOperation> {
     return loadingProvider.isLoading
         ? Center(
             child: Padding(
-              padding: const EdgeInsets.all(150.0),
+              padding: const EdgeInsets.all(160.0),
               child: LoadingIndicator(
                 indicatorType: Indicator.ballPulse,
                 colors: [Theme.of(context).colorScheme.primary],

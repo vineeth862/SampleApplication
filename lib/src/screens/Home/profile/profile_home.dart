@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/explore/explore_exp.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
@@ -288,7 +289,7 @@ class ProfileScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle edit profile button press
-                  globalservice.navigate(context, OrderSummaryPage());
+                  globalservice.navigate(context, exploreExp());
                 },
                 child: const Text('Order Summary'),
               ),
