@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 
 import '../../screens/Home/models/order/order.dart' as orders;
+import '../../screens/Home/models/status/status.dart';
 
 class SelectedOrderState extends ChangeNotifier {
   final _db = FirebaseFirestore.instance;
   orders.Order order = orders.Order();
+  Status status = Status();
   static DocumentReference<Map<String, dynamic>>? document;
   get getOrder {
     return order;
+  }
+
+  get getStatus {
+    return status;
   }
 
   set setOrder(orders.Order order) {
@@ -54,5 +60,14 @@ class SelectedOrderState extends ChangeNotifier {
       }).toList();
     }
     return [];
+  }
+
+  Future<String> fetchStatus(statusCode) async {
+    final statusObj = await _db
+        .collection("masterData")
+        .where("statusCode", isEqualTo: statusCode)
+        .get();
+    status = Status.fromJson(statusObj.docs.first.data());
+    return "";
   }
 }

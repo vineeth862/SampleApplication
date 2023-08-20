@@ -1,7 +1,13 @@
 import "package:flutter/material.dart";
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
+
+import '../../../utils/Provider/loading_provider.dart';
+import '../../../utils/Provider/selected_order_provider.dart';
+import '../models/status/status.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
   Order? order;
@@ -14,8 +20,36 @@ class OrderTrackingScreen extends StatefulWidget {
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   GlobalService globalservice = GlobalService();
   Order? order;
-  int _index = 0;
+  Status? status = Status();
+  late SelectedOrderState selectedOrder;
+  late LoadingProvider loadingProvider;
+  int step = 0;
+  int currentStep = 0;
+  int statusCode = 0;
   _OrderTrackingScreenState({this.order});
+  loadData() async {
+    await selectedOrder.fetchStatus(order!.statusCode);
+    setState(() {
+      status = selectedOrder.getStatus;
+      step = status!.step!.toInt();
+      statusCode = status!.step!.toInt();
+      currentStep = step;
+      loadingProvider.stopLoading();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+      selectedOrder = Provider.of<SelectedOrderState>(context, listen: false);
+      loadingProvider.startLoading();
+      this.loadData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,15 +106,18 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
               controlsBuilder: (context, controller) {
                 return const SizedBox.shrink();
               },
-              currentStep: _index,
+              currentStep: currentStep,
               onStepTapped: (int index) {
                 setState(() {
-                  _index = index;
+                  if (index <= step) {
+                    currentStep = index;
+                  }
+                  // _index = index;
                 });
               },
               steps: <Step>[
                 Step(
-                  isActive: _index >= 0,
+                  isActive: step >= 0,
                   title: Text('Order Placed'),
                   content: Container(
                     alignment: Alignment.centerLeft,
@@ -95,8 +132,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                 ),
                 Step(
-                  isActive: _index >= 1,
-                  title: Text('Carrier Partner Accepted'),
+                  isActive: step >= 1,
+                  title: Text('Payment Status'),
                   content: Container(
                     alignment: Alignment.centerLeft,
                     child: Column(
@@ -114,8 +151,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                 ),
                 Step(
-                  isActive: _index >= 2,
-                  title: Text('Collection Collected'),
+                  isActive: step >= 2,
+                  title: Text('Carrier Status'),
                   content: Container(
                     alignment: Alignment.centerLeft,
                     child: Column(
@@ -129,8 +166,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                 ),
                 Step(
-                  isActive: _index >= 3,
-                  title: Text('Sample Reached To Lab'),
+                  isActive: step >= 3,
+                  title: Text('Sample Status'),
                   content: Container(
                     alignment: Alignment.centerLeft,
                     child: Column(
@@ -148,8 +185,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                 ),
                 Step(
-                  isActive: _index >= 4,
-                  title: Text('download report'),
+                  isActive: step >= 4,
+                  title: Text('Report Status'),
                   content: Container(
                     alignment: Alignment.centerLeft,
                     child: Column(

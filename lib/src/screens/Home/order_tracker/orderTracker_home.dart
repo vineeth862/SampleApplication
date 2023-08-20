@@ -24,7 +24,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   GlobalService globalservice = GlobalService();
   late SelectedOrderState selectedOrder;
   late LoadingProvider loadingProvider;
-  List<Order> orders = [];
+  List<dynamic> orders = [];
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
     final getOrder = await selectedOrder.fetchAllOrders(orderIds);
@@ -38,7 +38,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   void navigate(Order order, context) {
     if (order.statusCode == 1) {
       this.globalservice.navigate(context, PaymentScreeen());
-    } else if (order.statusCode == 2) {
+    } else {
       this.globalservice.navigate(
           context,
           OrderTrackingScreen(
@@ -109,7 +109,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height *
-                          0.75, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
+                          0.84, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: ListView.builder(
                         itemCount: orders

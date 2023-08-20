@@ -22,9 +22,6 @@ class SelectedTestState with ChangeNotifier {
 
   void removeAllTest() {
     this.selectedTest.clear();
-    print(selectedTest);
-    selectedTest = [];
-    // setDetailExpanded(false);
     notifyListeners();
   }
 

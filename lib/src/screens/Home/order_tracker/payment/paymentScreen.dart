@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../utils/Provider/selected_order_provider.dart';
+import '../../../../utils/Provider/selected_test_provider.dart';
+import '../../models/order/order.dart';
 
 class PaymentScreeen extends StatefulWidget {
   @override
@@ -6,16 +11,26 @@ class PaymentScreeen extends StatefulWidget {
 }
 
 class _MyPaymentScreeen extends State<PaymentScreeen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  String _payment = "do Payment";
+  late SelectedOrderState selectedOrder;
+  late SelectedTestState selectedTest;
+  void _doPayment() async {
+    _payment = "Payment Successfull";
+    Order order = selectedOrder.getOrder;
+    order.statusCode = 2;
+    order.statusLabel = "Payment Successfull";
+    selectedOrder.setOrder = order;
+    await selectedOrder.createOrder();
     setState(() {
-      _counter++;
+      selectedOrder.resetOrder();
+      selectedTest.removeAllTest();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    selectedOrder = Provider.of<SelectedOrderState>(context);
+    selectedTest = Provider.of<SelectedTestState>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Payment Screen'),
@@ -28,16 +43,16 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
               'Make Payment here',
             ),
             Text(
-              '$_counter',
+              '$_payment',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: _doPayment,
+        tooltip: 'pay',
+        child: Icon(Icons.payment_outlined),
       ),
     );
   }

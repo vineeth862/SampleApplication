@@ -74,8 +74,6 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                 selectedOrder.setOrder = order;
                 await selectedOrder.createOrder();
 
-                selectedTest.removeAllTest();
-                selectedOrder.resetOrder();
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => PaymentScreeen()));
                 // globalservice.navigate(context, PaymentScreeen());
