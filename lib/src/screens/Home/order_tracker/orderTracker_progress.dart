@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
@@ -96,109 +95,143 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "OrderID: " + widget.order!.orderNumber.toString(),
-                style: Theme.of(context).textTheme.titleLarge,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text("OrderID: "),
+                    subtitle: Text(order!.orderNumber.toString()),
+                  ),
+                  ListTile(
+                    title: Text("Order Status: "),
+                    subtitle: Text(order!.statusLabel.toString()),
+                  )
+                ],
               ),
             ),
             SizedBox(height: 5),
-            Stepper(
-              controlsBuilder: (context, controller) {
-                return const SizedBox.shrink();
-              },
-              currentStep: currentStep,
-              onStepTapped: (int index) {
-                setState(() {
-                  if (index <= step) {
-                    currentStep = index;
-                  }
-                  // _index = index;
-                });
-              },
-              steps: <Step>[
-                Step(
-                  isActive: step >= 0,
-                  title: Text('Order Placed'),
-                  content: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text("Order Created Date :"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        )
-                      ],
+            Expanded(
+              child: Stepper(
+                controlsBuilder: (context, controller) {
+                  return const SizedBox.shrink();
+                },
+                currentStep: currentStep,
+                onStepTapped: (int index) {
+                  setState(() {
+                    if (index <= step) {
+                      currentStep = index;
+                    }
+                    // _index = index;
+                  });
+                },
+                steps: <Step>[
+                  Step(
+                    isActive: step >= 0,
+                    title: Text('Order Placed'),
+                    content: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text("Order Created Date :"),
+                            subtitle: Text(order!.createdDate.toString()),
+                          ),
+                          ListTile(
+                            title: Text("Booked Slot Time :"),
+                            subtitle: Text(order!.booked!.slot.toString()),
+                          ),
+                          ListTile(
+                            title: Text("Booked Address :"),
+                            subtitle: Text(order!.address.toString()),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Step(
-                  isActive: step >= 1,
-                  title: Text('Payment Status'),
-                  content: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text("carrier Name:"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        ),
-                        ListTile(
-                          title: Text("contact Carrier:"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        )
-                      ],
+                  Step(
+                    isActive: step >= 1,
+                    title: Text('Payment Status'),
+                    content: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          // ListTile(
+                          //   title: Text("Transaction Status:"),
+                          //   subtitle: Text(order!.statusLabel.toString()),
+                          // ),
+                          ListTile(
+                            title: Text("Total Amount:"),
+                            subtitle: Text(order!.totalPrice.toString()),
+                          ),
+                          ListTile(
+                            title: Text("Transaction Time:"),
+                            subtitle: Text("need To update"),
+                          ),
+                          ListTile(
+                            title: Text("Transaction Id:"),
+                            subtitle: Text("need to update"),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Step(
-                  isActive: step >= 2,
-                  title: Text('Carrier Status'),
-                  content: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text("sample name:"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        )
-                      ],
+                  Step(
+                    isActive: step >= 2,
+                    title: Text('Carrier Status'),
+                    content: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          // ListTile(
+                          //   title: Text("Carrier Status:"),
+                          //   subtitle: Text(order!.statusLabel.toString()),
+                          // ),
+                          ListTile(
+                            title: Text("Carrier Name:"),
+                            subtitle: Text(order!.carrierName.toString()),
+                          ),
+                          ListTile(
+                            title: Text("Carrier mob:"),
+                            subtitle: Text(order!.carrierCode.toString()),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Step(
-                  isActive: step >= 3,
-                  title: Text('Sample Status'),
-                  content: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text("lab Name:"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        ),
-                        ListTile(
-                          title: Text("recieved Time:"),
-                          subtitle: Text(order!.createdDate.toString()),
-                        )
-                      ],
+                  Step(
+                    isActive: step >= 3,
+                    title: Text('Sample Status'),
+                    content: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          // ListTile(
+                          //   title: Text("Sample Status:"),
+                          //   subtitle: Text(order!.statusLabel.toString()),
+                          // ),
+                          ListTile(
+                            title: Text(" Sample Collected Date:"),
+                            subtitle: Text(order!.createdDate.toString()),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Step(
-                  isActive: step >= 4,
-                  title: Text('Report Status'),
-                  content: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        ListTile(
-                            leading: Icon(Icons.download),
-                            title: Text("download"))
-                      ],
+                  Step(
+                    isActive: step >= 4,
+                    title: Text('Report Status'),
+                    content: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          ListTile(
+                              leading: Icon(Icons.download),
+                              title: Text("download"))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             //OutlinedButton(onPressed: () {}, child: HomePage())
             Divider(

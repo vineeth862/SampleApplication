@@ -1,6 +1,7 @@
 // import 'package:sample_application/src/screens/Home/models/order/payment.dart';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sample_application/src/screens/Home/models/order/payment.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
 
 import 'booked.dart';
@@ -22,7 +23,7 @@ class Order {
   List<Test>? tests;
   Booked? booked;
   String? specificInstruction;
-  // Payment? payment;
+  Payment? payment;
   String? address;
 
   Order({
@@ -33,7 +34,7 @@ class Order {
     this.createdDate,
     this.orderNumber,
     this.patient,
-    // this.payment,
+    this.payment,
     this.self,
     this.specificInstruction,
     this.statusCode,
