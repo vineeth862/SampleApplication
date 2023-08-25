@@ -20,11 +20,13 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
     order.statusCode = 2;
     order.statusLabel = "Payment Successfull";
     selectedOrder.setOrder = order;
-    await selectedOrder.createOrder();
-    setState(() {
-      selectedOrder.resetOrder();
-      selectedTest.removeAllTest();
-    });
+    if (order.orderNumber != null) {
+      await selectedOrder.createOrder();
+      setState(() {
+        selectedOrder.resetOrder();
+        selectedTest.removeAllTest();
+      });
+    }
   }
 
   @override

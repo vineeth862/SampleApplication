@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/user/user.dart';
 import 'package:sample_application/src/screens/Home/profile/change_mobileNumber.dart';
 
 enum Gender { Male, Female, Other }
@@ -24,7 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   File? _profileImage;
   var items = ['Male', 'Female', 'Others', 'Not to disclose'];
-  Map<String, dynamic> sampleData = {};
+  // Map<String, dynamic> sampleData = {};
   //Gender _selectedGender = Gender.Male;
   String _selectedGender = "Male";
   @override
@@ -54,25 +55,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  Future<Map<String, dynamic>> getData() async {
-    Map<String, dynamic> sampleDatatemp =
-        await UserRepository.instance.getUserData();
+  Future<User> getData() async {
+    User sampleDatatemp = await UserRepository.instance.getUserData();
     setState(() {
-      _nameController = TextEditingController(text: sampleDatatemp['userName']);
-      if (sampleDatatemp['email'] != null) {
-        _emailController = TextEditingController(text: sampleDatatemp['email']);
+      _nameController = TextEditingController(text: sampleDatatemp.userName);
+      if (sampleDatatemp.email != null) {
+        _emailController = TextEditingController(text: sampleDatatemp.email);
       } else {
         _emailController = TextEditingController();
       }
       _mobilenumbercontroller =
-          TextEditingController(text: sampleDatatemp['mobile']);
-      if (sampleDatatemp['gender'] != null) {
-        _selectedGender = sampleDatatemp['gender'];
+          TextEditingController(text: sampleDatatemp.mobile);
+      if (sampleDatatemp.gender != null) {
+        _selectedGender = sampleDatatemp.gender.toString();
       }
     });
 
     //setState(() {
-    sampleData = sampleDatatemp;
+    // sampleData = sampleDatatemp;
     //});
     return sampleDatatemp;
   }

@@ -5,6 +5,7 @@ import '../../../../../global_service/global_service.dart';
 import '../../../../../utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/test_card.dart';
+import '../../../models/test/test.dart';
 import '../../../models/test/testcard.dart';
 import '../../../order_tracker/step1/step1.dart';
 import '../../explore.service.dart';
@@ -50,6 +51,14 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
     final selectedTest = Provider.of<SelectedTestState>(context);
     List<TestCard> list = searchState.getTestCardList;
     bool _isInputEmpty = true;
+
+    bool isTestSelected(Test test) {
+      return (selectedTest.getSelectedTest
+              .where((element) => element.hf_test_code == test.hf_test_code)
+              .length >
+          0);
+    }
+
     return Scaffold(
       body: CustomScrollView(
         controller: _scrollController,
@@ -146,14 +155,13 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                     description: list[index].test.toString(),
                     labName: list[index].labName,
                     price: list[index].price,
-                    isTestSelected: !selectedTest.getSelectedTest
-                        .contains(list[index]?.testObject),
+                    isTestSelected: isTestSelected(list[index].testObject),
                     tapOnButton: (test) {
                       if (selectedTest.getSelectedTest
-                          .contains(list[index]?.testObject))
-                        selectedTest.removeTest(list[index]?.testObject);
+                          .contains(list[index].testObject))
+                        selectedTest.removeTest(list[index].testObject);
                       else
-                        selectedTest.addTest(list[index]?.testObject);
+                        selectedTest.addTest(list[index].testObject);
 
                       globalservice.navigate(context, StepOneToBookTest());
 

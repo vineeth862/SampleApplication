@@ -60,16 +60,16 @@ class TestCardWidget extends StatelessWidget {
                       //   Icons.add,
                       //   size: 20,
                       // ),
-                      child: isTestSelected ? Text("BOOK") : Text("BOOKED"),
+                      child: isTestSelected ? Text("BOOKED") : Text("BOOK"),
 
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(0),
                         foregroundColor: isTestSelected
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.background,
-                        backgroundColor: isTestSelected
-                            ? Theme.of(context).colorScheme.onPrimary
+                            ? Theme.of(context).colorScheme.background
                             : Theme.of(context).colorScheme.primary,
+                        backgroundColor: isTestSelected
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               8.0), // Adjust the border radius as needed

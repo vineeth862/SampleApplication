@@ -25,7 +25,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       tests: (json['tests'] as List<dynamic>?)
           ?.map((e) => Test.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalPrice: json['totalPrice'] as int?,
+      totalPrice: json['totalPrice'],
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),

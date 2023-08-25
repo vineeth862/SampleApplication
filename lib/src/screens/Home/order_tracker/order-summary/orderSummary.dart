@@ -27,8 +27,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
 
   Future<String> loadData() async {
     Order order = await selectedOrder.getOrder;
-    var totalAmmount = 0;
-    order.totalPrice = totalAmmount;
+    double totalAmmount = 0;
 
     orderItems = {
       'orderNumber': order.orderNumber,
@@ -42,7 +41,10 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
       'address': order.address,
       'slot': order.booked?.slot
     };
+    order.totalPrice = totalAmmount;
+    order.createdDate = new DateTime.now().toString();
     selectedOrder.setOrder = order;
+
     return "sccess";
   }
 

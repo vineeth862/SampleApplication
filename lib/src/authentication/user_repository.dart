@@ -67,7 +67,10 @@ class UserRepository extends GetxController {
     String userKey = globalservice.getCurrentUserKey();
 
     List orders = await this.getOrderIds();
-    orders.add(orderId);
+    if (orders.where((order) => order == orderId).length == 0) {
+      orders.add(orderId);
+    }
+
     //need to change this
     await _db
         .collection("user")
@@ -113,20 +116,17 @@ class UserRepository extends GetxController {
   getAdress() async {
     String userKey = globalservice.getCurrentUserKey();
     final data = await _db.collection("user").doc(userKey).get();
-    //print(data.data()?.containsKey("locations"));
-    //print(data.data()?['locations']);
+
     List<dynamic> locationArray = data.data()?['locations'];
-    //print(locationArray);
+
     if (locationArray != null && locationArray is List) {
-      // Assign the type List<Map<String, dynamic>> to the array
       List<Map<String, dynamic>> locationList =
           List<Map<String, dynamic>>.from(locationArray);
-      //print(locationList.runtimeType);
+
       return locationList;
     } else {
       print("Document does not exist.");
     }
-    //return items1;
   }
 
   deleteAddress(index) async {
@@ -139,22 +139,13 @@ class UserRepository extends GetxController {
     _db.collection("user").doc(userKey).update({"locations": locationArray});
   }
 
-  Future<Map<String, dynamic>> getUserData() async {
+  Future<User> getUserData() async {
     String userKey = globalservice.getCurrentUserKey();
 
-    Map<String, dynamic> data = {};
     final _db = FirebaseFirestore.instance;
     DocumentSnapshot<Map<String, dynamic>> userdata =
         await _db.collection("user").doc(userKey).get();
-    data['userName'] = userdata.data()?['userName'];
-    data['email'] = userdata.data()?['email'];
-    data['gender'] = userdata.data()?['gender'];
-    String mobile = userdata.data()?['mobile'];
-    data['mobile'] = mobile.substring(3);
-    // data.add(userdata.data()?['userName']);
-    // data.add(userdata.data()?['email']);
-    // data.add(userKey);
-    print(data);
-    return data;
+
+    return User.fromJson(userdata.data() as Map<String, dynamic>);
   }
 }

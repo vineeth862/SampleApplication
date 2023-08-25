@@ -9,6 +9,7 @@ import 'package:sample_application/src/utils/helper_widgets/test_card.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
+import '../../../models/test/test.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class FilteredTestCardlistPage extends StatefulWidget {
@@ -26,12 +27,21 @@ class FilteredTestCardlistPage extends StatefulWidget {
 class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
+
   bool expandDetails = false;
+
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
     List<TestCard> list = searchState.getTestCardList;
+    bool isTestSelected(Test test) {
+      return (selectedTest.getSelectedTest
+              .where((element) => element.hf_test_code == test.hf_test_code)
+              .length >
+          0);
+    }
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
@@ -56,8 +66,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                         description: list[index].test.toString(),
                         labName: list[index].labName,
                         price: list[index].price,
-                        isTestSelected: !selectedTest.getSelectedTest
-                            .contains(list[index]?.testObject),
+                        isTestSelected: isTestSelected(list[index]!.testObject),
                         tapOnButton: (test) {
                           if (selectedTest.getSelectedTest
                               .contains(list[index]?.testObject))

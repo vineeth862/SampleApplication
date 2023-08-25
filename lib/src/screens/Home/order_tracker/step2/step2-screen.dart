@@ -35,6 +35,11 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
           widget.addressChanged(address);
           Order order = selectedOrder!.getOrder;
           order.address = widget.selectedAdress;
+          // int totalAmount = 0;
+          // order.tests?.forEach((element) {
+          //   totalAmount += int.parse(element.price);
+          // });
+          // order.totalPrice = totalAmount;
           selectedOrder!.setOrder = order;
         });
       },

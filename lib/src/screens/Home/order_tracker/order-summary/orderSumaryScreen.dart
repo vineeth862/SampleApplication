@@ -13,7 +13,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     double total = 0.0;
 
     for (var item in widget.orderItems['items']) {
-      print(item);
       total += int.parse(item['price']); //* item['quantity'];
     }
     setState(() {
