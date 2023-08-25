@@ -3,10 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../../../../../global_service/global_service.dart';
 import '../../../../../utils/Provider/search_provider.dart';
+import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/test_card.dart';
+import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
 import '../../../models/test/testcard.dart';
+import '../../../order_tracker/payment/paymentScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 import '../../explore.service.dart';
 import 'card_detail_page.dart';
@@ -49,6 +52,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
     List<TestCard> list = searchState.getTestCardList;
     bool _isInputEmpty = true;
 
@@ -163,7 +167,13 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                       else
                         selectedTest.addTest(list[index].testObject);
 
-                      globalservice.navigate(context, StepOneToBookTest());
+                      Order order = selectedOrder.getOrder;
+
+                      Widget widget = order.statusCode == 1
+                          ? PaymentScreeen()
+                          : StepOneToBookTest();
+
+                      globalservice.navigate(context, widget);
 
                       if (selectedTest.getSelectedTest.isEmpty) {
                         selectedTest.setDetailExpanded(false);

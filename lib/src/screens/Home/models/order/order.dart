@@ -13,7 +13,7 @@ class Order {
   String? orderNumber;
   int? carrierCode;
   String? carrierName;
-  int? statusCode;
+  int? statusCode = 0;
   String? statusLabel;
   String? createdDate;
   double? totalPrice;

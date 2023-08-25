@@ -20,7 +20,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
           : User.fromJson(json['patient'] as Map<String, dynamic>),
       self: json['self'] as bool?,
       specificInstruction: json['specificInstruction'] as String?,
-      statusCode: json['statusCode'] as int?,
+      statusCode: json['statusCode'],
       statusLabel: json['statusLabel'] as String?,
       tests: (json['tests'] as List<dynamic>?)
           ?.map((e) => Test.fromJson(e as Map<String, dynamic>))

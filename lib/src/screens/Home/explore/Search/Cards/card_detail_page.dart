@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
+import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
+import '../../../models/order/order.dart';
+import '../../../order_tracker/payment/paymentScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class CardDetailPage extends StatefulWidget {
@@ -22,6 +25,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
     List<dynamic> list = searchState.getTestCardList;
     return SafeArea(
       child: Scaffold(
@@ -310,10 +314,13 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           content: "view details",
                           hyperLink: true,
                           buttonClicked: () {
-                            GlobalService().navigate(
-                              context,
-                              StepOneToBookTest(),
-                            );
+                            Order order = selectedOrder.getOrder;
+
+                            Widget widget = order.statusCode == 1
+                                ? PaymentScreeen()
+                                : StepOneToBookTest();
+
+                            globalservice.navigate(context, widget);
                           },
                           expandDetail: () {
                             setState(() {

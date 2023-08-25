@@ -6,10 +6,13 @@ import 'package:sample_application/src/screens/Home/models/test/testcard.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/screens/Home/explore/explore.service.dart';
 import 'package:sample_application/src/utils/helper_widgets/test_card.dart';
+import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
+import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
+import '../../../order_tracker/payment/paymentScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class FilteredTestCardlistPage extends StatefulWidget {
@@ -34,6 +37,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
     List<TestCard> list = searchState.getTestCardList;
     bool isTestSelected(Test test) {
       return (selectedTest.getSelectedTest
@@ -119,10 +123,13 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                         content: "view details",
                         hyperLink: true,
                         buttonClicked: () {
-                          GlobalService().navigate(
-                            context,
-                            StepOneToBookTest(),
-                          );
+                          Order order = selectedOrder.getOrder;
+
+                          Widget widget = order.statusCode == 1
+                              ? PaymentScreeen()
+                              : StepOneToBookTest();
+
+                          globalservice.navigate(context, widget);
                         },
                         expandDetail: () {
                           setState(() {
