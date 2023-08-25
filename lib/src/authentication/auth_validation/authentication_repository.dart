@@ -14,12 +14,12 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
     //firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    //ever(firebaseUser, _setInitialScreen);
+    _setInitialScreen(firebaseUser.value);
   }
 
   _setInitialScreen(User? user) {
     print(user);
-    print("redirecting now---------------------");
     user == null
         ? Get.offAll(() => const Welcomesignin())
         : Get.offAll(() => HomePage());
