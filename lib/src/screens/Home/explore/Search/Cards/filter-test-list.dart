@@ -62,35 +62,40 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.all(10),
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return TestCardWidget(
-                        title: list[index].name,
-                        description: list[index].test.toString(),
-                        labName: list[index].labName,
-                        price: list[index].price,
-                        isTestSelected: isTestSelected(list[index]!.testObject),
-                        tapOnButton: (test) {
-                          if (selectedTest.getSelectedTest
-                              .contains(list[index]?.testObject))
-                            selectedTest.removeTest(list[index]?.testObject);
-                          else
-                            selectedTest.addTest(list[index]?.testObject);
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
+                      child: TestCardWidget(
+                          title: list[index].labName,
+                          description: list[index].test.toString(),
+                          labName: list[index].name,
+                          price: list[index].price,
+                          isTestSelected:
+                              isTestSelected(list[index]!.testObject),
+                          tapOnButton: (test) {
+                            if (selectedTest.getSelectedTest
+                                .contains(list[index]?.testObject))
+                              selectedTest.removeTest(list[index]?.testObject);
+                            else
+                              selectedTest.addTest(list[index]?.testObject);
 
-                          globalservice.navigate(context, StepOneToBookTest());
+                            globalservice.navigate(
+                                context, StepOneToBookTest());
 
-                          if (selectedTest.getSelectedTest.isEmpty) {
-                            selectedTest.setDetailExpanded(false);
-                          }
-                        },
-                        tapOnCard: (value) {
-                          globalservice.navigate(
-                              context,
-                              CardDetailPage(
-                                test: list[index].testObject,
-                              ));
-                        });
+                            if (selectedTest.getSelectedTest.isEmpty) {
+                              selectedTest.setDetailExpanded(false);
+                            }
+                          },
+                          tapOnCard: (value) {
+                            globalservice.navigate(
+                                context,
+                                CardDetailPage(
+                                  test: list[index].testObject,
+                                ));
+                          }),
+                    );
                   },
                 ),
               ),

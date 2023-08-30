@@ -27,31 +27,37 @@ class TestCardWidget extends StatelessWidget {
         onTap: () {
           tapOnCard({title: title, description: description});
         },
-        child: Card(
-          elevation: 2.0,
-          shape: Theme.of(context).cardTheme.shape,
-          color: Theme.of(context).cardTheme.color,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+        child: Container(
+          // shape: Theme.of(context).cardTheme.shape,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: Color.fromARGB(255, 213, 213, 213).withOpacity(0.3)),
+
+              // color: Color.fromARGB(255, 255, 181, 71),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(35.0),
+                topRight: Radius.circular(25.0),
+              )),
+          // color: Theme.of(context).cardTheme.color,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                        child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    )),
+                    // const Spacer(),
+                    SizedBox(
+                      width: 10,
                     ),
-                    const Spacer(),
                     ElevatedButton(
                       onPressed: () {
                         tapOnButton("");
@@ -82,22 +88,22 @@ class TestCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16.0),
-                Text(
-                  labName.length > 20 ? labName : labName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+              ),
+              // const SizedBox(height: 16.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(
+                  labName,
                   softWrap: true,
-                  style: const TextStyle(
-                    fontSize: 10.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
+              ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
                   children: [
                     Icon(
                       Icons.access_time_outlined,
@@ -106,26 +112,58 @@ class TestCardWidget extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
-                    Text(description.length > 20
-                        ? description.substring(0, 20) + '...'
-                        : description),
+                    Text(
+                      description,
+                      softWrap: true,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                     const Spacer(),
                     Container(
-                      child: Text(price),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.currency_rupee_outlined,
+                            size: 14,
+                            weight: 50,
+                            color: const Color.fromARGB(255, 106, 105, 105),
+                          ),
+                          Text(price),
+                        ],
+                      ),
                     )
-                    // ListTile(
-                    //   leading: Icon(Icons.lock_clock_outlined),
-                    // )
                   ],
                 ),
-                const ListTile(
-                  enabled: true,
-                  contentPadding: EdgeInsets.all(0),
-                  title: Text("view more details"),
-                  textColor: Color.fromARGB(255, 255, 181, 71),
-                )
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                alignment: Alignment.center,
+                transformAlignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 255, 181, 71),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
+                    )),
+
+                child: Text(
+                  "View More Details",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(color: Colors.white),
+                ),
+                height: 50,
+                // color: Color.fromARGB(255, 255, 181, 71),
+              ),
+              // const ListTile(
+              //   enabled: true,
+              //   contentPadding: EdgeInsets.all(0),
+              //   title: Text("view more details"),
+              //   textColor: Color.fromARGB(255, 255, 181, 71),
+              // )
+            ],
           ),
         ),
       ),

@@ -154,38 +154,42 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return TestCardWidget(
-                    title: list[index].name,
-                    description: list[index].test.toString(),
-                    labName: list[index].labName,
-                    price: list[index].price,
-                    isTestSelected: isTestSelected(list[index].testObject),
-                    tapOnButton: (test) {
-                      if (selectedTest.getSelectedTest
-                          .contains(list[index].testObject))
-                        selectedTest.removeTest(list[index].testObject);
-                      else
-                        selectedTest.addTest(list[index].testObject);
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  child: TestCardWidget(
+                      title: list[index].name,
+                      description: list[index].test.toString(),
+                      labName: list[index].labName,
+                      price: list[index].price,
+                      isTestSelected: isTestSelected(list[index].testObject),
+                      tapOnButton: (test) {
+                        if (selectedTest.getSelectedTest
+                            .contains(list[index].testObject))
+                          selectedTest.removeTest(list[index].testObject);
+                        else
+                          selectedTest.addTest(list[index].testObject);
 
-                      Order order = selectedOrder.getOrder;
+                        Order order = selectedOrder.getOrder;
 
-                      Widget widget = order.statusCode == 1
-                          ? PaymentScreeen()
-                          : StepOneToBookTest();
+                        Widget widget = order.statusCode == 1
+                            ? PaymentScreeen()
+                            : StepOneToBookTest();
 
-                      globalservice.navigate(context, widget);
+                        globalservice.navigate(context, widget);
 
-                      if (selectedTest.getSelectedTest.isEmpty) {
-                        selectedTest.setDetailExpanded(false);
-                      }
-                    },
-                    tapOnCard: (value) {
-                      globalservice.navigate(
-                          context,
-                          CardDetailPage(
-                            test: list[index].testObject,
-                          ));
-                    });
+                        if (selectedTest.getSelectedTest.isEmpty) {
+                          selectedTest.setDetailExpanded(false);
+                        }
+                      },
+                      tapOnCard: (value) {
+                        globalservice.navigate(
+                            context,
+                            CardDetailPage(
+                              test: list[index].testObject,
+                            ));
+                      }),
+                );
               },
               childCount: list.length,
             ),

@@ -124,7 +124,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             Expanded(
                               child: ListTile(
                                 leading: Icon(Icons.currency_rupee,
-                                    size: 23, weight: 50, color: Colors.black),
+                                    size: 21, weight: 45, color: Colors.black),
                                 horizontalTitleGap: -18.0,
                                 title: Text(widget.test.price,
                                     textAlign: TextAlign.left,
@@ -133,7 +133,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         .labelLarge
                                         ?.copyWith(
                                             color: Colors.black,
-                                            fontSize: 20,
+                                            fontSize: 22,
                                             fontWeight: FontWeight.bold)),
                               ),
                             )
