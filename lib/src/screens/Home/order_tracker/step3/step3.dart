@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/booked.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step3/step3-screen.dart';
@@ -38,7 +39,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                 date.month.toString() +
                 "-" +
                 date.day.toString() +
-                "   " +
+                "  " +
                 time!.hour.toString() +
                 " : " +
                 "00";
@@ -123,7 +124,8 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                       hyperLink: false,
                       buttonClicked: () async {
                         order.Order orderObject = selectedOrder.getOrder;
-                        if (selectedslot.isNotEmpty) {
+
+                        if (selectedslot.split("  ").length == 2) {
                           orderObject.booked = booked;
                           selectedOrder.setOrder = orderObject;
 
@@ -131,6 +133,20 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                           this
                               .globalservice
                               .navigate(context, OrderSummaryPage());
+                        } else {
+                          Get.snackbar(
+                              "Info", "Please Select Both Date and Time",
+                              icon: Icon(
+                                Icons.warning_amber_rounded,
+                              ),
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .tertiaryContainer,
+                              dismissDirection: DismissDirection.horizontal,
+                              forwardAnimationCurve: ElasticInOutCurve(),
+                              duration: Duration(seconds: 2)
+                              //colorText: Theme.of(context).colorScheme.primary,
+                              );
                         }
                         // OrderSummaryPage()
                       },

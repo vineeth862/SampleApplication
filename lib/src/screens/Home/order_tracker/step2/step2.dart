@@ -91,7 +91,19 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                                 .navigate(context, StepThreeToBookTest());
                           } else {
                             Get.snackbar(
-                                "Info", "Please select any one address");
+                                "Info", "Please Select Any One Address",
+                                icon: Icon(
+                                  Icons.warning_amber_rounded,
+                                ),
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .tertiaryContainer,
+                                dismissDirection: DismissDirection.horizontal,
+                                forwardAnimationCurve: ElasticInOutCurve(),
+                                duration: Duration(seconds: 2),
+                                snackPosition: SnackPosition.TOP
+                                //colorText: Theme.of(context).colorScheme.primary,
+                                );
                           }
                         },
                         hyperLink: false,
