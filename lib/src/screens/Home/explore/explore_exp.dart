@@ -48,6 +48,8 @@ class _exploreExpState extends State<exploreExp> {
         SliverAppBar(
           backgroundColor: Color.fromARGB(255, 243, 242, 243),
           toolbarHeight: 70,
+          leading: null,
+          automaticallyImplyLeading: false,
           title: _isAppBarExpanded
               ? Row(
                   children: [

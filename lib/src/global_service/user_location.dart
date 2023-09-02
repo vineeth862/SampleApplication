@@ -8,6 +8,7 @@ class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
   RxString globalString = 'Fetching adress...'.obs;
   final appState = AppState();
+  Position? latAndLong;
   //final appStates = Provider.of<AppState>(context);
   String? postalCode;
   String? locality;
@@ -78,6 +79,7 @@ class UserCurrentLocation extends GetxController {
   loaddata() async {
     Position pos = await UserCurrentLocation.instance.determinePosition();
     //print(pos.latitude);
+    latAndLong = pos;
     List<Placemark> add = await UserCurrentLocation.instance.GetFullAdress(pos);
     print(add);
     Placemark place = add[0];

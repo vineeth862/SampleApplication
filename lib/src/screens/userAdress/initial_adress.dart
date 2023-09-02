@@ -3,7 +3,9 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/userAdress/add_address.dart';
 import 'package:sample_application/src/screens/userAdress/address_operation.dart';
+import 'package:sample_application/src/screens/userAdress/testing_location_picker.dart';
 import 'package:sample_application/src/utils/constants/textconstant.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
 class InitialAdress extends StatefulWidget {
   const InitialAdress({super.key});
@@ -89,7 +91,8 @@ class _InitialAdressState extends State<InitialAdress> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  globalservice.navigate(
+                      context, getCurrentLocation(title: "Vineeth"));
                 },
                 child: Container(
                   alignment: Alignment.bottomLeft,
