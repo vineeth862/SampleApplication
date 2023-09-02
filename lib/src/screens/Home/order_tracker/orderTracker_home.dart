@@ -242,7 +242,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(4.0),
-                                                child: Text(item.testname),
+                                                child: Text(item.testName),
                                               ),
                                             )),
                                     const Divider(

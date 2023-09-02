@@ -18,21 +18,24 @@ class SearchListState with ChangeNotifier {
 
   search(String value) async {
     filteredTests = [];
-
+    filteredLabs = [];
     if (value.isNotEmpty) {
       var testList = await FirebaseFirestore.instance
-          .collection('test')
-          .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
-          .where('testname',
-              isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
+          .collection('test2')
+          .where('displayName', isGreaterThanOrEqualTo: value.toUpperCase())
+          .where('displayName',
+              isLessThanOrEqualTo: '${value.toUpperCase()}\uf8ff')
           .get();
 
       var labList = await FirebaseFirestore.instance.collection('lab').get();
-
       if (testList.docs.isNotEmpty) {
-        filteredTests = testList.docs.map((e) {
-          return Test.fromJson(e.data() as Map<String, dynamic>);
-        }).toList();
+        Set<String> uniqueTets = Set();
+
+        for (var test in testList.docs) {
+          if (uniqueTets.add(Test.fromJson(test.data()).displayName)) {
+            filteredTests.add(Test.fromJson(test.data()));
+          }
+        }
       }
 
       // here we are filtering labs based on the input value and assigned to the filteredLabs.
@@ -55,14 +58,20 @@ class SearchListState with ChangeNotifier {
   searchTest(String value, String labCode) async {
     filteredTestCardList = [];
     var result = await FirebaseFirestore.instance
-        .collection('test')
+        .collection('test2')
         .where("labCode", isEqualTo: labCode)
-        .where('testname', isGreaterThanOrEqualTo: value.toUpperCase())
-        .where('testname', isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
+        .where('displayName', isGreaterThanOrEqualTo: value.toUpperCase())
+        .where('displayName',
+            isLessThanOrEqualTo: value.toUpperCase() + '\uf8ff')
         .get();
     if (result.docs.isNotEmpty) {
-      filteredTestCardList =
-          result.docs.map((e) => TestCard.fromJson(e.data())).toList();
+      Set<String> uniqueTets = Set();
+
+      for (var test in result.docs) {
+        if (uniqueTets.add(TestCard.fromJson(test.data()).name)) {
+          filteredTestCardList.add(TestCard.fromJson(test.data()));
+        }
+      }
     }
     notifyListeners();
     return "";
@@ -88,7 +97,7 @@ class SearchListState with ChangeNotifier {
 
   setTestCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
-        .collection('test')
+        .collection('test2')
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {
@@ -102,31 +111,11 @@ class SearchListState with ChangeNotifier {
     filteredTestCardList = [];
 
     if (test) {
-      setTestCardList(code, 'hf_test_code');
+      setTestCardList(code, 'medCapTestCode');
     } else {
       setTestCardList(code, 'labCode');
     }
 
     return;
   }
-
-  // Lab labObjectConverter(lab) {
-  //   return Lab(
-  //       labName: lab['labName'].toString(),
-  //       branchDetails: branchDetailsObjectConverter(lab['branchDetails']),
-  //       test: [...lab['test']],
-  //       hf_lab_code: lab['hf_lab_code']);
-  // }
-
-  // List<BranchDetails> branchDetailsObjectConverter(List obj) {
-  //   List<BranchDetails> list = [];
-  //   obj.forEach((e) {
-  //     list.add(BranchDetails(
-  //         availablePincodeDetails: [...e['availablePincodeDetails']],
-  //         fullAddress: e['fullAddress'],
-  //         locality: e['locality'],
-  //         pincode: e['pincode']));
-  //   });
-  //   return list;
-  // }
 }

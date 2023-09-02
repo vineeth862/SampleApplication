@@ -21,14 +21,15 @@ class TestListScreen extends StatelessWidget {
             itemCount: searchState.gettestSuggetionList.length,
             itemBuilder: (context, index) {
               return CustomListTile(
-                title:
-                    searchState.gettestSuggetionList.elementAt(index).testname,
+                title: searchState.gettestSuggetionList
+                    .elementAt(index)
+                    .displayName,
                 icon: Icons.medical_services,
                 labCode:
                     searchState.gettestSuggetionList.elementAt(index).labCode,
                 testCode: searchState.gettestSuggetionList
                     .elementAt(index)
-                    .hf_test_code,
+                    .medCapTestCode,
                 // subtitle:
                 //     searchState.gettestSuggetionList.elementAt(index).labName,
                 onTap: (title, labCode, testCode) async {
@@ -39,7 +40,7 @@ class TestListScreen extends StatelessWidget {
                         title: title,
                         category: searchState.gettestSuggetionList
                             .elementAt(index)
-                            .test_code,
+                            .medCapTestCode,
                       ));
                 },
               );

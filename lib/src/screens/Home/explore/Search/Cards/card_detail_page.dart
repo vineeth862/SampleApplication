@@ -69,7 +69,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             Text("test : ",
                                 style: Theme.of(context).textTheme.labelLarge),
                             Expanded(
-                              child: Text(widget.test.testname,
+                              child: Text(widget.test.testName,
                                   maxLines: 2,
                                   softWrap: true,
                                   style:
@@ -97,7 +97,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Sample Required : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text(widget.test.sampletypename,
+                            Text(widget.test.sampletypeName,
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),

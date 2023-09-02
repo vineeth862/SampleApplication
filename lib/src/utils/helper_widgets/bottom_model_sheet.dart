@@ -38,7 +38,7 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
     // }).first;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(test.testname), Text(test.price)],
+      children: [Text(test.testName), Text(test.price)],
     );
   }
 

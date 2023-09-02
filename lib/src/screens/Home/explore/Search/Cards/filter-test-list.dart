@@ -41,9 +41,8 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
     List<TestCard> list = searchState.getTestCardList;
     bool isTestSelected(Test test) {
       return (selectedTest.getSelectedTest
-              .where((element) => element.hf_test_code == test.hf_test_code)
-              .length >
-          0);
+          .where((element) => element.medCapTestCode == test.medCapTestCode)
+          .isNotEmpty);
     }
 
     return Scaffold(
@@ -73,13 +72,13 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                           labName: list[index].name,
                           price: list[index].price,
                           isTestSelected:
-                              isTestSelected(list[index]!.testObject),
+                              isTestSelected(list[index].testObject),
                           tapOnButton: (test) {
                             if (selectedTest.getSelectedTest
-                                .contains(list[index]?.testObject))
-                              selectedTest.removeTest(list[index]?.testObject);
+                                .contains(list[index].testObject))
+                              selectedTest.removeTest(list[index].testObject);
                             else
-                              selectedTest.addTest(list[index]?.testObject);
+                              selectedTest.addTest(list[index].testObject);
 
                             globalservice.navigate(
                                 context, StepOneToBookTest());

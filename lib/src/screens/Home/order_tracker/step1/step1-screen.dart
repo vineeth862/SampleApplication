@@ -131,7 +131,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
   Column generateListTileBody(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(test.testname), Text(test.price)],
+      children: [Text(test.testName), Text(test.price)],
     );
   }
 

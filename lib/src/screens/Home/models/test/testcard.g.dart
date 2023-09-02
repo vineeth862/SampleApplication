@@ -7,10 +7,10 @@ part of 'testcard.dart';
 // **************************************************************************
 
 TestCard _$TestCardFromJson(Map<String, dynamic> json) => TestCard(
-      name: json['testname'] as String,
-      test: json['tat'] as String,
+      name: json['testName'] as String,
+      test: json['tat'].toString(),
       testSelcted: false,
-      testCode: json['hf_test_code'] as String,
+      testCode: json['medCapTestCode'] as String,
       price: json['price'].toString() as String,
       labName: json['labName'] as String,
       testObject: Test.fromJson(json as Map<String, dynamic>),

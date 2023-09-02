@@ -3,34 +3,38 @@ part 'test.g.dart';
 
 @JsonSerializable()
 class Test {
-  String frequency;
-  String hf_test_code;
+  String medCapTestCode;
   String labCode;
   String labName;
   String method;
   String price;
   String sampleContainer;
-  String sampletypename;
+  String sampletypeName;
   String tat;
   String testProcessingDays;
-  String test_code;
-  String test_des;
-  String testname;
+  String testCode;
+  String testDes;
+  String testName;
+  String category;
+  bool daily;
+  String displayName;
 
   Test(
-      {required this.frequency,
-      required this.hf_test_code,
+      {required this.medCapTestCode,
       required this.labCode,
       required this.labName,
       required this.method,
       required this.price,
       required this.sampleContainer,
-      required this.sampletypename,
+      required this.sampletypeName,
       required this.tat,
       required this.testProcessingDays,
-      required this.test_code,
-      required this.test_des,
-      required this.testname});
+      required this.testCode,
+      required this.testDes,
+      required this.testName,
+      required this.category,
+      required this.daily,
+      required this.displayName});
   factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
   Map<String, dynamic> toJson() => _$TestToJson(this);
 }

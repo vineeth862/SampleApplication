@@ -58,9 +58,8 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
 
     bool isTestSelected(Test test) {
       return (selectedTest.getSelectedTest
-              .where((element) => element.hf_test_code == test.hf_test_code)
-              .length >
-          0);
+          .where((element) => element.medCapTestCode == test.medCapTestCode)
+          .isNotEmpty);
     }
 
     return Scaffold(
