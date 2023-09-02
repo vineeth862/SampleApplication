@@ -34,8 +34,7 @@ class _MySliderState extends State<MySlider> {
                 ));
           }).toList(),
           options: CarouselOptions(
-            height: 120,
-            aspectRatio: 16 / 9,
+            aspectRatio: 16 / 6,
             viewportFraction: 1.0,
             enableInfiniteScroll: false,
             autoPlay: true, // Enable auto-playing of slides

@@ -13,73 +13,25 @@ class LabTestCategoryCard extends StatelessWidget {
       elevation: 0,
       color: Theme.of(context).colorScheme.secondaryContainer,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.all(3),
-            child: CircleAvatar(
-              radius: 35,
-              backgroundImage: AssetImage(imagePath),
-            ),
+          CircleAvatar(
+            radius: MediaQuery.of(context).size.width * 0.10,
+            backgroundImage: AssetImage(imagePath),
           ),
           SizedBox(
-            height: 10,
+            height: MediaQuery.of(context).size.width * 0.025,
           ),
           Text(
             title,
             style: TextStyle(
-              fontSize: 10,
+              fontSize: MediaQuery.of(context).size.width * 0.025,
               fontWeight: FontWeight.bold,
             ),
-          )
+          ),
         ],
       ),
-
-      // subtitle: Text("jsjvjvj"),
-      // title: Text(title),
-      // subtitle: Text('Card Subtitle'),
-      // ),
     );
-    // return ClipRRect(
-    //     borderRadius: BorderRadius.circular(50),
-    //     child: Card(
-    //       child: Column(
-    //         children: [
-    //           Container(
-    //             width: 60,
-    //             height: 60,
-    //             child: ClipRRect(
-    //               borderRadius: BorderRadius.circular(50),
-    //               child: Image.asset(
-    //                 imagePath,
-    //                 fit: BoxFit.cover,
-    //               ),
-    //             ),
-    //           ),
-    //           Padding(
-    //             padding: EdgeInsets.all(8),
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Text(
-    //                   title,
-    //                   style: TextStyle(
-    //                     fontWeight: FontWeight.bold,
-    //                     fontSize: 10,
-    //                   ),
-    //                 ),
-    //                 // SizedBox(height: 4),
-    //                 // Text(
-    //                 //   content,
-    //                 //   style: TextStyle(
-    //                 //     fontSize: 14,
-    //                 //   ),
-    //                 // ),
-    //               ],
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
   }
 }
