@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
 import 'package:sample_application/src/screens/Home/models/category/category.dart';
@@ -7,6 +8,8 @@ import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dar
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import '../../../global_service/cloud_storage_service.dart';
 import '../../../global_service/global_service.dart';
+import '../../../utils/Provider/search_provider.dart';
+import 'Search/Cards/filter-test-list.dart';
 import 'explore.service.dart';
 import 'explore_category.dart';
 import 'explore_why-us.dart';
@@ -25,6 +28,7 @@ class _exploreExpState extends State<exploreExp> {
   ScrollController _scrollController = ScrollController();
   CloudStorageService storage = CloudStorageService();
   List<LabTestCategoryCard> categoryList = [];
+  late SearchListState searchState;
   List labList = [];
   @override
   void initState() {
@@ -57,7 +61,16 @@ class _exploreExpState extends State<exploreExp> {
 
     for (var i = 0; i < list.length; i++) {
       // var path = await storage.getImageRef(list[i].path!);
-      labList.add(Container(
+      labList.add(InkWell(
+        onTap: () async {
+          await searchState.cardClicked(list[i].labCode!, false);
+          globalservice.navigate(
+              context,
+              FilteredTestCardlistPage(
+                title: list[i].title!,
+                category: list[i].labCode!,
+              ));
+        },
         child: Image.network(
           list[i].path!,
           fit: BoxFit.fill,
@@ -79,6 +92,7 @@ class _exploreExpState extends State<exploreExp> {
   @override
   Widget build(BuildContext context) {
     final myController = Get.find<UserCurrentLocation>();
+    searchState = Provider.of<SearchListState>(context);
     return SafeArea(
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
