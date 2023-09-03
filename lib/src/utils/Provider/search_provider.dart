@@ -118,4 +118,12 @@ class SearchListState with ChangeNotifier {
 
     return;
   }
+
+  categoryClicked(String category) {
+    filteredTestCardList = [];
+
+    setTestCardList(category, 'category');
+
+    return;
+  }
 }
