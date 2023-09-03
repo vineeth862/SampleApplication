@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
+import 'package:sample_application/src/screens/Home/models/category/category.dart';
+import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
-import 'package:sample_application/src/utils/Provider/address_provider.dart';
+import '../../../global_service/cloud_storage_service.dart';
 import '../../../global_service/global_service.dart';
-import '../../../utils/Provider/search_provider.dart';
 import 'explore.service.dart';
 import 'explore_category.dart';
 import 'explore_why-us.dart';
@@ -23,6 +23,9 @@ class _exploreExpState extends State<exploreExp> {
   GlobalService globalservice = GlobalService();
   bool _isAppBarExpanded = false;
   ScrollController _scrollController = ScrollController();
+  CloudStorageService storage = CloudStorageService();
+  List<LabTestCategoryCard> categoryList = [];
+  List labList = [];
   @override
   void initState() {
     super.initState();
@@ -31,6 +34,39 @@ class _exploreExpState extends State<exploreExp> {
         _isAppBarExpanded = _scrollController.offset > 200.0;
         // Adjust the value as needed
       });
+    });
+    getCategoryList();
+    getLabLogoList();
+  }
+
+  getCategoryList() async {
+    List<Category> list = await exploreService.fetchCategoryList();
+
+    for (var i = 0; i < list.length; i++) {
+      // var path = await storage.getImageRef(list[i].path!);
+      categoryList.add(LabTestCategoryCard(list[i].title!, "", list[i].path!));
+    }
+
+    setState(() {
+      categoryList = [...categoryList];
+    });
+  }
+
+  getLabLogoList() async {
+    List<LabMasterData> list = await exploreService.fetchLabList();
+
+    for (var i = 0; i < list.length; i++) {
+      // var path = await storage.getImageRef(list[i].path!);
+      labList.add(Container(
+        child: Image.network(
+          list[i].path!,
+          fit: BoxFit.fill,
+        ),
+      ));
+    }
+
+    setState(() {
+      labList = [...labList];
     });
   }
 
@@ -112,21 +148,6 @@ class _exploreExpState extends State<exploreExp> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 20),
-                            //   child: Text(
-                            //     "You are at",
-                            //     style: Theme.of(context)
-                            //         .textTheme
-                            //         .titleLarge!
-                            //         .copyWith(
-                            //             color: Theme.of(context)
-                            //                 .colorScheme
-                            //                 .primary),
-                            //   ),
-                            // ),
-
                             TextButton.icon(
                                 onPressed: () {
                                   globalservice.navigate(
@@ -246,20 +267,7 @@ class _exploreExpState extends State<exploreExp> {
                               physics: NeverScrollableScrollPhysics(),
                               childAspectRatio:
                                   0.8, // Adjust the aspect ratio to control the card height
-                              children: [
-                                LabTestCategoryCard('Blood Tests', '',
-                                    './assets/images/blood.png'),
-                                LabTestCategoryCard('Urin Tests', '',
-                                    './assets/images/urin-test.avif'),
-                                LabTestCategoryCard('cogh test', '',
-                                    './assets/images/cogh.jpg'),
-                                LabTestCategoryCard('metabolic test', '',
-                                    './assets/images/test1.jpg'),
-                                LabTestCategoryCard('covid -19', '',
-                                    './assets/images/corona.jpg'),
-                                LabTestCategoryCard('Thyroid panel', '',
-                                    './assets/images/test1.jpg'),
-                              ],
+                              children: [...categoryList],
                             ),
                           ),
                         ],
@@ -323,44 +331,7 @@ class _exploreExpState extends State<exploreExp> {
                                 physics: NeverScrollableScrollPhysics(),
                                 childAspectRatio: 16 /
                                     9, // Adjust the aspect ratio to control the card height
-                                children: [
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-logo1.jpeg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-logo2.jpeg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log3.jpeg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log4.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log5.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log6.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ],
+                                children: [...labList],
                               ),
                             ),
                           ),

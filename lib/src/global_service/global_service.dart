@@ -49,6 +49,7 @@ class GlobalService {
   //   print(user);
   //   return user;
   // }
+
   // static final GlobalService _instance = GlobalService._privateConstructor();
 
   // GlobalService._privateConstructor();

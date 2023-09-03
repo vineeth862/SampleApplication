@@ -18,7 +18,7 @@ class LabTestCategoryCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: MediaQuery.of(context).size.width * 0.10,
-            backgroundImage: AssetImage(imagePath),
+            backgroundImage: NetworkImage(imagePath),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.width * 0.025,

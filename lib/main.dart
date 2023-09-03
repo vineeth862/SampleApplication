@@ -25,7 +25,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => SelectedTestState()),
     ChangeNotifierProvider(create: (_) => SelectedOrderState()),
     ChangeNotifierProvider(create: (_) => AppState()),
-    ChangeNotifierProvider(create: (_) => LoadingProvider()),
+    ChangeNotifierProvider(create: (_) => LoadingProvider())
   ], child: const MyApp()));
 }
 

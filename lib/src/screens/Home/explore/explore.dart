@@ -143,18 +143,18 @@ class _ExploreState extends State<Explore> {
                                 childAspectRatio:
                                     0.8, // Adjust the aspect ratio to control the card height
                                 children: [
-                                  LabTestCategoryCard('Blood Tests', '',
-                                      './assets/images/blood.png'),
-                                  LabTestCategoryCard('Urin Tests', '',
-                                      './assets/images/urin-test.avif'),
-                                  LabTestCategoryCard('cogh test', '',
-                                      './assets/images/cogh.jpg'),
-                                  LabTestCategoryCard('metabolic test', '',
-                                      './assets/images/test1.jpg'),
-                                  LabTestCategoryCard('covid -19', '',
-                                      './assets/images/corona.jpg'),
-                                  LabTestCategoryCard('Thyroid panel', '',
-                                      './assets/images/test1.jpg'),
+                                  // LabTestCategoryCard('Blood Tests', '',
+                                  //     './assets/images/blood.png'),
+                                  // LabTestCategoryCard('Urin Tests', '',
+                                  //     './assets/images/urin-test.avif'),
+                                  // LabTestCategoryCard('cogh test', '',
+                                  //     './assets/images/cogh.jpg'),
+                                  // LabTestCategoryCard('metabolic test', '',
+                                  //     './assets/images/test1.jpg'),
+                                  // LabTestCategoryCard('covid -19', '',
+                                  //     './assets/images/corona.jpg'),
+                                  // LabTestCategoryCard('Thyroid panel', '',
+                                  //     './assets/images/test1.jpg'),
                                 ],
                               ),
                             ),
@@ -213,42 +213,42 @@ class _ExploreState extends State<Explore> {
                                 childAspectRatio: 80 /
                                     20, // Adjust the aspect ratio to control the card height
                                 children: [
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-logo1.jpeg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-logo2.jpeg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log3.jpeg',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log4.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log5.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Image.asset(
-                                      './assets/images/lab-log6.png',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-logo1.jpeg',
+                                  //     fit: BoxFit.cover,
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-logo2.jpeg',
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-log3.jpeg',
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-log4.png',
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-log5.png',
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   child: Image.asset(
+                                  //     './assets/images/lab-log6.png',
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
