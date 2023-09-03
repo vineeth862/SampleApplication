@@ -61,8 +61,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 20, 104, 23),
-                  Color.fromARGB(255, 17, 137, 21)
+                  Theme.of(context).colorScheme.primary,
+                  Theme.of(context).colorScheme.primary,
                 ]),
               ),
               child: Column(
@@ -82,7 +82,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Center(
                       child: Text(
-                        "Health Fine",
+                        "MedCapH",
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
