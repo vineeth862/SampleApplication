@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
+import 'package:sample_application/src/screens/Home/explore/explore_packages.dart';
 import 'package:sample_application/src/screens/Home/models/category/category.dart';
 import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
@@ -13,6 +14,7 @@ import 'Search/Cards/filter-test-list.dart';
 import 'explore.service.dart';
 import 'explore_category.dart';
 import 'explore_why-us.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class exploreExp extends StatefulWidget {
   const exploreExp({super.key});
@@ -292,7 +294,24 @@ class _exploreExpState extends State<exploreExp> {
                 SizedBox(
                   height: 10,
                 ),
-                MySlider(),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: ListTile(
+                      title: Text("Popular Health Packages",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.05,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      subtitle: Text(
+                        "MedcapH recomended health packages",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                  ),
+                ),
+                PackageSlider(),
                 SizedBox(
                   height: 25,
                 ),
@@ -354,9 +373,12 @@ class _exploreExpState extends State<exploreExp> {
                     ),
                   ),
                 ),
-                MySlider(),
+                //MySlider(),
                 SizedBox(
                   height: 25,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             ),
