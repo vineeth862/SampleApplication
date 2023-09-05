@@ -13,32 +13,61 @@ class LabListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     return searchState.getlabSuggetionList.isEmpty
-        ? SingleChildScrollView(
-            child: NoResultFoundCard(
-            title: 'No available lab in this search',
-          ))
-        : ListView.builder(
-            itemCount: searchState.getlabSuggetionList.length,
-            itemBuilder: (context, index) {
-              return CustomListTile(
-                title: searchState.getlabSuggetionList[index].labName,
-                icon: Icons.store_outlined,
-                //subtitle: "lab",
-                labCode: searchState.getlabSuggetionList[index].hf_lab_code,
-                testCode: '',
-                onTap: (title, labCode, tesCode) async {
-                  await searchState.cardClicked(labCode, false);
-                  globalservice.navigate(
-                      context,
-                      FilteredLabCardlistPage(
-                          title: searchState.getlabSuggetionList[index].labName,
-                          location: searchState.getlabSuggetionList[index]
-                              .branchDetails[0].locality,
-                          labCode: searchState
-                              .getlabSuggetionList[index].hf_lab_code));
-                },
-              );
-            },
+        ? Center(
+            child: SingleChildScrollView(
+                child: NoResultFoundCard(
+              title: 'No available lab in this search',
+            )),
+          )
+        : Column(
+            children: [
+              Container(
+                alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.all(12),
+                child: searchState.input.isEmpty
+                    ? Text(
+                        "Popular Labs",
+                        style: TextStyle(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 3),
+                      )
+                    : Text(
+                        "Searched Results!",
+                        style: TextStyle(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 3),
+                      ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: searchState.getlabSuggetionList.length,
+                  itemBuilder: (context, index) {
+                    return CustomListTile(
+                      title: searchState.getlabSuggetionList[index].labName,
+                      icon: Icons.store_outlined,
+                      //subtitle: "lab",
+                      labCode:
+                          searchState.getlabSuggetionList[index].hf_lab_code,
+                      testCode: '',
+                      onTap: (title, labCode, tesCode) async {
+                        await searchState.cardClicked(labCode, false);
+                        globalservice.navigate(
+                            context,
+                            FilteredLabCardlistPage(
+                                title: searchState
+                                    .getlabSuggetionList[index].labName,
+                                location: searchState.getlabSuggetionList[index]
+                                    .branchDetails[0].locality,
+                                labCode: searchState
+                                    .getlabSuggetionList[index].hf_lab_code));
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           );
   }
 }

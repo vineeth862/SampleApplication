@@ -8,8 +8,16 @@ class SearchListState with ChangeNotifier {
   List<Lab> filteredLabs = [];
   List<Test> filteredTests = [];
 
+  String input = '';
+
   List<Test> get gettestSuggetionList {
     return filteredTests;
+  }
+
+  void resetSearchList() {
+    filteredTests = [];
+    filteredLabs = [];
+    notifyListeners();
   }
 
   List<Lab> get getlabSuggetionList {
@@ -19,6 +27,7 @@ class SearchListState with ChangeNotifier {
   search(String value) async {
     filteredTests = [];
     filteredLabs = [];
+    input = value;
     if (value.isNotEmpty) {
       var testList = await FirebaseFirestore.instance
           .collection('test2')
@@ -29,10 +38,12 @@ class SearchListState with ChangeNotifier {
 
       var labList = await FirebaseFirestore.instance.collection('lab').get();
       if (testList.docs.isNotEmpty) {
-        Set<String> uniqueTets = Set();
-
         for (var test in testList.docs) {
-          if (uniqueTets.add(Test.fromJson(test.data()).displayName)) {
+          var filteredTest = filteredTests
+              .where((element) =>
+                  element.displayName == Test.fromJson(test.data()).displayName)
+              .toList();
+          if (filteredTest.isEmpty) {
             filteredTests.add(Test.fromJson(test.data()));
           }
         }
@@ -51,6 +62,7 @@ class SearchListState with ChangeNotifier {
         }).toList();
       }
     }
+
     notifyListeners();
     return "";
   }
@@ -125,5 +137,35 @@ class SearchListState with ChangeNotifier {
     setTestCardList(category, 'category');
 
     return;
+  }
+
+  searchPriorityTestAndLabs() async {
+    input = '';
+    var testList = await FirebaseFirestore.instance
+        .collection('test2')
+        .where("priority", isEqualTo: true)
+        .orderBy('priorityOrder')
+        .get();
+
+    var labList = await FirebaseFirestore.instance
+        .collection('lab')
+        .where("priority", isEqualTo: true)
+        .orderBy('priorityOrder')
+        .get();
+
+    if (testList.docs.isNotEmpty) {
+      filteredTests = testList.docs.map((doc) {
+        return Test.fromJson(doc.data());
+      }).toList();
+    }
+
+    if (labList.docs.isNotEmpty) {
+      filteredLabs = labList.docs.map((doc) {
+        return Lab.fromJson(doc.data());
+      }).toList();
+    }
+
+    notifyListeners();
+    return "";
   }
 }

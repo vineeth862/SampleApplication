@@ -13,38 +13,62 @@ class TestListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     return searchState.gettestSuggetionList.isEmpty
-        ? SingleChildScrollView(
-            child: NoResultFoundCard(
-            title: 'No available test in this search',
-          ))
-        : ListView.builder(
-            itemCount: searchState.gettestSuggetionList.length,
-            itemBuilder: (context, index) {
-              return CustomListTile(
-                title: searchState.gettestSuggetionList
-                    .elementAt(index)
-                    .displayName,
-                icon: Icons.medical_services,
-                labCode:
-                    searchState.gettestSuggetionList.elementAt(index).labCode,
-                testCode: searchState.gettestSuggetionList
-                    .elementAt(index)
-                    .medCapTestCode,
-                // subtitle:
-                //     searchState.gettestSuggetionList.elementAt(index).labName,
-                onTap: (title, labCode, testCode) async {
-                  await searchState.cardClicked(testCode, true);
-                  globalservice.navigate(
-                      context,
-                      FilteredTestCardlistPage(
-                        title: title,
-                        category: searchState.gettestSuggetionList
-                            .elementAt(index)
-                            .medCapTestCode,
-                      ));
-                },
-              );
-            },
-          );
+        ? Center(
+            child: SingleChildScrollView(
+                child: NoResultFoundCard(
+              title: 'No available test in this search',
+            )),
+          )
+        : Column(children: [
+            Container(
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.all(12),
+              child: searchState.input.isEmpty
+                  ? Text(
+                      "Popular Tests",
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 3),
+                    )
+                  : Text(
+                      "Searched Results!",
+                      style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 3),
+                    ),
+            ),
+            Expanded(
+                child: ListView.builder(
+              itemCount: searchState.gettestSuggetionList.length,
+              itemBuilder: (context, index) {
+                return CustomListTile(
+                  title: searchState.gettestSuggetionList
+                      .elementAt(index)
+                      .displayName,
+                  icon: Icons.medical_services,
+                  labCode:
+                      searchState.gettestSuggetionList.elementAt(index).labCode,
+                  testCode: searchState.gettestSuggetionList
+                      .elementAt(index)
+                      .medCapTestCode,
+                  // subtitle:
+                  //     searchState.gettestSuggetionList.elementAt(index).labName,
+                  onTap: (title, labCode, testCode) async {
+                    await searchState.cardClicked(testCode, true);
+                    globalservice.navigate(
+                        context,
+                        FilteredTestCardlistPage(
+                          title: title,
+                          category: searchState.gettestSuggetionList
+                              .elementAt(index)
+                              .medCapTestCode,
+                        ));
+                  },
+                );
+              },
+            ))
+          ]);
   }
 }

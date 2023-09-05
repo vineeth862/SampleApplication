@@ -19,12 +19,15 @@ class _SearchBarPageState extends State<SearchBarPage>
     with SingleTickerProviderStateMixin {
   bool _isInputEmpty = true;
   late TabController _tabController;
+  late SearchListState searchState;
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    Future.delayed(Duration(milliseconds: 0),
+        () => searchState.searchPriorityTestAndLabs());
   }
 
   @override
@@ -38,9 +41,31 @@ class _SearchBarPageState extends State<SearchBarPage>
     _tabController.animateTo(tabIndex);
   }
 
+  void search(value) async {
+    _isInputEmpty = value.isEmpty;
+    await searchState.search(value.trim());
+    if (value.trim().isNotEmpty &&
+        searchState.filteredTests.isEmpty &&
+        searchState.filteredLabs.isNotEmpty) {
+      switchToTab(0);
+    } else if (value.trim().isNotEmpty &&
+        searchState.filteredTests.isNotEmpty &&
+        searchState.filteredLabs.isEmpty) {
+      switchToTab(1);
+    }
+    if (value.isEmpty) {
+      Future.delayed(Duration(milliseconds: 500), () {
+        if (value.isEmpty) {
+          searchState.resetSearchList();
+          searchState.searchPriorityTestAndLabs();
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final searchState = Provider.of<SearchListState>(context);
+    searchState = Provider.of<SearchListState>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme,
@@ -91,18 +116,8 @@ class _SearchBarPageState extends State<SearchBarPage>
                     ),
                   ),
                   // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
-                  onChanged: (value) async {
-                    _isInputEmpty = value.isEmpty;
-                    await searchState.search(value.trim());
-                    if (value.trim().isNotEmpty &&
-                        searchState.filteredTests.isEmpty &&
-                        searchState.filteredLabs.isNotEmpty) {
-                      switchToTab(0);
-                    } else if (value.trim().isNotEmpty &&
-                        searchState.filteredTests.isNotEmpty &&
-                        searchState.filteredLabs.isEmpty) {
-                      switchToTab(1);
-                    }
+                  onChanged: (value) {
+                    search(value);
                   },
                 ),
               ),
@@ -121,8 +136,8 @@ class _SearchBarPageState extends State<SearchBarPage>
               TabBarView(
                 controller: _tabController,
                 children: [
-                  Center(child: LabListScreen()),
-                  Center(child: TestListScreen()),
+                  LabListScreen(),
+                  TestListScreen(),
                 ],
               ),
             ],
