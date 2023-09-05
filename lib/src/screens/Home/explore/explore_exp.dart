@@ -292,28 +292,25 @@ class _exploreExpState extends State<exploreExp> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: ListTile(
-                      title: Text("Popular Health Packages",
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.05,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      subtitle: Text(
-                        "MedcapH recomended health packages",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
+                  child: ListTile(
+                    title: Text("Popular Health Packages",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    subtitle: Text(
+                      "MedcapH recomended health packages",
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
                 PackageSlider(),
                 SizedBox(
-                  height: 25,
+                  height: 10,
                 ),
                 Card(
                   child: Padding(
