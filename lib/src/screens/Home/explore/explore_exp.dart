@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/search_field.dart';
+import 'package:sample_application/src/screens/Home/explore/explore_howItWorks.dart';
 import 'package:sample_application/src/screens/Home/explore/explore_packages.dart';
 import 'package:sample_application/src/screens/Home/models/category/category.dart';
 import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dart';
@@ -99,7 +101,7 @@ class _exploreExpState extends State<exploreExp> {
     return SafeArea(
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
-          backgroundColor: Color.fromARGB(255, 243, 242, 243),
+          backgroundColor: const Color.fromARGB(255, 243, 242, 243),
           toolbarHeight: 70,
           leading: null,
           automaticallyImplyLeading: false,
@@ -111,7 +113,7 @@ class _exploreExpState extends State<exploreExp> {
                         // padding:
                         //     const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: GestureDetector(
                           onTap: () {
                             globalservice.navigate(
@@ -132,8 +134,8 @@ class _exploreExpState extends State<exploreExp> {
                               fillColor: Theme.of(context)
                                   .colorScheme
                                   .onSecondaryContainer,
-                              contentPadding: EdgeInsets.all(16),
-                              border: OutlineInputBorder(
+                              contentPadding: const EdgeInsets.all(16),
+                              border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                             ),
@@ -141,7 +143,7 @@ class _exploreExpState extends State<exploreExp> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Icon(
                       Icons.ac_unit_rounded,
                       color: Theme.of(context).colorScheme.primary,
@@ -154,7 +156,7 @@ class _exploreExpState extends State<exploreExp> {
             background: !_isAppBarExpanded
                 ? SafeArea(
                     child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             gradient: LinearGradient(colors: [
                           Color.fromARGB(255, 250, 250, 250),
                           Color.fromARGB(255, 246, 245, 246),
@@ -168,9 +170,9 @@ class _exploreExpState extends State<exploreExp> {
                             TextButton.icon(
                                 onPressed: () {
                                   globalservice.navigate(
-                                      context, InitialAdress());
+                                      context, const InitialAdress());
                                 },
-                                icon: Icon(Icons.location_on),
+                                icon: const Icon(Icons.location_on),
                                 label: Obx(() => Text(
                                       myController.globalString.value,
                                       style: Theme.of(context)
@@ -181,7 +183,7 @@ class _exploreExpState extends State<exploreExp> {
                                                   .colorScheme
                                                   .primary),
                                     ))),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             // Padding(
@@ -207,14 +209,14 @@ class _exploreExpState extends State<exploreExp> {
                   padding: const EdgeInsets.all(0.0),
                   child: MySlider(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Container(
                   // padding:
                   //     const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: GestureDetector(
                     onTap: () {
                       globalservice.navigate(context, const SearchBarPage());
@@ -227,16 +229,16 @@ class _exploreExpState extends State<exploreExp> {
                           Icons.search,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        contentPadding: EdgeInsets.all(16),
-                        border: OutlineInputBorder(
+                        contentPadding: const EdgeInsets.all(16),
+                        border: const OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 45,
+                const SizedBox(
+                  height: 25,
                 ),
                 Card(
                   child: AspectRatio(
@@ -260,10 +262,10 @@ class _exploreExpState extends State<exploreExp> {
                                       './assets/images/flask.jpg',
                                       fit: BoxFit.cover),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text("Popular Tests",
+                                Text("Popular Categories",
                                     style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.width *
@@ -281,7 +283,7 @@ class _exploreExpState extends State<exploreExp> {
                               crossAxisCount: 3,
                               mainAxisSpacing: 4.0,
                               crossAxisSpacing: 4.0,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               childAspectRatio:
                                   0.8, // Adjust the aspect ratio to control the card height
                               children: [...categoryList],
@@ -292,7 +294,7 @@ class _exploreExpState extends State<exploreExp> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Align(
@@ -309,8 +311,106 @@ class _exploreExpState extends State<exploreExp> {
                     ),
                   ),
                 ),
-                PackageSlider(),
-                SizedBox(
+                const PackageSlider(),
+                const SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ListTile(
+                    title: Text("Test/Packages for Men",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    subtitle: Text(
+                      "Highly Prescribed test and packages by doctor",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+                const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      MaleFemaleCategory(
+                        name: "Under 25 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "25-50 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "Above 50 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "All Packages",
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ListTile(
+                    title: Text("Test/Packages for Women",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    subtitle: Text(
+                      "Highly Prescribed test and packages by doctor",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+                const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      MaleFemaleCategory(
+                        name: "Under 25 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "25-50 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "Above 50 Years",
+                      ),
+                      MaleFemaleCategory(
+                        name: "All Packages",
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text("How it Works",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.05,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    )),
+
+                const HowItWorks(
+                    heading: "1. Book Test",
+                    description:
+                        "Find a Health Test you are looking for from your desired diagnostics."),
+                const HowItWorks(
+                    heading: "2. Sample Collection",
+                    description:
+                        "Our Phlebo will collect the sample from your doorstep ensuring the highest safety"),
+                const HowItWorks(
+                    heading: "3. Get Reports",
+                    description:
+                        "Test reports can be downloaded easily from Emial and MedCapH"),
+                const SizedBox(
                   height: 10,
                 ),
                 Card(
@@ -328,7 +428,7 @@ class _exploreExpState extends State<exploreExp> {
                                 children: [
                                   Image.asset('./assets/images/lab1.png',
                                       fit: BoxFit.cover),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   Align(
@@ -359,7 +459,7 @@ class _exploreExpState extends State<exploreExp> {
                                 crossAxisCount: 3,
                                 mainAxisSpacing: 20,
                                 crossAxisSpacing: 20,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 childAspectRatio: 16 /
                                     9, // Adjust the aspect ratio to control the card height
                                 children: [...labList],
@@ -372,10 +472,10 @@ class _exploreExpState extends State<exploreExp> {
                   ),
                 ),
                 //MySlider(),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
               ],

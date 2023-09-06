@@ -160,7 +160,7 @@ class labPackageCard extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
-                          .copyWith(color: Color.fromARGB(193, 27, 8, 1)),
+                          .copyWith(color: const Color.fromARGB(193, 27, 8, 1)),
                     ),
                   )
                 ],
@@ -169,6 +169,48 @@ class labPackageCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MaleFemaleCategory extends StatelessWidget {
+  final Image? image;
+  final String? name;
+  const MaleFemaleCategory({super.key, this.image, this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+          child: Column(
+        children: [
+          ConstrainedBox(
+              constraints: const BoxConstraints(
+                  maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
+              child: Container(
+                child: Image.asset('./assets/images/Lab_Single_Person.jpg',
+                    height: 70, fit: BoxFit.fitWidth),
+              )),
+          const SizedBox(
+            height: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Theme.of(context).colorScheme.secondaryContainer,
+                      Theme.of(context).colorScheme.secondaryContainer,
+                    ]),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(name.toString()),
+                )),
+          )
+        ],
+      )),
     );
   }
 }
