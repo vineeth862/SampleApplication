@@ -86,7 +86,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                           vertical: 8, horizontal: 12),
                       child: TestCardWidget(
                           title: list[index].labName,
-                          description: list[index].test.toString(),
+                          test: list[index].testObject,
                           labName: list[index].name,
                           price: list[index].price,
                           isTestSelected:

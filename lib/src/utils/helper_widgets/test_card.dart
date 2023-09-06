@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../screens/Home/models/test/test.dart';
 
 class TestCardWidget extends StatelessWidget {
   final String title;
-  final String description;
+  final Test test;
   final bool isTestSelected;
   final String labName;
   late Function(Object card) tapOnCard;
@@ -12,7 +15,7 @@ class TestCardWidget extends StatelessWidget {
   TestCardWidget(
       {super.key,
       required this.title,
-      required this.description,
+      required this.test,
       required this.tapOnCard,
       required this.tapOnButton,
       required this.isTestSelected,
@@ -21,11 +24,43 @@ class TestCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime date = DateTime.now();
+    String getReportDate(Test testObj) {
+      if (testObj.testProcessingDays.isNumericOnly &&
+          testObj.tat.isNumericOnly) {
+        int totalHour;
+        int labClosingTime = int.parse(testObj.testProcessingDays);
+        int labOpeningTime = 9;
+        int tat = int.tryParse(testObj.tat)!;
+
+        int sampleDeliveringHour = date.hour + 4;
+
+        if (labClosingTime > (sampleDeliveringHour + tat)) {
+          totalHour = tat;
+        } else {
+          totalHour = (24 - date.hour) + labOpeningTime + tat;
+        }
+        int totalDays = (totalHour / 24).remainder(1) != 0
+            ? (totalHour / 24).toInt() + 1
+            : (totalHour / 24).toInt();
+        if (!testObj.daily) {
+          if ((5 - (date.weekday + totalDays)) >= 0) {
+            totalDays += 2;
+          }
+        }
+        if (totalHour < 24) {
+          return "Reports Within 1 Day";
+        }
+        return "Reports Within $totalDays Day";
+      }
+      return "NA";
+    }
+
     return Container(
       width: double.infinity,
       child: GestureDetector(
         onTap: () {
-          tapOnCard({title: title, description: description});
+          tapOnCard({title: title, test: test});
         },
         child: Container(
           // shape: Theme.of(context).cardTheme.shape,
@@ -113,7 +148,7 @@ class TestCardWidget extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      description,
+                      getReportDate(test),
                       softWrap: true,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),

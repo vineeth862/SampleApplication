@@ -24,14 +24,14 @@ class TestListScreen extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(12),
               child: searchState.input.isEmpty
-                  ? Text(
+                  ? const Text(
                       "Popular Tests",
                       style: TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 3),
                     )
-                  : Text(
+                  : const Text(
                       "Searched Results!",
                       style: TextStyle(
                           fontSize: 21,

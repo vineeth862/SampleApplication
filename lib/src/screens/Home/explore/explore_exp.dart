@@ -35,6 +35,7 @@ class _exploreExpState extends State<exploreExp> {
   @override
   void initState() {
     super.initState();
+
     _scrollController.addListener(() {
       setState(() {
         _isAppBarExpanded = _scrollController.offset > 200.0;

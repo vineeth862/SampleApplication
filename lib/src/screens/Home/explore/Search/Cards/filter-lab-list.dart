@@ -175,7 +175,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   child: TestCardWidget(
                       title: list[index].name,
-                      description: list[index].test.toString(),
+                      test: list[index].testObject,
                       labName: list[index].labName,
                       price: list[index].price,
                       isTestSelected: isTestSelected(list[index].testObject),

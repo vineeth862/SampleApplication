@@ -15,7 +15,7 @@ Test _$TestFromJson(Map<String, dynamic> json) => Test(
     sampleContainer: json['sampleContainer'] as String,
     sampletypeName: json['sampletypeName'] as String,
     tat: json['tat'].toString(),
-    testProcessingDays: json['testProcessingDays'] as String,
+    testProcessingDays: json['testProcessingDays'].toString(),
     testCode: json['testCode'].toString(),
     testDes: json['testDes'] as String,
     testName: json['testName'] as String,
