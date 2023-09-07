@@ -49,9 +49,9 @@ class TestCardWidget extends StatelessWidget {
           }
         }
         if (totalHour < 24) {
-          return "Reports Within 1 Day";
+          return "Reports Within 1 Days";
         }
-        return "Reports Within $totalDays Day";
+        return "Reports Within $totalDays Days";
       }
       return "NA";
     }

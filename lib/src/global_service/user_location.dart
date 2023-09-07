@@ -7,6 +7,8 @@ import '../utils/Provider/address_provider.dart';
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
   RxString globalString = 'Fetching adress...'.obs;
+  RxString location = 'Fetching adress...'.obs;
+  RxString area = '...'.obs;
   final appState = AppState();
   Position? latAndLong;
   //final appStates = Provider.of<AppState>(context);
@@ -86,6 +88,8 @@ class UserCurrentLocation extends GetxController {
     postalCode = place.postalCode.toString();
     locality = place.locality.toString();
     adress = postalCode! + ', ' + locality!;
+    location = RxString(place.subLocality.toString());
+    area = RxString(add[4].name.toString());
     //print(fulladd.Name);
     updateGlobalString(adress);
     print(globalString.value);
