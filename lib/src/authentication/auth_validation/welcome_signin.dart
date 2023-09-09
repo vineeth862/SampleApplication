@@ -23,6 +23,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
   TextEditingController nameController = TextEditingController();
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
+  final pinController = TextEditingController();
   User user = User();
   var otp;
   var Controller = Get.put(otpController());
@@ -36,7 +37,8 @@ class _WelcomesigninState extends State<Welcomesignin> {
   void _saveItem() {
     user.mobile = "+91" + mobileNumberController.text.trim();
     user.userName = nameController.text.trim();
-    AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
+    AuthenticationRepository.instance
+        .PhoneNumberAuth(user.mobile!, pinputcontroller: pinController);
   }
 
   @override
@@ -243,13 +245,17 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           const SizedBox(height: 20),
                           GestureDetector(
                             child: Pinput(
+                              controller: pinController,
                               length: 6,
                               focusNode: focusNode,
                               keyboardType: TextInputType.number,
+                              androidSmsAutofillMethod:
+                                  AndroidSmsAutofillMethod.none,
+                              listenForMultipleSmsOnAndroid: true,
                               validator: (value) {
                                 otp = value.toString();
-                                // otpController.instance
-                                //     .verifyOtpController(otp, user);
+                                otpController.instance
+                                    .verifyOtpController(otp, user);
                               },
                             ),
                           ),

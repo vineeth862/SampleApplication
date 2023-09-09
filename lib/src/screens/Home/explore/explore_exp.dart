@@ -102,7 +102,7 @@ class _exploreExpState extends State<exploreExp> {
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
           backgroundColor: const Color.fromARGB(255, 243, 242, 243),
-          toolbarHeight: 70,
+          toolbarHeight: 75,
           leading: null,
           automaticallyImplyLeading: false,
           title: _isAppBarExpanded
@@ -144,10 +144,23 @@ class _exploreExpState extends State<exploreExp> {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Icon(
-                      Icons.ac_unit_rounded,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxHeight: 100,
+                          minHeight: 50,
+                          maxWidth: 100,
+                          minWidth: 20,
+                        ),
+                        child: const CircleAvatar(
+                          backgroundImage: AssetImage(
+                            './assets/images/MedCapH.jpg',
+                          ),
+                          radius: 20,
+                        ),
+                      ),
+                    ),
                   ],
                 )
               : Container(),
@@ -156,40 +169,89 @@ class _exploreExpState extends State<exploreExp> {
             background: !_isAppBarExpanded
                 ? SafeArea(
                     child: Container(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [
-                          Color.fromARGB(255, 250, 250, 250),
-                          Color.fromARGB(255, 246, 245, 246),
-                          Color.fromARGB(255, 249, 249, 249),
-                          Color.fromARGB(255, 251, 249, 251),
+                          Theme.of(context).colorScheme.surface,
+                          Theme.of(context).colorScheme.surface,
                           //Color.fromARGB(255, 5, 84, 8)
                         ])),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextButton.icon(
-                                onPressed: () {
-                                  globalservice.navigate(
-                                      context, const InitialAdress());
-                                },
-                                icon: const Icon(Icons.location_on),
-                                label: Obx(() => Text(
-                                      myController.globalString.value,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary),
-                                    ))),
-                            const SizedBox(
-                              height: 10,
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 4),
+                            //   child: ConstrainedBox(
+                            //     constraints: const BoxConstraints(
+                            //       maxHeight: 100,
+                            //       minHeight: 50,
+                            //       maxWidth: 100,
+                            //       minWidth: 20,
+                            //     ),
+                            //     child: CircleAvatar(
+                            //       backgroundImage: AssetImage(
+                            //         './assets/images/5856.jpg',
+                            //       ),
+                            //       radius: 20,
+                            //     ),
+                            //   ),
+                            // ),
+                            //Text("Choose Location"),
+                            ListTile(
+                                contentPadding: const EdgeInsets.only(
+                                    left: 15.0, right: 0.0, top: 0, bottom: 0),
+                                title: Text(
+                                  "Choose Location",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                subtitle: Obx(() => Text(
+                                    myController.globalString.value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(
+                                            color: Colors.black,
+                                            fontSize: 12)))),
+                            // TextButton(
+                            //     onPressed: () {
+                            //       globalservice.navigate(
+                            //           context, const InitialAdress());
+                            //     },
+                            //     child: Obx(() => Text(
+                            //         myController.globalString.value,
+                            //         style: Theme.of(context)
+                            //             .textTheme
+                            //             .titleLarge!
+                            //             .copyWith(
+                            //                 color: Colors.black,
+                            //                 fontSize: 12)))),
+                            const Expanded(
+                              child: SizedBox(),
                             ),
                             // Padding(
                             //   padding: const EdgeInsets.all(8.0),
                             //   child: MySlider(),
                             // )
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 8.0),
+                            //   child: ConstrainedBox(
+                            //       constraints: const BoxConstraints(
+                            //         maxHeight: 200,
+                            //         minHeight: 50,
+                            //         maxWidth: 200,
+                            //         minWidth: 20,
+                            //       ),
+                            //       // child: CircleAvatar(
+                            //       //   backgroundImage: AssetImage(
+                            //       //     './assets/images/MedCapH.jpg',
+                            //       //   ),
+                            //       //   radius: 50,
+                            //       // ),
+                            //       child: Image.asset(
+                            //         './assets/images/MedCapH.jpg',
+                            //         height: 100,
+                            //       )),
+                            // ),
                           ],
                         )),
                   )
@@ -240,60 +302,73 @@ class _exploreExpState extends State<exploreExp> {
                 const SizedBox(
                   height: 25,
                 ),
-                Card(
-                  child: AspectRatio(
-                    aspectRatio: 1 / 1,
-                    // padding: const EdgeInsets.all(16.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.07,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.07,
-                                  child: Image.asset(
-                                      './assets/images/flask.jpg',
-                                      fit: BoxFit.cover),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text("Popular Categories",
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Expanded(
-                            child: GridView.count(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
-                              physics: const NeverScrollableScrollPhysics(),
-                              childAspectRatio:
-                                  0.8, // Adjust the aspect ratio to control the card height
-                              children: [...categoryList],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                // Card(
+                //   child: AspectRatio(
+                //     aspectRatio: 1 / 1,
+                //     // padding: const EdgeInsets.all(16.0),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(16),
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.center,
+                //         children: [
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Row(
+                //     children: [
+                //       Container(
+                //         width: MediaQuery.of(context).size.width * 0.07,
+                //         height: MediaQuery.of(context).size.width * 0.07,
+                //         child: Image.asset('./assets/images/flask.jpg',
+                //             fit: BoxFit.cover),
+                //       ),
+                //       const SizedBox(
+                //         width: 10,
+                //       ),
+                //       Text("Popular Categories",
+                //           style: TextStyle(
+                //             fontSize: MediaQuery.of(context).size.width * 0.05,
+                //             fontWeight: FontWeight.bold,
+                //           )),
+                //     ],
+                //   ),
+                // ),
+                ListTile(
+                  title: Text("Popular Categories",
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  subtitle: Text(
+                    "MedCapH recomended Health Categories",
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
+                //           const SizedBox(
+                //             height: 20,
+                //           ),
+                Container(
+                  width: double.infinity,
+                  height: 280,
+                  // decoration: const BoxDecoration(
+                  //     gradient: LinearGradient(colors: [
+                  //   Color.fromARGB(255, 231, 243, 253),
+                  //   Color.fromARGB(255, 231, 243, 253),
+                  // ])),
+                  child: GridView.count(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4.0,
+                    crossAxisSpacing: 4.0,
+                    physics: const NeverScrollableScrollPhysics(),
+                    childAspectRatio:
+                        0.8, // Adjust the aspect ratio to control the card height
+                    children: [...categoryList],
+                  ),
+                ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(
                   height: 5,
                 ),

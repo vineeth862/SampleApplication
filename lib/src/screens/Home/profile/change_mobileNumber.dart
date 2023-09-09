@@ -22,6 +22,7 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
   var Controller = Get.put(otpController());
+  final pinController = TextEditingController();
   User user = User();
   var otp;
   void _validate() {
@@ -31,7 +32,8 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
   void _saveItem() {
     user.mobile = "+91" + mobileNumberController.text.trim();
 
-    AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
+    AuthenticationRepository.instance
+        .PhoneNumberAuth(user.mobile!, pinputcontroller: pinController);
   }
 
   @override
@@ -137,6 +139,7 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
                               GestureDetector(
                                 child: Pinput(
                                   length: 6,
+                                  controller: pinController,
                                   focusNode: focusNode,
                                   keyboardType: TextInputType.number,
                                   validator: (value) {

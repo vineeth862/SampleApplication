@@ -25,10 +25,12 @@ class AuthenticationRepository extends GetxController {
         : Get.offAll(() => HomePage());
   }
 
-  Future<void> PhoneNumberAuth(String MobileNumber) async {
+  Future<void> PhoneNumberAuth(String MobileNumber,
+      {pinputcontroller = "1"}) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: MobileNumber,
-      verificationCompleted: (credential) async {
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        pinputcontroller.setText(credential.smsCode);
         await _auth.signInWithCredential(credential);
       },
       codeSent: ((verificationId, resendToken) {

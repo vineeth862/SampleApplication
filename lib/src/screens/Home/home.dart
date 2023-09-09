@@ -39,7 +39,7 @@ class HomePageState extends State<HomePage> {
     ProfileScreen(),
     //Explore(),
     exploreExp(),
-    OrderTrackerHome()
+    OrderTrackerHome(),
   ];
 
   void _onItemTapped(int index) {

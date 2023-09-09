@@ -97,7 +97,8 @@ flutter:
     - assets/images/why-us3.png
     - assets/images/why-us4.png
     - assets/images/lab1.png
-    
+    - assets/images/MedCapH.jpg
+    - assets/images/5856.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

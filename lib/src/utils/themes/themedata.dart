@@ -10,7 +10,8 @@ final ThemeData theme = ThemeData(
       primary: Color.fromRGBO(189, 73, 50, 1),
       primaryContainer: Color.fromRGBO(189, 73, 50, 1),
       secondary: Color.fromRGBO(214, 157, 146, 1), // Light purple color
-      secondaryContainer: Color.fromRGBO(253, 247, 247, 1),
+      //secondaryContainer: Color.fromRGBO(253, 247, 247, 1),
+      secondaryContainer: Color.fromRGBO(251, 245, 243, 1),
       tertiary: Color.fromRGBO(177, 75, 55, 1),
       surface: Colors.white,
       background: Colors.white,
