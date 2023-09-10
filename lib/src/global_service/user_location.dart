@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+import '../screens/Home/models/lab/lab.dart';
 import '../utils/Provider/address_provider.dart';
+import '../utils/Provider/search_provider.dart';
 
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
   RxString globalString = 'Fetching adress...'.obs;
   RxString location = 'Fetching adress...'.obs;
+  RxString pinCode = ''.obs;
   RxString area = '...'.obs;
   final appState = AppState();
   Position? latAndLong;
@@ -15,6 +19,7 @@ class UserCurrentLocation extends GetxController {
   String? postalCode;
   String? locality;
   String adress = "Fetching adress...";
+  List<Lab> availabelLabs = [];
   //RxString globalString = 'Initial Value'.obs;
   bool hasInitialValueChanged = false;
   void updateGlobalString(String newValue) {
@@ -90,8 +95,22 @@ class UserCurrentLocation extends GetxController {
     adress = postalCode! + ', ' + locality!;
     location = RxString(place.subLocality.toString());
     area = RxString(add[4].name.toString());
+    pinCode = RxString(postalCode.toString());
+    SearchListState().filterLabOnPinCode();
     //print(fulladd.Name);
     updateGlobalString(adress);
     print(globalString.value);
+  }
+
+  filterLabOnPinCode() async {
+    var labList = await FirebaseFirestore.instance.collection('lab').get();
+    availabelLabs = labList.docs.map((doc) {
+      return Lab.fromJson(doc.data());
+    }).where((element) {
+      return element.branchDetails
+          .where((element) =>
+              element.availablePincodeDetails.contains(pinCode.toString()))
+          .isNotEmpty;
+    }).toList();
   }
 }

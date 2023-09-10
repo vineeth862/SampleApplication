@@ -120,7 +120,8 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                       // style: const TextStyle(color: Color.fromARGB(255, 43, 42, 42)),
                       onChanged: (value) async {
                         _isInputEmpty = value.isEmpty;
-                        await searchState.searchTest(value, widget.labCode);
+                        await searchState.searchTestByLabCode(
+                            value, widget.labCode);
                       },
                     ),
                   )
