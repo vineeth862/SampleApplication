@@ -8,6 +8,8 @@ import 'package:sample_application/src/screens/Home/explore/explore_howItWorks.d
 import 'package:sample_application/src/screens/Home/explore/explore_packages.dart';
 import 'package:sample_application/src/screens/Home/models/category/category.dart';
 import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
+import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import '../../../global_service/cloud_storage_service.dart';
 import '../../../global_service/global_service.dart';
@@ -102,7 +104,7 @@ class _exploreExpState extends State<exploreExp> {
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
           backgroundColor: const Color.fromARGB(255, 243, 242, 243),
-          toolbarHeight: 75,
+          toolbarHeight: 70,
           leading: null,
           automaticallyImplyLeading: false,
           title: _isAppBarExpanded
@@ -175,82 +177,153 @@ class _exploreExpState extends State<exploreExp> {
                           Theme.of(context).colorScheme.surface,
                           //Color.fromARGB(255, 5, 84, 8)
                         ])),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 4),
-                            //   child: ConstrainedBox(
-                            //     constraints: const BoxConstraints(
-                            //       maxHeight: 100,
-                            //       minHeight: 50,
-                            //       maxWidth: 100,
-                            //       minWidth: 20,
-                            //     ),
-                            //     child: CircleAvatar(
-                            //       backgroundImage: AssetImage(
-                            //         './assets/images/5856.jpg',
-                            //       ),
-                            //       radius: 20,
-                            //     ),
-                            //   ),
-                            // ),
-                            //Text("Choose Location"),
-                            ListTile(
-                                contentPadding: const EdgeInsets.only(
-                                    left: 15.0, right: 0.0, top: 0, bottom: 0),
-                                title: Text(
-                                  "Choose Location",
-                                  style: Theme.of(context).textTheme.bodySmall,
+                            GestureDetector(
+                              onTap: () {
+                                globalservice.navigate(
+                                    context, const ProfileScreen());
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxHeight: 100,
+                                    minHeight: 50,
+                                    maxWidth: 100,
+                                    minWidth: 20,
+                                  ),
+                                  child: CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                      './assets/images/5856.jpg',
+                                    ),
+                                    radius: 20,
+                                  ),
                                 ),
-                                subtitle: Obx(() => Text(
-                                    myController.globalString.value,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(
-                                            color: Colors.black,
-                                            fontSize: 12)))),
-                            // TextButton(
-                            //     onPressed: () {
-                            //       globalservice.navigate(
-                            //           context, const InitialAdress());
-                            //     },
-                            //     child: Obx(() => Text(
-                            //         myController.globalString.value,
-                            //         style: Theme.of(context)
-                            //             .textTheme
-                            //             .titleLarge!
-                            //             .copyWith(
-                            //                 color: Colors.black,
-                            //                 fontSize: 12)))),
-                            const Expanded(
-                              child: SizedBox(),
+                              ),
                             ),
+                            Container(
+                              width: 150,
+                              height: 200,
+                              child: GestureDetector(
+                                onTap: () {
+                                  globalservice.navigate(
+                                      context, const InitialAdress());
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      visualDensity: VisualDensity(
+                                          horizontal: 1, vertical: -1),
+                                      contentPadding:
+                                          const EdgeInsets.only(left: 5),
+                                      title: Text(
+                                        "Choose Location",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
+                                      ),
+                                      subtitle: Obx(() => Text(
+                                          myController.globalString.value,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge!
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12))),
+                                      trailing: Container(
+                                        width: 30,
+                                        alignment:
+                                            AlignmentDirectional(-10, 0.9),
+                                        child: Icon(
+                                            Icons.keyboard_arrow_down_sharp),
+                                      ),
+                                    ),
+
+                                    // TextButton(
+                                    //     onPressed: () {
+                                    //       globalservice.navigate(
+                                    //           context, const InitialAdress());
+                                    //     },
+                                    //     child: Obx(() => Text(
+                                    //         myController.globalString.value,
+                                    //         style: Theme.of(context)
+                                    //             .textTheme
+                                    //             .titleLarge!
+                                    //             .copyWith(
+                                    //                 color: Colors.black,
+                                    //                 fontSize: 12)))),
+
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(8.0),
+                                    //   child: MySlider(),
+                                    // )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // ),
                             // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: MySlider(),
-                            // )
+                            //   padding: const EdgeInsets.only(left: 0),
+                            //   child: Icon(
+                            //     Icons.keyboard_arrow_down_sharp,
+                            //   ),
+
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.33,
+                            ),
+
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  globalservice.navigate(
+                                      context, OrderTrackerHome());
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0, right: 0),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_cart,
+                                        // color: Theme.of(context)
+                                        //     .colorScheme
+                                        //     .primary,
+                                      ),
+                                      Text("Cart",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge!
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
                             // Padding(
                             //   padding:
                             //       const EdgeInsets.symmetric(horizontal: 8.0),
                             //   child: ConstrainedBox(
-                            //       constraints: const BoxConstraints(
-                            //         maxHeight: 200,
-                            //         minHeight: 50,
-                            //         maxWidth: 200,
-                            //         minWidth: 20,
-                            //       ),
-                            //       // child: CircleAvatar(
-                            //       //   backgroundImage: AssetImage(
-                            //       //     './assets/images/MedCapH.jpg',
-                            //       //   ),
-                            //       //   radius: 50,
-                            //       // ),
-                            //       child: Image.asset(
+                            //     constraints: const BoxConstraints(
+                            //       maxHeight: 200,
+                            //       minHeight: 50,
+                            //       maxWidth: 200,
+                            //       minWidth: 20,
+                            //     ),
+                            //     child: CircleAvatar(
+                            //       backgroundImage: AssetImage(
                             //         './assets/images/MedCapH.jpg',
-                            //         height: 100,
-                            //       )),
+                            //       ),
+                            //       radius: 20,
+                            //     ),
+                            //     // child: Image.asset(
+                            //     //   './assets/images/MedCapH.jpg',
+                            //     //   height: 100,
+                            //     // )
+                            //   ),
                             // ),
                           ],
                         )),
@@ -264,7 +337,7 @@ class _exploreExpState extends State<exploreExp> {
         SliverList(
             delegate: SliverChildListDelegate([
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Padding(

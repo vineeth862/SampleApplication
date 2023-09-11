@@ -32,13 +32,15 @@ class HomePageState extends State<HomePage> {
 
   String postalCode = "";
   String Locality = "";
-  int selectedIndex = 1;
+  int selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    ProfileScreen(),
+    //ProfileScreen(),
     //Explore(),
     exploreExp(),
+    ProfileScreen(),
+    ProfileScreen(),
     OrderTrackerHome(),
   ];
 
@@ -175,21 +177,28 @@ class HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined),
-            label: 'Profile',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined),
-            label: 'Explore',
+            icon: Icon(Icons.airline_seat_flat),
+            label: 'Radiology',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_hospital_sharp),
+            label: 'Dr.Consultation',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.moped_outlined),
-            label: 'Order Tracker',
+            label: 'Track Order',
           ),
         ],
         currentIndex: selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary,
         onTap: _onItemTapped,
+        showUnselectedLabels: true,
+        unselectedItemColor: Theme.of(context).colorScheme.onBackground,
+        type: BottomNavigationBarType.fixed,
       ),
     ));
   }
