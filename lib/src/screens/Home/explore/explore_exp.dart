@@ -11,14 +11,16 @@ import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dar
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
+import '../../../authentication/user_repository.dart';
 import '../../../global_service/cloud_storage_service.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/search_provider.dart';
+import '../order_tracker/order-repository.dart';
 import 'Search/Cards/filter-test-list.dart';
 import 'explore.service.dart';
 import 'explore_category.dart';
 import 'explore_why-us.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:badges/badges.dart' as badges;
 
 class exploreExp extends StatefulWidget {
   const exploreExp({super.key});
@@ -35,9 +37,12 @@ class _exploreExpState extends State<exploreExp> {
   CloudStorageService storage = CloudStorageService();
   List<LabTestCategoryCard> categoryList = [];
   late SearchListState searchState;
+  final orderRepo = OrderRepository();
   List labList = [];
+  int cartCount = 0;
   @override
   void initState() {
+    getCartCount();
     super.initState();
 
     _scrollController.addListener(() {
@@ -48,6 +53,13 @@ class _exploreExpState extends State<exploreExp> {
     });
     getCategoryList();
     getLabLogoList();
+  }
+
+  getCartCount() async {
+    final orderIds = await UserRepository().getOrderIds();
+
+    await orderRepo.fetchAllOrders(orderIds, 'cart');
+    setState(() {});
   }
 
   getCategoryList() async {
@@ -273,36 +285,63 @@ class _exploreExpState extends State<exploreExp> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.33,
                             ),
-
-                            Expanded(
+                            Padding(
+                              padding: const EdgeInsets.all(12),
                               child: GestureDetector(
                                 onTap: () {
                                   globalservice.navigate(
-                                      context, OrderTrackerHome());
+                                      context,
+                                      OrderTrackerHome(
+                                        from: 'cart',
+                                      ));
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 20.0, right: 0),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.shopping_cart,
-                                        // color: Theme.of(context)
-                                        //     .colorScheme
-                                        //     .primary,
-                                      ),
-                                      Text("Cart",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge!
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12))
-                                    ],
+                                child: badges.Badge(
+                                  badgeContent: Text(
+                                    orderRepo.orderList.length.toString(),
+                                    style: TextStyle(fontSize: 8),
                                   ),
+                                  showBadge: true,
+                                  badgeAnimation: badges.BadgeAnimation.slide(
+                                      animationDuration: Duration(
+                                        seconds: 1,
+                                      ),
+                                      curve: Curves.bounceInOut),
+                                  child: Icon(Icons.shopping_cart),
                                 ),
                               ),
                             )
+                            // Expanded(
+                            //   child: GestureDetector(
+                            //     onTap: () {
+                            //       globalservice.navigate(
+                            //           context,
+                            //           OrderTrackerHome(
+                            //             from: 'cart',
+                            //           ));
+                            //     },
+                            //     child: Padding(
+                            //       padding: const EdgeInsets.only(
+                            //           top: 20.0, right: 0),
+                            //       child: Column(
+                            //         children: [
+                            //           Icon(
+                            //             Icons.shopping_cart,
+                            //             // color: Theme.of(context)
+                            //             //     .colorScheme
+                            //             //     .primary,
+                            //           ),
+                            //           Text("Cart",
+                            //               style: Theme.of(context)
+                            //                   .textTheme
+                            //                   .titleLarge!
+                            //                   .copyWith(
+                            //                       color: Colors.black,
+                            //                       fontSize: 12))
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
                             // Padding(
                             //   padding:
                             //       const EdgeInsets.symmetric(horizontal: 8.0),

@@ -35,13 +35,15 @@ class HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     //ProfileScreen(),
     //Explore(),
-    exploreExp(),
-    ProfileScreen(),
-    ProfileScreen(),
-    OrderTrackerHome(),
+    const exploreExp(),
+    const ProfileScreen(),
+    const ProfileScreen(),
+    OrderTrackerHome(
+      from: 'home',
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -170,7 +172,7 @@ class HomePageState extends State<HomePage> {
                           });
                         },
                       )
-                    : Card()),
+                    : const Card()),
           ),
         ],
       ),

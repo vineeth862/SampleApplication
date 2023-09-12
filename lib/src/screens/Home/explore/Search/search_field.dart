@@ -125,7 +125,9 @@ class _SearchBarPageState extends State<SearchBarPage>
                         Expanded(
                           child: ListTile(
                             title: Obx(() => Text(
-                                  myController.location.value,
+                                  myController.location.value.trim() != ""
+                                      ? myController.location.value
+                                      : myController.adress,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge!

@@ -17,6 +17,8 @@ class Test {
   String testName;
   String category;
   bool daily;
+  int labOpeningTime;
+  int labClosingTime;
   String displayName;
 
   Test(
@@ -34,7 +36,9 @@ class Test {
       required this.testName,
       required this.category,
       required this.daily,
-      required this.displayName});
+      required this.displayName,
+      required this.labOpeningTime,
+      required this.labClosingTime});
   factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
   Map<String, dynamic> toJson() => _$TestToJson(this);
 }

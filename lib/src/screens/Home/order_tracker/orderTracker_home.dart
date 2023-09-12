@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/order-repository.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 
@@ -12,8 +13,8 @@ import '../models/test/test.dart';
 import 'orderTracker_progress.dart';
 
 class OrderTrackerHome extends StatefulWidget {
-  const OrderTrackerHome({super.key});
-
+  OrderTrackerHome({super.key, required this.from});
+  String from;
   @override
   State<OrderTrackerHome> createState() => _OrderTrackerHomeState();
 }
@@ -25,12 +26,14 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   late SelectedOrderState selectedOrder;
   late LoadingProvider loadingProvider;
   List<dynamic> orders = [];
+
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
-    final getOrder = await selectedOrder.fetchAllOrders(orderIds);
+    final orderRepo = OrderRepository();
+    await orderRepo.fetchAllOrders(orderIds, widget.from);
 
     setState(() {
-      orders = getOrder;
+      orders = orderRepo.orderList;
       loadingProvider.stopLoading();
     });
   }
@@ -95,7 +98,9 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            "Your Bookings",
+                            widget.from == "cart"
+                                ? "Your Cart"
+                                : "Your Bookings",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!

@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/user_repository.dart';
 
-import '../../screens/Home/models/order/order.dart' as orders;
+import '../../screens/Home/models/order/order.dart' as orderModule;
 import '../../screens/Home/models/status/status.dart';
 
 class SelectedOrderState extends ChangeNotifier {
   final _db = FirebaseFirestore.instance;
-  orders.Order order = orders.Order();
+  orderModule.Order order = orderModule.Order();
   Status status = Status();
   static DocumentReference<Map<String, dynamic>>? document;
   get getOrder {
@@ -18,12 +18,12 @@ class SelectedOrderState extends ChangeNotifier {
     return status;
   }
 
-  set setOrder(orders.Order order) {
+  set setOrder(orderModule.Order order) {
     this.order = order;
   }
 
   void resetOrder() {
-    order = orders.Order();
+    order = orderModule.Order();
     notifyListeners();
   }
 
@@ -46,20 +46,6 @@ class SelectedOrderState extends ChangeNotifier {
     });
     notifyListeners();
     return true;
-  }
-
-  fetchAllOrders(List orderIds) async {
-    final ordersList = await _db
-        .collection("order")
-        .where("orderNumber", whereIn: orderIds)
-        .get();
-
-    if (ordersList.docs.isNotEmpty) {
-      return ordersList.docs.map((doc) {
-        return orders.Order.fromJson(doc.data());
-      }).toList();
-    }
-    return [];
   }
 
   Future<String> fetchStatus(statusCode) async {

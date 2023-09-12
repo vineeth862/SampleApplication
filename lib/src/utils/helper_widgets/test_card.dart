@@ -26,34 +26,35 @@ class TestCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime date = DateTime.now();
     String getReportDate(Test testObj) {
-      if (testObj.testProcessingDays.isNumericOnly &&
-          testObj.tat.isNumericOnly) {
-        int totalHour;
-        int labClosingTime = int.parse(testObj.testProcessingDays);
-        int labOpeningTime = 9;
-        int tat = int.tryParse(testObj.tat)!;
+      // if (testObj.testProcessingDays == '') {
+      //   int totalHour;
 
-        int sampleDeliveringHour = date.hour + 4;
+      //   int tat = int.tryParse(testObj.tat)!;
 
-        if (labClosingTime > (sampleDeliveringHour + tat)) {
-          totalHour = tat;
-        } else {
-          totalHour = (24 - date.hour) + labOpeningTime + tat;
-        }
-        int totalDays = (totalHour / 24).remainder(1) != 0
-            ? (totalHour / 24).toInt() + 1
-            : (totalHour / 24).toInt();
-        if (!testObj.daily) {
-          if ((5 - (date.weekday + totalDays)) >= 0) {
-            totalDays += 2;
-          }
-        }
-        if (totalHour < 24) {
-          return "Reports Within 1 Days";
-        }
-        return "Reports Within $totalDays Days";
-      }
-      return "NA";
+      //   int sampleDeliveringHour = date.hour >= testObj.labOpeningTime &&
+      //           date.hour < testObj.labClosingTime
+      //       ? date.hour + 2
+      //       : testObj.labOpeningTime + 2;
+
+      //   if (testObj.labClosingTime > (sampleDeliveringHour + tat)) {
+      //     totalHour = tat;
+      //   } else {
+      //     totalHour = (24 - date.hour) + testObj.labOpeningTime + tat;
+      //   }
+      //   int totalDays = (totalHour / 24).remainder(1) != 0
+      //       ? (totalHour / 24).toInt() + 1
+      //       : (totalHour / 24).toInt();
+      //   if (!testObj.daily) {
+      //     if ((5 - (date.weekday + totalDays)) >= 0) {
+      //       totalDays += 2;
+      //     }
+      //   }
+      //   if (totalHour < 24) {
+      //     return "Reports Within $totalHour hours";
+      //   }
+      //   return "Reports Within $totalDays Days";
+      // }
+      return "Report Within ${testObj.tat} Active hours";
     }
 
     return Container(
