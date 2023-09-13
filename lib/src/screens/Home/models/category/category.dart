@@ -1,13 +1,12 @@
 class Category {
-  String? type;
   String? title;
   String? path;
+  List? testList;
+  Category({this.title, this.path, this.testList});
 
-  Category({this.type, this.title, this.path});
-
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      Category(type: json['type'], title: json['title'], path: json['path']);
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+      title: json['title'], path: json['path'], testList: json['testList']);
 
   Map<String, dynamic> toJson() =>
-      <String, dynamic>{'type': type, 'title': title, 'path': path};
+      <String, dynamic>{'title': title, 'path': path, 'testList': testList};
 }

@@ -10,20 +10,28 @@ class LabTestCategoryCard extends StatelessWidget {
   final String title;
   final String content;
   final String imagePath;
+  final List testList;
 
-  LabTestCategoryCard(this.title, this.content, this.imagePath);
+  LabTestCategoryCard(this.title, this.content, this.imagePath, this.testList);
   GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
     return GestureDetector(
-      onTap: () async {
-        await searchState.categoryClicked("category", title);
+      onTap: () {
+        // await searchState.categoryClicked("category", title);
+        // globalservice.navigate(
+        //     context,
+        //     FilteredTestCardlistPage(
+        //       title: title,
+        //       category: content,
+        //     ));
+        print(testList + ["explor"]);
         globalservice.navigate(
             context,
-            FilteredTestCardlistPage(
-              title: title,
-              category: content,
+            FilterCategoryListPage(
+              sexCategory: title,
+              testList: testList,
             ));
       },
       child: Card(

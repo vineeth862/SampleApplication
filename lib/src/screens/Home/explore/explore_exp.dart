@@ -68,7 +68,8 @@ class _exploreExpState extends State<exploreExp> {
 
     for (var i = 0; i < list.length; i++) {
       // var path = await storage.getImageRef(list[i].path!);
-      categoryList.add(LabTestCategoryCard(list[i].title!, "", list[i].path!));
+      categoryList.add(LabTestCategoryCard(
+          list[i].title!, "", list[i].path!, list[i].testList!));
     }
 
     setState(() {
@@ -456,9 +457,7 @@ class _exploreExpState extends State<exploreExp> {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
-                //           const SizedBox(
-                //             height: 20,
-                //           ),
+
                 Container(
                   width: double.infinity,
                   height: 280,

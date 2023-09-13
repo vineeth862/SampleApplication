@@ -8,7 +8,9 @@ import 'package:sample_application/src/utils/Provider/search_provider.dart';
 class FilterCategoryListPage extends StatefulWidget {
   final String? sexCategory;
   final String? ageGroup;
-  const FilterCategoryListPage({super.key, this.sexCategory, this.ageGroup});
+  final List? testList;
+  const FilterCategoryListPage(
+      {super.key, this.sexCategory, this.ageGroup, this.testList});
 
   @override
   State<FilterCategoryListPage> createState() => _FilterCategoryListPageState();
@@ -43,7 +45,13 @@ class _FilterCategoryListPageState extends State<FilterCategoryListPage> {
 
   @override
   void initState() {
-    getMaleCategory();
+    if (widget.testList == null || widget.testList == []) {
+      getMaleCategory();
+    } else {
+      setState(() {
+        displayNames = widget.testList!.toList();
+      });
+    }
   }
 
   GlobalService globalservice = GlobalService();

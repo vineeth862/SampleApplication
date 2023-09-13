@@ -8,8 +8,8 @@ class ExploreService {
   final _db = FirebaseFirestore.instance;
   fetchCategoryList() async {
     final categoryList = await _db
-        .collection("masterData")
-        .where("type", isEqualTo: 'category')
+        .collection("packages/category/popularCategory")
+        //.where("type", isEqualTo: 'category')
         .get();
 
     if (categoryList.docs.isNotEmpty) {
