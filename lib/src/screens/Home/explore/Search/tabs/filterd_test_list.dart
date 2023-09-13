@@ -57,6 +57,7 @@ class TestListScreen extends StatelessWidget {
                   //     searchState.gettestSuggetionList.elementAt(index).labName,
                   onTap: (title, labCode, testCode) async {
                     await searchState.cardClicked(testCode, true);
+                    // ignore: use_build_context_synchronously
                     globalservice.navigate(
                         context,
                         FilteredTestCardlistPage(

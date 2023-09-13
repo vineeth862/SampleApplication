@@ -9,6 +9,8 @@ import '../../global_service/user_location.dart';
 class SearchListState with ChangeNotifier {
   List<Lab> filteredLabs = [];
   List<Test> filteredTests = [];
+  var filteredMaleCategory = [];
+  List<String> filteredFemaleCategory = [];
   final myController = Get.find<UserCurrentLocation>();
   String input = '';
 
@@ -205,10 +207,10 @@ class SearchListState with ChangeNotifier {
     return;
   }
 
-  categoryClicked(String category) {
+  categoryClicked(String category, String param) {
     filteredTestCardList = [];
 
-    setTestCardList(category, 'category');
+    setTestCardList(param, category);
 
     return;
   }
@@ -223,5 +225,37 @@ class SearchListState with ChangeNotifier {
               .contains(myController.pinCode.toString()))
           .isNotEmpty;
     }).toList();
+  }
+
+  List get gettestCategoryMaleList {
+    return filteredMaleCategory;
+  }
+
+  List<String> get gettestCategoryfemaleList {
+    return filteredFemaleCategory;
+  }
+
+  List<TestCard> get getFilteredMaleCardList {
+    return filteredMaleCardList;
+  }
+
+  List<TestCard> filteredMaleCardList = [];
+  setFilteredMaleCardList(testCode, condition) async {
+    var result = await FirebaseFirestore.instance
+        .collection('test2')
+        .where(condition, isEqualTo: testCode)
+        .get();
+    if (result.docs.isNotEmpty) {
+      filteredMaleCardList =
+          result.docs.map((e) => TestCard.fromJson(e.data())).where((test) {
+        bool flag = false;
+        myController.availabelLabs.forEach((element) {
+          if (!flag)
+            flag = (element.hf_lab_code.toString() == test.testObject.labCode);
+        });
+        return flag;
+      }).toList();
+    }
+    notifyListeners();
   }
 }

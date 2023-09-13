@@ -39,6 +39,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
     final selectedTest = Provider.of<SelectedTestState>(context);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
     List<TestCard> list = searchState.getTestCardList;
+
     bool isTestSelected(Test test) {
       return (selectedTest.getSelectedTest
           .where((element) =>

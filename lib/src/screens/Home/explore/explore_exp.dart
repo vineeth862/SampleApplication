@@ -10,6 +10,7 @@ import 'package:sample_application/src/screens/Home/models/category/category.dar
 import 'package:sample_application/src/screens/Home/models/lab/labMasterData.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
+import 'package:sample_application/src/screens/category/filtered_category_list.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import '../../../authentication/user_repository.dart';
 import '../../../global_service/cloud_storage_service.dart';
@@ -283,7 +284,7 @@ class _exploreExpState extends State<exploreExp> {
                             //   ),
 
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.33,
+                              width: MediaQuery.of(context).size.width * 0.3,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(12),
@@ -516,22 +517,62 @@ class _exploreExpState extends State<exploreExp> {
                     ),
                   ),
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      MaleFemaleCategory(
-                        name: "Under 25 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "men",
+                                ageGroup: "young",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "Under 25 Years",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "25-50 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "men",
+                                ageGroup: "mid",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "  25-50 Years  ",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "Above 50 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "men",
+                                ageGroup: "old",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "Above 50 Years",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "All Packages",
-                      )
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "men",
+                                ageGroup: "all",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "All Packages",
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -552,22 +593,62 @@ class _exploreExpState extends State<exploreExp> {
                     ),
                   ),
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      MaleFemaleCategory(
-                        name: "Under 25 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "women",
+                                ageGroup: "young",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "Under 25 Years",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "25-50 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "women",
+                                ageGroup: "mid",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "  25-50 Years  ",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "Above 50 Years",
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "women",
+                                ageGroup: "old",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "Above 50 years",
+                        ),
                       ),
-                      MaleFemaleCategory(
-                        name: "All Packages",
-                      )
+                      GestureDetector(
+                        onTap: () {
+                          globalservice.navigate(
+                              context,
+                              FilterCategoryListPage(
+                                sexCategory: "women",
+                                ageGroup: "all",
+                              ));
+                        },
+                        child: MaleFemaleCategory(
+                          name: "All Packages",
+                        ),
+                      ),
                     ],
                   ),
                 ),

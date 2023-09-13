@@ -8,6 +8,7 @@ import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_h
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-summary/orderSummary.dart';
+import 'package:sample_application/src/screens/category/filtered_category_list.dart';
 import 'package:sample_application/src/screens/userAdress/addressbook.dart';
 
 import '../../../utils/db-operation/db_operations.dart';
@@ -289,7 +290,7 @@ class ProfileScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle edit profile button press
-                  globalservice.navigate(context, exploreExp());
+                  globalservice.navigate(context, FilterCategoryListPage());
                 },
                 child: const Text('Order Summary'),
               ),

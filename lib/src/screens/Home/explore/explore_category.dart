@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/Cards/filter-test-list.dart';
+import 'package:sample_application/src/screens/category/filtered_category_list.dart';
 
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/search_provider.dart';
@@ -17,7 +18,7 @@ class LabTestCategoryCard extends StatelessWidget {
     final searchState = Provider.of<SearchListState>(context);
     return GestureDetector(
       onTap: () async {
-        await searchState.categoryClicked(title);
+        await searchState.categoryClicked("category", title);
         globalservice.navigate(
             context,
             FilteredTestCardlistPage(
@@ -180,37 +181,35 @@ class MaleFemaleCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Card(
-          child: Column(
-        children: [
-          ConstrainedBox(
-              constraints: const BoxConstraints(
-                  maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
-              child: Container(
-                child: Image.asset('./assets/images/Lab_Single_Person.jpg',
-                    height: 70, fit: BoxFit.fitWidth),
-              )),
-          const SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+    GlobalService globalservice = GlobalService();
+    return Card(
+        child: Column(
+      children: [
+        ConstrainedBox(
+            constraints: const BoxConstraints(
+                maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
             child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      Theme.of(context).colorScheme.secondaryContainer,
-                      Theme.of(context).colorScheme.secondaryContainer,
-                    ]),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(name.toString()),
-                )),
-          )
-        ],
-      )),
-    );
+              child: Image.asset('./assets/images/Lab_Single_Person.jpg',
+                  height: 70, fit: BoxFit.fitWidth),
+            )),
+        const SizedBox(
+          height: 5,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Theme.of(context).colorScheme.secondaryContainer,
+                    Theme.of(context).colorScheme.secondaryContainer,
+                  ]),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(name.toString()),
+              )),
+        )
+      ],
+    ));
   }
 }
