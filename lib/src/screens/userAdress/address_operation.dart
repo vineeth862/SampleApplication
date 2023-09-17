@@ -115,7 +115,7 @@ class _addressOperationState extends State<addressOperation> {
     if (visibleItemCount < items.length) {
       isButtonEnabled = true;
     }
-    print(widget.routeDetails.toString() + " hii");
+    //print(widget.routeDetails.toString() + " hii");
     return loadingProvider.isLoading
         ? Center(
             child: Padding(
@@ -216,27 +216,19 @@ class _addressOperationState extends State<addressOperation> {
                         itemBuilder: (context, index) {
                           if (index < visibleItemCount) {
                             return GestureDetector(
-                              onTap: () {
-                                // loadingProvider.startLoading();
-                                // Future.delayed(Duration(seconds: 2), () {
-                                //   //loadingProvider.startLoading();
-
-                                //   loadingProvider.stopLoading();
-
-                                //   //loadingProvider.stopLoading();
-                                // });
+                              onTap: () async {
                                 myController.updateGlobalString(
                                     items[index].pincode.toString());
-                                //print(myController.addressToBeConsidered.value);
+                                BuildContext currentContext = context;
+                                //loadingProvider.startLoading();
 
-                                Future.delayed(Duration(seconds: 1), () {
-                                  //loadingProvider.startLoading();
+                                loadingProvider.startLoading();
+                                await Future.delayed(Duration(seconds: 1), () {
+                                  loadingProvider.stopLoading();
+                                  Get.offAll(() => HomePage());
 
-                                  globalservice.navigate(context, HomePage());
-
-                                  //loadingProvider.stopLoading();
+                                  //globalservice.navigate(context, HomePage());
                                 });
-                                //globalservice.navigate(context, HomePage());
                               },
                               child: Container(
                                 child: Column(

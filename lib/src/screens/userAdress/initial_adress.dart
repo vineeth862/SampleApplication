@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/userAdress/address_operation.dart';
 import 'package:sample_application/src/screens/userAdress/testing_location_picker.dart';
+import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 
 class InitialAdress extends StatefulWidget {
   const InitialAdress({super.key});
@@ -25,8 +27,14 @@ class _InitialAdressState extends State<InitialAdress> {
     super.dispose();
   }
 
+  void saveAdress(context) {
+    if (_formKey.currentState!.validate()) {}
+  }
+
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final loadingProvider = Provider.of<LoadingProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -77,13 +85,28 @@ class _InitialAdressState extends State<InitialAdress> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: _pincodeController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Enter Pincode',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(0)),
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: _pincodeController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Enter Pincode',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0)),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a pincode';
+                            }
+                            if (value.length != 6) {
+                              return 'Pincode must be 6 digits';
+                            }
+                            if (!value.isNumericOnly) {
+                              return 'Pincode must be digits';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ),
@@ -91,16 +114,15 @@ class _InitialAdressState extends State<InitialAdress> {
                         height: 56,
                         child: ElevatedButton(
                             onPressed: () {
-                              print(_pincodeController!.text);
-                              myController.updateGlobalString(
-                                  _pincodeController!.text.toString());
-                              Future.delayed(Duration(seconds: 1), () {
-                                //loadingProvider.startLoading();
-
-                                globalservice.navigate(context, HomePage());
-
-                                //loadingProvider.stopLoading();
-                              });
+                              if (_formKey.currentState!.validate()) {
+                                myController.updateGlobalString(
+                                    _pincodeController!.text.toString());
+                                loadingProvider.startLoading();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  loadingProvider.stopLoading();
+                                  Get.offAll(() => HomePage());
+                                });
+                              }
                             },
                             child: Text("Check"),
                             style: ButtonStyle(
