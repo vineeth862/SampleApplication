@@ -214,21 +214,26 @@ class _addressOperationState extends State<addressOperation> {
                         itemCount: visibleItemCount +
                             1, // Add 1 for the "Load More" button
                         itemBuilder: (context, index) {
+                          //final item = items[index];
                           if (index < visibleItemCount) {
                             return GestureDetector(
                               onTap: () async {
-                                myController.updateGlobalString(
-                                    items[index].pincode.toString());
-                                BuildContext currentContext = context;
-                                //loadingProvider.startLoading();
+                                if (widget.routeDetails.toString() ==
+                                    "InitialAdress") {
+                                  myController.updateGlobalString(
+                                      items[index].pincode.toString());
+                                  BuildContext currentContext = context;
+                                  //loadingProvider.startLoading();
 
-                                loadingProvider.startLoading();
-                                await Future.delayed(Duration(seconds: 1), () {
-                                  loadingProvider.stopLoading();
-                                  Get.offAll(() => HomePage());
+                                  loadingProvider.startLoading();
+                                  await Future.delayed(Duration(seconds: 1),
+                                      () {
+                                    loadingProvider.stopLoading();
+                                    Get.offAll(() => HomePage());
 
-                                  //globalservice.navigate(context, HomePage());
-                                });
+                                    //globalservice.navigate(context, HomePage());
+                                  });
+                                }
                               },
                               child: Container(
                                 child: Column(

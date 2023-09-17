@@ -151,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                                 globalservice.navigate(
                                     context,
                                     HomePage(
-                                      index: 2,
+                                      index: 3,
                                     ));
                               },
                               icon: const Icon(
@@ -252,48 +252,48 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   )),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, const Welcomesignin());
-                },
-                child: const Text('Login Screen'),
-              ),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  // globalservice.navigate(context, const SlotBooking());
-                },
-                child: const Text('SlotBooking'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, GitHubRepositoriesScreen());
+              // const SizedBox(height: 20),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, const Welcomesignin());
+              //   },
+              //   child: const Text('Login Screen'),
+              // ),
+              // const SizedBox(height: 20),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     // globalservice.navigate(context, const SlotBooking());
+              //   },
+              //   child: const Text('SlotBooking'),
+              // ),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, GitHubRepositoriesScreen());
 
-                  // print("uploadClicked");
-                  // dbOperations db = dbOperations();
-                  // db.loadDataList();
-                },
-                child: const Text('uploadList'),
-              ),
-              const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, OrderTrackingScreen());
-                },
-                child: const Text('Order Tracking'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, FilterCategoryListPage());
-                },
-                child: const Text('Order Summary'),
-              ),
+              //     // print("uploadClicked");
+              //     // dbOperations db = dbOperations();
+              //     // db.loadDataList();
+              //   },
+              //   child: const Text('uploadList'),
+              // ),
+              // const SizedBox(height: 20),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, OrderTrackingScreen());
+              //   },
+              //   child: const Text('Order Tracking'),
+              // ),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, FilterCategoryListPage());
+              //   },
+              //   child: const Text('Order Summary'),
+              // ),
             ],
           ),
         ),
