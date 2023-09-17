@@ -10,6 +10,7 @@ import '../../../authentication/user_repository.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/selected_order_provider.dart';
 import '../models/test/test.dart';
+import 'order-summary/orderTrackerDailog.dart';
 import 'orderTracker_progress.dart';
 
 class OrderTrackerHome extends StatefulWidget {
@@ -39,15 +40,22 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   }
 
   void navigate(Order order, context) {
-    // if (order.statusCode == 1) {
-    //   this.globalservice.navigate(context, PaymentScreeen());
-    // } else {
-    this.globalservice.navigate(
-        context,
-        OrderTrackingScreen(
-          order: order,
-        ));
-    // }
+    if (order.statusCode == 1) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return OrderTrackerDialog(
+            order: order!,
+          ); // Custom widget for the dialog content
+        },
+      );
+    } else {
+      this.globalservice.navigate(
+          context,
+          OrderTrackingScreen(
+            order: order,
+          ));
+    }
   }
 
   @override

@@ -120,7 +120,8 @@ class _InitialAdressState extends State<InitialAdress> {
                                 loadingProvider.startLoading();
                                 Future.delayed(Duration(seconds: 1), () {
                                   loadingProvider.stopLoading();
-                                  Get.offAll(() => HomePage());
+                                  globalservice.navigate(context, HomePage());
+                                  // Get.offAll(() => HomePage());
                                 });
                               }
                             },

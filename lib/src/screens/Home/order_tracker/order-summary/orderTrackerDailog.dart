@@ -183,11 +183,14 @@ class OrderTrackerDialog extends StatelessWidget {
                           child: Text('Booked Tests : ',
                               style: Theme.of(context).textTheme.titleSmall),
                         ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Container(
                             width: MediaQuery.of(context).size.width * 0.90,
-                            height: 20 * order.tests!.length.toDouble(),
+                            height: 30 * order.tests!.length.toDouble(),
                             child: ListView.builder(
-                              itemCount: 1,
+                              itemCount: order.tests!.length,
                               itemBuilder: (context, index) => Column(
                                 children: [
                                   Text(order.tests![index].displayName,
