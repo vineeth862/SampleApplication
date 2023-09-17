@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/userAdress/address_operation.dart';
 import 'package:sample_application/src/screens/userAdress/testing_location_picker.dart';
@@ -13,34 +15,18 @@ class InitialAdress extends StatefulWidget {
 
 class _InitialAdressState extends State<InitialAdress> {
   GlobalService globalservice = GlobalService();
-  List<String> items = List.generate(18,
-      (index) => '4/5, 1st cross road, Byrappa Layout, whitefield, Bangalore');
+  //TextEditingController? _nameController;
+  final myController = Get.find<UserCurrentLocation>();
+  final _pincodeController = TextEditingController();
+  @override
+  void dispose() {
+    _pincodeController!.dispose();
 
-  int visibleItemCount = 5;
-
-  void _loadMoreItems() {
-    setState(() {
-      if (visibleItemCount < items.length) {
-        visibleItemCount += 5;
-      } else {
-        visibleItemCount = visibleItemCount;
-      }
-    });
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isButtonEnabled = false;
-    bool isItemsNotPresent = false;
-    if (items.length == 0) {
-      isItemsNotPresent = true;
-    }
-    if (items.length < visibleItemCount) {
-      visibleItemCount = items.length;
-    }
-    if (visibleItemCount < items.length) {
-      isButtonEnabled = true;
-    }
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -86,44 +72,89 @@ class _InitialAdressState extends State<InitialAdress> {
               Divider(
                 height: 3,
               ),
-              InkWell(
-                onTap: () {
-                  globalservice.navigate(
-                      context, getCurrentLocation(title: "Vineeth"));
-                },
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.gps_fixed,
-                          color: Theme.of(context).colorScheme.primary,
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _pincodeController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: 'Enter Pincode',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0)),
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "Use Current Location",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        )),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                    Container(
+                        height: 56,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              print(_pincodeController!.text);
+                              myController.updateGlobalString(
+                                  _pincodeController!.text.toString());
+                              Future.delayed(Duration(seconds: 1), () {
+                                //loadingProvider.startLoading();
+
+                                globalservice.navigate(context, HomePage());
+
+                                //loadingProvider.stopLoading();
+                              });
+                            },
+                            child: Text("Check"),
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius
+                                      .zero, // Remove circular radius
+                                ),
+                              ),
+                            )))
+                  ],
                 ),
               ),
-              Divider(
-                height: 5,
-              ),
+
+              // Expanded(
+              //     child: ElevatedButton(
+              //         onPressed: () {}, child: Text("Check")))
+
+              // InkWell(
+              //   onTap: () {
+              //     globalservice.navigate(
+              //         context, getCurrentLocation(title: "Vineeth"));
+              //   },
+              //   child: Container(
+              //     alignment: Alignment.bottomLeft,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: Row(
+              //         children: [
+              //           Icon(
+              //             Icons.gps_fixed,
+              //             color: Theme.of(context).colorScheme.primary,
+              //           ),
+              //           SizedBox(
+              //             width: 10,
+              //           ),
+              //           Expanded(
+              //               child: Text(
+              //             "Enter Pincode",
+              //             style: Theme.of(context)
+              //                 .textTheme
+              //                 .bodyLarge!
+              //                 .copyWith(
+              //                     color: Theme.of(context).colorScheme.primary),
+              //           )),
+              //           Icon(
+              //             Icons.arrow_forward_ios_rounded,
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               addressOperation(
                 routeDetails: InitialAdress(),
               )

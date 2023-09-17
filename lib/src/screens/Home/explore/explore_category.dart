@@ -26,7 +26,7 @@ class LabTestCategoryCard extends StatelessWidget {
         //       title: title,
         //       category: content,
         //     ));
-        print(testList + ["explor"]);
+
         globalservice.navigate(
             context,
             FilterCategoryListPage(
@@ -36,14 +36,34 @@ class LabTestCategoryCard extends StatelessWidget {
       },
       child: Card(
         elevation: 0,
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        //color: Theme.of(context).colorScheme.secondaryContainer,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: MediaQuery.of(context).size.width * 0.10,
-              backgroundImage: NetworkImage(imagePath),
+            // CircleAvatar(
+            //   radius: MediaQuery.of(context).size.width * 0.10,
+            //   backgroundImage: NetworkImage(imagePath),
+            // ),
+            Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              //color: Colors.blue,
+              // child: ConstrainedBox(
+              //   constraints: const BoxConstraints(
+              //       maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
+              //   child: Image.network(imagePath,),
+              // ),
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(10), // Set your desired corner radius
+                child: Image.network(
+                  imagePath, // Replace with your image URL
+                  width: 100, // Set your desired width
+                  height: 80, // Set your desired height
+                  fit: BoxFit.cover, // Set your desired image fit
+                ),
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.width * 0.025,

@@ -12,6 +12,7 @@ import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_h
 import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/category/filtered_category_list.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
+import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 import '../../../authentication/user_repository.dart';
 import '../../../global_service/cloud_storage_service.dart';
 import '../../../global_service/global_service.dart';
@@ -114,6 +115,9 @@ class _exploreExpState extends State<exploreExp> {
   Widget build(BuildContext context) {
     final myController = Get.find<UserCurrentLocation>();
     searchState = Provider.of<SearchListState>(context);
+    final loadingProvider = Provider.of<LoadingProvider>(context);
+    //loadingProvider.startLoading();
+
     return SafeArea(
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
@@ -239,7 +243,8 @@ class _exploreExpState extends State<exploreExp> {
                                             .bodySmall,
                                       ),
                                       subtitle: Obx(() => Text(
-                                          myController.globalString.value,
+                                          myController
+                                              .addressToBeConsidered.value,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleLarge!
@@ -460,7 +465,7 @@ class _exploreExpState extends State<exploreExp> {
 
                 Container(
                   width: double.infinity,
-                  height: 280,
+                  height: 225,
                   // decoration: const BoxDecoration(
                   //     gradient: LinearGradient(colors: [
                   //   Color.fromARGB(255, 231, 243, 253),
@@ -472,7 +477,7 @@ class _exploreExpState extends State<exploreExp> {
                     crossAxisSpacing: 4.0,
                     physics: const NeverScrollableScrollPhysics(),
                     childAspectRatio:
-                        0.8, // Adjust the aspect ratio to control the card height
+                        1, // Adjust the aspect ratio to control the card height
                     children: [...categoryList],
                   ),
                 ),

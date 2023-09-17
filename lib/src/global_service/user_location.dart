@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/home.dart';
 
 import '../screens/Home/models/lab/lab.dart';
 import '../utils/Provider/address_provider.dart';
@@ -9,26 +14,48 @@ import '../utils/Provider/search_provider.dart';
 
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
-  RxString globalString = 'Fetching adress...'.obs;
-  RxString location = 'Fetching adress...'.obs;
-  RxString pinCode = ''.obs;
+  RxString addressToBeConsidered = 'Fetching adress'.obs;
+  RxString location = 'Fetching adress'.obs;
+  RxString pinCode = 'Fetching adress'.obs;
   RxString area = '...'.obs;
   final appState = AppState();
   Position? latAndLong;
   //final appStates = Provider.of<AppState>(context);
   String? postalCode;
   String? locality;
-  String adress = "Fetching adress...";
+  String adress = "Fetching adress";
   List<Lab> availabelLabs = [];
+
+  RxBool pinCodeExists = true.obs;
   //RxString globalString = 'Initial Value'.obs;
   bool hasInitialValueChanged = false;
+
+  GlobalService globalService = GlobalService();
   void updateGlobalString(String newValue) {
     if (!hasInitialValueChanged) {
       hasInitialValueChanged = true;
       appState.updateGlobalStringValue(newValue);
       // Perform your one-time operation here
-      print('Performing one-time operation');
-      globalString.value = newValue;
+      //print('Performing one-time operation');
+      addressToBeConsidered.value = newValue;
+      Future.delayed(Duration(seconds: 2), () {
+        //loadingProvider.startLoading();
+        Get.offAll(() => HomePage());
+
+        //loadingProvider.stopLoading();
+      });
+
+      //validatePincode(pinCode);
+    } else {
+      appState.updateGlobalStringValue(newValue);
+      // Perform your one-time operation here
+
+      addressToBeConsidered.value = newValue;
+      pinCode.value = newValue;
+      location.value = newValue;
+      area.value = newValue;
+      filterLabOnPinCode();
+      validatePincode(pinCode);
     }
   }
 
@@ -80,7 +107,13 @@ class UserCurrentLocation extends GetxController {
 
   @override
   void onReady() {
-    loaddata();
+    Future.delayed(Duration(seconds: 0), () {
+      //loadingProvider.startLoading();
+
+      loaddata();
+
+      //loadingProvider.stopLoading();
+    });
   }
 
   loaddata() async {
@@ -88,7 +121,7 @@ class UserCurrentLocation extends GetxController {
     //print(pos.latitude);
     latAndLong = pos;
     List<Placemark> add = await UserCurrentLocation.instance.GetFullAdress(pos);
-    print(add);
+    //print(add);
     Placemark place = add[0];
     postalCode = place.postalCode.toString();
     locality = place.locality.toString();
@@ -97,9 +130,10 @@ class UserCurrentLocation extends GetxController {
     area = RxString(add[4].name.toString());
     pinCode = RxString(postalCode.toString());
     SearchListState().filterLabOnPinCode();
+    validatePincode(pinCode);
     //print(fulladd.Name);
     updateGlobalString(adress);
-    print(globalString.value);
+    //print(globalString.value);
   }
 
   filterLabOnPinCode() async {
@@ -112,5 +146,14 @@ class UserCurrentLocation extends GetxController {
               element.availablePincodeDetails.contains(pinCode.toString()))
           .isNotEmpty;
     }).toList();
+    print(availabelLabs);
+  }
+
+  validatePincode(pinCode) async {
+    var pinCodeList = FirebaseFirestore.instance.collection('pincode');
+    final documentSnapshot = await pinCodeList.doc(pinCode.toString()).get();
+
+    pinCodeExists.value = documentSnapshot.exists;
+    //print(pinCodeExists);
   }
 }

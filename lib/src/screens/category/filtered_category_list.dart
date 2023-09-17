@@ -65,10 +65,10 @@ class _FilterCategoryListPageState extends State<FilterCategoryListPage> {
             " Category"),
       ),
       body: Container(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // Number of columns
-          ),
+        child: ListView.builder(
+          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //   crossAxisCount: 3, // Number of columns
+          // ),
           itemCount: displayNames.length,
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -84,11 +84,44 @@ class _FilterCategoryListPageState extends State<FilterCategoryListPage> {
               },
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Card(
-                    color: const Color.fromARGB(255, 253, 229, 221),
-                    child: Center(
-                      child: Text(displayNames[index]),
-                    )),
+                child: Container(
+                  height: 80,
+                  child: Card(
+                      margin: EdgeInsets.only(
+                          top: 5, left: 10, right: 10, bottom: 5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 2,
+                      color:
+                          Color.fromARGB(255, 201, 243, 205).withOpacity(0.5),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.medical_services_rounded,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  displayNames[index],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
               ),
             );
           },

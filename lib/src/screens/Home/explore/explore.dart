@@ -49,7 +49,7 @@ class _ExploreState extends State<Explore> {
                         },
                         icon: Icon(Icons.location_on),
                         label: Obx(() => Text(
-                              myController.globalString.value,
+                              myController.addressToBeConsidered.value,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!
