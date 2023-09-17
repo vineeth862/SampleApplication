@@ -7,6 +7,7 @@ import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import '../../../utils/Provider/loading_provider.dart';
 import '../../../utils/Provider/selected_order_provider.dart';
 import '../models/status/status.dart';
+import 'order-summary/orderTrackerDailog.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
   Order? order;
@@ -104,7 +105,31 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ListTile(
                     title: Text("Order Status: "),
                     subtitle: Text(order!.statusLabel.toString()),
-                  )
+                  ),
+                  ListTile(
+                    // leading: Icon(Icons.table_view_outlined),
+                    title: Text(
+                      "Click here For Order Details",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color.fromARGB(255, 16, 28, 255),
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                    // tileColor: Colors.blueAccent[700],
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return OrderTrackerDialog(
+                            order: order!,
+                          ); // Custom widget for the dialog content
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

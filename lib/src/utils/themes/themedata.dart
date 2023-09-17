@@ -54,17 +54,17 @@ final ThemeData theme = ThemeData(
     ),
     titleMedium: TextStyle(
       fontSize: 14.0,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 94, 90, 90),
+      color: Color.fromARGB(255, 88, 87, 87),
     ),
     titleSmall: TextStyle(
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 94, 90, 90),
+      color: Color.fromARGB(255, 130, 129, 129),
     ),
     labelLarge: TextStyle(
       fontSize: 14.0,

@@ -39,15 +39,15 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   }
 
   void navigate(Order order, context) {
-    if (order.statusCode == 1) {
-      this.globalservice.navigate(context, PaymentScreeen());
-    } else {
-      this.globalservice.navigate(
-          context,
-          OrderTrackingScreen(
-            order: order,
-          ));
-    }
+    // if (order.statusCode == 1) {
+    //   this.globalservice.navigate(context, PaymentScreeen());
+    // } else {
+    this.globalservice.navigate(
+        context,
+        OrderTrackingScreen(
+          order: order,
+        ));
+    // }
   }
 
   @override
