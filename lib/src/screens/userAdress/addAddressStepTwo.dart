@@ -46,6 +46,7 @@ class AddAdressStepTwo extends StatelessWidget {
       order.address = concatenatedAddress;
       selectedOrder!.setOrder = order;
       //UserRepository.instance.getAdress();
+      Navigator.pop(context);
       globalservice.navigate(context, StepThreeToBookTest());
     }
   }

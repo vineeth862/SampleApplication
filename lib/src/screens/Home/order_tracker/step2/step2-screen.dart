@@ -29,7 +29,7 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
 
     return addressOperationStepTwo(
       routeDetails: StepTwoScreen(addressChanged: (adress) {}),
-      addressSelected: (address) {
+      addressSelected: (address) async {
         setState(() {
           widget.selectedAdress = address;
           widget.addressChanged(address);

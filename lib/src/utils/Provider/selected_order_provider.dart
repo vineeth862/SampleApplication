@@ -56,4 +56,13 @@ class SelectedOrderState extends ChangeNotifier {
     status = Status.fromJson(statusObj.docs.first.data());
     return "";
   }
+
+  Future<String> isPinCodeValid(statusCode) async {
+    final statusObj = await _db
+        .collection("lab")
+        .where("statusCode", isEqualTo: statusCode)
+        .get();
+    status = Status.fromJson(statusObj.docs.first.data());
+    return "";
+  }
 }

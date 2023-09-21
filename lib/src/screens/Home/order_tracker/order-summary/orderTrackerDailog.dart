@@ -178,30 +178,43 @@ class OrderTrackerDialog extends StatelessWidget {
                           )
                         ]),
                         SizedBox(height: 8.0),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Booked Tests : ',
+                        Row(children: [
+                          Text('Booked Test : ',
                               style: Theme.of(context).textTheme.titleSmall),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.90,
-                            height: 30 * order.tests!.length.toDouble(),
-                            child: ListView.builder(
-                              itemCount: order.tests!.length,
-                              itemBuilder: (context, index) => Column(
-                                children: [
-                                  Text(order.tests![index].displayName,
-                                      softWrap: true,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium),
-                                  SizedBox(height: 10),
-                                ],
-                              ),
-                            ))
+                          Expanded(
+                            child: Text(
+                              order.tests!
+                                  .map((e) => e.displayName)
+                                  .join(",  "),
+                              style: Theme.of(context).textTheme.titleMedium,
+                              softWrap: true,
+                            ),
+                          )
+                        ]),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Text('Booked Tests : ',
+                        //       style: Theme.of(context).textTheme.titleSmall),
+                        // ),
+                        // SizedBox(
+                        //   height: 15,
+                        // ),
+                        // Container(
+                        //     width: MediaQuery.of(context).size.width * 0.90,
+                        //     height: 30 * order.tests!.length.toDouble(),
+                        //     child: ListView.builder(
+                        //       itemCount: order.tests!.length,
+                        //       itemBuilder: (context, index) => Column(
+                        //         children: [
+                        //           Text(order.tests![index].displayName,
+                        //               softWrap: true,
+                        //               style: Theme.of(context)
+                        //                   .textTheme
+                        //                   .titleMedium),
+                        //           SizedBox(height: 10),
+                        //         ],
+                        //       ),
+                        //     ))
                       ],
                     ),
                   )

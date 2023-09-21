@@ -229,9 +229,9 @@ class _addressOperationState extends State<addressOperation> {
                                   await Future.delayed(Duration(seconds: 1),
                                       () {
                                     loadingProvider.stopLoading();
-                                    Get.offAll(() => HomePage());
+                                    // Get.offAll(() => HomePage());
 
-                                    //globalservice.navigate(context, HomePage());
+                                    globalservice.navigate(context, HomePage());
                                   });
                                 }
                               },

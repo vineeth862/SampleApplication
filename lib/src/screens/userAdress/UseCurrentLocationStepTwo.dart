@@ -49,6 +49,7 @@ class UseCurrentLocationStepTwo extends StatelessWidget {
       order.address = concatenatedAddress;
       selectedOrder!.setOrder = order;
       //UserRepository.instance.getAdress();
+      Navigator.pop(context);
       globalservice.navigate(context, StepThreeToBookTest());
       //UserRepository.instance.getAdress();
     }
