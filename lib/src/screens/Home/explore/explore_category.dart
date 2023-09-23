@@ -5,6 +5,7 @@ import 'package:sample_application/src/screens/category/filtered_category_list.d
 
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/search_provider.dart';
+import '../package/package-list.dart';
 
 class LabTestCategoryCard extends StatelessWidget {
   final String title;
@@ -83,6 +84,7 @@ class LabTestCategoryCard extends StatelessWidget {
 }
 
 class labPackageCard extends StatelessWidget {
+  GlobalService globalservice = GlobalService();
   final String? pacName;
   final String? pacDes;
   final String? pacPrice;
@@ -102,7 +104,8 @@ class labPackageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Tapped");
+        globalservice.navigate(context,
+            PackageCardlistPage(title: pacName!, category: pacDes.toString()));
       },
       child: Card(
         elevation: 0,

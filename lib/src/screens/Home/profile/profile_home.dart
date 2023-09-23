@@ -268,17 +268,13 @@ class ProfileScreen extends StatelessWidget {
               //   },
               //   child: const Text('SlotBooking'),
               // ),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     globalservice.navigate(context, GitHubRepositoriesScreen());
-
-              //     // print("uploadClicked");
-              //     // dbOperations db = dbOperations();
-              //     // db.loadDataList();
-              //   },
-              //   child: const Text('uploadList'),
-              // ),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, GitHubRepositoriesScreen());
+                },
+                child: const Text('uploadList'),
+              ),
               // const SizedBox(height: 20),
               // TextButton(
               //   onPressed: () {

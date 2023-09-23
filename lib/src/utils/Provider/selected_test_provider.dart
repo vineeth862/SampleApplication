@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/Home/models/package/package.dart';
 import '../../screens/Home/models/test/test.dart';
 
 class SelectedTestState with ChangeNotifier {
   List<Test> selectedTest = [];
+  List<Package> selectedPackage = [];
   bool _detailExpanded = false;
 
   List<Test> get getSelectedTest {
     return selectedTest;
+  }
+
+  List<Package> get getSelectedPackage {
+    return selectedPackage;
   }
 
   void addTest(test) {

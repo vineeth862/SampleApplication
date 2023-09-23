@@ -2,6 +2,9 @@ import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/explore/explore_category.dart';
+import 'package:sample_application/src/screens/Home/package/package-list.dart';
+
+import '../../../global_service/global_service.dart';
 
 class PackageSlider extends StatefulWidget {
   const PackageSlider({super.key});
@@ -13,7 +16,8 @@ class PackageSlider extends StatefulWidget {
 class _PackageSliderState extends State<PackageSlider> {
   int _currentIndex = 0;
   final CarouselController _carouselController = CarouselController();
-  final List<Widget> cardList = [
+  GlobalService globalservice = GlobalService();
+  final List<labPackageCard> cardList = [
     labPackageCard(
       pacName: "Basic General Health Checkup",
       pacDes: "Measure Vitamin D & B12 levels and others",
@@ -52,7 +56,7 @@ class _PackageSliderState extends State<PackageSlider> {
     return Column(
       children: [
         CarouselSlider(
-          items: cardList.map((card) {
+          items: cardList.map((labPackageCard card) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -96,7 +100,10 @@ class _PackageSliderState extends State<PackageSlider> {
         TextButton.icon(
           label: const Text("View all packages"),
           icon: const Icon(Icons.arrow_circle_right_sharp),
-          onPressed: () {},
+          onPressed: () {
+            globalservice.navigate(
+                context, PackageCardlistPage(title: "", category: ""));
+          },
         )
       ],
     );
