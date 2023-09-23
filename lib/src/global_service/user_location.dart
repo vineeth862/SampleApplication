@@ -40,7 +40,7 @@ class UserCurrentLocation extends GetxController {
       addressToBeConsidered.value = newValue;
       Future.delayed(Duration(seconds: 2), () {
         //loadingProvider.startLoading();
-        Get.offAll(() => HomePage());
+        //Get.offAll(() => HomePage());
 
         //loadingProvider.stopLoading();
       });

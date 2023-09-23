@@ -21,6 +21,7 @@ class UserRepository extends GetxController {
           .whenComplete(
               () => Get.snackbar("Success", "Your account is created"))
           .catchError((error, stackTrace) {
+        print(error);
         Get.snackbar("Failed", "Something went wrong");
         // print(_db.collection('user').snapshots().length.toString());
       });

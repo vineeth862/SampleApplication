@@ -81,9 +81,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
     } else {
       if (isMySelfButtonSelected) {
         var user = await Get.put(UserRepository()).getUser();
+
         String name = user.data()?['userName'];
 
-        if (name != null && name.isNotEmpty) {
+        if (name != "null" && name.isNotEmpty) {
           _namecontroller.setText(name);
         }
       } else {

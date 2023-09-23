@@ -254,8 +254,8 @@ class _WelcomesigninState extends State<Welcomesignin> {
                               listenForMultipleSmsOnAndroid: true,
                               validator: (value) {
                                 otp = value.toString();
-                                otpController.instance
-                                    .verifyOtpController(otp, user);
+                                // otpController.instance
+                                //     .verifyOtpController(otp, user);
                               },
                             ),
                           ),

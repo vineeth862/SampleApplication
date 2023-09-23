@@ -205,7 +205,8 @@ class labPackageCard extends StatelessWidget {
 class MaleFemaleCategory extends StatelessWidget {
   final Image? image;
   final String? name;
-  const MaleFemaleCategory({super.key, this.image, this.name});
+  final String? imagePath;
+  const MaleFemaleCategory({super.key, this.image, this.name, this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -213,13 +214,33 @@ class MaleFemaleCategory extends StatelessWidget {
     return Card(
         child: Column(
       children: [
-        ConstrainedBox(
-            constraints: const BoxConstraints(
-                maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
-            child: Container(
-              child: Image.asset('./assets/images/Lab_Single_Person.jpg',
-                  height: 70, fit: BoxFit.fitWidth),
-            )),
+        Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                  maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
+              // child: Container(
+              //   padding: EdgeInsets.all(5),
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(10),
+              //       color: Theme.of(context).colorScheme.secondaryContainer),
+              //   child: Image.asset(
+              //     imagePath.toString(),
+              //     height: 70,
+              //     width: 100,
+              //     fit: BoxFit.fill,
+              //   ),
+              // ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  imagePath.toString(),
+                  height: 70.0,
+                  width: 100.0,
+                  fit: BoxFit.fill,
+                ),
+              )),
+        ),
         const SizedBox(
           height: 5,
         ),

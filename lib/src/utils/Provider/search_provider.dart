@@ -180,6 +180,7 @@ class SearchListState with ChangeNotifier {
     }
 
     if (labList.docs.isNotEmpty) {
+      print(labList.docs.map((e) => print(e.data())));
       filteredLabs = labList.docs.map((doc) {
         return Lab.fromJson(doc.data());
       }).where((element) {

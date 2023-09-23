@@ -536,6 +536,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Under 25 Years",
+                          imagePath: "./assets/images/men1.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -549,6 +550,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "  25-50 Years  ",
+                          imagePath: "./assets/images/men1.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -562,6 +564,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Above 50 Years",
+                          imagePath: "./assets/images/men1.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -575,6 +578,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "All Packages",
+                          imagePath: "./assets/images/fam1.jpg",
                         ),
                       ),
                     ],
@@ -612,6 +616,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Under 25 Years",
+                          imagePath: "./assets/images/women1.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -625,6 +630,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "  25-50 Years  ",
+                          imagePath: "./assets/images/women3.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -638,6 +644,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Above 50 years",
+                          imagePath: "./assets/images/women2.jpg",
                         ),
                       ),
                       GestureDetector(
@@ -651,6 +658,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "All Packages",
+                          imagePath: "./assets/images/fam1.jpg",
                         ),
                       ),
                     ],

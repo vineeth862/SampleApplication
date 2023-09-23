@@ -100,6 +100,11 @@ flutter:
     - assets/images/lab1.png
     - assets/images/MedCapH.jpg
     - assets/images/5856.jpg
+    - assets/images/men1.jpg
+    - assets/images/women1.jpg
+    - assets/images/women2.jpg
+    - assets/images/women3.jpg
+    - assets/images/fam1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
+import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
+import 'package:sample_application/src/authentication/user_repository.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
 
 import '../../screens/Home/models/test/test.dart';
 
@@ -22,6 +26,7 @@ class TestCardWidget extends StatelessWidget {
       required this.labName,
       required this.price});
 
+  GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.now();
@@ -95,8 +100,53 @@ class TestCardWidget extends StatelessWidget {
                       width: 10,
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        tapOnButton("");
+                      onPressed: () async {
+                        String userKey = globalservice.getCurrentUserKey();
+
+                        if (userKey != "null") {
+                          tapOnButton("");
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  //icon: Icon(Icons.time_to_leave),
+                                  alignment: const AlignmentDirectional(1, 0),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  title: Text("Please Login",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary)),
+                                  content: Text(
+                                    "Please Login to book test",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!,
+                                  ),
+                                  actions: [
+                                    // Define buttons for the AlertDialog
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        minimumSize: MaterialStateProperty.all(
+                                            const Size(80,
+                                                25)), // Set the desired size
+                                      ),
+                                      child: const Text("Login"),
+                                      onPressed: () {
+                                        globalservice.navigate(context,
+                                            const Welcomesignin()); // Close the AlertDialog
+                                      },
+                                    ),
+                                  ],
+                                  actionsAlignment: MainAxisAlignment.end,
+                                );
+                              });
+                        }
                       },
                       // icon: const Icon(
                       //   Icons.add,

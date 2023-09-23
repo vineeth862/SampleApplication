@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
+import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
@@ -21,6 +23,7 @@ class CardDetailPage extends StatefulWidget {
 class _CardDetailPageState extends State<CardDetailPage> {
   GlobalService globalservice = GlobalService();
   bool expandDetails = false;
+
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
@@ -146,11 +149,58 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (selectedTest.getSelectedTest
-                                  .contains(widget.test)) {
-                                selectedTest.removeTest(widget.test);
+                              String userKey =
+                                  globalservice.getCurrentUserKey();
+                              if (userKey != "null") {
+                                if (selectedTest.getSelectedTest
+                                    .contains(widget.test)) {
+                                  selectedTest.removeTest(widget.test);
+                                } else {
+                                  selectedTest.addTest(widget.test);
+                                }
                               } else {
-                                selectedTest.addTest(widget.test);
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        //icon: Icon(Icons.time_to_leave),
+                                        alignment:
+                                            const AlignmentDirectional(1, 0),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        title: Text("Please Login",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge!
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary)),
+                                        content: Text(
+                                          "Please Login to book test",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!,
+                                        ),
+                                        actions: [
+                                          // Define buttons for the AlertDialog
+                                          ElevatedButton(
+                                            style: ButtonStyle(
+                                              minimumSize: MaterialStateProperty
+                                                  .all(const Size(80,
+                                                      25)), // Set the desired size
+                                            ),
+                                            child: const Text("Login"),
+                                            onPressed: () {
+                                              globalservice.navigate(context,
+                                                  const Welcomesignin()); // Close the AlertDialog
+                                            },
+                                          ),
+                                        ],
+                                        actionsAlignment: MainAxisAlignment.end,
+                                      );
+                                    });
                               }
                             },
                             child: !selectedTest.getSelectedTest

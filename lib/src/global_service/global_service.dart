@@ -36,10 +36,12 @@ class GlobalService {
 
   String getCurrentUserKey() {
     final _auth = FirebaseAuth.instance;
-
-    String userKey = _auth.currentUser!.phoneNumber.toString();
-
-    return userKey;
+    if (_auth.currentUser != null) {
+      String userKey = _auth.currentUser!.phoneNumber.toString();
+      return userKey;
+    } else {
+      return "null";
+    }
   }
 
   // Future<DocumentSnapshot<Map<String, dynamic>>> getCurrentUser() async {
