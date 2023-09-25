@@ -37,7 +37,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
   }
 
   loadList() async {
-    await packageService.loadPackageList();
+    await packageService.getAllLabsByPackage(widget.title);
     setState(() {});
   }
 
@@ -56,7 +56,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
 
     void onBookButton(Package packageObj) {
       if (selectedPackage.getSelectedPackage.contains(packageObj)) {
-        selectedPackage.removeTest(packageObj);
+        selectedPackage.removePackage(packageObj);
       } else {
         List<Package> duplicateTest = selectedPackage.getSelectedPackage
             .where((element) =>
@@ -64,9 +64,9 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
             .toList();
 
         if (duplicateTest.isNotEmpty) {
-          selectedPackage.removeTest(duplicateTest[0]);
+          selectedPackage.removePackage(duplicateTest[0]);
         }
-        selectedPackage.addTest(packageObj);
+        selectedPackage.addPackage(packageObj);
       }
     }
 
@@ -92,9 +92,9 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 12),
                       child: PackageCardWidget(
-                        title: list[index].labName!,
+                        title: list[index].pacName!,
                         package: list[index].packageObject!,
-                        labName: list[index].labName!,
+                        testList: list[index].testList!,
                         price: list[index].price!,
                         isTestSelected:
                             isPackageSelected(list[index].packageObject!),
@@ -128,12 +128,18 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
             child: SwipeableContainer(
                 key: UniqueKey(),
                 removeTest: (tesCode) {
-                  setState(() {
-                    selectedPackage.removeTest(tesCode);
-                    if (selectedPackage.getSelectedPackage.isEmpty) {
-                      selectedPackage.setDetailExpanded(false);
-                    }
-                  });
+                  selectedPackage.removeTest(tesCode);
+                  if (selectedPackage.getSelectedTest.isEmpty &&
+                      selectedPackage.getSelectedPackage.isEmpty) {
+                    selectedPackage.setDetailExpanded(false);
+                  }
+                },
+                removePackage: (pacCode) {
+                  selectedPackage.removePackage(pacCode);
+                  if (selectedPackage.getSelectedTest.isEmpty &&
+                      selectedPackage.getSelectedPackage.isEmpty) {
+                    selectedPackage.setDetailExpanded(false);
+                  }
                 }),
           ),
           Positioned(

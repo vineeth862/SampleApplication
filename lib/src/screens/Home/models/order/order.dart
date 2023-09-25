@@ -2,6 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sample_application/src/screens/Home/models/order/payment.dart';
+import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
 
 import 'booked.dart';
@@ -21,28 +22,33 @@ class Order {
   User? user;
   User? patient;
   List<Test>? tests;
+  List<Package>? packages;
+  String? labCode;
+  String? labName;
   Booked? booked;
   String? specificInstruction;
   Payment? payment;
   String? address;
 
-  Order({
-    this.address,
-    this.booked,
-    this.carrierCode,
-    this.carrierName,
-    this.createdDate,
-    this.orderNumber,
-    this.patient,
-    this.payment,
-    this.self,
-    this.specificInstruction,
-    this.statusCode,
-    this.statusLabel,
-    this.tests,
-    this.totalPrice,
-    this.user,
-  });
+  Order(
+      {this.address,
+      this.booked,
+      this.carrierCode,
+      this.carrierName,
+      this.createdDate,
+      this.orderNumber,
+      this.patient,
+      this.payment,
+      this.self,
+      this.specificInstruction,
+      this.statusCode,
+      this.statusLabel,
+      this.tests,
+      this.packages,
+      this.totalPrice,
+      this.user,
+      this.labCode,
+      this.labName});
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);

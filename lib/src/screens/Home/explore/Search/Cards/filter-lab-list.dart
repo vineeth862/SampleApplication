@@ -191,7 +191,8 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
 
                         globalservice.navigate(context, widget);
 
-                        if (selectedTest.getSelectedTest.isEmpty) {
+                        if (selectedTest.getSelectedTest.isEmpty &&
+                            selectedTest.getSelectedPackage.isEmpty) {
                           selectedTest.setDetailExpanded(false);
                         }
                       },

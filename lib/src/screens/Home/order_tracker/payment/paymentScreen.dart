@@ -25,6 +25,7 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
       setState(() {
         selectedOrder.resetOrder();
         selectedTest.removeAllTest();
+        selectedTest.removeAllPackage();
       });
     }
   }

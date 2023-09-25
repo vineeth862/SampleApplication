@@ -27,7 +27,22 @@ class SelectedTestState with ChangeNotifier {
   }
 
   void removeAllTest() {
-    this.selectedTest.clear();
+    selectedTest.clear();
+    notifyListeners();
+  }
+
+  void addPackage(package) {
+    selectedPackage.add(package);
+    notifyListeners();
+  }
+
+  void removePackage(package) {
+    selectedPackage.remove(package);
+    notifyListeners();
+  }
+
+  void removeAllPackage() {
+    selectedPackage.clear();
     notifyListeners();
   }
 

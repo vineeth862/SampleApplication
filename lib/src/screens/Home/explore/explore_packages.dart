@@ -2,9 +2,10 @@ import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/screens/Home/explore/explore_category.dart';
-import 'package:sample_application/src/screens/Home/package/package-list.dart';
+import 'package:sample_application/src/screens/Home/package/package-card-list.dart';
 
 import '../../../global_service/global_service.dart';
+import '../package/package-suggetion-list.dart';
 
 class PackageSlider extends StatefulWidget {
   const PackageSlider({super.key});
@@ -101,8 +102,7 @@ class _PackageSliderState extends State<PackageSlider> {
           label: const Text("View all packages"),
           icon: const Icon(Icons.arrow_circle_right_sharp),
           onPressed: () {
-            globalservice.navigate(
-                context, PackageCardlistPage(title: "", category: ""));
+            globalservice.navigate(context, PackageSuggetionList());
           },
         )
       ],

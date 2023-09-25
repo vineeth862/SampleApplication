@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-repository.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 
 import '../../../authentication/user_repository.dart';
@@ -26,7 +26,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   GlobalService globalservice = GlobalService();
   late SelectedOrderState selectedOrder;
   late LoadingProvider loadingProvider;
-  List<dynamic> orders = [];
+  List<Order> orders = [];
 
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
@@ -68,6 +68,25 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
 
     // TODO: implement initState
     super.initState();
+  }
+
+  getBookedItems(i) {
+    if (orders[i].tests!.isNotEmpty)
+      return orders[i].tests!.map((Test item) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(item.testName),
+            ),
+          ));
+
+    return orders[i].packages!.map((Package item) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(item.packageName),
+          ),
+        ));
   }
 
   @override
@@ -176,8 +195,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                             Expanded(
                                               child: Text(
                                                 orders[index]
-                                                    .tests![0]
-                                                    .labName, //CHANGE THE NAME TO PARTICULAR LAB NAME
+                                                    .labName!, //CHANGE THE NAME TO PARTICULAR LAB NAME
                                                 // textAlign: TextAlign.start,
                                                 maxLines: 5,
                                                 overflow: TextOverflow.visible,
@@ -238,7 +256,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
                                       child: Text(
-                                        "Booked Test",
+                                        "Booked Items",
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
@@ -246,18 +264,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                                 fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    ...orders[index]
-                                        .tests!
-                                        .map((Test item) => Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4.0),
-                                                child: Text(item.testName),
-                                              ),
-                                            )),
+                                    ...getBookedItems(index),
                                     const Divider(
                                       height: 5,
                                     ),

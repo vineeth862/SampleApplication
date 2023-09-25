@@ -7,7 +7,7 @@ part of 'package.dart';
 // **************************************************************************
 
 Package _$PackageFromJson(Map<String, dynamic> json) => Package(
-    medCaPackageCode: json['medCaPackageCode'] as String,
+    medCaPackageCode: json['medCaPackageCode'].toString(),
     labCode: json['labCode'] as String,
     labName: json['labName'] as String,
     method: json['method'] as String,
@@ -26,7 +26,7 @@ Package _$PackageFromJson(Map<String, dynamic> json) => Package(
     testList: json['testList']);
 
 Map<String, dynamic> _$PackageToJson(Package instance) => <String, dynamic>{
-      'medCapTestCode': instance.medCaPackageCode,
+      'medCaPackageCode': instance.medCaPackageCode,
       'labCode': instance.labCode,
       'labName': instance.labName,
       'method': instance.method,
@@ -35,9 +35,9 @@ Map<String, dynamic> _$PackageToJson(Package instance) => <String, dynamic>{
       'sampletypeName': instance.sampletypeName,
       'tat': instance.tat,
       'testProcessingDays': instance.testProcessingDays,
-      'testCode': instance.packageCode,
-      'testDes': instance.packageDes,
-      'testName': instance.packageName,
+      'packageCode': instance.packageCode,
+      'packageDes': instance.packageDes,
+      'packageName': instance.packageName,
       'displayName': instance.displayName,
       'daily': instance.daily,
       'labOpeningTime': instance.labOpeningTime,

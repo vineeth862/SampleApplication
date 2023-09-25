@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import '../../../../utils/Provider/selected_order_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -35,6 +36,10 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
         ...order.tests!.map((Test test) {
           totalAmmount += int.parse(test.price);
           return {'name': test.testName, 'price': test.price};
+        }),
+        ...order.packages!.map((Package package) {
+          totalAmmount += int.parse(package.price);
+          return {'name': package.packageName, 'price': package.price};
         })
       ],
       'totalAmount': totalAmmount,

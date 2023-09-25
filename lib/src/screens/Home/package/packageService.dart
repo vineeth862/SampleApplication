@@ -4,9 +4,23 @@ import '../models/package/packageCard.dart';
 
 class PackageService {
   List<PackageCard> packageList = [];
-
+  Set<String> allPackagesNameList = {};
   loadPackageList() async {
     var result = await FirebaseFirestore.instance.collection('package').get();
+    if (result.docs.isNotEmpty) {
+      allPackagesNameList = result.docs
+          .map((e) => PackageCard.fromJson(e.data()).pacName.toString())
+          .toSet();
+    }
+
+    return "";
+  }
+
+  getAllLabsByPackage(String displayName) async {
+    var result = await FirebaseFirestore.instance
+        .collection('package')
+        .where("displayName", isEqualTo: displayName)
+        .get();
     if (result.docs.isNotEmpty) {
       packageList =
           result.docs.map((e) => PackageCard.fromJson(e.data())).toList();

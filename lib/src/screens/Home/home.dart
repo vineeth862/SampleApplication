@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/screens/Home/doctorConsultation.dart';
+import 'package:sample_application/src/screens/Home/doctor_consultation.dart/doctorConsultation.dart';
 import 'package:sample_application/src/screens/Home/explore/explore_exp.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
-import 'package:sample_application/src/screens/Home/profile/profile_home.dart';
 import 'package:sample_application/src/screens/Home/home_service.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
-import 'package:sample_application/src/screens/Home/radiology.dart';
+import 'package:sample_application/src/screens/Home/radiology/radiology.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 import '../../utils/Provider/selected_order_provider.dart';
@@ -148,7 +147,15 @@ class HomePageState extends State<HomePage> {
                         key: UniqueKey(),
                         removeTest: (tesCode) {
                           selectedTest.removeTest(tesCode);
-                          if (selectedTest.getSelectedTest.isEmpty) {
+                          if (selectedTest.getSelectedTest.isEmpty &&
+                              selectedTest.getSelectedPackage.isEmpty) {
+                            selectedTest.setDetailExpanded(false);
+                          }
+                        },
+                        removePackage: (pacCode) {
+                          selectedTest.removePackage(pacCode);
+                          if (selectedTest.getSelectedTest.isEmpty &&
+                              selectedTest.getSelectedPackage.isEmpty) {
                             selectedTest.setDetailExpanded(false);
                           }
                         }),
@@ -158,10 +165,11 @@ class HomePageState extends State<HomePage> {
                     right: 0,
                     left: 0,
                     child: Container(
-                        child: selectedTest.getSelectedTest.isNotEmpty
+                        child: (selectedTest.getSelectedTest.isNotEmpty ||
+                                selectedTest.getSelectedPackage.isNotEmpty)
                             ? SlotBookingCard(
                                 title:
-                                    "${selectedTest.getSelectedTest.length} item Selected",
+                                    "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
                                 content: "view details",
                                 buttonClicked: () {
                                   Order order = selectedOrder.getOrder;

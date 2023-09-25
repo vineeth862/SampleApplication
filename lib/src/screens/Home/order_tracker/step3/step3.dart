@@ -117,7 +117,8 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
           right: 0,
           left: 0,
           child: Container(
-              child: selectedTest.getSelectedTest.isNotEmpty
+              child: selectedTest.getSelectedTest.isNotEmpty ||
+                      selectedTest.getSelectedPackage.isNotEmpty
                   ? SlotBookingCard(
                       title: "Collection at",
                       content: selectedslot,
@@ -127,6 +128,12 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
 
                         if (selectedslot.split("  ").length == 2) {
                           orderObject.booked = booked;
+                          orderObject.labCode = orderObject.tests!.isNotEmpty
+                              ? orderObject.tests![0].labCode
+                              : orderObject.packages![0].labCode;
+                          orderObject.labName = orderObject.tests!.isNotEmpty
+                              ? orderObject.tests![0].labName
+                              : orderObject.packages![0].labName;
                           selectedOrder.setOrder = orderObject;
 
                           await selectedOrder.docInIt();

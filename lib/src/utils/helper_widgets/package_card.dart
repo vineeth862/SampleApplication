@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import '../../screens/Home/models/package/package-detailPage.dart';
 import '../../screens/Home/models/package/package.dart';
 
 class PackageCardWidget extends StatelessWidget {
   final String title;
   final Package package;
   final bool isTestSelected;
-  final String labName;
+  final String testList;
   late Function(Object card) tapOnCard;
   late Function(String test) tapOnButton;
   final String price;
@@ -19,7 +20,7 @@ class PackageCardWidget extends StatelessWidget {
       required this.tapOnCard,
       required this.tapOnButton,
       required this.isTestSelected,
-      required this.labName,
+      required this.testList,
       required this.price});
 
   GlobalService globalservice = GlobalService();
@@ -175,9 +176,14 @@ class PackageCardWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
-                  labName,
+                  testList,
+                  overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  maxLines: 3,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontSize: 10),
                 ),
               ),
               // SizedBox(
@@ -219,25 +225,31 @@ class PackageCardWidget extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                alignment: Alignment.center,
-                transformAlignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 181, 71),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25.0),
-                      topRight: Radius.circular(25.0),
-                    )),
+              GestureDetector(
+                onTap: () {
+                  globalservice.navigate(
+                      context, PackageDetailPage(package: package));
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  transformAlignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 181, 71),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(25.0),
+                        topRight: Radius.circular(25.0),
+                      )),
 
-                child: Text(
-                  "View More Details",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: Colors.white),
+                  child: Text(
+                    "View More Details",
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(color: Colors.white),
+                  ),
+                  height: 50,
+                  // color: Color.fromARGB(255, 255, 181, 71),
                 ),
-                height: 50,
-                // color: Color.fromARGB(255, 255, 181, 71),
               ),
               // const ListTile(
               //   enabled: true,

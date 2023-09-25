@@ -5,11 +5,14 @@ import 'package:sample_application/src/utils/Provider/selected_test_provider.dar
 
 import '../../global_service/global_service.dart';
 import '../../screens/Home/explore/Search/Cards/filter-lab-list.dart';
+import '../../screens/Home/models/package/package.dart';
 import '../Provider/search_provider.dart';
 
 class SwipeableContainer extends StatefulWidget {
-  SwipeableContainer({super.key, required this.removeTest});
+  SwipeableContainer(
+      {super.key, required this.removeTest, required this.removePackage});
   Function(Test testCode) removeTest;
+  Function(Package testCode) removePackage;
   @override
   _SwipeableContainerState createState() => _SwipeableContainerState();
 }
@@ -29,16 +32,17 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
     });
   }
 
-  Column generateListTileBody(Test test) {
-    // filteredTest = searchState!.filteredTestCardList.where((element) {
-    //   print(element.testCode.toString());
-    //   print(test);
-    //   print((element.testCode.toString() == test));
-    //   return true;
-    // }).first;
+  Column generateListTileBodyForTest(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [Text(test.testName), Text(test.price)],
+    );
+  }
+
+  Column generateListTileBodyForPackage(Package package) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [Text(package.displayName), Text(package.price)],
     );
   }
 
@@ -102,7 +106,7 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                       ...selectedTest.getSelectedTest
                           .map(
                             (test) => ListTile(
-                              title: generateListTileBody(test),
+                              title: generateListTileBodyForTest(test),
                               iconColor: Theme.of(context).colorScheme.primary,
                               leading: Icon(Icons.medical_services),
                               trailing: IconButton(
@@ -115,12 +119,29 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                             ),
                           )
                           .toList(),
+                      ...selectedTest.getSelectedPackage
+                          .map(
+                            (package) => ListTile(
+                              title: generateListTileBodyForPackage(package),
+                              iconColor: Theme.of(context).colorScheme.primary,
+                              leading: Icon(Icons.medical_services),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      widget.removePackage(package);
+                                    });
+                                  },
+                                  icon: Icon(Icons.delete_outlined)),
+                            ),
+                          )
+                          .toList(),
                     ],
                   ),
                 ),
                 ListTile(
                   onTap: () async {
-                    if (selectedTest.getSelectedTest.length > 0) {
+                    if (selectedTest.getSelectedTest.isNotEmpty ||
+                        selectedTest.getSelectedPackage.isNotEmpty) {
                       var lab = selectedTest.getSelectedTest[0];
                       await searchState?.cardClicked(lab.labCode, false);
                       this.globalservice.navigate(

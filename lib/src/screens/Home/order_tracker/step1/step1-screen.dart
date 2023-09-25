@@ -4,6 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
+import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
 import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
@@ -14,6 +15,7 @@ import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filter-lab-list.dart';
 import '../../explore/Search/search_field.dart';
+import '../../package/package-suggetion-list.dart';
 
 class StepOneScreen extends StatefulWidget {
   StepOneScreen();
@@ -105,6 +107,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
         Order order = selectedOrder!.getOrder;
         order.self = isMySelfButtonSelected;
         order.tests = selectedTest!.getSelectedTest;
+        order.packages = selectedTest!.getSelectedPackage;
         if (isMySelfButtonSelected) {
           var user = await Get.put(UserRepository()).getUser();
           order.user?.gender = selectedGender;
@@ -129,10 +132,17 @@ class _StepOneScreenState extends State<StepOneScreen> {
     }
   }
 
-  Column generateListTileBody(Test test) {
+  Column generateListTileBodyForTest(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [Text(test.testName), Text(test.price)],
+    );
+  }
+
+  Column generateListTileBodyForPackage(Package package) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [Text(package.displayName), Text(package.price)],
     );
   }
 
@@ -304,7 +314,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Text(
-              'Tests Are Added  / Add more Test',
+              'Added Tests/Packages',
               style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
@@ -319,17 +329,42 @@ class _StepOneScreenState extends State<StepOneScreen> {
                     ...selectedTest!.getSelectedTest
                         .map(
                           (test) => ListTile(
-                            title: generateListTileBody(test),
+                            title: generateListTileBodyForTest(test),
                             iconColor: Theme.of(context).colorScheme.primary,
                             leading: Icon(Icons.medical_services),
                             trailing: IconButton(
                                 onPressed: () {
                                   selectedTest!.removeTest(test);
-                                  if (selectedTest!.getSelectedTest.length ==
-                                      0) {
+                                  if ((selectedTest!
+                                              .getSelectedPackage.length ==
+                                          0 &&
+                                      selectedTest!.getSelectedTest.length ==
+                                          0)) {
                                     this
                                         .globalservice
                                         .navigate(context, SearchBarPage());
+                                  }
+                                },
+                                icon: Icon(Icons.delete_outlined)),
+                          ),
+                        )
+                        .toList(),
+                    ...selectedTest!.getSelectedPackage
+                        .map(
+                          (package) => ListTile(
+                            title: generateListTileBodyForPackage(package),
+                            iconColor: Theme.of(context).colorScheme.primary,
+                            leading: Icon(Icons.medical_services),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  selectedTest!.removePackage(package);
+                                  if ((selectedTest!
+                                              .getSelectedPackage.length ==
+                                          0 &&
+                                      selectedTest!.getSelectedTest.length ==
+                                          0)) {
+                                    this.globalservice.navigate(
+                                        context, PackageSuggetionList());
                                   }
                                 },
                                 icon: Icon(Icons.delete_outlined)),

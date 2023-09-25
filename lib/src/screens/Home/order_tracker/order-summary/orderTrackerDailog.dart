@@ -171,22 +171,30 @@ class OrderTrackerDialog extends StatelessWidget {
                         Row(children: [
                           Text('Lab Name : ',
                               style: Theme.of(context).textTheme.titleSmall),
-                          Text(
-                            order.tests![0].labName,
-                            style: Theme.of(context).textTheme.titleMedium,
-                            softWrap: true,
+                          Expanded(
+                            child: Text(
+                              order.labName!,
+                              style: Theme.of(context).textTheme.titleMedium,
+                              softWrap: true,
+                            ),
                           )
                         ]),
                         SizedBox(height: 8.0),
                         Row(children: [
-                          Text('Booked Test : ',
+                          Text('Booked Items : ',
                               style: Theme.of(context).textTheme.titleSmall),
+                        ]),
+                        Row(children: [
                           Expanded(
                             child: Text(
                               order.tests!
-                                  .map((e) => e.displayName)
-                                  .join(",  "),
+                                      .map((e) => e.displayName)
+                                      .join(",  ") +
+                                  order.packages!
+                                      .map((e) => e.displayName)
+                                      .join(",  "),
                               style: Theme.of(context).textTheme.titleMedium,
+                              textAlign: TextAlign.center,
                               softWrap: true,
                             ),
                           )

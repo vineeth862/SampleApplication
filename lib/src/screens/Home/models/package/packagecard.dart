@@ -5,7 +5,7 @@ class PackageCard {
   final bool? pacSelcted;
   final String? pacCode;
   final String? price;
-  final String? labName;
+  final String? testList;
   final Package? packageObject;
 
   PackageCard(
@@ -13,11 +13,11 @@ class PackageCard {
       this.pacSelcted,
       this.pacCode,
       this.price,
-      this.labName,
+      this.testList,
       this.packageObject});
 
   factory PackageCard.fromJson(Map<String, dynamic> json) => PackageCard(
-      labName: json['labName'],
+      testList: json['testList'],
       pacCode: json['packageCode'],
       pacName: json['displayName'],
       pacSelcted: false,

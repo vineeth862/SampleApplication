@@ -123,12 +123,18 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
             child: SwipeableContainer(
                 key: UniqueKey(),
                 removeTest: (tesCode) {
-                  setState(() {
-                    selectedTest.removeTest(tesCode);
-                    if (selectedTest.getSelectedTest.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  });
+                  selectedTest.removeTest(tesCode);
+                  if (selectedTest.getSelectedTest.isEmpty &&
+                      selectedTest.getSelectedPackage.isEmpty) {
+                    selectedTest.setDetailExpanded(false);
+                  }
+                },
+                removePackage: (pacCode) {
+                  selectedTest.removePackage(pacCode);
+                  if (selectedTest.getSelectedTest.isEmpty &&
+                      selectedTest.getSelectedPackage.isEmpty) {
+                    selectedTest.setDetailExpanded(false);
+                  }
                 }),
           ),
           Positioned(
@@ -136,10 +142,11 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
             right: 0,
             left: 0,
             child: Container(
-                child: selectedTest.getSelectedTest.isNotEmpty
+                child: (selectedTest.getSelectedTest.isNotEmpty ||
+                        selectedTest.getSelectedPackage.isNotEmpty)
                     ? SlotBookingCard(
                         title:
-                            "${selectedTest.getSelectedTest.length} item Selected",
+                            "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
                         content: "view details",
                         hyperLink: true,
                         buttonClicked: () {

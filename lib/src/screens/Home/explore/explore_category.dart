@@ -5,7 +5,7 @@ import 'package:sample_application/src/screens/category/filtered_category_list.d
 
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/search_provider.dart';
-import '../package/package-list.dart';
+import '../package/package-card-list.dart';
 
 class LabTestCategoryCard extends StatelessWidget {
   final String title;

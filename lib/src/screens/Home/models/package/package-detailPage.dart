@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
-import '../../../../../utils/Provider/selected_order_provider.dart';
-import '../../../../../utils/Provider/selected_test_provider.dart';
-import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
-import '../../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../../../models/order/order.dart';
-import '../../../order_tracker/payment/paymentScreen.dart';
-import '../../../order_tracker/step1/step1.dart';
+import '../../../../utils/Provider/selected_order_provider.dart';
+import '../../../../utils/Provider/selected_test_provider.dart';
+import '../../../../utils/helper_widgets/bottom_model_sheet.dart';
+import '../../../../utils/helper_widgets/slot-booking-card.dart';
+import '../../order_tracker/payment/paymentScreen.dart';
+import '../../order_tracker/step1/step1.dart';
+import '../order/order.dart';
 
-class CardDetailPage extends StatefulWidget {
-  CardDetailPage({super.key, required this.test});
-  Test test;
+class PackageDetailPage extends StatefulWidget {
+  PackageDetailPage({super.key, required this.package});
+  Package package;
   @override
-  State<CardDetailPage> createState() => _CardDetailPageState();
+  State<PackageDetailPage> createState() => _PackageDetailPage();
 }
 
-class _CardDetailPageState extends State<CardDetailPage> {
+class _PackageDetailPage extends State<PackageDetailPage> {
   GlobalService globalservice = GlobalService();
   bool expandDetails = false;
 
@@ -29,7 +28,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
-    List<dynamic> list = searchState.getTestCardList;
+    // List<dynamic> list = searchState.getTestCardList;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -37,7 +36,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
               IconThemeData(color: Theme.of(context).colorScheme.primary),
           backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
-            "Test Details",
+            "package Details",
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
         ),
@@ -69,10 +68,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("test : ",
+                            Text("package : ",
                                 style: Theme.of(context).textTheme.labelLarge),
                             Expanded(
-                              child: Text(widget.test.testName,
+                              child: Text(widget.package.displayName,
                                   maxLines: 2,
                                   softWrap: true,
                                   style:
@@ -88,7 +87,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("lab : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text(widget.test.labName,
+                            Text(widget.package.labName,
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
@@ -100,8 +99,12 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Sample Required : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text(widget.test.sampletypeName,
-                                style: Theme.of(context).textTheme.titleSmall)
+                            Expanded(
+                              child: Text(widget.package.sampletypeName,
+                                  softWrap: true,
+                                  style:
+                                      Theme.of(context).textTheme.titleSmall),
+                            )
                           ],
                         ),
                         const SizedBox(
@@ -122,6 +125,30 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            Text("Tests Includs : ",
+                                style: Theme.of(context).textTheme.labelLarge),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(widget.package.testList,
+                                  softWrap: true,
+                                  style:
+                                      Theme.of(context).textTheme.titleSmall),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
                             Text("start at : ",
                                 style: Theme.of(context).textTheme.labelLarge),
                             Expanded(
@@ -129,7 +156,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 leading: Icon(Icons.currency_rupee,
                                     size: 21, weight: 45, color: Colors.black),
                                 horizontalTitleGap: -18.0,
-                                title: Text(widget.test.price,
+                                title: Text(widget.package.price,
                                     textAlign: TextAlign.left,
                                     style: Theme.of(context)
                                         .textTheme
@@ -152,11 +179,11 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               String userKey =
                                   globalservice.getCurrentUserKey();
                               if (userKey != "null") {
-                                if (selectedTest.getSelectedTest
-                                    .contains(widget.test)) {
-                                  selectedTest.removeTest(widget.test);
+                                if (selectedTest.getSelectedPackage
+                                    .contains(widget.package)) {
+                                  selectedTest.removePackage(widget.package);
                                 } else {
-                                  selectedTest.addTest(widget.test);
+                                  selectedTest.addPackage(widget.package);
                                 }
                               } else {
                                 showDialog(
@@ -178,7 +205,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                                         .colorScheme
                                                         .primary)),
                                         content: Text(
-                                          "Please Login to book test",
+                                          "Please Login to book package",
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium!,
@@ -203,18 +230,18 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     });
                               }
                             },
-                            child: !selectedTest.getSelectedTest
-                                    .contains(widget.test)
+                            child: !selectedTest.getSelectedPackage
+                                    .contains(widget.package)
                                 ? Text("BOOK")
                                 : Text("BOOKED"),
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.all(0),
-                              foregroundColor: !selectedTest.getSelectedTest
-                                      .contains(widget.test)
+                              foregroundColor: !selectedTest.getSelectedPackage
+                                      .contains(widget.package)
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.background,
-                              backgroundColor: !selectedTest.getSelectedTest
-                                      .contains(widget.test)
+                              backgroundColor: !selectedTest.getSelectedPackage
+                                      .contains(widget.package)
                                   ? Theme.of(context).colorScheme.onPrimary
                                   : Theme.of(context).colorScheme.primary,
                               shape: RoundedRectangleBorder(

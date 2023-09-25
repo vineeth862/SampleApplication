@@ -78,15 +78,19 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             left: 0,
             child: SwipeableContainer(
                 key: UniqueKey(),
-                removeTest: (testCode) {
-                  setState(() {
-                    selectedTest.removeTest(testCode);
-
-                    if (selectedTest.getSelectedTest.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                      this.globalservice.navigate(context, SearchBarPage());
-                    }
-                  });
+                removeTest: (tesCode) {
+                  selectedTest.removeTest(tesCode);
+                  if (selectedTest.getSelectedTest.isEmpty &&
+                      selectedTest.getSelectedPackage.isEmpty) {
+                    selectedTest.setDetailExpanded(false);
+                  }
+                },
+                removePackage: (pacCode) {
+                  selectedTest.removePackage(pacCode);
+                  if (selectedTest.getSelectedTest.isEmpty &&
+                      selectedTest.getSelectedPackage.isEmpty) {
+                    selectedTest.setDetailExpanded(false);
+                  }
                 }),
           ),
           Positioned(
@@ -94,10 +98,11 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             right: 0,
             left: 0,
             child: Container(
-                child: selectedTest.getSelectedTest.isNotEmpty
+                child: (selectedTest.getSelectedTest.isNotEmpty ||
+                        selectedTest.getSelectedPackage.isNotEmpty)
                     ? SlotBookingCard(
                         title:
-                            "${selectedTest.getSelectedTest.length} item Selected",
+                            "${selectedTest.getSelectedTest.length + selectedTest.selectedPackage.length} item Selected",
                         content: "view details",
                         hyperLink: true,
                         buttonClicked: () async {

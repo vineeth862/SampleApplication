@@ -81,7 +81,8 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
             right: 0,
             left: 0,
             child: Container(
-                child: selectedTest.getSelectedTest.isNotEmpty
+                child: selectedTest.getSelectedTest.isNotEmpty ||
+                        selectedTest.selectedPackage.isNotEmpty
                     ? SlotBookingCard(
                         title: "Your Location",
                         content: selectedAdress,
