@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 
@@ -9,6 +11,7 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
   var verificationId = "".obs;
+  TextEditingController pinController = TextEditingController();
 
   @override
   void onReady() {
@@ -24,16 +27,18 @@ class AuthenticationRepository extends GetxController {
         : Get.offAll(() => HomePage());
   }
 
-  Future<void> PhoneNumberAuth(String MobileNumber,
-      {pinputcontroller = "1"}) async {
+  Future<void> PhoneNumberAuth(
+    String MobileNumber,
+  ) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: MobileNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
-        pinputcontroller.setText(credential.smsCode);
         await _auth.signInWithCredential(credential);
       },
       codeSent: ((verificationId, resendToken) {
         this.verificationId.value = verificationId;
+        // print(verificationId.toString());
+        // pinController.setText(verificationId.toString());
       }),
       codeAutoRetrievalTimeout: (verificationId) {
         this.verificationId.value = verificationId;

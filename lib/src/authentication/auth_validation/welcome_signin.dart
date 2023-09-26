@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
-import 'package:pinput/pinput.dart';
+
 import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/authentication/auth_validation/otp_controller.dart';
+import 'package:sample_application/src/authentication/auth_validation/otp_form_screen.dart';
+//import 'package:sample_application/src/authentication/auth_validation/otp_screen_exp.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
+
 import '../user_repository.dart';
 
 class Welcomesignin extends StatefulWidget {
@@ -23,22 +26,16 @@ class _WelcomesigninState extends State<Welcomesignin> {
   TextEditingController nameController = TextEditingController();
   GlobalService globalservice = GlobalService();
   UserRepository userRepository = UserRepository();
-  final pinController = TextEditingController();
+
   User user = User();
   var otp;
   var Controller = Get.put(otpController());
-  void _validate() {
-    _formKey.currentState!.validate();
-    // if (_formKey.currentState!.validate()) {
-    //   _saveItem();
-    // }
-  }
 
-  void _saveItem() {
+  void _saveItem() async {
     user.mobile = "+91" + mobileNumberController.text.trim();
     user.userName = nameController.text.trim();
-    AuthenticationRepository.instance
-        .PhoneNumberAuth(user.mobile!, pinputcontroller: pinController);
+
+    AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
   }
 
   @override
@@ -217,11 +214,12 @@ class _WelcomesigninState extends State<Welcomesignin> {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
-                _validate();
-
                 //globalservice.navigate(context, const PinputExample());
                 if (_formKey.currentState!.validate()) {
                   _saveItem();
+                  // globalservice.navigate(
+                  //     context, OtpScreen(phone: mobileNumberController.text));
+
                   showModalBottomSheet(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -239,48 +237,51 @@ class _WelcomesigninState extends State<Welcomesignin> {
                             height: 20,
                           ),
                           Text(
-                            "Please enter the OTP sent to registered phone number",
+                            "Please enter the OTP sent to ${user.mobile}  ",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           const SizedBox(height: 20),
-                          GestureDetector(
-                            child: Pinput(
-                              controller: pinController,
-                              length: 6,
-                              focusNode: focusNode,
-                              keyboardType: TextInputType.number,
-                              androidSmsAutofillMethod:
-                                  AndroidSmsAutofillMethod.none,
-                              listenForMultipleSmsOnAndroid: true,
-                              validator: (value) {
-                                otp = value.toString();
-                                // otpController.instance
-                                //     .verifyOtpController(otp, user);
-                              },
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   child: Pinput(
+                          //     controller: AuthenticationRepository
+                          //         .instance.pinController,
+                          //     length: 6,
+                          //     focusNode: focusNode,
+                          //     keyboardType: TextInputType.number,
+                          //     androidSmsAutofillMethod:
+                          //         AndroidSmsAutofillMethod.none,
+                          //     autofocus: true,
+                          //     listenForMultipleSmsOnAndroid: true,
+                          //     validator: (value) {
+                          //       otp = value.toString();
+                          //       otpController.instance
+                          //           .verifyOtpController(otp, user);
+                          //     },
+                          //   ),
+                          // ),
                           const SizedBox(
                             height: 20,
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              _validate();
+                          //   ElevatedButton(
+                          //     onPressed: () {
+                          //       _validate();
 
-                              otpController.instance
-                                  .verifyOtpController(otp, user);
-                            },
-                            child: const Text("Submit"),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    20.0), // Set the border radius value
-                              ),
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 100.0),
-                            ),
-                          ),
+                          //       otpController.instance
+                          //           .verifyOtpController(otp, user);
+                          //     },
+                          //     child: const Text("Submit"),
+                          //     style: ElevatedButton.styleFrom(
+                          //       shape: RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(
+                          //             20.0), // Set the border radius value
+                          //       ),
+                          //       backgroundColor:
+                          //           Theme.of(context).colorScheme.primary,
+                          //       padding:
+                          //           const EdgeInsets.symmetric(horizontal: 100.0),
+                          //     ),
+                          //   ),
+                          OtpPhoneWidget(user: user)
                         ],
                       ),
                     ),

@@ -238,17 +238,14 @@ class MaleFemaleCategory extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
                 child: Image.asset(
                   imagePath.toString(),
-                  height: 70.0,
-                  width: 100.0,
+                  height: 80.0,
+                  width: 120.0,
                   fit: BoxFit.fill,
                 ),
               )),
         ),
-        const SizedBox(
-          height: 5,
-        ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [

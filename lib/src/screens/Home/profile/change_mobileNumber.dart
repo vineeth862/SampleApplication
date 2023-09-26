@@ -32,8 +32,7 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
   void _saveItem() {
     user.mobile = "+91" + mobileNumberController.text.trim();
 
-    AuthenticationRepository.instance
-        .PhoneNumberAuth(user.mobile!, pinputcontroller: pinController);
+    AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
   }
 
   @override

@@ -536,7 +536,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Under 25 Years",
-                          imagePath: "./assets/images/men1.jpg",
+                          imagePath: "./assets/images/men4.png",
                         ),
                       ),
                       GestureDetector(
@@ -550,7 +550,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "  25-50 Years  ",
-                          imagePath: "./assets/images/men1.jpg",
+                          imagePath: "./assets/images/men4.png",
                         ),
                       ),
                       GestureDetector(
@@ -564,7 +564,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Above 50 Years",
-                          imagePath: "./assets/images/men1.jpg",
+                          imagePath: "./assets/images/men4.png",
                         ),
                       ),
                       GestureDetector(
@@ -616,7 +616,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "Under 25 Years",
-                          imagePath: "./assets/images/women1.jpg",
+                          imagePath: "./assets/images/women4.png",
                         ),
                       ),
                       GestureDetector(
@@ -630,7 +630,7 @@ class _exploreExpState extends State<exploreExp> {
                         },
                         child: MaleFemaleCategory(
                           name: "  25-50 Years  ",
-                          imagePath: "./assets/images/women3.jpg",
+                          imagePath: "./assets/images/women1.png",
                         ),
                       ),
                       GestureDetector(
