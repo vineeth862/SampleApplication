@@ -102,7 +102,11 @@ class _PackageSliderState extends State<PackageSlider> {
           label: const Text("View all packages"),
           icon: const Icon(Icons.arrow_circle_right_sharp),
           onPressed: () {
-            globalservice.navigate(context, PackageSuggetionList());
+            globalservice.navigate(
+                context,
+                PackageSuggetionList(
+                  labCode: "",
+                ));
           },
         )
       ],

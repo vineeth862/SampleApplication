@@ -6,6 +6,7 @@ import 'package:sample_application/src/utils/Provider/selected_test_provider.dar
 import '../../global_service/global_service.dart';
 import '../../screens/Home/explore/Search/Cards/filter-lab-list.dart';
 import '../../screens/Home/models/package/package.dart';
+import '../../screens/Home/order_tracker/step1/confirmation-allert.dart';
 import '../Provider/search_provider.dart';
 
 class SwipeableContainer extends StatefulWidget {
@@ -140,24 +141,32 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
                 ),
                 ListTile(
                   onTap: () async {
-                    if (selectedTest.getSelectedTest.isNotEmpty ||
-                        selectedTest.getSelectedPackage.isNotEmpty) {
-                      var lab = selectedTest.getSelectedTest[0];
-                      await searchState?.cardClicked(lab.labCode, false);
-                      this.globalservice.navigate(
-                          context,
-                          FilteredLabCardlistPage(
-                            title: lab.labName,
-                            labCode: lab.labCode,
-                            location: "location",
-                          ));
-                    }
-                    setState(() {
-                      selectedTest.toggelDetailExpanded();
-                    });
+                    // if (selectedTest.getSelectedTest.isNotEmpty ||
+                    //     selectedTest.getSelectedPackage.isNotEmpty) {
+                    //   var lab = selectedTest.getSelectedTest[0];
+                    //   await searchState?.cardClicked(lab.labCode, false);
+                    //   this.globalservice.navigate(
+                    //       context,
+                    //       FilteredLabCardlistPage(
+                    //         title: lab.labName,
+                    //         labCode: lab.labCode,
+                    //         location: "location",
+                    //       ));
+                    // }
+                    // setState(() {
+                    //   selectedTest.toggelDetailExpanded();
+                    // });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Center(
+                          child: Allert(),
+                        ); // Custom widget for the dialog content
+                      },
+                    );
                   },
                   title: Text(
-                    "Add more test",
+                    "Add more Items",
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 16,

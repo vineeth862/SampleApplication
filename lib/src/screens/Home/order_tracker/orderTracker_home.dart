@@ -71,22 +71,24 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   }
 
   getBookedItems(i) {
-    if (orders[i].tests!.isNotEmpty)
-      return orders[i].tests!.map((Test item) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Text(item.testName),
-            ),
-          ));
+    final list = [];
 
-    return orders[i].packages!.map((Package item) => Padding(
+    orders[i].tests?.forEach((Test item) => list.add(Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(item.testName),
+          ),
+        )));
+
+    orders[i].packages?.forEach((Package item) => list.add(Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(item.packageName),
           ),
-        ));
+        )));
+    return list;
   }
 
   @override

@@ -190,6 +190,7 @@ class OrderTrackerDialog extends StatelessWidget {
                               order.tests!
                                       .map((e) => e.displayName)
                                       .join(",  ") +
+                                  (order.packages!.isNotEmpty ? ',  ' : '') +
                                   order.packages!
                                       .map((e) => e.displayName)
                                       .join(",  "),

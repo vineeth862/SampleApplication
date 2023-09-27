@@ -184,6 +184,9 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                   selectedTest.removePackage(widget.package);
                                 } else {
                                   selectedTest.addPackage(widget.package);
+
+                                  globalservice.navigate(
+                                      context, StepOneToBookTest());
                                 }
                               } else {
                                 showDialog(

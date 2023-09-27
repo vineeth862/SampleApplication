@@ -16,6 +16,20 @@ class PackageService {
     return "";
   }
 
+  loadPackageListByLabCode(labCode) async {
+    var result = await FirebaseFirestore.instance
+        .collection('package')
+        .where('labCode', isEqualTo: labCode)
+        .get();
+    if (result.docs.isNotEmpty) {
+      allPackagesNameList = result.docs
+          .map((e) => PackageCard.fromJson(e.data()).pacName.toString())
+          .toSet();
+    }
+
+    return "";
+  }
+
   getAllLabsByPackage(String displayName) async {
     var result = await FirebaseFirestore.instance
         .collection('package')

@@ -9,6 +9,7 @@ import '../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../utils/helper_widgets/package_card.dart';
 import '../../../utils/helper_widgets/slot-booking-card.dart';
 import '../models/order/order.dart';
+import '../models/package/package-detailPage.dart';
 import '../models/package/packageCard.dart';
 import '../order_tracker/payment/paymentScreen.dart';
 import '../order_tracker/step1/step1.dart';
@@ -65,8 +66,9 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
 
         if (duplicateTest.isNotEmpty) {
           selectedPackage.removePackage(duplicateTest[0]);
+        } else {
+          selectedPackage.addPackage(packageObj);
         }
-        selectedPackage.addPackage(packageObj);
       }
     }
 
@@ -101,18 +103,17 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         tapOnButton: (package) {
                           onBookButton(list[index].packageObject!);
 
-                          // globalservice.navigate(context, StepOneToBookTest());
+                          globalservice.navigate(context, StepOneToBookTest());
 
                           if (selectedPackage.getSelectedPackage.isEmpty) {
                             selectedPackage.setDetailExpanded(false);
                           }
                         },
                         tapOnCard: (value) {
-                          // globalservice.navigate(
-                          //     context,
-                          //     CardDetailPage(
-                          //       package: list[index].packageObj,
-                          //     ));
+                          globalservice.navigate(
+                              context,
+                              PackageDetailPage(
+                                  package: list[index].packageObject!));
                         },
                       ),
                     );
@@ -147,10 +148,11 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
             right: 0,
             left: 0,
             child: Container(
-                child: selectedPackage.getSelectedPackage.isNotEmpty
+                child: selectedPackage.getSelectedPackage.isNotEmpty ||
+                        selectedPackage.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
                         title:
-                            "${selectedPackage.getSelectedPackage.length} item Selected",
+                            "${selectedPackage.getSelectedPackage.length + selectedPackage.getSelectedTest.length} item Selected",
                         content: "view details",
                         hyperLink: true,
                         buttonClicked: () {

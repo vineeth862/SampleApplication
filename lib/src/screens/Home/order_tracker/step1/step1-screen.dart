@@ -16,6 +16,7 @@ import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filter-lab-list.dart';
 import '../../explore/Search/search_field.dart';
 import '../../package/package-suggetion-list.dart';
+import 'confirmation-allert.dart';
 
 class StepOneScreen extends StatefulWidget {
   StepOneScreen();
@@ -102,34 +103,35 @@ class _StepOneScreenState extends State<StepOneScreen> {
   }
 
   Future<bool> UpdateWidget() async {
-    if (_formKey.currentState!.validate()) {
-      if (selectedOrder != null) {
-        Order order = selectedOrder!.getOrder;
-        order.self = isMySelfButtonSelected;
-        order.tests = selectedTest!.getSelectedTest;
-        order.packages = selectedTest!.getSelectedPackage;
-        if (isMySelfButtonSelected) {
-          var user = await Get.put(UserRepository()).getUser();
-          order.user?.gender = selectedGender;
-          order.user?.gender = selectedGender;
-          order.user = User(
-              userName: user.data()?['userName'],
-              age: _agecontroller.text,
-              gender: selectedGender,
-              mobile: user.data()?['mobile']);
-        } else {
-          order.user = User(
-              userName: _namecontroller.text,
-              age: _agecontroller.text,
-              gender: selectedGender);
-        }
-
-        selectedOrder!.setOrder = order;
+    // if (_formKey.currentState!.validate()) {
+    if (selectedOrder != null) {
+      Order order = selectedOrder!.getOrder;
+      order.self = isMySelfButtonSelected;
+      order.tests = selectedTest!.getSelectedTest;
+      order.packages = selectedTest!.getSelectedPackage;
+      if (isMySelfButtonSelected) {
+        var user = await Get.put(UserRepository()).getUser();
+        order.user?.gender = selectedGender;
+        order.user?.gender = selectedGender;
+        order.user = User(
+            userName: user.data()?['userName'],
+            age: _agecontroller.text,
+            gender: selectedGender,
+            mobile: user.data()?['mobile']);
+      } else {
+        order.user = User(
+            userName: _namecontroller.text,
+            age: _agecontroller.text,
+            gender: selectedGender);
       }
-      return true;
-    } else {
-      return false;
+
+      selectedOrder!.setOrder = order;
     }
+    return true;
+    // }
+    // else {
+    //   return false;
+    // }
   }
 
   Column generateListTileBodyForTest(Test test) {
@@ -363,8 +365,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                           0 &&
                                       selectedTest!.getSelectedTest.length ==
                                           0)) {
-                                    this.globalservice.navigate(
-                                        context, PackageSuggetionList());
+                                    this.globalservice.navigate(context,
+                                        PackageSuggetionList(labCode: ""));
                                   }
                                 },
                                 icon: Icon(Icons.delete_outlined)),
@@ -373,21 +375,19 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         .toList(),
                     ListTile(
                       onTap: () async {
-                        if (selectedTest!.getSelectedTest.length > 0) {
-                          var lab = selectedTest!.getSelectedTest[0];
-                          await searchState?.cardClicked(lab.labCode, false);
-                          this.globalservice.navigate(
-                              context,
-                              FilteredLabCardlistPage(
-                                title: lab.labName,
-                                labCode: lab.labCode,
-                                location: "location",
-                              ));
-                        }
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: Allert(),
+                            ); // Custom widget for the dialog content
+                          },
+                        );
+
                         UpdateWidget();
                       },
                       title: Text(
-                        "Add more test",
+                        "Add more Items",
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.primary,
                             fontSize: 16,

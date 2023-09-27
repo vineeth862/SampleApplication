@@ -5,22 +5,32 @@ import 'package:sample_application/src/screens/Home/package/package-card-list.da
 import 'package:sample_application/src/screens/Home/package/packageService.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 
-class PackageSuggetionList extends StatefulWidget {
-  const PackageSuggetionList({super.key});
+import '../../../utils/Provider/selected_test_provider.dart';
 
+class PackageSuggetionList extends StatefulWidget {
+  PackageSuggetionList({super.key, required this.labCode});
+  String labCode;
   @override
   State<PackageSuggetionList> createState() => _PackageSuggetionList();
 }
 
 class _PackageSuggetionList extends State<PackageSuggetionList> {
   PackageService packageService = PackageService();
+  late SelectedTestState selectedTest;
   @override
   void initState() {
-    loadList();
+    Future(() {
+      loadList(widget.labCode.isNotEmpty);
+    });
   }
 
-  loadList() async {
-    await packageService.loadPackageList();
+  loadList(bool isNotEmpty) async {
+    if (isNotEmpty) {
+      await packageService.loadPackageListByLabCode(widget.labCode);
+    } else {
+      await packageService.loadPackageList();
+    }
+
     setState(() {});
   }
 

@@ -74,8 +74,9 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
             .toList();
         if (duplicateTest.isNotEmpty) {
           selectedTest.removeTest(duplicateTest[0]);
+        } else {
+          selectedTest.addTest(testObject);
         }
-        selectedTest.addTest(testObject);
       }
     }
 
