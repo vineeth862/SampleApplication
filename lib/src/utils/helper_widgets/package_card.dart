@@ -86,7 +86,7 @@ class PackageCardWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Text(
-                      title,
+                      package.labName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
