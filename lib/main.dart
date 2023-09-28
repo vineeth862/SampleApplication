@@ -3,6 +3,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
+import 'package:sample_application/src/screens/Home/explore/explore_why-us.dart';
+import 'package:sample_application/src/screens/Home/spalsh_screen/splashscreen.dart';
 import 'package:sample_application/src/utils/Provider/address_provider.dart';
 import 'package:sample_application/src/utils/Provider/loading_provider.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
       title: 'Sample Application',
       theme: theme,
       themeMode: ThemeMode.light,
-      home: HomePage(),
+      home: const MySplashScreen(),
     );
   }
 }

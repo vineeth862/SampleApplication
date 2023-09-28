@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -132,8 +134,6 @@ class _addressOperationState extends State<addressOperation> {
               widget.routeDetails.toString() != "InitialAdress"
                   ? InkWell(
                       onTap: () {
-                        //
-
                         globalservice.navigate(
                             context, AddAdress(routeInfo: widget.routeDetails));
                       },
@@ -229,9 +229,9 @@ class _addressOperationState extends State<addressOperation> {
                                   await Future.delayed(Duration(seconds: 1),
                                       () {
                                     loadingProvider.stopLoading();
-                                    // Get.offAll(() => HomePage());
+                                    Get.offAll(() => HomePage());
 
-                                    globalservice.navigate(context, HomePage());
+                                    //globalservice.navigate(context, HomePage());
                                   });
                                 }
                               },

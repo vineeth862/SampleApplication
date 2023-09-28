@@ -1,7 +1,5 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -38,7 +36,7 @@ class UserCurrentLocation extends GetxController {
       // Perform your one-time operation here
       //print('Performing one-time operation');
       addressToBeConsidered.value = newValue;
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 0), () {
         //loadingProvider.startLoading();
         //Get.offAll(() => HomePage());
 
@@ -151,9 +149,9 @@ class UserCurrentLocation extends GetxController {
 
   validatePincode(pinCode) async {
     var pinCodeList = FirebaseFirestore.instance.collection('pincode');
-    final documentSnapshot = await pinCodeList.doc(pinCode.toString()).get();
+    final isPincode = await pinCodeList.doc(pinCode.toString()).get();
 
-    pinCodeExists.value = documentSnapshot.exists;
+    pinCodeExists.value = isPincode.exists;
     //print(pinCodeExists);
   }
 }
