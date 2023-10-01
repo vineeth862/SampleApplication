@@ -66,7 +66,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         "SKIP",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .titleMedium!
                             .copyWith(fontSize: 12),
                       ),
                       style: OutlinedButton.styleFrom(
@@ -93,7 +93,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                 'Explore the world of diagnostics.',
                 style: Theme.of(context)
                     .textTheme
-                    .displayLarge!
+                    .headlineMedium!
                     .copyWith(color: Colors.black),
                 textAlign: TextAlign.center,
               ),
@@ -104,7 +104,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35.0),
               child: Text('Log in or sign up',
-                  style: Theme.of(context).textTheme.titleLarge!),
+                  style: Theme.of(context).textTheme.headlineMedium!),
             ),
             const SizedBox(height: 10.0),
             Form(
@@ -231,7 +231,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         children: [
                           Text(
                             "OTP",
-                            style: Theme.of(context).textTheme.displayLarge,
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           const SizedBox(
                             height: 20,

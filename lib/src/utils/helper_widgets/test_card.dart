@@ -114,11 +114,11 @@ class TestCardWidget extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             softWrap: true,
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           Text(
                             "NABL",
-                            style: Theme.of(context).textTheme.titleSmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       ),
@@ -138,8 +138,8 @@ class TestCardWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          isTest ? "Test :" : " Lab :",
-                          style: Theme.of(context).textTheme.titleMedium,
+                          isTest ? "Test :" : "Lab :",
+                          style: Theme.of(context).textTheme.headlineMedium,
                         )
                       ],
                     ),
@@ -148,7 +148,7 @@ class TestCardWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -171,7 +171,7 @@ class TestCardWidget extends StatelessWidget {
                     Text(
                       getReportDate(test),
                       softWrap: true,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     // const Spacer(),
                     // Container(
@@ -219,7 +219,7 @@ class TestCardWidget extends StatelessWidget {
                                 Text("₹${test.price}",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleLarge!
+                                        .headlineMedium!
                                         .copyWith(fontWeight: FontWeight.bold)),
                                 const SizedBox(
                                   width: 5,
@@ -236,7 +236,7 @@ class TestCardWidget extends StatelessWidget {
                                 Text("25%",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleLarge!
+                                        .headlineMedium!
                                         .copyWith(
                                             fontSize: 13,
                                             color: Theme.of(context)
@@ -280,7 +280,7 @@ class TestCardWidget extends StatelessWidget {
                                     title: Text("Please Login",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .displayLarge!
+                                            .headlineMedium!
                                             .copyWith(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -289,7 +289,7 @@ class TestCardWidget extends StatelessWidget {
                                       "Please Login to book test",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleMedium!,
+                                          .headlineMedium!,
                                     ),
                                     actions: [
                                       // Define buttons for the AlertDialog

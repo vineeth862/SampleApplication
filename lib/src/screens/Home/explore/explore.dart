@@ -52,7 +52,7 @@ class _ExploreState extends State<Explore> {
                               myController.addressToBeConsidered.value,
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleLarge!
+                                  .titleMedium!
                                   .copyWith(color: Colors.white),
                             ))),
                     SizedBox(
@@ -127,7 +127,7 @@ class _ExploreState extends State<Explore> {
                                   Text("Popular test",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .displayLarge),
+                                          .headlineMedium),
                                 ],
                               ),
                             ),
@@ -192,7 +192,7 @@ class _ExploreState extends State<Explore> {
                                 Text("Popular lab",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .displayLarge),
+                                        .headlineMedium),
                                 const SizedBox(
                                   height: 20,
                                 ),

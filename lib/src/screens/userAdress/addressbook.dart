@@ -49,7 +49,7 @@ class _AdressBookState extends State<AdressBook> {
                         "Address Book",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .headlineMedium!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),

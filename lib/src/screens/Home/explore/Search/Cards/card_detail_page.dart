@@ -89,9 +89,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Lab : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Text(widget.test.labName,
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -101,9 +102,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Sample Required : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Text(widget.test.sampletypeName,
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -113,9 +115,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Method : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Text("Not Specified",
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -268,7 +271,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               width: 10,
                             ),
                             Text("No fasting required.",
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         )
                       ],
@@ -315,7 +318,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       "Phone",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleLarge,
+                                          .headlineMedium,
                                     )
                                   ],
                                 )),
@@ -338,7 +341,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       "Mail",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleLarge,
+                                          .headlineMedium,
                                     )
                                   ],
                                 ))
@@ -371,7 +374,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               "Price: ₹" + widget.test.price,
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleLarge!
+                                  .headlineMedium!
                                   .copyWith(color: Colors.black),
                             ),
                           ),
@@ -403,7 +406,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       title: Text("Please Login",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .displayLarge!
+                                              .headlineMedium!
                                               .copyWith(
                                                   color: Theme.of(context)
                                                       .colorScheme

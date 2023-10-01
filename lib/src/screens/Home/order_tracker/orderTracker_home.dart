@@ -132,7 +132,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                 : "Your Bookings",
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge!
+                                .headlineMedium!
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -204,7 +204,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                                 softWrap: true,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .titleLarge!
+                                                    .headlineMedium!
                                                     .copyWith(
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -261,7 +261,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         "Booked Items",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleSmall!
+                                            .headlineMedium!
                                             .copyWith(
                                                 fontWeight: FontWeight.bold),
                                       ),

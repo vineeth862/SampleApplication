@@ -22,15 +22,13 @@ class NoResultFoundCard extends StatelessWidget {
           SizedBox(height: 16.0),
           Text(
             title,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           SizedBox(height: 8.0),
           Text(
             'Sorry, no results were found',
             textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           GestureDetector(
             onTap: () {
@@ -41,11 +39,9 @@ class NoResultFoundCard extends StatelessWidget {
               child: Text(
                 'Please contact our customer service!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ),
           ),

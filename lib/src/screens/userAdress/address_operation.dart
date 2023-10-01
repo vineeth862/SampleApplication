@@ -184,7 +184,7 @@ class _addressOperationState extends State<addressOperation> {
                     "Saved addresses",
                     style: Theme.of(context)
                         .textTheme
-                        .titleLarge!
+                        .headlineMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -200,7 +200,7 @@ class _addressOperationState extends State<addressOperation> {
                         ),
                         Text(
                           "No Saved Address",
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         Divider(
                           height: 20,

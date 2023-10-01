@@ -130,14 +130,14 @@ class _SearchBarPageState extends State<SearchBarPage>
                                       : myController.adress,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge!
+                                      .headlineMedium!
                                       .copyWith(color: Colors.white),
                                 )),
                             subtitle: Obx(() => Text(
                                   myController.area.value,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleSmall!
+                                      .bodyMedium!
                                       .copyWith(
                                           color: Color.fromARGB(
                                               255, 252, 215, 215)),

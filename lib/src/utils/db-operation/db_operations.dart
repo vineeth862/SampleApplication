@@ -32,7 +32,7 @@ class _GitHubRepositoriesScreenState extends State<GitHubRepositoriesScreen> {
           "GitHub Repository Work",
           style: Theme.of(context)
               .textTheme
-              .displayLarge!
+              .headlineMedium!
               .copyWith(color: Colors.white),
         )),
       ),

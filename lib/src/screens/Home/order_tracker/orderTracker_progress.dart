@@ -73,9 +73,12 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     child: Center(
                       child: Text(
                         "Thanks For Choosing",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ),
                   ),

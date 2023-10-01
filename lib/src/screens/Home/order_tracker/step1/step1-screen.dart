@@ -161,7 +161,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Text(
               'Who is getting tested?',
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           Card(
@@ -317,7 +317,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Text(
               'Added Tests/Packages',
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           SizedBox(

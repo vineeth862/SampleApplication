@@ -48,7 +48,7 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                   child: Text('Enter New Number',
-                      style: Theme.of(context).textTheme.displayLarge!),
+                      style: Theme.of(context).textTheme.headlineMedium!),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -125,7 +125,8 @@ class _changeMobileNumberState extends State<changeMobileNumber> {
                             children: [
                               Text(
                                 "OTP",
-                                style: Theme.of(context).textTheme.displayLarge,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                               const SizedBox(
                                 height: 20,

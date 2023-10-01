@@ -192,7 +192,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                     "Saved addresses",
                     style: Theme.of(context)
                         .textTheme
-                        .titleLarge!
+                        .headlineMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -208,7 +208,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                         ),
                         Text(
                           "No Saved Address",
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         Divider(
                           height: 20,
@@ -257,7 +257,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                                       items[index],
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .titleLarge!
+                                                          .titleMedium!
                                                           .copyWith(
                                                               color: Theme.of(
                                                                       context)
@@ -267,7 +267,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                                   : Text(items[index],
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .titleLarge),
+                                                          .titleMedium),
                                             ),
                                           ),
                                           GestureDetector(

@@ -55,7 +55,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Information",
-                            style: Theme.of(context).textTheme.displayLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -69,13 +69,14 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("package : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Expanded(
                               child: Text(widget.package.displayName,
                                   maxLines: 2,
                                   softWrap: true,
                                   style:
-                                      Theme.of(context).textTheme.titleSmall),
+                                      Theme.of(context).textTheme.bodyMedium),
                             )
                           ],
                         ),
@@ -86,9 +87,10 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("lab : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Text(widget.package.labName,
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -98,12 +100,13 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Sample Required : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Expanded(
                               child: Text(widget.package.sampletypeName,
                                   softWrap: true,
                                   style:
-                                      Theme.of(context).textTheme.titleSmall),
+                                      Theme.of(context).textTheme.bodyMedium),
                             )
                           ],
                         ),
@@ -114,9 +117,10 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Recommended Gender : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Text("male, female",
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -126,7 +130,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("Tests Includs : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style: Theme.of(context).textTheme.bodyMedium),
                           ],
                         ),
                         const SizedBox(
@@ -139,7 +143,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                               child: Text(widget.package.testList,
                                   softWrap: true,
                                   style:
-                                      Theme.of(context).textTheme.titleSmall),
+                                      Theme.of(context).textTheme.bodyMedium),
                             )
                           ],
                         ),
@@ -150,7 +154,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text("start at : ",
-                                style: Theme.of(context).textTheme.labelLarge),
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
                             Expanded(
                               child: ListTile(
                                 leading: Icon(Icons.currency_rupee,
@@ -160,7 +165,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                     textAlign: TextAlign.left,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .labelLarge
+                                        .bodyMedium
                                         ?.copyWith(
                                             color: Colors.black,
                                             fontSize: 22,
@@ -202,7 +207,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                         title: Text("Please Login",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .displayLarge!
+                                                .headlineMedium!
                                                 .copyWith(
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -211,7 +216,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                           "Please Login to book package",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleMedium!,
+                                              .headlineMedium!,
                                         ),
                                         actions: [
                                           // Define buttons for the AlertDialog
@@ -275,7 +280,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Preperation",
-                            style: Theme.of(context).textTheme.displayLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const SizedBox(
                           height: 20,
                         ),
@@ -291,7 +296,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                             // Text("note : ",
                             //     style: Theme.of(context).textTheme.labelLarge),
                             Text("* no preperation required...",
-                                style: Theme.of(context).textTheme.titleSmall)
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium)
                           ],
                         )
                       ],
@@ -324,7 +330,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text("Need help ?",
-                              style: Theme.of(context).textTheme.displayLarge),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           const SizedBox(
                             height: 20,
                           ),
@@ -346,11 +353,11 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                   Text("Call our health adviser to book",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .labelLarge),
+                                          .headlineMedium),
                                   Text("our team of experts will guid you",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleSmall)
+                                          .bodyMedium)
                                 ],
                               )
                             ],
@@ -370,7 +377,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Freequently booked together",
-                            style: Theme.of(context).textTheme.displayLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const SizedBox(
                           height: 20,
                         ),

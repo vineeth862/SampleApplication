@@ -263,7 +263,7 @@ class _StepThreeScreen extends State<StepThreeScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   'No available slots. Please check for the next day slots',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               )
             : SizedBox(

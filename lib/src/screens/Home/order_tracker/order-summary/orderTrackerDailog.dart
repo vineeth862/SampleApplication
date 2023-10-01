@@ -81,21 +81,23 @@ class OrderTrackerDialog extends StatelessWidget {
                         SizedBox(height: 20),
                         Row(children: [
                           Text('Patient Name : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(
                             generateString(order.user?.userName),
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                             softWrap: true,
                           )
                         ]),
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Mobile : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(
                               generateString(order.user?.mobile)
                                   .substring(3, 13),
-                              style: Theme.of(context).textTheme.titleMedium)
+                              style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
                       ],
@@ -143,38 +145,42 @@ class OrderTrackerDialog extends StatelessWidget {
                         SizedBox(height: 15),
                         Row(children: [
                           Text('Sample PickUp On : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(
                               generateString(
                                   order.booked?.bookedDate?.substring(0, 10)),
-                              style: Theme.of(context).textTheme.titleMedium)
+                              style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Collection Slot : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(generateString(order.booked?.bookedSlot),
-                              style: Theme.of(context).textTheme.titleMedium)
+                              style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Address : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Expanded(
                             child: Text(order.address!,
                                 overflow: TextOverflow.visible,
                                 softWrap: true,
-                                style: Theme.of(context).textTheme.titleMedium),
+                                style: Theme.of(context).textTheme.bodyMedium),
                           )
                         ]),
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Lab Name : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Expanded(
                             child: Text(
                               order.labName!,
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.bodyMedium,
                               softWrap: true,
                             ),
                           )
@@ -182,7 +188,8 @@ class OrderTrackerDialog extends StatelessWidget {
                         SizedBox(height: 8.0),
                         Row(children: [
                           Text('Booked Items : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                         ]),
                         Row(children: [
                           Expanded(
@@ -194,7 +201,7 @@ class OrderTrackerDialog extends StatelessWidget {
                                   order.packages!
                                       .map((e) => e.displayName)
                                       .join(",  "),
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.bodyMedium,
                               textAlign: TextAlign.center,
                               softWrap: true,
                             ),
@@ -265,19 +272,21 @@ class OrderTrackerDialog extends StatelessWidget {
                       children: [
                         Text(
                           "Payment Information",
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         SizedBox(height: 15),
                         Row(children: [
                           Text('Item Total : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(order.totalPrice.toString(),
-                              style: Theme.of(context).textTheme.titleMedium)
+                              style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Sample Collection Charge : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(
                             'FREE',
                             style: TextStyle(
@@ -287,9 +296,10 @@ class OrderTrackerDialog extends StatelessWidget {
                         SizedBox(height: 10),
                         Row(children: [
                           Text('Payable Amount : ',
-                              style: Theme.of(context).textTheme.titleSmall),
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
                           Text(order.totalPrice.toString(),
-                              style: Theme.of(context).textTheme.titleMedium)
+                              style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
                         // Row(children: [

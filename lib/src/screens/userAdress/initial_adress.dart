@@ -57,7 +57,7 @@ class _InitialAdressState extends State<InitialAdress> {
                         "Choose Your Location",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .headlineMedium!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),

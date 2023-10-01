@@ -217,7 +217,7 @@ class HomePageState extends State<HomePage> {
                     title: Text("Oh,no!",
                         style: Theme.of(context)
                             .textTheme
-                            .displayLarge!
+                            .headlineMedium!
                             .copyWith(
                                 color: Theme.of(context).colorScheme.primary)),
                     content: Obx(() => Text(

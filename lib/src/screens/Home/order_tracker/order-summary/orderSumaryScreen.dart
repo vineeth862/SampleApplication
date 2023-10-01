@@ -44,7 +44,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 'Order Number: ${widget.orderItems == null ? "" : widget.orderItems['orderNumber']}',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge!
+                    .headlineMedium!
                     .copyWith(fontWeight: FontWeight.bold)),
             SizedBox(height: 16),
             Container(
@@ -64,7 +64,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     'Sample collection address',
                     style: Theme.of(context)
                         .textTheme
-                        .titleLarge!
+                        .headlineMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
@@ -77,7 +77,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                   Text('Booked Slot',
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge!
+                          .headlineMedium!
                           .copyWith(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   Text(widget.orderItems == null

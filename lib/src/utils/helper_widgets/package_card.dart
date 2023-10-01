@@ -90,7 +90,7 @@ class PackageCardWidget extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     )),
                     // const Spacer(),
                     SizedBox(
@@ -114,7 +114,7 @@ class PackageCardWidget extends StatelessWidget {
                                   title: Text("Please Login",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .displayLarge!
+                                          .headlineMedium!
                                           .copyWith(
                                               color: Theme.of(context)
                                                   .colorScheme
@@ -123,7 +123,7 @@ class PackageCardWidget extends StatelessWidget {
                                     "Please Login to book test",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleMedium!,
+                                        .headlineMedium!,
                                   ),
                                   actions: [
                                     // Define buttons for the AlertDialog
@@ -182,7 +182,7 @@ class PackageCardWidget extends StatelessWidget {
                   maxLines: 3,
                   style: Theme.of(context)
                       .textTheme
-                      .titleSmall!
+                      .bodyMedium!
                       .copyWith(fontSize: 10),
                 ),
               ),
@@ -244,7 +244,7 @@ class PackageCardWidget extends StatelessWidget {
                     "View More Details",
                     style: Theme.of(context)
                         .textTheme
-                        .labelLarge!
+                        .titleMedium!
                         .copyWith(color: Colors.white),
                   ),
                   height: 50,

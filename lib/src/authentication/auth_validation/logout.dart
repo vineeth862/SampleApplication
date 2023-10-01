@@ -84,7 +84,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Logout',
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     Switch(
