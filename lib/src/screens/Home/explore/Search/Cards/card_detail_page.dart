@@ -44,6 +44,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
         body: Stack(
           children: [
             Container(
+              color: Color.fromRGBO(219, 229, 233, 1),
               padding: const EdgeInsets.all(8),
               child: ListView(children: [
                 Card(
@@ -51,12 +52,12 @@ class _CardDetailPageState extends State<CardDetailPage> {
                   shape: Theme.of(context).cardTheme.shape,
                   color: Theme.of(context).cardTheme.color,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Information",
-                            style: Theme.of(context).textTheme.displayLarge),
+                        Text(widget.test.testName,
+                            style: Theme.of(context).textTheme.bodyLarge),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -66,35 +67,31 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         const SizedBox(
                           height: 20,
                         ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        //   children: [
+                        //     Text("test : ",
+                        //         style: Theme.of(context).textTheme.labelLarge),
+                        //     Expanded(
+                        //       child: Text(widget.test.testName,
+                        //           maxLines: 2,
+                        //           softWrap: true,
+                        //           style:
+                        //               Theme.of(context).textTheme.titleSmall),
+                        //     )
+                        //   ],
+                        // ),
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Test : ",
+                            Text("Lab : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Expanded(
-                              child: Text(widget.test.testName,
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  style:
-                                      Theme.of(context).textTheme.titleSmall),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("lab : ",
-                                style: Theme.of(context).textTheme.labelLarge),
-                            Expanded(
-                              child: Text(widget.test.labName,
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  style:
-                                      Theme.of(context).textTheme.titleSmall),
-                            )
+                            Text(widget.test.labName,
+                                style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
                         const SizedBox(
@@ -115,127 +112,122 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Recommended Gender : ",
+                            Text("Method : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text("male, female",
+                            Text("Not Specified",
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("start at : ",
-                                style: Theme.of(context).textTheme.labelLarge),
-                            Expanded(
-                              child: ListTile(
-                                leading: Icon(Icons.currency_rupee,
-                                    size: 21, weight: 45, color: Colors.black),
-                                horizontalTitleGap: -18.0,
-                                title: Text(widget.test.price,
-                                    textAlign: TextAlign.left,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                            color: Colors.black,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold)),
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              String userKey =
-                                  globalservice.getCurrentUserKey();
-                              if (userKey != "null") {
-                                if (selectedTest.getSelectedTest
-                                    .contains(widget.test)) {
-                                  selectedTest.removeTest(widget.test);
-                                } else {
-                                  selectedTest.addTest(widget.test);
-                                }
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        //icon: Icon(Icons.time_to_leave),
-                                        alignment:
-                                            const AlignmentDirectional(1, 0),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        title: Text("Please Login",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displayLarge!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary)),
-                                        content: Text(
-                                          "Please Login to book test",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!,
-                                        ),
-                                        actions: [
-                                          // Define buttons for the AlertDialog
-                                          ElevatedButton(
-                                            style: ButtonStyle(
-                                              minimumSize: MaterialStateProperty
-                                                  .all(const Size(80,
-                                                      25)), // Set the desired size
-                                            ),
-                                            child: const Text("Login"),
-                                            onPressed: () {
-                                              globalservice.navigate(context,
-                                                  const Welcomesignin()); // Close the AlertDialog
-                                            },
-                                          ),
-                                        ],
-                                        actionsAlignment: MainAxisAlignment.end,
-                                      );
-                                    });
-                              }
-                            },
-                            child: !selectedTest.getSelectedTest
-                                    .contains(widget.test)
-                                ? Text("BOOK")
-                                : Text("BOOKED"),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
-                              foregroundColor: !selectedTest.getSelectedTest
-                                      .contains(widget.test)
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.background,
-                              backgroundColor: !selectedTest.getSelectedTest
-                                      .contains(widget.test)
-                                  ? Theme.of(context).colorScheme.onPrimary
-                                  : Theme.of(context).colorScheme.primary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    8.0), // Adjust the border radius as needed
-                                side: BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary), // Set the outline color
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        //   children: [
+                        //     Text("start at : ",
+                        //         style: Theme.of(context).textTheme.labelLarge),
+                        //     Expanded(
+                        //       child: ListTile(
+                        //         leading: Icon(Icons.currency_rupee,
+                        //             size: 21, weight: 45, color: Colors.black),
+                        //         horizontalTitleGap: -18.0,
+                        //         title: Text(widget.test.price,
+                        //             textAlign: TextAlign.left,
+                        //             style: Theme.of(context)
+                        //                 .textTheme
+                        //                 .labelLarge
+                        //                 ?.copyWith(
+                        //                     color: Colors.black,
+                        //                     fontSize: 22,
+                        //                     fontWeight: FontWeight.bold)),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+
+                        // Container(
+                        //   width: double.infinity,
+                        //   child: ElevatedButton(
+                        //     onPressed: () {
+                        //       String userKey =
+                        //           globalservice.getCurrentUserKey();
+                        //       if (userKey != "null") {
+                        //         if (selectedTest.getSelectedTest
+                        //             .contains(widget.test)) {
+                        //           selectedTest.removeTest(widget.test);
+                        //         } else {
+                        //           selectedTest.addTest(widget.test);
+                        //         }
+                        //       } else {
+                        //         showDialog(
+                        //             context: context,
+                        //             builder: (BuildContext context) {
+                        //               return AlertDialog(
+                        //                 //icon: Icon(Icons.time_to_leave),
+                        //                 alignment:
+                        //                     const AlignmentDirectional(1, 0),
+                        //                 shape: RoundedRectangleBorder(
+                        //                     borderRadius:
+                        //                         BorderRadius.circular(10)),
+                        //                 title: Text("Please Login",
+                        //                     style: Theme.of(context)
+                        //                         .textTheme
+                        //                         .displayLarge!
+                        //                         .copyWith(
+                        //                             color: Theme.of(context)
+                        //                                 .colorScheme
+                        //                                 .primary)),
+                        //                 content: Text(
+                        //                   "Please Login to book test",
+                        //                   style: Theme.of(context)
+                        //                       .textTheme
+                        //                       .titleMedium!,
+                        //                 ),
+                        //                 actions: [
+                        //                   // Define buttons for the AlertDialog
+                        //                   ElevatedButton(
+                        //                     style: ButtonStyle(
+                        //                       minimumSize: MaterialStateProperty
+                        //                           .all(const Size(80,
+                        //                               25)), // Set the desired size
+                        //                     ),
+                        //                     child: const Text("Login"),
+                        //                     onPressed: () {
+                        //                       globalservice.navigate(context,
+                        //                           const Welcomesignin()); // Close the AlertDialog
+                        //                     },
+                        //                   ),
+                        //                 ],
+                        //                 actionsAlignment: MainAxisAlignment.end,
+                        //               );
+                        //             });
+                        //       }
+                        //     },
+                        //     child: !selectedTest.getSelectedTest
+                        //             .contains(widget.test)
+                        //         ? Text("BOOK")
+                        //         : Text("BOOKED"),
+                        //     style: ElevatedButton.styleFrom(
+                        //       padding: EdgeInsets.all(0),
+                        //       foregroundColor: !selectedTest.getSelectedTest
+                        //               .contains(widget.test)
+                        //           ? Theme.of(context).colorScheme.primary
+                        //           : Theme.of(context).colorScheme.background,
+                        //       backgroundColor: !selectedTest.getSelectedTest
+                        //               .contains(widget.test)
+                        //           ? Theme.of(context).colorScheme.onPrimary
+                        //           : Theme.of(context).colorScheme.primary,
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(
+                        //             8.0), // Adjust the border radius as needed
+                        //         side: BorderSide(
+                        //             color: Theme.of(context)
+                        //                 .colorScheme
+                        //                 .primary), // Set the outline color
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -250,9 +242,9 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Preperation",
-                            style: Theme.of(context).textTheme.displayLarge),
-                        const SizedBox(
-                          height: 20,
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        SizedBox(
+                          height: 10,
                         ),
                         const Divider(
                           height: 10,
@@ -260,12 +252,22 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           indent: 10,
                           endIndent: 10,
                         ),
+                        SizedBox(
+                          height: 5,
+                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             // Text("note : ",
                             //     style: Theme.of(context).textTheme.labelLarge),
-                            Text("* no preperation required...",
+                            Icon(
+                              Icons.food_bank_outlined,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("No fasting required.",
                                 style: Theme.of(context).textTheme.titleSmall)
                           ],
                         )
@@ -282,10 +284,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Need help ?",
-                            style: Theme.of(context).textTheme.displayLarge),
+                        Text("Any Queries ?",
+                            style: Theme.of(context).textTheme.bodyLarge),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         const Divider(
                           height: 10,
@@ -293,67 +295,169 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           indent: 10,
                           endIndent: 10,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Allert();
-                            // Allert(
-                            //     'Confirmation',
-                            //     'Please Click Test OR Package To Add More Items!',
-                            //     'mobile',
-                            //     'mail', () {
-                            //   globalservice.makingPhoneCall("8296653901");
-                            // }, () {
-                            //   globalservice.sendEmail(
-                            //       "pramodcr28@gmail.com",
-                            //       "INQUERRY ABOUT " + widget.test.displayName,
-                            //       "hey medcapH team! let me know more about ${widget.test.displayName}  Test?");
-                            // });
-                          },
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.call_outlined),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                children: [
-                                  Text("Contact our health adviser to book",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  print("Tapped");
+                                },
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.call_outlined,
+                                      color: Color.fromARGB(255, 48, 108, 158),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Phone",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .labelLarge),
-                                  Text("our team of experts will guid you",
+                                          .titleLarge,
+                                    )
+                                  ],
+                                )),
+                            SizedBox(
+                              width: 80,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  print("Tapped");
+                                },
+                                child: Column(
+                                  children: [
+                                    Icon(Icons.mail,
+                                        color:
+                                            Color.fromARGB(255, 48, 108, 158)),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "Mail",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleSmall)
-                                ],
-                              )
-                            ],
-                          ),
+                                          .titleLarge,
+                                    )
+                                  ],
+                                ))
+                          ],
                         )
                       ],
                     ),
                   ),
                 ),
-                Card(
-                  elevation: 2.0,
-                  shape: Theme.of(context).cardTheme.shape,
-                  color: Theme.of(context).cardTheme.color,
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
                   child: Container(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    height: 80,
+                    //width: double.infinity,
+                    // decoration: BoxDecoration(
+                    //     gradient: LinearGradient(colors: [
+                    //   Theme.of(context).colorScheme.surface,
+                    //   Theme.of(context).colorScheme.surface
+                    // ])),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 253, 245, 229),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Freequently booked together",
-                            style: Theme.of(context).textTheme.displayLarge),
-                        const SizedBox(
-                          height: 20,
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Price: ₹" + widget.test.price,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: Colors.black),
+                            ),
+                          ),
                         ),
-                        const Divider(
-                          height: 10,
-                          thickness: 1,
-                          indent: 10,
-                          endIndent: 10,
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            String userKey = globalservice.getCurrentUserKey();
+                            if (userKey != "null") {
+                              if (selectedTest.getSelectedTest
+                                  .contains(widget.test)) {
+                                selectedTest.removeTest(widget.test);
+                              } else {
+                                selectedTest.addTest(widget.test);
+                              }
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      //icon: Icon(Icons.time_to_leave),
+                                      alignment:
+                                          const AlignmentDirectional(1, 0),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      title: Text("Please Login",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary)),
+                                      content: Text(
+                                        "Please Login to book test",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!,
+                                      ),
+                                      actions: [
+                                        // Define buttons for the AlertDialog
+                                        ElevatedButton(
+                                          style: ButtonStyle(
+                                            minimumSize: MaterialStateProperty
+                                                .all(const Size(80,
+                                                    25)), // Set the desired size
+                                          ),
+                                          child: const Text("Login"),
+                                          onPressed: () {
+                                            globalservice.navigate(context,
+                                                const Welcomesignin()); // Close the AlertDialog
+                                          },
+                                        ),
+                                      ],
+                                      actionsAlignment: MainAxisAlignment.end,
+                                    );
+                                  });
+                            }
+                          },
+                          child: !selectedTest.getSelectedTest
+                                  .contains(widget.test)
+                              ? Text("BOOK")
+                              : Text("BOOKED"),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(0),
+                            foregroundColor: !selectedTest.getSelectedTest
+                                    .contains(widget.test)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.background,
+                            backgroundColor: !selectedTest.getSelectedTest
+                                    .contains(widget.test)
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context).colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  8.0), // Adjust the border radius as needed
+                              side: BorderSide(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+
+                              // Set the outline color
+                            ),
+                          ),
                         ),
                       ],
                     ),

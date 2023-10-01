@@ -67,7 +67,7 @@ class LabTestCategoryCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.width * 0.025,
+              height: MediaQuery.of(context).size.width * 0.01,
             ),
             Text(title, style: Theme.of(context).textTheme.titleMedium),
           ],

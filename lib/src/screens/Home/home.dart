@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,105 +137,112 @@ class HomePageState extends State<HomePage> {
         //   backgroundColor: Theme.of(context).colorScheme.background,
         // ),
         // ignore: unrelated_type_equality_checks
-        body: myController.pinCodeExists.value
-            ? Stack(
-                children: [
-                  _widgetOptions.elementAt(selectedIndex),
-                  Positioned(
-                    bottom: 100,
-                    right: 0,
-                    left: 0,
-                    child: SwipeableContainer(
-                        key: UniqueKey(),
-                        removeTest: (tesCode) {
-                          selectedTest.removeTest(tesCode);
-                          if (selectedTest.getSelectedTest.isEmpty &&
-                              selectedTest.getSelectedPackage.isEmpty) {
-                            selectedTest.setDetailExpanded(false);
-                          }
-                        },
-                        removePackage: (pacCode) {
-                          selectedTest.removePackage(pacCode);
-                          if (selectedTest.getSelectedTest.isEmpty &&
-                              selectedTest.getSelectedPackage.isEmpty) {
-                            selectedTest.setDetailExpanded(false);
-                          }
-                        }),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    child: Container(
-                        child: (selectedTest.getSelectedTest.isNotEmpty ||
-                                selectedTest.getSelectedPackage.isNotEmpty)
-                            ? SlotBookingCard(
-                                title:
-                                    "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
-                                content: "view details",
-                                buttonClicked: () {
-                                  Order order = selectedOrder.getOrder;
 
-                                  Widget widget = order.statusCode == 1
-                                      ? PaymentScreeen()
-                                      : StepOneToBookTest();
+        body: Obx(
+          () => (myController.pinCodeExists.value)
+              ? Stack(
+                  children: [
+                    _widgetOptions.elementAt(selectedIndex),
+                    Positioned(
+                      bottom: 100,
+                      right: 0,
+                      left: 0,
+                      child: SwipeableContainer(
+                          key: UniqueKey(),
+                          removeTest: (tesCode) {
+                            selectedTest.removeTest(tesCode);
+                            if (selectedTest.getSelectedTest.isEmpty &&
+                                selectedTest.getSelectedPackage.isEmpty) {
+                              selectedTest.setDetailExpanded(false);
+                            }
+                          },
+                          removePackage: (pacCode) {
+                            selectedTest.removePackage(pacCode);
+                            if (selectedTest.getSelectedTest.isEmpty &&
+                                selectedTest.getSelectedPackage.isEmpty) {
+                              selectedTest.setDetailExpanded(false);
+                            }
+                          }),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: Container(
+                          child: (selectedTest.getSelectedTest.isNotEmpty ||
+                                  selectedTest.getSelectedPackage.isNotEmpty)
+                              ? SlotBookingCard(
+                                  title:
+                                      "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
+                                  content: "view details",
+                                  buttonClicked: () {
+                                    Order order = selectedOrder.getOrder;
 
-                                  globalservice.navigate(context, widget);
-                                },
-                                hyperLink: true,
-                                expandDetail: () {
-                                  setState(() {
-                                    expandDetails = true;
-                                  });
-                                },
-                              )
-                            : const Card()),
-                  ),
-                ],
-              )
-            : Container(
-                //color: Theme.of(context).colorScheme.primary,
-                decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //     image: AssetImage("./assets/images/MedCapH.jpg"),
-                    //     fit: BoxFit.cover
-                    //     // Set your desired image fit
-                    //     ),
-                    gradient: LinearGradient(colors: [
-                  Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                  Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                ])),
-                //color: Theme.of(context).colorScheme.primary,
-                child: AlertDialog(
-                  //icon: Icon(Icons.time_to_leave),
-                  alignment: const AlignmentDirectional(1, 0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  title: Text("Oh,no!",
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.primary)),
-                  content: Obx(() => Text(
-                        "Service not available in " +
-                            myController.addressToBeConsidered.value,
-                        style: Theme.of(context).textTheme.titleMedium!,
-                      )),
-                  actions: [
-                    // Define buttons for the AlertDialog
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            const Size(80, 25)), // Set the desired size
-                      ),
-                      child: const Text("Change Location"),
-                      onPressed: () {
-                        globalservice.navigate(context,
-                            const InitialAdress()); // Close the AlertDialog
-                      },
+                                    Widget widget = order.statusCode == 1
+                                        ? PaymentScreeen()
+                                        : StepOneToBookTest();
+
+                                    globalservice.navigate(context, widget);
+                                  },
+                                  hyperLink: true,
+                                  expandDetail: () {
+                                    setState(() {
+                                      expandDetails = true;
+                                    });
+                                  },
+                                )
+                              : const Card()),
                     ),
                   ],
-                  actionsAlignment: MainAxisAlignment.end,
+                )
+              : Container(
+                  //color: Theme.of(context).colorScheme.primary,
+                  decoration: BoxDecoration(
+                      // image: DecorationImage(
+                      //     image: AssetImage("./assets/images/MedCapH.jpg"),
+                      //     fit: BoxFit.cover
+                      //     // Set your desired image fit
+                      //     ),
+                      gradient: LinearGradient(colors: [
+                    Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    Theme.of(context).colorScheme.primary.withOpacity(0.1)
+                  ])),
+                  //color: Theme.of(context).colorScheme.primary,
+
+                  child: AlertDialog(
+                    //icon: Icon(Icons.time_to_leave),
+                    alignment: const AlignmentDirectional(1, 0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    title: Text("Oh,no!",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(
+                                color: Theme.of(context).colorScheme.primary)),
+                    content: Obx(() => Text(
+                          "Service not available in " +
+                              myController.addressToBeConsidered.value,
+                          style: Theme.of(context).textTheme.titleMedium!,
+                        )),
+                    actions: [
+                      // Define buttons for the AlertDialog
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            // minimumSize: MaterialStateProperty.all(
+                            //     const Size(80, 25)), // Set the desired size
+                            ),
+                        child: const Text("Change Location"),
+                        onPressed: () {
+                          globalservice.navigate(context,
+                              const InitialAdress()); // Close the AlertDialog
+                        },
+                      ),
+                    ],
+                    actionsAlignment: MainAxisAlignment.end,
+                  ),
                 ),
-              ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
