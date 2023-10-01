@@ -9,10 +9,10 @@ class MySlider extends StatefulWidget {
 
 class _MySliderState extends State<MySlider> {
   final List<String> imageUrls = [
-    './assets/images/why-us1.png',
-    './assets/images/why-us2.png',
-    './assets/images/why-us3.png',
-    './assets/images/why-us4.png',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy1.png?alt=media&token=7828f712-5515-4d22-8a8e-88a52e0d2512',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy2.png?alt=media&token=735fb633-0ddb-4353-9454-ede6167f90b5',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy3.png?alt=media&token=6f4ee468-3ca4-460c-bbc1-b959ca44b0b9',
+    // './assets/images/why-us4.png',
   ];
 
   int _currentIndex = 0;
@@ -27,7 +27,7 @@ class _MySliderState extends State<MySlider> {
             return ClipRRect(
                 borderRadius: BorderRadius.circular(
                     10), // Adjust the border radius as needed
-                child: Image.asset(
+                child: Image.network(
                   url,
                   fit: BoxFit.cover,
                   width: double.infinity,

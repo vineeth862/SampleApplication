@@ -25,25 +25,13 @@ final ThemeData theme = ThemeData(
       onError: Colors.white,
       brightness: Brightness.light,
       outlineVariant: Colors.orangeAccent),
-  textTheme: const TextTheme(
-    headlineLarge: TextStyle(
-        fontSize: 10.0,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.normal,
-        decoration: TextDecoration.none,
-        color: Colors.black87),
-    headlineMedium: TextStyle(
-        fontSize: 10.0,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.normal,
-        decoration: TextDecoration.none,
-        color: Colors.black87),
-    headlineSmall: TextStyle(
-        fontSize: 10.0,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.normal,
-        decoration: TextDecoration.none,
-        color: Colors.black87),
+  textTheme: TextTheme(
+    headlineMedium: GoogleFonts.robotoSlab(
+        fontSize: 16, color: Color.fromARGB(255, 32, 32, 32)),
+    bodyMedium: GoogleFonts.notoSans(
+        fontSize: 10, color: Color.fromARGB(255, 90, 89, 89)),
+    titleMedium:
+        GoogleFonts.besley(fontSize: 10, color: Color.fromARGB(255, 0, 0, 0)),
     displayLarge: TextStyle(
         fontSize: 10.0,
         fontWeight: FontWeight.bold,
@@ -63,28 +51,6 @@ final ThemeData theme = ThemeData(
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-    ),
-    titleLarge: TextStyle(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-      decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 52, 51, 51),
-      overflow: TextOverflow.ellipsis,
-    ),
-    titleMedium: TextStyle(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-      decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 49, 49, 49),
-    ),
-    titleSmall: TextStyle(
-      fontSize: 10.0,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-      decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 58, 58, 58),
     ),
     labelLarge: TextStyle(
       fontSize: 12.0,

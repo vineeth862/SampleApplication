@@ -419,7 +419,7 @@ class _exploreExpState extends State<exploreExp> {
                   ),
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: 5,
                 ),
                 // Card(
                 //   child: AspectRatio(
@@ -453,19 +453,16 @@ class _exploreExpState extends State<exploreExp> {
                 // ),
                 ListTile(
                   title: Text("Popular Categories",
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
-                        fontWeight: FontWeight.bold,
-                      )),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   subtitle: Text(
                     "MedCapH recomended Health Categories",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
 
                 Container(
                   width: double.infinity,
-                  height: 225,
+                  height: 250,
                   // decoration: const BoxDecoration(
                   //     gradient: LinearGradient(colors: [
                   //   Color.fromARGB(255, 231, 243, 253),
@@ -486,41 +483,32 @@ class _exploreExpState extends State<exploreExp> {
                 //     ),
                 //   ),
                 // ),
-                const SizedBox(
-                  height: 5,
-                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: ListTile(
                     title: Text("Popular Health Packages",
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: Theme.of(context).textTheme.headlineMedium),
                     subtitle: Text(
                       "MedcapH recomended health packages",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: Color.fromARGB(255, 175, 102, 101)),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),
                 const PackageSlider(),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: ListTile(
                     title: Text("Test/Packages for Men",
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.045,
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: Theme.of(context).textTheme.headlineMedium),
                     subtitle: Text(
                       "Highly Prescribed test and packages by doctor",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),
@@ -594,13 +582,10 @@ class _exploreExpState extends State<exploreExp> {
                   alignment: Alignment.topLeft,
                   child: ListTile(
                     title: Text("Test/Packages for Women",
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: Theme.of(context).textTheme.headlineMedium),
                     subtitle: Text(
                       "Highly Prescribed test and packages by doctor",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),
@@ -675,10 +660,7 @@ class _exploreExpState extends State<exploreExp> {
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text("How it Works",
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.05,
-                            fontWeight: FontWeight.bold,
-                          )),
+                          style: Theme.of(context).textTheme.headlineMedium),
                     )),
 
                 const HowItWorks(
@@ -717,13 +699,9 @@ class _exploreExpState extends State<exploreExp> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text("Choose Most Trusted Labs",
-                                        style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.05,
-                                          fontWeight: FontWeight.bold,
-                                        )),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium),
                                   ),
                                   const SizedBox(
                                     height: 20,

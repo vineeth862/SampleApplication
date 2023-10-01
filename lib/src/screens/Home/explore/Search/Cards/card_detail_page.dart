@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
@@ -70,7 +69,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("test : ",
+                            Text("Test : ",
                                 style: Theme.of(context).textTheme.labelLarge),
                             Expanded(
                               child: Text(widget.test.testName,

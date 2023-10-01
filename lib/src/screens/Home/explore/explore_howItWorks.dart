@@ -25,16 +25,13 @@ class HowItWorks extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: ListTile(
                   title: Text(heading.toString(),
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        fontWeight: FontWeight.bold,
-                      )),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
                       //"Find a Health Test you are looking for from your desired diagnostics.",
                       description.toString(),
-                      style: Theme.of(context).textTheme.labelLarge,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                   minVerticalPadding: 10,
