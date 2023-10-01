@@ -4,6 +4,7 @@ import 'package:sample_application/src/authentication/auth_validation/authentica
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/step1/confirmation-allert.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
@@ -88,8 +89,13 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("lab : ",
                                 style: Theme.of(context).textTheme.labelLarge),
-                            Text(widget.test.labName,
-                                style: Theme.of(context).textTheme.titleSmall)
+                            Expanded(
+                              child: Text(widget.test.labName,
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  style:
+                                      Theme.of(context).textTheme.titleSmall),
+                            )
                           ],
                         ),
                         const SizedBox(
@@ -288,24 +294,43 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           indent: 10,
                           endIndent: 10,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.call_outlined),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                Text("Call our health adviser to book",
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge),
-                                Text("our team of experts will guid you",
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall)
-                              ],
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Allert();
+                            // Allert(
+                            //     'Confirmation',
+                            //     'Please Click Test OR Package To Add More Items!',
+                            //     'mobile',
+                            //     'mail', () {
+                            //   globalservice.makingPhoneCall("8296653901");
+                            // }, () {
+                            //   globalservice.sendEmail(
+                            //       "pramodcr28@gmail.com",
+                            //       "INQUERRY ABOUT " + widget.test.displayName,
+                            //       "hey medcapH team! let me know more about ${widget.test.displayName}  Test?");
+                            // });
+                          },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.call_outlined),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text("Contact our health adviser to book",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge),
+                                  Text("our team of experts will guid you",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall)
+                                ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

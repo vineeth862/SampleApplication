@@ -4,13 +4,13 @@ import 'package:sample_application/src/authentication/auth_validation/welcome_si
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
-import '../../../../utils/Provider/selected_order_provider.dart';
-import '../../../../utils/Provider/selected_test_provider.dart';
-import '../../../../utils/helper_widgets/bottom_model_sheet.dart';
-import '../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../../order_tracker/payment/paymentScreen.dart';
-import '../../order_tracker/step1/step1.dart';
-import '../order/order.dart';
+import '../../../utils/Provider/selected_order_provider.dart';
+import '../../../utils/Provider/selected_test_provider.dart';
+import '../../../utils/helper_widgets/bottom_model_sheet.dart';
+import '../../../utils/helper_widgets/slot-booking-card.dart';
+import '../order_tracker/payment/paymentScreen.dart';
+import '../order_tracker/step1/step1.dart';
+import '../models/order/order.dart';
 
 class PackageDetailPage extends StatefulWidget {
   PackageDetailPage({super.key, required this.package});
@@ -304,40 +304,59 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                   color: Theme.of(context).cardTheme.color,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Need help ?",
-                            style: Theme.of(context).textTheme.displayLarge),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Divider(
-                          height: 10,
-                          thickness: 1,
-                          indent: 10,
-                          endIndent: 10,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.call_outlined),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                Text("Call our health adviser to book",
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge),
-                                Text("our team of experts will guid you",
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall)
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                    child: GestureDetector(
+                      onTap: () {
+                        // mobile
+                        // globalservice.makingPhoneCall("8296653901");
+
+                        // mail
+                        globalservice.sendEmail(
+                            "pramodcr28@gmail.com",
+                            "INQUERRY ABOUT " + widget.package.displayName,
+                            "hey medcapH team! let me know more about ${widget.package.displayName}  Test?");
+
+                        // SMS
+                        // globalservice.sendSMS(
+                        //     "8296653901", '''hey medcapH team! let me know more
+                        //         about ${widget.package.displayName}  Test?''');
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("Need help ?",
+                              style: Theme.of(context).textTheme.displayLarge),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Divider(
+                            height: 10,
+                            thickness: 1,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.call_outlined),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text("Call our health adviser to book",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge),
+                                  Text("our team of experts will guid you",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall)
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

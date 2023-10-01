@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/event-logs/event-logs.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
+import '../../../../global_service/event_log_service.dart';
 import '../../../../utils/Provider/selected_order_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
@@ -17,6 +19,7 @@ class OrderSummaryPage extends StatefulWidget {
 
 class _OrderSummaryPageState extends State<OrderSummaryPage> {
   GlobalService globalservice = GlobalService();
+  EventLogService eventLogService = EventLogService();
   Map<String, dynamic> orderItems = {};
   late SelectedTestState selectedTest;
   late SelectedOrderState selectedOrder;
@@ -24,6 +27,19 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1)).then((value) => loadData());
+  }
+
+  addLog() {
+    Order order = selectedOrder.getOrder;
+    EventLog event = EventLog(
+        dateTime: "skndkbd",
+        event: "OrderCreation",
+        eventType: "Creation",
+        id: "",
+        metaData: order.toJson(),
+        module: "OrderTracker",
+        userDetails: order.user!);
+    // eventLogService.addLog(event);
   }
 
   Future<String> loadData() async {
@@ -79,6 +95,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                 order.statusCode = 1;
                 order.statusLabel = "Payment Pending";
                 selectedOrder.setOrder = order;
+                addLog();
                 await selectedOrder.createOrder();
 
                 Navigator.pushReplacement(context,

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData theme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.deepPurple,
-  fontFamily: 'Lato',
+  fontFamily: GoogleFonts.notoSans().fontFamily,
   colorScheme: const ColorScheme(
       //primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
       //primary: Color.fromRGBO(235, 93, 22, 0.984),
+
       primary: Color.fromRGBO(189, 73, 50, 1),
       primaryContainer: Color.fromRGBO(189, 73, 50, 1),
-      secondary: Color.fromRGBO(214, 157, 146, 1), // Light purple color
+      secondary: Color.fromRGBO(219, 229, 233, 1),
       //secondaryContainer: Color.fromRGBO(253, 247, 247, 1),
       secondaryContainer: Color.fromRGBO(251, 245, 243, 1),
       tertiary: Color.fromRGBO(177, 75, 55, 1),
@@ -24,14 +26,32 @@ final ThemeData theme = ThemeData(
       brightness: Brightness.light,
       outlineVariant: Colors.orangeAccent),
   textTheme: const TextTheme(
+    headlineLarge: TextStyle(
+        fontSize: 10.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: Colors.black87),
+    headlineMedium: TextStyle(
+        fontSize: 10.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: Colors.black87),
+    headlineSmall: TextStyle(
+        fontSize: 10.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: Colors.black87),
     displayLarge: TextStyle(
-        fontSize: 20.0,
+        fontSize: 10.0,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.normal,
         decoration: TextDecoration.none,
         color: Colors.black87),
     displayMedium: TextStyle(
-      fontSize: 18.0,
+      fontSize: 12.0,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
@@ -39,49 +59,49 @@ final ThemeData theme = ThemeData(
       overflow: TextOverflow.ellipsis,
     ),
     displaySmall: TextStyle(
-      fontSize: 20.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
     ),
     titleLarge: TextStyle(
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 94, 90, 90),
+      color: Color.fromARGB(255, 52, 51, 51),
       overflow: TextOverflow.ellipsis,
     ),
     titleMedium: TextStyle(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w400,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 88, 87, 87),
+      color: Color.fromARGB(255, 49, 49, 49),
     ),
     titleSmall: TextStyle(
-      fontSize: 12.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
-      color: Color.fromARGB(255, 130, 129, 129),
+      color: Color.fromARGB(255, 58, 58, 58),
     ),
     labelLarge: TextStyle(
-      fontSize: 14.0,
+      fontSize: 12.0,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
       color: Color.fromARGB(255, 94, 90, 90),
     ),
     labelMedium: TextStyle(
-      fontSize: 12.0,
+      fontSize: 10.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,
       color: Color.fromARGB(255, 94, 90, 90),
     ),
     labelSmall: TextStyle(
-      fontSize: 10.0,
+      fontSize: 8.0,
       fontWeight: FontWeight.w300,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.none,

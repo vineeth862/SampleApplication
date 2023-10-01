@@ -454,7 +454,7 @@ class _exploreExpState extends State<exploreExp> {
                 ListTile(
                   title: Text("Popular Categories",
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       )),
                   subtitle: Text(
@@ -494,12 +494,15 @@ class _exploreExpState extends State<exploreExp> {
                   child: ListTile(
                     title: Text("Popular Health Packages",
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontWeight: FontWeight.bold,
                         )),
                     subtitle: Text(
                       "MedcapH recomended health packages",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Color.fromARGB(255, 175, 102, 101)),
                     ),
                   ),
                 ),
@@ -512,7 +515,7 @@ class _exploreExpState extends State<exploreExp> {
                   child: ListTile(
                     title: Text("Test/Packages for Men",
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontSize: MediaQuery.of(context).size.width * 0.045,
                           fontWeight: FontWeight.bold,
                         )),
                     subtitle: Text(

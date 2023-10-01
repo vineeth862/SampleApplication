@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class GlobalService {
   final _db = FirebaseFirestore.instance;
@@ -42,6 +43,39 @@ class GlobalService {
     } else {
       return "null";
     }
+  }
+
+  makingPhoneCall(phone) async {
+    UrlLauncher.launch("tel://" + phone);
+  }
+
+  sendSMS(phone, content) {
+    final Uri smsLaunchUri = Uri(
+      scheme: 'sms',
+      path: phone,
+      queryParameters: <String, String>{
+        'body': Uri.encodeComponent(content),
+      },
+    );
+    UrlLauncher.launchUrl(smsLaunchUri);
+  }
+
+  sendEmail(emai, subject, content) {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: emai,
+      query: encodeQueryParameters(
+          <String, String>{'subject': subject, 'body': content}),
+    );
+    UrlLauncher.launchUrl(emailLaunchUri);
+    // UrlLauncher.launch('mailto:${p.email}');
+  }
+
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
   // Future<DocumentSnapshot<Map<String, dynamic>>> getCurrentUser() async {

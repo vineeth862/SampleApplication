@@ -14,7 +14,6 @@ import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
 import '../../../order_tracker/payment/paymentScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
-import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 
 class FilteredTestCardlistPage extends StatefulWidget {
   String title;
@@ -67,106 +66,111 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.background),
         title: Text(
           widget.title,
-          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          style: TextStyle(color: Theme.of(context).colorScheme.background),
         ),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 12),
-                      child: TestCardWidget(
-                          title: list[index].labName,
-                          test: list[index].testObject,
-                          labName: list[index].name,
-                          price: list[index].price,
-                          isTestSelected:
-                              isTestSelected(list[index].testObject),
-                          tapOnButton: (test) {
-                            onBookButton(list[index].testObject);
+      body: Container(
+        color: Theme.of(context).colorScheme.secondary,
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 5, right: 5),
+                        child: TestCardWidget(
+                            isTest: true,
+                            title: list[index].labName,
+                            test: list[index].testObject,
+                            cardName: list[index].name,
+                            price: list[index].price,
+                            isTestSelected:
+                                isTestSelected(list[index].testObject),
+                            tapOnButton: (test) {
+                              onBookButton(list[index].testObject);
 
-                            globalservice.navigate(
-                                context, StepOneToBookTest());
+                              globalservice.navigate(
+                                  context, StepOneToBookTest());
 
-                            if (selectedTest.getSelectedTest.isEmpty) {
-                              selectedTest.setDetailExpanded(false);
-                            }
-                          },
-                          tapOnCard: (value) {
-                            globalservice.navigate(
-                                context,
-                                CardDetailPage(
-                                  test: list[index].testObject,
-                                ));
-                          }),
-                    );
-                  },
+                              if (selectedTest.getSelectedTest.isEmpty) {
+                                selectedTest.setDetailExpanded(false);
+                              }
+                            },
+                            tapOnCard: (value) {
+                              globalservice.navigate(
+                                  context,
+                                  CardDetailPage(
+                                    test: list[index].testObject,
+                                  ));
+                            }),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 100,
-            right: 0,
-            left: 0,
-            child: SwipeableContainer(
-                key: UniqueKey(),
-                removeTest: (tesCode) {
-                  selectedTest.removeTest(tesCode);
-                  if (selectedTest.getSelectedTest.isEmpty &&
-                      selectedTest.getSelectedPackage.isEmpty) {
-                    selectedTest.setDetailExpanded(false);
-                  }
-                },
-                removePackage: (pacCode) {
-                  selectedTest.removePackage(pacCode);
-                  if (selectedTest.getSelectedTest.isEmpty &&
-                      selectedTest.getSelectedPackage.isEmpty) {
-                    selectedTest.setDetailExpanded(false);
-                  }
-                }),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Container(
-                child: (selectedTest.getSelectedTest.isNotEmpty ||
-                        selectedTest.getSelectedPackage.isNotEmpty)
-                    ? SlotBookingCard(
-                        title:
-                            "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
-                        content: "view details",
-                        hyperLink: true,
-                        buttonClicked: () {
-                          Order order = selectedOrder.getOrder;
+              ],
+            ),
+            Positioned(
+              bottom: 100,
+              right: 0,
+              left: 0,
+              child: SwipeableContainer(
+                  key: UniqueKey(),
+                  removeTest: (tesCode) {
+                    selectedTest.removeTest(tesCode);
+                    if (selectedTest.getSelectedTest.isEmpty &&
+                        selectedTest.getSelectedPackage.isEmpty) {
+                      selectedTest.setDetailExpanded(false);
+                    }
+                  },
+                  removePackage: (pacCode) {
+                    selectedTest.removePackage(pacCode);
+                    if (selectedTest.getSelectedTest.isEmpty &&
+                        selectedTest.getSelectedPackage.isEmpty) {
+                      selectedTest.setDetailExpanded(false);
+                    }
+                  }),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                  child: (selectedTest.getSelectedTest.isNotEmpty ||
+                          selectedTest.getSelectedPackage.isNotEmpty)
+                      ? SlotBookingCard(
+                          title:
+                              "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
+                          content: "view details",
+                          hyperLink: true,
+                          buttonClicked: () {
+                            Order order = selectedOrder.getOrder;
 
-                          Widget widget = order.statusCode == 1
-                              ? PaymentScreeen()
-                              : StepOneToBookTest();
+                            Widget widget = order.statusCode == 1
+                                ? PaymentScreeen()
+                                : StepOneToBookTest();
 
-                          globalservice.navigate(context, widget);
-                        },
-                        expandDetail: () {
-                          setState(() {
-                            expandDetails = true;
-                          });
-                        },
-                      )
-                    : Card()),
-          ),
-        ],
+                            globalservice.navigate(context, widget);
+                          },
+                          expandDetail: () {
+                            setState(() {
+                              expandDetails = true;
+                            });
+                          },
+                        )
+                      : Card()),
+            ),
+          ],
+        ),
       ),
     );
   }

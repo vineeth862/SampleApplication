@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sample_application/src/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
-import 'package:sample_application/src/authentication/user_repository.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-
+import 'package:sample_application/src/utils/helper_widgets/link.dart';
+import '../../screens/Home/explore/Search/Cards/card_detail_page.dart';
 import '../../screens/Home/models/test/test.dart';
 
 class TestCardWidget extends StatelessWidget {
   final String title;
+  final bool isTest;
   final Test test;
   final bool isTestSelected;
-  final String labName;
+  final String cardName;
   late Function(Object card) tapOnCard;
   late Function(String test) tapOnButton;
   final String price;
@@ -23,8 +22,9 @@ class TestCardWidget extends StatelessWidget {
       required this.tapOnCard,
       required this.tapOnButton,
       required this.isTestSelected,
-      required this.labName,
-      required this.price});
+      required this.cardName,
+      required this.price,
+      required this.isTest});
 
   GlobalService globalservice = GlobalService();
   @override
@@ -73,115 +73,84 @@ class TestCardWidget extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(
                   color: Color.fromARGB(255, 213, 213, 213).withOpacity(0.3)),
-
-              // color: Color.fromARGB(255, 255, 181, 71),
+              color: Theme.of(context).colorScheme.background,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35.0),
-                topRight: Radius.circular(25.0),
-              )),
+                  // bottomLeft: Radius.circular(35.0),
+                  // topRight: Radius.circular(25.0),
+                  bottomLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0),
+                  topLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15))),
           // color: Theme.of(context).cardTheme.color,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: EdgeInsets.only(left: 10.0, right: 10, top: 10),
                 child: Row(
                   children: [
-                    Expanded(
-                        child: Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    )),
-                    // const Spacer(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        String userKey = globalservice.getCurrentUserKey();
-
-                        if (userKey != "null") {
-                          tapOnButton("");
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  //icon: Icon(Icons.time_to_leave),
-                                  alignment: const AlignmentDirectional(1, 0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  title: Text("Please Login",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary)),
-                                  content: Text(
-                                    "Please Login to book test",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!,
-                                  ),
-                                  actions: [
-                                    // Define buttons for the AlertDialog
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        minimumSize: MaterialStateProperty.all(
-                                            const Size(80,
-                                                25)), // Set the desired size
-                                      ),
-                                      child: const Text("Login"),
-                                      onPressed: () {
-                                        globalservice.navigate(context,
-                                            const Welcomesignin()); // Close the AlertDialog
-                                      },
-                                    ),
-                                  ],
-                                  actionsAlignment: MainAxisAlignment.end,
-                                );
-                              });
-                        }
-                      },
-                      // icon: const Icon(
-                      //   Icons.add,
-                      //   size: 20,
-                      // ),
-                      child: isTestSelected ? Text("BOOKED") : Text("BOOK"),
-
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0),
-                        foregroundColor: isTestSelected
-                            ? Theme.of(context).colorScheme.background
-                            : Theme.of(context).colorScheme.primary,
-                        backgroundColor: isTestSelected
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onPrimary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              8.0), // Adjust the border radius as needed
-                          side: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary), // Set the outline color
+                    ClipOval(
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Image.asset(
+                          "./assets/images/Lab_Single_Person.jpg",
+                          // scale: 1,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          Text(
+                            "NABL",
+                            style: Theme.of(context).textTheme.titleSmall,
+                          )
+                        ],
+                      ),
+                    )
+                    // const Spacer(),
                   ],
                 ),
               ),
+              // Divider(),
               // const SizedBox(height: 16.0),
+
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  labName,
-                  softWrap: true,
-                  style: Theme.of(context).textTheme.titleMedium,
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          isTest ? "Test :" : " Lab :",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        )
+                      ],
+                    ),
+                    Text(
+                      cardName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    )
+                  ],
                 ),
               ),
               // SizedBox(
@@ -194,55 +163,215 @@ class TestCardWidget extends StatelessWidget {
                     Icon(
                       Icons.access_time_outlined,
                       color: Theme.of(context).colorScheme.primary,
+                      size: 14,
                     ),
                     const SizedBox(
-                      width: 8,
+                      width: 5,
                     ),
                     Text(
                       getReportDate(test),
                       softWrap: true,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    const Spacer(),
-                    Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.currency_rupee_outlined,
-                            size: 14,
-                            weight: 50,
-                            color: const Color.fromARGB(255, 106, 105, 105),
-                          ),
-                          Text(price),
-                        ],
-                      ),
-                    )
+                    // const Spacer(),
+                    // Container(
+                    //   child: Row(
+                    //     children: [
+                    //       Icon(
+                    //         Icons.currency_rupee_outlined,
+                    //         size: 14,
+                    //         weight: 50,
+                    //         color: const Color.fromARGB(255, 106, 105, 105),
+                    //       ),
+                    //       Text(price),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
+              // SizedBox(
+              //   height: 15,
+              // ),
+              // Divider(),
               Container(
-                alignment: Alignment.center,
-                transformAlignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 181, 71),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25.0),
-                      topRight: Radius.circular(25.0),
-                    )),
-
-                child: Text(
-                  "View More Details",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: Colors.white),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  color: Color.fromARGB(223, 252, 245, 226),
                 ),
-                height: 50,
-                // color: Color.fromARGB(255, 255, 181, 71),
-              ),
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+                height: 45,
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        // Define the action you want to perform when the link is tapped.
+                        // You can navigate to a new screen or trigger some other action.
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: [
+                                Text("₹${test.price}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(fontWeight: FontWeight.bold)),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  (double.parse(test.price) * 1.25).toString(),
+                                  style: const TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      fontSize: 10),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text("25%",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(
+                                            fontSize: 13,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .error)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: 15,
+                    // ),
+                    Spacer(),
+                    Link(
+                      text: "Details",
+                      navigate: CardDetailPage(test: test),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Container(
+                      width: 60,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          String userKey = globalservice.getCurrentUserKey();
+
+                          if (userKey != "null") {
+                            tapOnButton("");
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    //icon: Icon(Icons.time_to_leave),
+                                    alignment: const AlignmentDirectional(1, 0),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    title: Text("Please Login",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary)),
+                                    content: Text(
+                                      "Please Login to book test",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!,
+                                    ),
+                                    actions: [
+                                      // Define buttons for the AlertDialog
+                                      ElevatedButton(
+                                        style: ButtonStyle(
+                                          minimumSize: MaterialStateProperty
+                                              .all(const Size(80,
+                                                  25)), // Set the desired size
+                                        ),
+                                        child: const Text("Login"),
+                                        onPressed: () {
+                                          globalservice.navigate(context,
+                                              const Welcomesignin()); // Close the AlertDialog
+                                        },
+                                      ),
+                                    ],
+                                    actionsAlignment: MainAxisAlignment.end,
+                                  );
+                                });
+                          }
+                        },
+                        // icon: const Icon(
+                        //   Icons.add,
+                        //   size: 20,
+                        // ),
+                        child: isTestSelected
+                            ? Text(
+                                "BOOKED",
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w500),
+                              )
+                            : Text(
+                                "BOOK",
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w500),
+                              ),
+
+                        style: ElevatedButton.styleFrom(
+                          // fixedSize: Size(10, 10),
+                          // maximumSize: Size(10, 10),
+                          padding: EdgeInsets.all(0),
+                          foregroundColor: isTestSelected
+                              ? Theme.of(context).colorScheme.background
+                              : Theme.of(context).colorScheme.primary,
+                          backgroundColor: isTestSelected
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                6.0), // Adjust the border radius as needed
+                            side: BorderSide(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primary), // Set the outline color
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              // Container(
+              //   alignment: Alignment.center,
+              //   transformAlignment: Alignment.center,
+              //   decoration: BoxDecoration(
+              //       color: Color.fromARGB(255, 255, 181, 71),
+              //       borderRadius: BorderRadius.only(
+              //         bottomLeft: Radius.circular(25.0),
+              //         topRight: Radius.circular(25.0),
+              //       )),
+
+              //   child: Text(
+              //     "View More Details",
+              //     style: Theme.of(context)
+              //         .textTheme
+              //         .labelLarge!
+              //         .copyWith(color: Colors.white),
+              //   ),
+              //   height: 50,
+              //   // color: Color.fromARGB(255, 255, 181, 71),
+              // ),
+
               // const ListTile(
               //   enabled: true,
               //   contentPadding: EdgeInsets.all(0),

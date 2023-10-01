@@ -9,7 +9,7 @@ import '../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../utils/helper_widgets/package_card.dart';
 import '../../../utils/helper_widgets/slot-booking-card.dart';
 import '../models/order/order.dart';
-import '../models/package/package-detailPage.dart';
+import 'package-detailPage.dart';
 import '../models/package/packageCard.dart';
 import '../order_tracker/payment/paymentScreen.dart';
 import '../order_tracker/step1/step1.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
-import '../../screens/Home/models/package/package-detailPage.dart';
+import '../../screens/Home/package/package-detailPage.dart';
 import '../../screens/Home/models/package/package.dart';
 
 class PackageCardWidget extends StatelessWidget {
