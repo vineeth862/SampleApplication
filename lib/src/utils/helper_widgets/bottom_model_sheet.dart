@@ -90,10 +90,7 @@ class _SwipeableContainerState extends State<SwipeableContainer> {
               children: [
                 Text(
                   "Your Cart",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineMedium!
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

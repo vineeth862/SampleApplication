@@ -117,10 +117,7 @@ class labPackageCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(fontWeight: FontWeight.bold)
+                  style: Theme.of(context).textTheme.displayMedium
                   //     .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
               const SizedBox(
@@ -137,10 +134,7 @@ class labPackageCard extends StatelessWidget {
               Row(
                 children: [
                   Text("₹$pacPrice",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.bold)),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(
                     width: 5,
                   ),
@@ -183,10 +177,7 @@ class labPackageCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: const Color.fromARGB(193, 27, 8, 1)),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   )
                 ],

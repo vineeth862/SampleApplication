@@ -163,13 +163,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                 horizontalTitleGap: -18.0,
                                 title: Text(widget.package.price,
                                     textAlign: TextAlign.left,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                            color: Colors.black,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold)),
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
                               ),
                             )
                           ],

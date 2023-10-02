@@ -64,10 +64,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                       },
                       child: Text(
                         "SKIP",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(fontSize: 12),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       style: OutlinedButton.styleFrom(
                         shape: CircleBorder(
@@ -91,10 +88,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
               child: Text(
                 'Explore the world of diagnostics.',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: Colors.black),
+                style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
             ),

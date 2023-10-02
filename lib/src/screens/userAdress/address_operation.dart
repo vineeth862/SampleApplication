@@ -182,10 +182,7 @@ class _addressOperationState extends State<addressOperation> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
                     "Saved addresses",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
               ),

@@ -130,10 +130,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                             widget.from == "cart"
                                 ? "Your Cart"
                                 : "Your Bookings",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ],
                       ),
@@ -204,10 +201,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                                 softWrap: true,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headlineMedium!
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                    .headlineMedium,
                                               ),
                                             ),
                                             // Spacer(),
@@ -227,9 +221,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                                   orders[index].statusLabel!,
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .titleMedium!
-                                                      .copyWith(
-                                                          color: Colors.black),
+                                                      .titleMedium,
                                                 ), //UYPDATE COLOR OF THE BUTTON AND STATUS BASED ON THE ORDER STATUS
                                                 // style: OutlinedButton.styleFrom(
                                                 //   //minimumSize: Size(10, 30),
@@ -261,9 +253,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         "Booked Items",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
+                                            .headlineMedium,
                                       ),
                                     ),
                                     ...getBookedItems(index),

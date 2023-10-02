@@ -111,10 +111,7 @@ class _FilterCategoryListPageState extends State<FilterCategoryListPage> {
                               child: ListTile(
                                 title: Text(
                                   displayNames[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(fontSize: 15),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
                             ),

@@ -429,7 +429,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             GestureDetector(
                                 onTap: () {
-                                  print("Tapped");
+                                  globalservice.makingPhoneCall("8296653901");
                                 },
                                 child: Column(
                                   children: [
@@ -453,7 +453,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  print("Tapped");
+                                  globalservice.sendEmail(
+                                      "pramodcr28@gmail.com",
+                                      "Somthing",
+                                      "testing");
                                 },
                                 child: Column(
                                   children: [

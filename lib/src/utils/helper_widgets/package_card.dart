@@ -180,10 +180,7 @@ class PackageCardWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                   maxLines: 3,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 10),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
               // SizedBox(

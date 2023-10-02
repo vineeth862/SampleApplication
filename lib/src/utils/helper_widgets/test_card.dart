@@ -219,8 +219,7 @@ class TestCardWidget extends StatelessWidget {
                                 Text("₹${test.price}",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headlineMedium!
-                                        .copyWith(fontWeight: FontWeight.bold)),
+                                        .headlineMedium),
                                 const SizedBox(
                                   width: 5,
                                 ),

@@ -247,10 +247,7 @@ class _exploreExpState extends State<exploreExp> {
                                               .addressToBeConsidered.value,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12))),
+                                              .titleMedium)),
                                       trailing: Container(
                                         width: 30,
                                         alignment:

@@ -87,10 +87,7 @@ class _PackageSuggetionList extends State<PackageSuggetionList> {
                                 title: Text(
                                   packageService.allPackagesNameList
                                       .elementAt(index),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(fontSize: 15),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
                             ),

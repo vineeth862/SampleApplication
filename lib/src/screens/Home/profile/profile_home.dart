@@ -79,10 +79,7 @@ class ProfileScreen extends StatelessWidget {
                     Text(
                       "Profile",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
                 ),
@@ -200,10 +197,7 @@ class ProfileScreen extends StatelessWidget {
                     Text(
                       "Preferences & Settings",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
                 ),

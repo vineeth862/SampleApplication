@@ -79,10 +79,7 @@ class UseCurrentLocationStepTwo extends StatelessWidget {
                   Expanded(
                     child: Text(
                       "Enter Complete Address",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),
                 ],

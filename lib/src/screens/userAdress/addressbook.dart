@@ -47,10 +47,7 @@ class _AdressBookState extends State<AdressBook> {
                     Expanded(
                       child: Text(
                         "Address Book",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ),
                     GestureDetector(
