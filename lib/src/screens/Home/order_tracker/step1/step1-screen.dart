@@ -16,7 +16,7 @@ import '../../../../utils/helper_widgets/custom-button.dart';
 import '../../explore/Search/Cards/filter-lab-list.dart';
 import '../../explore/Search/search_field.dart';
 import '../../package/package-suggetion-list.dart';
-import 'confirmation-allert.dart';
+import '../confirmation-allert.dart';
 
 class StepOneScreen extends StatefulWidget {
   StepOneScreen();
@@ -439,10 +439,11 @@ class _StepOneScreenState extends State<StepOneScreen> {
                       },
                       title: Text(
                         "Add more Items",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                                color: Theme.of(context).colorScheme.primary),
                       ),
                       iconColor: Theme.of(context).colorScheme.primary,
                       leading: Icon(Icons.add_circle_outline),

@@ -9,7 +9,7 @@ import 'package:sample_application/src/screens/Home/models/order/order.dart'
 class StepThreeScreen extends StatefulWidget {
   final screen = _StepThreeScreen();
   StepThreeScreen({super.key, required this.slotSelected});
-  Function(DateTime date, TimeOfDay? time) slotSelected;
+  Function(DateTime date, TimeOfDay? time, String displaySlot) slotSelected;
 
   @override
   State<StepThreeScreen> createState() => _StepThreeScreen();
@@ -37,7 +37,7 @@ class _StepThreeScreen extends State<StepThreeScreen> {
     if (dateTimePresent) {
       String datePresent = orderObject.booked!.bookedDate.toString();
       String timePresent = orderObject.booked!.bookedSlot.toString();
-      selectedDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(datePresent);
+      selectedDate = DateFormat("dd-MM-yyyy hh:mm:ss").parse(datePresent);
       selectedTime = TimeOfDay(
           hour: int.parse(timePresent.split(":")[0]),
           minute: int.parse(timePresent.split(":")[1]));
@@ -77,15 +77,17 @@ class _StepThreeScreen extends State<StepThreeScreen> {
     setState(() {
       selectedDate = date;
       selectedTime = null;
-      ;
-      widget.slotSelected(selectedDate!, selectedTime);
+      widget.slotSelected(selectedDate!, selectedTime, "");
     });
   }
 
   void _selectTime(TimeOfDay time) {
     setState(() {
       selectedTime = time;
-      widget.slotSelected(selectedDate!, selectedTime!);
+
+      final diasplaySlot =
+          _formatTimeRange(time, TimeOfDay(hour: time.hour + 1, minute: 0));
+      widget.slotSelected(selectedDate!, selectedTime!, diasplaySlot);
     });
   }
 

@@ -7,6 +7,7 @@ import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../../utils/helper_widgets/bottom_model_sheet.dart';
+import '../../../../../utils/helper_widgets/price_container.dart';
 import '../../../../../utils/helper_widgets/slot-booking-card.dart';
 import '../../../models/order/order.dart';
 import '../../../order_tracker/payment/paymentScreen.dart';
@@ -563,10 +564,16 @@ class _CardDetailPageState extends State<CardDetailPage> {
                   child: (selectedTest.getSelectedTest.isNotEmpty ||
                           selectedTest.getSelectedPackage.isNotEmpty)
                       ? SlotBookingCard(
-                          title:
-                              "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
-                          content: "view details",
-                          hyperLink: true,
+                          selectedCount: selectedTest.getSelectedTest.length +
+                              selectedTest.getSelectedPackage.length,
+                          title: " Test/Package Selected",
+                          contentColor: false,
+                          content: Price(
+                            finalAmount: "3432",
+                            discount: "10",
+                          ),
+                          subContent: "",
+                          hyperLink: false,
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;
 

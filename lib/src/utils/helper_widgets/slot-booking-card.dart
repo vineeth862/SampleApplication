@@ -4,8 +4,11 @@ import 'package:sample_application/src/utils/Provider/selected_test_provider.dar
 import '../../global_service/global_service.dart';
 
 class SlotBookingCard extends StatefulWidget {
+  final int selectedCount;
   final String title;
-  final String content;
+  final dynamic content;
+  final bool contentColor;
+  final String subContent;
   // final Widget navigate;
   final bool hyperLink;
   Function() expandDetail;
@@ -14,9 +17,11 @@ class SlotBookingCard extends StatefulWidget {
   SlotBookingCard(
       {required this.title,
       required this.content,
-      // required this.navigate,
+      required this.subContent,
+      required this.selectedCount,
       required this.hyperLink,
       required this.expandDetail,
+      required this.contentColor,
       required this.buttonClicked});
 
   @override
@@ -51,12 +56,19 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                    ),
+                  Row(
+                    children: [
+                      widget.selectedCount != 0
+                          ? Text(
+                              widget.selectedCount.toString(),
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            )
+                          : Text(""),
+                      Text(
+                        widget.title,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
                   SizedBox(height: 8.0),
                   widget.hyperLink
@@ -70,7 +82,10 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                               children: [
                                 Text(
                                   widget.content,
-                                  style: TextStyle(color: Colors.orange),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(color: Colors.orangeAccent),
                                 ),
                                 // SizedBox(width: 4.0),
                                 Icon(
@@ -86,17 +101,34 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                             widget.expandDetail();
                             selectedTest.toggelDetailExpanded();
                           })
-                      : Expanded(
-                          child: Text(
-                            widget.content,
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                        ),
+                      : widget.content is String
+                          ? Text(
+                              widget.content,
+                              softWrap: true,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                      color: widget.contentColor
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .inverseSurface),
+                            )
+                          : widget.content,
+                  SizedBox(height: 8.0),
+                  Text(widget.subContent)
                 ],
               ),
             ),
             SizedBox(width: 16.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).colorScheme.tertiary),
               onPressed: () {
                 widget.buttonClicked();
                 // this.globalservice.navigate(context, widget.navigate);

@@ -151,9 +151,12 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                   child: (selectedTest.getSelectedTest.isNotEmpty ||
                           selectedTest.getSelectedPackage.isNotEmpty)
                       ? SlotBookingCard(
-                          title:
-                              "${selectedTest.getSelectedTest.length + selectedTest.getSelectedPackage.length} item Selected",
+                          selectedCount: selectedTest.getSelectedTest.length +
+                              selectedTest.getSelectedPackage.length,
+                          title: " Test/Package Selected",
+                          contentColor: false,
                           content: "view details",
+                          subContent: "",
                           hyperLink: true,
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;

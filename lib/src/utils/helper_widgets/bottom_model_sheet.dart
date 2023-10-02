@@ -4,7 +4,7 @@ import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 import '../../global_service/global_service.dart';
 import '../../screens/Home/models/package/package.dart';
-import '../../screens/Home/order_tracker/step1/confirmation-allert.dart';
+import '../../screens/Home/order_tracker/confirmation-allert.dart';
 import '../Provider/search_provider.dart';
 
 class SwipeableContainer extends StatefulWidget {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-screen.dart';
+import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
 import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
-import '../../explore/Search/search_field.dart';
 import '../step2/step2.dart';
 
 class StepOneToBookTest extends StatefulWidget {
@@ -32,7 +31,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             child: Text(
               "Step 1 ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w900),
             ),
@@ -42,7 +41,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
             child: Text(
               "of 3  ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
@@ -101,10 +100,16 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                 child: (selectedTest.getSelectedTest.isNotEmpty ||
                         selectedTest.getSelectedPackage.isNotEmpty)
                     ? SlotBookingCard(
-                        title:
-                            "${selectedTest.getSelectedTest.length + selectedTest.selectedPackage.length} item Selected",
-                        content: "view details",
-                        hyperLink: true,
+                        selectedCount: selectedTest.getSelectedTest.length +
+                            selectedTest.selectedPackage.length,
+                        title: " Test/Package Selected",
+                        contentColor: false,
+                        content: Price(
+                          finalAmount: "3432",
+                          discount: "10",
+                        ),
+                        subContent: "",
+                        hyperLink: false,
                         buttonClicked: () async {
                           if (await widget.btnClicked()) {
                             globalservice.navigate(

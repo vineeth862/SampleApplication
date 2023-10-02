@@ -151,9 +151,12 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                 child: selectedPackage.getSelectedPackage.isNotEmpty ||
                         selectedPackage.getSelectedTest.isNotEmpty
                     ? SlotBookingCard(
-                        title:
-                            "${selectedPackage.getSelectedPackage.length + selectedPackage.getSelectedTest.length} item Selected",
+                        selectedCount: selectedPackage.getSelectedTest.length +
+                            selectedPackage.selectedPackage.length,
+                        title: " Test/Package Selected",
+                        contentColor: false,
                         content: "view details",
+                        subContent: "",
                         hyperLink: true,
                         buttonClicked: () {
                           Order order = selectedOrder.getOrder;

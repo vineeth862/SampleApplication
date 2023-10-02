@@ -11,6 +11,7 @@ import '../../../../utils/Provider/selected_test_provider.dart';
 import '../../../../utils/helper_widgets/slot-booking-card.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart'
     as order;
+import 'package:intl/intl.dart';
 
 class StepThreeToBookTest extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
   bool expandDetails = false;
   String selectedslot = "";
   GlobalService globalservice = GlobalService();
-  late Booked booked;
+  late Booked booked = Booked(bookedDate: "", bookedSlot: "", slot: "");
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
@@ -31,40 +32,27 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
     order.Order orderObject = selectedOrder.getOrder;
 
     final screen = StepThreeScreen(
-      slotSelected: (date, time) {
-        if (time != null) {
+      slotSelected: (date, time, slot) {
+        String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+        if (slot.isNotEmpty) {
           setState(() {
-            selectedslot = date.year.toString() +
-                "-" +
-                date.month.toString() +
-                "-" +
-                date.day.toString() +
-                "  " +
-                time!.hour.toString() +
-                " : " +
-                "00";
             booked = Booked(
-                bookedDate: date.toString(),
-                bookedSlot: time.hour.toString() + ":" + time.minute.toString(),
-                slot: selectedslot);
+                bookedDate: formattedDate,
+                bookedSlot: slot,
+                slot: formattedDate + " " + slot);
           });
           // print(time);
         } else {
           setState(() {
-            selectedslot = date.year.toString() +
-                "-" +
-                date.month.toString() +
-                "-" +
-                date.day.toString();
-
             booked = Booked(
-                bookedDate: date.toString(),
-                bookedSlot: time.toString(),
-                slot: selectedslot);
+                bookedDate: formattedDate,
+                bookedSlot: slot,
+                slot: formattedDate);
           });
         }
       },
     );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
@@ -74,7 +62,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
             child: Text(
               "Step 3 ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w900),
             ),
@@ -84,7 +72,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
             child: Text(
               "of 3  ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
@@ -120,8 +108,11 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
               child: selectedTest.getSelectedTest.isNotEmpty ||
                       selectedTest.getSelectedPackage.isNotEmpty
                   ? SlotBookingCard(
-                      title: "Collection at",
-                      content: selectedslot,
+                      selectedCount: 0,
+                      title: "Sample Collection",
+                      contentColor: false,
+                      content: "Date : " + booked.bookedDate!,
+                      subContent: "Slot : " + booked.bookedSlot!,
                       hyperLink: false,
                       buttonClicked: () async {
                         order.Order orderObject = selectedOrder.getOrder;

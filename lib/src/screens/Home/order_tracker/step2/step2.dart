@@ -17,6 +17,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
   // Add your state variables and methods here
   bool expandDetails = false;
   String selectedAdress = "";
+  String displayAdress = "";
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
@@ -36,7 +37,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
             child: Text(
               "Step 2 ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w900),
             ),
@@ -46,7 +47,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
             child: Text(
               "of 3  ",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
@@ -84,8 +85,13 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                 child: selectedTest.getSelectedTest.isNotEmpty ||
                         selectedTest.selectedPackage.isNotEmpty
                     ? SlotBookingCard(
+                        selectedCount: 0,
                         title: "Your Location",
-                        content: selectedAdress,
+                        contentColor: selectedAdress.isEmpty,
+                        content: selectedAdress.isEmpty
+                            ? displayAdress
+                            : selectedAdress,
+                        subContent: "",
                         buttonClicked: () async {
                           if (selectedAdress.isNotEmpty) {
                             GlobalService()
@@ -105,6 +111,10 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                                 snackPosition: SnackPosition.TOP
                                 //colorText: Theme.of(context).colorScheme.primary,
                                 );
+                            setState(() {
+                              displayAdress =
+                                  "You haven't selected any address";
+                            });
                           }
                         },
                         hyperLink: false,

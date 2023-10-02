@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../global_service/global_service.dart';
-import '../../../../utils/Provider/search_provider.dart';
-import '../../../../utils/Provider/selected_test_provider.dart';
-import '../../explore/Search/Cards/filter-lab-list.dart';
-import '../../explore/Search/Cards/filter-test-list.dart';
-import '../../explore/Search/search_field.dart';
-import '../../package/package-suggetion-list.dart';
+import '../../../global_service/global_service.dart';
+import '../../../utils/Provider/search_provider.dart';
+import '../../../utils/Provider/selected_test_provider.dart';
+import '../explore/Search/Cards/filter-lab-list.dart';
+import '../explore/Search/search_field.dart';
+import '../package/package-suggetion-list.dart';
 
 class Allert extends StatefulWidget {
   @override
@@ -22,7 +20,7 @@ class _AllertState extends State<Allert> {
     GlobalService globalservice = GlobalService();
     return Container(
       width: 400,
-      height: 225,
+      height: 175,
       margin: EdgeInsets.all(20),
       child: Card(
         elevation: 5,
@@ -32,23 +30,18 @@ class _AllertState extends State<Allert> {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Confirmation',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 4),
               Divider(), // Add a horizontal line to separate title and body
-              SizedBox(height: 8),
+              // SizedBox(height: 8),
               Text(
                 'Please Click Test OR Package To Add More Items!',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Spacer(),
               Row(
