@@ -33,14 +33,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
       child: Scaffold(
         appBar: AppBar(
           iconTheme:
-              IconThemeData(color: Theme.of(context).colorScheme.primary),
-          backgroundColor: Theme.of(context).colorScheme.background,
+              IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: Text(
             "Test Details",
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium!
-                .copyWith(color: Theme.of(context).colorScheme.primary),
+                .copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         body: Stack(
@@ -441,8 +441,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     children: [
                                       Icon(
                                         Icons.call_outlined,
-                                        color:
-                                            Color.fromARGB(255, 48, 108, 158),
+                                        color: Color.fromARGB(255, 48, 158, 77),
                                         size: 18,
                                       ),
                                       SizedBox(
@@ -471,8 +470,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     children: [
                                       Icon(
                                         Icons.mail,
-                                        color:
-                                            Color.fromARGB(255, 48, 108, 158),
+                                        color: Color.fromARGB(255, 48, 158, 77),
                                         size: 18,
                                       ),
                                       SizedBox(
@@ -494,7 +492,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                   ),
                 ),
                 Container(
-                  color: Color.fromARGB(255, 242, 229, 214),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 248, 240, 240),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Column(children: [
@@ -502,12 +503,24 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         "Know about......",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
+                      Divider(
+                        color: Colors.grey, // Color of the dots
+                        height: 20, // Height of the divider
+                        thickness: 1, // Thickness of the divider line
+                        indent: 20, // Left margin of the divider
+                        endIndent: 20, // Right margin of the divider
+                      ),
                       Text(
                         widget.test.testName,
                         style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.center,
                       ),
-                      SizedBox(
-                        height: 10,
+                      Divider(
+                        color: Colors.grey, // Color of the dots
+                        height: 20, // Height of the divider
+                        thickness: 1, // Thickness of the divider line
+                        indent: 20, // Left margin of the divider
+                        endIndent: 20, // Right margin of the divider
                       ),
                       Text(
                         "Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",

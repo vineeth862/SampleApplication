@@ -47,7 +47,20 @@ class TestListScreen extends StatelessWidget {
                   title: searchState.gettestSuggetionList
                       .elementAt(index)
                       .displayName,
-                  icon: Icons.medical_services,
+                  icon: ClipOval(
+                    child: Container(
+                      width: 20,
+                      height: 30,
+                      //color: Theme.of(context).colorScheme.tertiary,
+                      // decoration: BoxDecoration(
+                      //     border: Border.all(color: Colors.black)),
+                      child: Image.asset(
+                        "./assets/images/blood-test.png",
+                        // scale: 1,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
                   labCode:
                       searchState.gettestSuggetionList.elementAt(index).labCode,
                   testCode: searchState.gettestSuggetionList

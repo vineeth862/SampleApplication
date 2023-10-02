@@ -113,6 +113,8 @@ flutter:
     - assets/images/men2.png
     - assets/images/men3.png
     - assets/images/men4.png
+    - assets/images/blood-tube.png
+    - assets/images/blood-test.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

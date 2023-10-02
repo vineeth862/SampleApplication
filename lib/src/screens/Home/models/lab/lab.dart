@@ -9,6 +9,7 @@ class Lab {
   List<String> test;
 
   String hf_lab_code;
+  String logo;
 
   List<BranchDetails> branchDetails;
 
@@ -16,7 +17,8 @@ class Lab {
       {required this.branchDetails,
       required this.test,
       required this.labName,
-      required this.hf_lab_code});
+      required this.hf_lab_code,
+      required this.logo});
   factory Lab.fromJson(Map<String, dynamic> json) => _$LabFromJson(json);
   Map<String, dynamic> toJson() => _$LabToJson(this);
 }

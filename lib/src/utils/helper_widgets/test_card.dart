@@ -91,13 +91,15 @@ class TestCardWidget extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Container(
-                        width: 35,
-                        height: 35,
-                        color: Theme.of(context).colorScheme.primary,
+                        width: 20,
+                        height: 30,
+                        //color: Theme.of(context).colorScheme.tertiary,
+                        // decoration: BoxDecoration(
+                        //     border: Border.all(color: Colors.black)),
                         child: Image.asset(
-                          "./assets/images/Lab_Single_Person.jpg",
+                          "./assets/images/blood-test.png",
                           // scale: 1,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -116,10 +118,10 @@ class TestCardWidget extends StatelessWidget {
                             softWrap: true,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                          Text(
-                            "NABL",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          )
+                          isTest
+                              ? Text("NABL",
+                                  style: Theme.of(context).textTheme.bodyMedium)
+                              : Container()
                         ],
                       ),
                     )

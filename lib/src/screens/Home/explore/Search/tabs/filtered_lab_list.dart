@@ -46,7 +46,20 @@ class LabListScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return CustomListTile(
                       title: searchState.getlabSuggetionList[index].labName,
-                      icon: Icons.store_outlined,
+                      icon: ClipOval(
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          //color: Theme.of(context).colorScheme.tertiary,
+                          // decoration: BoxDecoration(
+                          //     border: Border.all(color: Colors.black)),
+                          child: Image.network(
+                            searchState.getlabSuggetionList[index].logo,
+                            // scale: 1,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                       //subtitle: "lab",
                       labCode:
                           searchState.getlabSuggetionList[index].hf_lab_code,

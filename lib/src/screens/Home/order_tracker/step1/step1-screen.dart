@@ -103,35 +103,35 @@ class _StepOneScreenState extends State<StepOneScreen> {
   }
 
   Future<bool> UpdateWidget() async {
-    // if (_formKey.currentState!.validate()) {
-    if (selectedOrder != null) {
-      Order order = selectedOrder!.getOrder;
-      order.self = isMySelfButtonSelected;
-      order.tests = selectedTest!.getSelectedTest;
-      order.packages = selectedTest!.getSelectedPackage;
-      if (isMySelfButtonSelected) {
-        var user = await Get.put(UserRepository()).getUser();
-        order.user?.gender = selectedGender;
-        order.user?.gender = selectedGender;
-        order.user = User(
-            userName: user.data()?['userName'],
-            age: _agecontroller.text,
-            gender: selectedGender,
-            mobile: user.data()?['mobile']);
-      } else {
-        order.user = User(
-            userName: _namecontroller.text,
-            age: _agecontroller.text,
-            gender: selectedGender);
-      }
+    print(_formKey.currentState);
+    if (_formKey.currentState!.validate()) {
+      if (selectedOrder != null) {
+        Order order = selectedOrder!.getOrder;
+        order.self = isMySelfButtonSelected;
+        order.tests = selectedTest!.getSelectedTest;
+        order.packages = selectedTest!.getSelectedPackage;
+        if (isMySelfButtonSelected) {
+          var user = await Get.put(UserRepository()).getUser();
+          order.user?.gender = selectedGender;
+          order.user?.gender = selectedGender;
+          order.user = User(
+              userName: user.data()?['userName'],
+              age: _agecontroller.text,
+              gender: selectedGender,
+              mobile: user.data()?['mobile']);
+        } else {
+          order.user = User(
+              userName: _namecontroller.text,
+              age: _agecontroller.text,
+              gender: selectedGender);
+        }
 
-      selectedOrder!.setOrder = order;
+        selectedOrder!.setOrder = order;
+      }
+      return true;
+    } else {
+      return false;
     }
-    return true;
-    // }
-    // else {
-    //   return false;
-    // }
   }
 
   Column generateListTileBodyForTest(Test test) {
@@ -242,28 +242,37 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                     enabled: !isMySelfButtonSelected,
                                     labelText: 'Full name*',
                                     border: OutlineInputBorder(),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 10),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter name';
                                     }
                                     return null;
-                                  }, // Other properties and validation for the age field
+                                  },
+                                  autovalidateMode: AutovalidateMode
+                                      .onUserInteraction, // Other properties and validation for the age field
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 8),
                           Row(
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 100,
                                 child: TextFormField(
                                   controller: _agecontroller,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     labelText: 'Age',
+                                    errorMaxLines: 2,
                                     border: OutlineInputBorder(),
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 10.0,
+                                      horizontal: 10,
+                                    ),
                                   ),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
@@ -280,11 +289,17 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                     }
                                     return null; // Return null to indicate no error
                                   },
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                 ),
                               ),
                               Radio(
                                 value: 'Male',
                                 groupValue: selectedGender,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                activeColor:
+                                    Theme.of(context).colorScheme.primary,
                                 onChanged: (value) {
                                   setState(() {
                                     selectedGender = value.toString();
@@ -295,6 +310,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
                               Radio(
                                 value: 'Female',
                                 groupValue: selectedGender,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                activeColor:
+                                    Theme.of(context).colorScheme.primary,
                                 onChanged: (value) {
                                   setState(() {
                                     selectedGender = value.toString();
@@ -302,6 +321,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                 },
                               ),
                               Text('Female'),
+                              Radio(
+                                value: 'Others',
+                                groupValue: selectedGender,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                activeColor:
+                                    Theme.of(context).colorScheme.primary,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedGender = value.toString();
+                                  });
+                                },
+                              ),
+                              Text('Others'),
                             ],
                           ),
                         ],
@@ -312,7 +345,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Text(
@@ -333,7 +366,20 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           (test) => ListTile(
                             title: generateListTileBodyForTest(test),
                             iconColor: Theme.of(context).colorScheme.primary,
-                            leading: Icon(Icons.medical_services),
+                            leading: ClipOval(
+                              child: Container(
+                                width: 20,
+                                height: 30,
+                                //color: Theme.of(context).colorScheme.tertiary,
+                                // decoration: BoxDecoration(
+                                //     border: Border.all(color: Colors.black)),
+                                child: Image.asset(
+                                  "./assets/images/blood-test.png",
+                                  // scale: 1,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
+                            ),
                             trailing: IconButton(
                                 onPressed: () {
                                   selectedTest!.removeTest(test);
@@ -347,7 +393,12 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                         .navigate(context, SearchBarPage());
                                   }
                                 },
-                                icon: Icon(Icons.delete_outlined)),
+                                icon: Icon(
+                                  Icons.delete_outlined,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface,
+                                )),
                           ),
                         )
                         .toList(),

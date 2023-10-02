@@ -100,47 +100,44 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
-              ),
               Divider(
                 height: 3,
               ),
-              InkWell(
-                onTap: () {
-                  //Navigator.pop(context);
-                  globalservice.navigate(context, UseCurrentLocationStepTwo());
-                },
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.gps_fixed,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "Use Current Location",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        )),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     //Navigator.pop(context);
+              //     globalservice.navigate(context, UseCurrentLocationStepTwo());
+              //   },
+              //   child: Container(
+              //     alignment: Alignment.bottomLeft,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: Row(
+              //         children: [
+              //           Icon(
+              //             Icons.gps_fixed,
+              //             color: Theme.of(context).colorScheme.primary,
+              //           ),
+              //           SizedBox(
+              //             width: 10,
+              //           ),
+              //           Expanded(
+              //               child: Text(
+              //             "Use Current Location",
+              //             style: Theme.of(context)
+              //                 .textTheme
+              //                 .bodyLarge!
+              //                 .copyWith(
+              //                     color: Theme.of(context).colorScheme.primary),
+              //           )),
+              //           Icon(
+              //             Icons.arrow_forward_ios_rounded,
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Divider(
                 height: 5,
               ),
@@ -272,7 +269,9 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                               _removeItem(index);
                                             },
                                             child: Icon(Icons.delete,
-                                                color: Colors.red.shade900),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .inverseSurface),
                                           )
                                         ],
                                       ),

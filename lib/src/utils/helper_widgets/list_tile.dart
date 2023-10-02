@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomListTile extends StatelessWidget {
   final String title;
   //final String subtitle;
-  final IconData icon;
+  final Widget icon;
   late Function(String title, String labCode, String testCode) onTap;
   final String labCode;
   final String testCode;
@@ -33,7 +33,7 @@ class CustomListTile extends StatelessWidget {
         onTap: () {
           onTap(title, labCode, testCode);
         },
-        leading: Icon(icon),
+        leading: icon,
         iconColor: Theme.of(context).colorScheme.primary,
         title: Text(title),
         //subtitle: Text(subtitle),

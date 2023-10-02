@@ -101,8 +101,8 @@ class _StepThreeScreen extends State<StepThreeScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).colorScheme.primary
-              : Colors.black12,
+              ? Theme.of(context).colorScheme.tertiary
+              : Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(8.0),
         ),
         padding: const EdgeInsets.all(8.0),
@@ -163,16 +163,18 @@ class _StepThreeScreen extends State<StepThreeScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).colorScheme.primary
-              : Colors.black12,
+              ? Theme.of(context).colorScheme.tertiary
+              : Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(8.0),
         ),
         padding: const EdgeInsets.all(12.0),
-        child: Text(
-          //'${time.hour}:00',
-          _formatTimeRange(start, end),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
+        child: Center(
+          child: Text(
+            //'${time.hour}:00',
+            _formatTimeRange(start, end),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -209,15 +211,10 @@ class _StepThreeScreen extends State<StepThreeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Select Date',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: Text('Select Date',
+              style: Theme.of(context).textTheme.headlineMedium),
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -236,16 +233,12 @@ class _StepThreeScreen extends State<StepThreeScreen> {
         //   subtitle: Text(DateFormat('EEE, MMM d')
         //       .format(selectedDate ?? DateTime.now())),
         // ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Select Time',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: Text('Select Time',
+              style: Theme.of(context).textTheme.headlineMedium),
         ),
+
         // SingleChildScrollView(
         //   scrollDirection: Axis.horizontal,
         //   child: Row(
@@ -261,16 +254,27 @@ class _StepThreeScreen extends State<StepThreeScreen> {
         availableTimes.isEmpty
             ? Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'No available slots. Please check for the next day slots',
-                  style: Theme.of(context).textTheme.titleMedium,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_month_sharp,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'No available slots. Please check for the next day slots',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ],
                 ),
               )
             : SizedBox(
-                height: 280,
+                height: MediaQuery.sizeOf(context).height * 0.4,
                 child: GridView.count(
                   crossAxisCount: 3,
-                  childAspectRatio: 2.0,
+                  childAspectRatio: 3.0,
                   padding: EdgeInsets.all(8.0),
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 4.0,

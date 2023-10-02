@@ -13,11 +13,13 @@ Lab _$LabFromJson(Map<String, dynamic> json) => Lab(
       test: (json['test'] as List<dynamic>).map((e) => e as String).toList(),
       labName: json['labName'] as String,
       hf_lab_code: json['hf_lab_code'] as String,
+      logo: json['logo'] as String,
     );
 
 Map<String, dynamic> _$LabToJson(Lab instance) => <String, dynamic>{
       'labName': instance.labName,
       'test': instance.test,
       'hf_lab_code': instance.hf_lab_code,
+      "logo": instance.logo,
       'branchDetails': instance.branchDetails.map((e) => e.toJson()).toList(),
     };
