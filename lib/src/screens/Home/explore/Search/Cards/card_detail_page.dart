@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
-import 'package:sample_application/src/screens/Home/order_tracker/step1/confirmation-allert.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import '../../../../../utils/Provider/selected_order_provider.dart';
 import '../../../../../utils/Provider/selected_test_provider.dart';
@@ -38,7 +37,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
           backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
             "Test Details",
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium!
+                .copyWith(color: Theme.of(context).colorScheme.primary),
           ),
         ),
         body: Stack(
@@ -57,7 +59,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(widget.test.testName,
-                            style: Theme.of(context).textTheme.bodyLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -88,7 +90,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Lab : ",
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                    Theme.of(context).textTheme.headlineSmall),
                             Text(widget.test.labName,
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
@@ -101,7 +103,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Sample Required : ",
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                    Theme.of(context).textTheme.headlineSmall),
                             Text(widget.test.sampletypeName,
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
@@ -114,7 +116,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Method : ",
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                    Theme.of(context).textTheme.headlineSmall),
                             Text("Not Specified",
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
@@ -127,7 +129,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Price : ",
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                    Theme.of(context).textTheme.headlineSmall),
                             Text("₹" + widget.test.price,
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
@@ -140,7 +142,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           children: [
                             Text("Report : ",
                                 style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                    Theme.of(context).textTheme.headlineSmall),
                             Text(widget.test.tat + " Hours",
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
@@ -377,7 +379,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Preperation",
-                            style: Theme.of(context).textTheme.bodyLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -417,64 +419,75 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text("Any Queries ?",
-                            style: Theme.of(context).textTheme.bodyLarge),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         const Divider(
                           height: 10,
                           thickness: 1,
                           indent: 10,
                           endIndent: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  globalservice.makingPhoneCall("8296653901");
-                                },
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.call_outlined,
-                                      color: Color.fromARGB(255, 48, 108, 158),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "Phone",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    )
-                                  ],
-                                )),
-                            SizedBox(
-                              width: 80,
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  globalservice.sendEmail(
-                                      "pramodcr28@gmail.com",
-                                      "Somthing",
-                                      "testing");
-                                },
-                                child: Column(
-                                  children: [
-                                    Icon(Icons.mail,
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.2),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    globalservice.makingPhoneCall("8296653901");
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.call_outlined,
                                         color:
-                                            Color.fromARGB(255, 48, 108, 158)),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "Mail",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    )
-                                  ],
-                                ))
-                          ],
+                                            Color.fromARGB(255, 48, 108, 158),
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Phone",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      )
+                                    ],
+                                  )),
+                              // SizedBox(
+                              //   width: 80,
+                              // ),
+                              Spacer(),
+                              GestureDetector(
+                                  onTap: () {
+                                    globalservice.sendEmail(
+                                        "pramodcr28@gmail.com",
+                                        "Somthing",
+                                        "testing");
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.mail,
+                                        color:
+                                            Color.fromARGB(255, 48, 108, 158),
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Mail",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
                         )
                       ],
                     ),

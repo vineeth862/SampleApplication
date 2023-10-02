@@ -114,7 +114,7 @@ class TestCardWidget extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             softWrap: true,
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
                             "NABL",
@@ -139,7 +139,7 @@ class TestCardWidget extends StatelessWidget {
                       children: [
                         Text(
                           isTest ? "Test :" : "Lab :",
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         )
                       ],
                     ),

@@ -28,6 +28,8 @@ final ThemeData theme = ThemeData(
   textTheme: TextTheme(
     headlineMedium: GoogleFonts.robotoSlab(
         fontSize: 16, color: Color.fromARGB(255, 32, 32, 32)),
+    headlineSmall: GoogleFonts.robotoSlab(
+        fontSize: 12, color: Color.fromARGB(255, 32, 32, 32)),
     bodyMedium: GoogleFonts.notoSans(
         fontSize: 10, color: Color.fromARGB(255, 90, 89, 89)),
     bodyLarge: GoogleFonts.notoSans(

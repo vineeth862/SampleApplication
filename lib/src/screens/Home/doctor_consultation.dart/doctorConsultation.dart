@@ -7,7 +7,14 @@ class DoctorConsultation extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(title: const Text("Radiology")),
+      appBar: AppBar(
+          title: Text(
+        "Radiology",
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium!
+            .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+      )),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

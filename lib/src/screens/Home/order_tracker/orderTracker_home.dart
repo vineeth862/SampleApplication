@@ -201,7 +201,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                                 softWrap: true,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headlineMedium,
+                                                    .headlineSmall,
                                               ),
                                             ),
                                             // Spacer(),
@@ -253,7 +253,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                         "Booked Items",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headlineMedium,
+                                            .headlineSmall,
                                       ),
                                     ),
                                     ...getBookedItems(index),
