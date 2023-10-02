@@ -117,7 +117,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                       buttonClicked: () async {
                         order.Order orderObject = selectedOrder.getOrder;
 
-                        if (selectedslot.split("  ").length == 2) {
+                        if (booked.bookedSlot!.isNotEmpty) {
                           orderObject.booked = booked;
                           orderObject.labCode = orderObject.tests!.isNotEmpty
                               ? orderObject.tests![0].labCode
