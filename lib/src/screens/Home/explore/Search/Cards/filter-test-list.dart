@@ -70,7 +70,10 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
             IconThemeData(color: Theme.of(context).colorScheme.background),
         title: Text(
           widget.title,
-          style: TextStyle(color: Theme.of(context).colorScheme.background),
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
