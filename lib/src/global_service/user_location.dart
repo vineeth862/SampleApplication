@@ -36,12 +36,6 @@ class UserCurrentLocation extends GetxController {
       // Perform your one-time operation here
       //print('Performing one-time operation');
       addressToBeConsidered.value = newValue;
-      Future.delayed(Duration(seconds: 0), () {
-        //loadingProvider.startLoading();
-        //Get.offAll(() => HomePage());
-
-        //loadingProvider.stopLoading();
-      });
 
       //validatePincode(pinCode);
     } else {

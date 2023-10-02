@@ -64,9 +64,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           indent: 10,
                           endIndent: 10,
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+
                         // Row(
                         //   crossAxisAlignment: CrossAxisAlignment.center,
                         //   children: [
@@ -96,7 +94,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,7 +107,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,7 +120,141 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Price : ",
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
+                            Text("₹" + widget.test.price,
+                                style: Theme.of(context).textTheme.bodyMedium)
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Report : ",
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
+                            Text(widget.test.tat + " Hours",
+                                style: Theme.of(context).textTheme.bodyMedium)
+                          ],
+                        ),
+                        Divider(
+                          height: 10,
+                          thickness: 1,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    String userKey =
+                                        globalservice.getCurrentUserKey();
+                                    if (userKey != "null") {
+                                      if (selectedTest.getSelectedTest
+                                          .contains(widget.test)) {
+                                        selectedTest.removeTest(widget.test);
+                                      } else {
+                                        selectedTest.addTest(widget.test);
+                                      }
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              //icon: Icon(Icons.time_to_leave),
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      1, 0),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              title: Text("Please Login",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayLarge!
+                                                      .copyWith(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary)),
+                                              content: Text(
+                                                "Please Login to book test",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium!,
+                                              ),
+                                              actions: [
+                                                // Define buttons for the AlertDialog
+                                                ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    minimumSize:
+                                                        MaterialStateProperty
+                                                            .all(const Size(80,
+                                                                25)), // Set the desired size
+                                                  ),
+                                                  child: const Text("Login"),
+                                                  onPressed: () {
+                                                    globalservice.navigate(
+                                                        context,
+                                                        const Welcomesignin()); // Close the AlertDialog
+                                                  },
+                                                ),
+                                              ],
+                                              actionsAlignment:
+                                                  MainAxisAlignment.end,
+                                            );
+                                          });
+                                    }
+                                  },
+                                  child: !selectedTest.getSelectedTest
+                                          .contains(widget.test)
+                                      ? Text("BOOK")
+                                      : Text("BOOKED"),
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.all(0),
+                                    foregroundColor: !selectedTest
+                                            .getSelectedTest
+                                            .contains(widget.test)
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                    backgroundColor: !selectedTest
+                                            .getSelectedTest
+                                            .contains(widget.test)
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary
+                                        : Theme.of(context).colorScheme.primary,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          8.0), // Adjust the border radius as needed
+                                      side: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+
+                                      // Set the outline color
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         // Row(
                         //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -246,9 +378,6 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       children: [
                         Text("Preperation",
                             style: Theme.of(context).textTheme.bodyLarge),
-                        SizedBox(
-                          height: 10,
-                        ),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -289,9 +418,6 @@ class _CardDetailPageState extends State<CardDetailPage> {
                       children: [
                         Text("Any Queries ?",
                             style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(
-                          height: 10,
-                        ),
                         const Divider(
                           height: 10,
                           thickness: 1,
@@ -318,7 +444,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       "Phone",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headlineMedium,
+                                          .titleSmall,
                                     )
                                   ],
                                 )),
@@ -341,7 +467,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       "Mail",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headlineMedium,
+                                          .titleSmall,
                                     )
                                   ],
                                 ))
@@ -351,121 +477,32 @@ class _CardDetailPageState extends State<CardDetailPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    height: 80,
-                    //width: double.infinity,
-                    // decoration: BoxDecoration(
-                    //     gradient: LinearGradient(colors: [
-                    //   Theme.of(context).colorScheme.surface,
-                    //   Theme.of(context).colorScheme.surface
-                    // ])),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 253, 245, 229),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              "Price: ₹" + widget.test.price,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            String userKey = globalservice.getCurrentUserKey();
-                            if (userKey != "null") {
-                              if (selectedTest.getSelectedTest
-                                  .contains(widget.test)) {
-                                selectedTest.removeTest(widget.test);
-                              } else {
-                                selectedTest.addTest(widget.test);
-                              }
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      //icon: Icon(Icons.time_to_leave),
-                                      alignment:
-                                          const AlignmentDirectional(1, 0),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      title: Text("Please Login",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineMedium!
-                                              .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary)),
-                                      content: Text(
-                                        "Please Login to book test",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!,
-                                      ),
-                                      actions: [
-                                        // Define buttons for the AlertDialog
-                                        ElevatedButton(
-                                          style: ButtonStyle(
-                                            minimumSize: MaterialStateProperty
-                                                .all(const Size(80,
-                                                    25)), // Set the desired size
-                                          ),
-                                          child: const Text("Login"),
-                                          onPressed: () {
-                                            globalservice.navigate(context,
-                                                const Welcomesignin()); // Close the AlertDialog
-                                          },
-                                        ),
-                                      ],
-                                      actionsAlignment: MainAxisAlignment.end,
-                                    );
-                                  });
-                            }
-                          },
-                          child: !selectedTest.getSelectedTest
-                                  .contains(widget.test)
-                              ? Text("BOOK")
-                              : Text("BOOKED"),
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(0),
-                            foregroundColor: !selectedTest.getSelectedTest
-                                    .contains(widget.test)
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.background,
-                            backgroundColor: !selectedTest.getSelectedTest
-                                    .contains(widget.test)
-                                ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context).colorScheme.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // Adjust the border radius as needed
-                              side: BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-
-                              // Set the outline color
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                Container(
+                  color: Color.fromARGB(255, 242, 229, 214),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(children: [
+                      Text(
+                        "Know about......",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Text(
+                        widget.test.testName,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ]),
                   ),
-                ),
+                )
               ]),
             ),
             Positioned(
