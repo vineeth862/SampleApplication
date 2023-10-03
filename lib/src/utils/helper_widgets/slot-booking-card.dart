@@ -109,27 +109,25 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
         ? Row(
             children: [
               Text(
-                "Expand Details",
+                "Details",
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.tertiary),
+                    fontSize: 14, color: Theme.of(context).colorScheme.primary),
               ),
               // SizedBox(width: 4.0),
               Icon(Icons.keyboard_arrow_down_outlined,
-                  color: Theme.of(context).colorScheme.tertiary),
+                  color: Theme.of(context).colorScheme.primary),
             ],
           )
         : Row(
             children: [
               Text(
-                "Collapse Details",
+                "Details",
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.tertiary),
+                    fontSize: 14, color: Theme.of(context).colorScheme.primary),
               ),
               // SizedBox(width: 4.0),
               Icon(Icons.keyboard_arrow_up_outlined,
-                  color: Theme.of(context).colorScheme.tertiary),
+                  color: Theme.of(context).colorScheme.primary),
               Spacer(),
               Text(
                 "Your Cart",

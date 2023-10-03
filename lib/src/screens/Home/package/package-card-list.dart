@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/package/packageService.dart';
+import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import '../../../global_service/global_service.dart';
 import '../../../utils/Provider/selected_order_provider.dart';
 import '../../../utils/Provider/selected_test_provider.dart';
-import '../../../utils/helper_widgets/bottom_model_sheet.dart';
 import '../../../utils/helper_widgets/package_card.dart';
 import '../../../utils/helper_widgets/slot-booking-card.dart';
 import '../models/order/order.dart';
@@ -77,7 +77,10 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
         title: Text(
           widget.title,
-          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(color: Theme.of(context).colorScheme.primary),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
@@ -98,6 +101,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         package: list[index].packageObject!,
                         testList: list[index].testList!,
                         price: list[index].price!,
+                        isTest: false,
                         isTestSelected:
                             isPackageSelected(list[index].packageObject!),
                         tapOnButton: (package) {
@@ -134,10 +138,14 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                             selectedPackage.selectedPackage.length,
                         title: " Test/Package Selected",
                         contentColor: false,
-                        content: "view details",
+                        content: Price(
+                          finalAmount: "3432",
+                          discount: "10",
+                          totalPrice: true,
+                        ),
                         height: slotBookingCardHeight,
                         subContent: "",
-                        hyperLink: true,
+                        hyperLink: false,
                         buttonClicked: () {
                           Order order = selectedOrder.getOrder;
 
