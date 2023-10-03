@@ -22,7 +22,7 @@ class PackageDetailPage extends StatefulWidget {
 class _PackageDetailPage extends State<PackageDetailPage> {
   GlobalService globalservice = GlobalService();
   bool expandDetails = false;
-
+  num slotBookingCardHeight = 120;
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
@@ -389,27 +389,6 @@ class _PackageDetailPage extends State<PackageDetailPage> {
               ]),
             ),
             Positioned(
-              bottom: 100,
-              right: 0,
-              left: 0,
-              child: SwipeableContainer(
-                  key: UniqueKey(),
-                  removeTest: (tesCode) {
-                    selectedTest.removeTest(tesCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  },
-                  removePackage: (pacCode) {
-                    selectedTest.removePackage(pacCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  }),
-            ),
-            Positioned(
               bottom: 0,
               right: 0,
               left: 0,
@@ -421,6 +400,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                               selectedTest.getSelectedPackage.length,
                           title: " Test/Package Selected",
                           content: "view details",
+                          height: slotBookingCardHeight,
                           subContent: "",
                           contentColor: false,
                           hyperLink: true,

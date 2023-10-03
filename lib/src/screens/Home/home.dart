@@ -94,6 +94,7 @@ class HomePageState extends State<HomePage> {
     //final appStates = Provider.of<AppState>(context);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
     final loadingProvider = Provider.of<LoadingProvider>(context);
+    num slotBookingCardHeight = 120;
     if (widget.index != null) {
       setState(() {
         selectedIndex = int.parse(widget.index.toString());
@@ -144,27 +145,6 @@ class HomePageState extends State<HomePage> {
                   children: [
                     _widgetOptions.elementAt(selectedIndex),
                     Positioned(
-                      bottom: 100,
-                      right: 0,
-                      left: 0,
-                      child: SwipeableContainer(
-                          key: UniqueKey(),
-                          removeTest: (tesCode) {
-                            selectedTest.removeTest(tesCode);
-                            if (selectedTest.getSelectedTest.isEmpty &&
-                                selectedTest.getSelectedPackage.isEmpty) {
-                              selectedTest.setDetailExpanded(false);
-                            }
-                          },
-                          removePackage: (pacCode) {
-                            selectedTest.removePackage(pacCode);
-                            if (selectedTest.getSelectedTest.isEmpty &&
-                                selectedTest.getSelectedPackage.isEmpty) {
-                              selectedTest.setDetailExpanded(false);
-                            }
-                          }),
-                    ),
-                    Positioned(
                       bottom: 0,
                       right: 0,
                       left: 0,
@@ -179,6 +159,7 @@ class HomePageState extends State<HomePage> {
                                   content: "view details",
                                   subContent: "",
                                   contentColor: false,
+                                  height: slotBookingCardHeight,
                                   buttonClicked: () {
                                     Order order = selectedOrder.getOrder;
 

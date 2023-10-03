@@ -28,7 +28,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
   // ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
   PackageService packageService = PackageService();
-
+  num slotBookingCardHeight = 120;
   bool expandDetails = false;
 
   @override
@@ -123,27 +123,6 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
             ],
           ),
           Positioned(
-            bottom: 100,
-            right: 0,
-            left: 0,
-            child: SwipeableContainer(
-                key: UniqueKey(),
-                removeTest: (tesCode) {
-                  selectedPackage.removeTest(tesCode);
-                  if (selectedPackage.getSelectedTest.isEmpty &&
-                      selectedPackage.getSelectedPackage.isEmpty) {
-                    selectedPackage.setDetailExpanded(false);
-                  }
-                },
-                removePackage: (pacCode) {
-                  selectedPackage.removePackage(pacCode);
-                  if (selectedPackage.getSelectedTest.isEmpty &&
-                      selectedPackage.getSelectedPackage.isEmpty) {
-                    selectedPackage.setDetailExpanded(false);
-                  }
-                }),
-          ),
-          Positioned(
             bottom: 0,
             right: 0,
             left: 0,
@@ -156,6 +135,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         title: " Test/Package Selected",
                         contentColor: false,
                         content: "view details",
+                        height: slotBookingCardHeight,
                         subContent: "",
                         hyperLink: true,
                         buttonClicked: () {

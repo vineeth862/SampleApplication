@@ -18,6 +18,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
   bool expandDetails = false;
   String selectedAdress = "";
   String displayAdress = "";
+  num slotBookingCardHeight = 120;
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
@@ -88,6 +89,7 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                         selectedCount: 0,
                         title: "Your Location",
                         contentColor: selectedAdress.isEmpty,
+                        height: slotBookingCardHeight,
                         content: selectedAdress.isEmpty
                             ? displayAdress
                             : selectedAdress,

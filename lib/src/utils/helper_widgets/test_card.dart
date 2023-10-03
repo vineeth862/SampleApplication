@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/utils/helper_widgets/link.dart';
+import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import '../../screens/Home/explore/Search/Cards/card_detail_page.dart';
 import '../../screens/Home/models/test/test.dart';
 
@@ -209,46 +210,53 @@ class TestCardWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        // Define the action you want to perform when the link is tapped.
-                        // You can navigate to a new screen or trigger some other action.
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            child: Row(
-                              children: [
-                                Text("₹${test.price}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  (double.parse(test.price) * 1.25).toString(),
-                                  style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      fontSize: 10),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text("25%",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                            fontSize: 13,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .error)),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        onTap: () {
+                          // Define the action you want to perform when the link is tapped.
+                          // You can navigate to a new screen or trigger some other action.
+                        },
+                        child: Price(
+                          discount: "25",
+                          finalAmount: test.price,
+                          totalPrice: false,
+                        )
+
+                        // Row(
+                        //   children: <Widget>[
+                        //     Container(
+                        //       child: Row(
+                        //         children: [
+                        //           Text("₹${test.price}",
+                        //               style: Theme.of(context)
+                        //                   .textTheme
+                        //                   .headlineMedium),
+                        //           const SizedBox(
+                        //             width: 5,
+                        //           ),
+                        //           Text(
+                        //             (double.parse(test.price) * 1.25).toString(),
+                        //             style: const TextStyle(
+                        //                 decoration: TextDecoration.lineThrough,
+                        //                 fontSize: 10),
+                        //           ),
+                        //           const SizedBox(
+                        //             width: 5,
+                        //           ),
+                        //           Text("25%",
+                        //               style: Theme.of(context)
+                        //                   .textTheme
+                        //                   .headlineMedium!
+                        //                   .copyWith(
+                        //                       fontSize: 13,
+                        //                       color: Theme.of(context)
+                        //                           .colorScheme
+                        //                           .error)),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+
+                        ),
                     // SizedBox(
                     //   width: 15,
                     // ),
@@ -333,10 +341,10 @@ class TestCardWidget extends StatelessWidget {
                           // maximumSize: Size(10, 10),
                           padding: EdgeInsets.all(0),
                           foregroundColor: isTestSelected
-                              ? Theme.of(context).colorScheme.background
-                              : Theme.of(context).colorScheme.primary,
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.tertiary,
                           backgroundColor: isTestSelected
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.tertiary
                               : Theme.of(context).colorScheme.onPrimary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -344,7 +352,7 @@ class TestCardWidget extends StatelessWidget {
                             side: BorderSide(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .primary), // Set the outline color
+                                    .tertiary), // Set the outline color
                           ),
                         ),
                       ),

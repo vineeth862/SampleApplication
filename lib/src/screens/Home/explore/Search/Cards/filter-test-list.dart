@@ -30,7 +30,7 @@ class FilteredTestCardlistPage extends StatefulWidget {
 class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
   ExploreService exploreService = ExploreService();
   GlobalService globalservice = GlobalService();
-
+  num slotBookingCardHeight = 120;
   bool expandDetails = false;
 
   @override
@@ -123,27 +123,6 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
               ],
             ),
             Positioned(
-              bottom: 100,
-              right: 0,
-              left: 0,
-              child: SwipeableContainer(
-                  key: UniqueKey(),
-                  removeTest: (tesCode) {
-                    selectedTest.removeTest(tesCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  },
-                  removePackage: (pacCode) {
-                    selectedTest.removePackage(pacCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  }),
-            ),
-            Positioned(
               bottom: 0,
               right: 0,
               left: 0,
@@ -157,6 +136,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                           contentColor: false,
                           content: "view details",
                           subContent: "",
+                          height: slotBookingCardHeight,
                           hyperLink: true,
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;

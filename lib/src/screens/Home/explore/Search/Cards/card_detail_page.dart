@@ -29,6 +29,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
     final searchState = Provider.of<SearchListState>(context);
     final selectedTest = Provider.of<SelectedTestState>(context);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
+    num slotBookingCardHeight = 120;
     List<dynamic> list = searchState.getTestCardList;
     return SafeArea(
       child: Scaffold(
@@ -187,7 +188,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                               title: Text("Please Login",
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .displayLarge!
+                                                      .headlineMedium!
                                                       .copyWith(
                                                           color:
                                                               Theme.of(context)
@@ -536,27 +537,6 @@ class _CardDetailPageState extends State<CardDetailPage> {
               ]),
             ),
             Positioned(
-              bottom: 100,
-              right: 0,
-              left: 0,
-              child: SwipeableContainer(
-                  key: UniqueKey(),
-                  removeTest: (tesCode) {
-                    selectedTest.removeTest(tesCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  },
-                  removePackage: (pacCode) {
-                    selectedTest.removePackage(pacCode);
-                    if (selectedTest.getSelectedTest.isEmpty &&
-                        selectedTest.getSelectedPackage.isEmpty) {
-                      selectedTest.setDetailExpanded(false);
-                    }
-                  }),
-            ),
-            Positioned(
               bottom: 0,
               right: 0,
               left: 0,
@@ -568,9 +548,11 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               selectedTest.getSelectedPackage.length,
                           title: " Test/Package Selected",
                           contentColor: false,
+                          height: slotBookingCardHeight,
                           content: Price(
                             finalAmount: "3432",
                             discount: "10",
+                            totalPrice: true,
                           ),
                           subContent: "",
                           hyperLink: false,

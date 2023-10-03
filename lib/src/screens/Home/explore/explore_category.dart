@@ -117,7 +117,7 @@ class labPackageCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  style: Theme.of(context).textTheme.displayMedium
+                  style: Theme.of(context).textTheme.headlineMedium
                   //     .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
               const SizedBox(

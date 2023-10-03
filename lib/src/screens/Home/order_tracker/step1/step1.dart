@@ -72,27 +72,6 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
         child: Stack(children: [
           widget,
           Positioned(
-            bottom: 100,
-            right: 0,
-            left: 0,
-            child: SwipeableContainer(
-                key: UniqueKey(),
-                removeTest: (tesCode) {
-                  selectedTest.removeTest(tesCode);
-                  if (selectedTest.getSelectedTest.isEmpty &&
-                      selectedTest.getSelectedPackage.isEmpty) {
-                    selectedTest.setDetailExpanded(false);
-                  }
-                },
-                removePackage: (pacCode) {
-                  selectedTest.removePackage(pacCode);
-                  if (selectedTest.getSelectedTest.isEmpty &&
-                      selectedTest.getSelectedPackage.isEmpty) {
-                    selectedTest.setDetailExpanded(false);
-                  }
-                }),
-          ),
-          Positioned(
             bottom: 0,
             right: 0,
             left: 0,
@@ -104,9 +83,11 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                             selectedTest.selectedPackage.length,
                         title: " Test/Package Selected",
                         contentColor: false,
+                        height: 150,
                         content: Price(
                           finalAmount: "3432",
                           discount: "10",
+                          totalPrice: true,
                         ),
                         subContent: "",
                         hyperLink: false,

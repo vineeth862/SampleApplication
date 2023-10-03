@@ -38,7 +38,7 @@ class Radiology extends StatelessWidget {
             // const EdgeInsets.only(bottom: 8.0, left: 8),
             child: Text(
               "We are Coming Soon.....!",
-              style: Theme.of(context).textTheme.displayMedium,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           Expanded(

@@ -24,6 +24,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
   String selectedslot = "";
   GlobalService globalservice = GlobalService();
   late Booked booked = Booked(bookedDate: "", bookedSlot: "", slot: "");
+  num slotBookingCardHeight = 120;
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
@@ -113,6 +114,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                       contentColor: false,
                       content: "Date : " + booked.bookedDate!,
                       subContent: "Slot : " + booked.bookedSlot!,
+                      height: slotBookingCardHeight,
                       hyperLink: false,
                       buttonClicked: () async {
                         order.Order orderObject = selectedOrder.getOrder;
