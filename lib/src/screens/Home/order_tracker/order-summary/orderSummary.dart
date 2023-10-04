@@ -60,7 +60,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
       ],
       'totalAmount': totalAmmount,
       'address': order.address,
-      'slot': order.booked?.slot
+      'slot': order.booked?.slot,
+      'labName': order.labName
     };
     order.totalPrice = totalAmmount;
     order.createdDate = new DateTime.now().toString();
