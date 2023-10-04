@@ -4,6 +4,7 @@ import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/package/package-card-list.dart';
 import 'package:sample_application/src/screens/Home/package/packageService.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
+import 'package:sample_application/src/utils/helper_widgets/category_card.dart';
 
 import '../../../utils/Provider/selected_test_provider.dart';
 
@@ -47,56 +48,60 @@ class _PackageSuggetionList extends State<PackageSuggetionList> {
           itemCount: packageService.allPackagesNameList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () {
-                globalservice.navigate(
-                    context,
-                    PackageCardlistPage(
-                      category:
-                          packageService.allPackagesNameList.elementAt(index),
-                      title:
-                          packageService.allPackagesNameList.elementAt(index),
-                    ));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  height: 80,
-                  child: Card(
-                      margin: EdgeInsets.only(
-                          top: 5, left: 10, right: 10, bottom: 5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 2,
-                      color:
-                          Color.fromARGB(255, 201, 243, 205).withOpacity(0.5),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.medical_services_rounded,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Text(
-                                  packageService.allPackagesNameList
-                                      .elementAt(index),
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                ),
-              ),
-            );
+                onTap: () {
+                  globalservice.navigate(
+                      context,
+                      PackageCardlistPage(
+                        category:
+                            packageService.allPackagesNameList.elementAt(index),
+                        title:
+                            packageService.allPackagesNameList.elementAt(index),
+                      ));
+                },
+                child: categoryCard(
+                    displayName:
+                        packageService.allPackagesNameList.elementAt(index),
+                    logo: "package")
+                // Padding(
+                //   padding: const EdgeInsets.all(4.0),
+                //   child: Container(
+                //     height: 80,
+                //     child: Card(
+                //         margin: EdgeInsets.only(
+                //             top: 5, left: 10, right: 10, bottom: 5),
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(10.0),
+                //         ),
+                //         elevation: 2,
+                //         color:
+                //             Color.fromARGB(255, 201, 243, 205).withOpacity(0.5),
+                //         child: Center(
+                //           child: Row(
+                //             children: [
+                //               SizedBox(
+                //                 width: 10,
+                //               ),
+                //               Icon(
+                //                 Icons.medical_services_rounded,
+                //               ),
+                //               SizedBox(
+                //                 width: 20,
+                //               ),
+                //               Expanded(
+                //                 child: ListTile(
+                //                   title: Text(
+                //                     packageService.allPackagesNameList
+                //                         .elementAt(index),
+                //                     style: Theme.of(context).textTheme.bodyLarge,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         )),
+                //   ),
+                // ),
+                );
           },
         ),
       ),
