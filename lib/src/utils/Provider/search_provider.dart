@@ -156,15 +156,15 @@ class SearchListState with ChangeNotifier {
   searchPriorityTestAndLabs() async {
     input = '';
     var testList = await FirebaseFirestore.instance
-        .collection('test2')
-        .where("priority", isEqualTo: true)
-        .orderBy('priorityOrder')
+        .collection('priorityTest')
+        // .where("priority", isEqualTo: true)
+        // .orderBy('priorityOrder')
         .get();
 
     var labList = await FirebaseFirestore.instance
         .collection('lab')
-        .where("priority", isEqualTo: true)
-        .orderBy('priorityOrder')
+        // .where("priority", isEqualTo: true)
+        // .orderBy('priorityOrder')
         .get();
 
     if (testList.docs.isNotEmpty) {
@@ -180,7 +180,7 @@ class SearchListState with ChangeNotifier {
     }
 
     if (labList.docs.isNotEmpty) {
-      print(labList.docs.map((e) => print(e.data())));
+      // print(labList.docs.map((e) => print(e.data())));
       filteredLabs = labList.docs.map((doc) {
         return Lab.fromJson(doc.data());
       }).where((element) {
