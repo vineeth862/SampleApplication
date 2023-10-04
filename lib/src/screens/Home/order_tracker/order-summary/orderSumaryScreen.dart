@@ -230,6 +230,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       itemBuilder: (context, index) {
                         final item = widget.orderItems['items'][index];
                         return ListTile(
+                          titleAlignment: ListTileTitleAlignment.center,
                           trailing: IconButton(
                             icon: Icon(
                               Icons.delete_outline,
@@ -358,7 +359,11 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 title: "Total amount payable",
                 contentColor: false,
                 height: 150,
-                content: "₹ ${widget.orderItems['totalAmount']}",
+                content: Price(
+                  finalAmount: "3432",
+                  discount: "10",
+                  totalPrice: true,
+                ),
                 subContent: "",
                 hyperLink: false,
                 buttonClicked: () {
