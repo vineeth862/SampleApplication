@@ -81,7 +81,7 @@ class _InitialAdressState extends State<InitialAdress> {
                 height: 3,
               ),
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -90,7 +90,10 @@ class _InitialAdressState extends State<InitialAdress> {
                         child: TextFormField(
                           controller: _pincodeController,
                           keyboardType: TextInputType.number,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
+                            //isCollapsed: true,
+                            helperText: ' ',
                             labelText: 'Enter Pincode',
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(0)),
@@ -111,29 +114,32 @@ class _InitialAdressState extends State<InitialAdress> {
                       ),
                     ),
                     Container(
-                        height: 56,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                myController.updateGlobalString(
-                                    _pincodeController!.text.toString());
-                                loadingProvider.startLoading();
-                                Future.delayed(Duration(seconds: 1), () {
-                                  loadingProvider.stopLoading();
-                                  globalservice.navigate(context, HomePage());
-                                  // Get.offAll(() => HomePage());
-                                });
-                              }
-                            },
-                            child: Text("Check"),
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius
-                                      .zero, // Remove circular radius
+                        height: 80,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 24.0),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  myController.updateGlobalString(
+                                      _pincodeController!.text.toString());
+                                  loadingProvider.startLoading();
+                                  Future.delayed(Duration(seconds: 1), () {
+                                    loadingProvider.stopLoading();
+                                    globalservice.navigate(context, HomePage());
+                                    // Get.offAll(() => HomePage());
+                                  });
+                                }
+                              },
+                              child: Text("Check"),
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius
+                                        .zero, // Remove circular radius
+                                  ),
                                 ),
-                              ),
-                            )))
+                              )),
+                        ))
                   ],
                 ),
               ),

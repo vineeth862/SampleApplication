@@ -33,4 +33,24 @@ class ExploreService {
     }
     return [];
   }
+
+  fetchMaleCategoryList() async {
+    final categoryList = await _db.collection("packages/category/men").get();
+    if (categoryList.docs.isNotEmpty) {
+      return categoryList.docs.map((doc) {
+        return category.Category.fromJson(doc.data());
+      }).toList();
+    }
+    return [];
+  }
+
+  fetchFemaleCategoryList() async {
+    final categoryList = await _db.collection("packages/category/women").get();
+    if (categoryList.docs.isNotEmpty) {
+      return categoryList.docs.map((doc) {
+        return category.Category.fromJson(doc.data());
+      }).toList();
+    }
+    return [];
+  }
 }

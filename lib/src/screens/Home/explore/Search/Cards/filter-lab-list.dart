@@ -81,10 +81,13 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
     }
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
           SliverAppBar(
+            leading: null,
+            automaticallyImplyLeading: false,
             title: _isAppBarExpanded
                 ? Container(
                     padding: EdgeInsets.only(
@@ -127,37 +130,35 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                     ),
                   )
                 : Container(),
-            expandedHeight: !_isAppBarExpanded ? 200.0 : 0.0,
+            expandedHeight: !_isAppBarExpanded ? 120.0 : 0.0,
             flexibleSpace: FlexibleSpaceBar(
               background: !_isAppBarExpanded
                   ? SafeArea(
                       child: Container(
-                        color: Color.fromARGB(255, 247, 216, 241),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.9),
                         child: Center(
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 50,
+                                height: 30,
                               ),
-                              Text(
-                                widget.title.toString(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.location_on_outlined),
-                                titleAlignment: ListTileTitleAlignment.center,
-                                title: Text(
-                                  widget.location.toString(),
+                              Text(widget.title.toString(),
                                   textAlign: TextAlign.center,
-                                ),
-                              )
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge),
+
+                              // ListTile(
+                              //   //leading: Icon(Icons.location_on_outlined),
+                              //   titleAlignment: ListTileTitleAlignment.center,
+                              //   title: Text(
+                              //     widget.location.toString(),
+                              //     textAlign: TextAlign.center,
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

@@ -38,6 +38,8 @@ class _exploreExpState extends State<exploreExp> {
   ScrollController _scrollController = ScrollController();
   CloudStorageService storage = CloudStorageService();
   List<LabTestCategoryCard> categoryList = [];
+  List<MaleFemaleCategory> maleCategoryList = [];
+  List<MaleFemaleCategory> femaleCategoryList = [];
   late SearchListState searchState;
   final orderRepo = OrderRepository();
   List labList = [];
@@ -55,6 +57,8 @@ class _exploreExpState extends State<exploreExp> {
     });
     getCategoryList();
     getLabLogoList();
+    getMaleCategoryList();
+    getFemaleCategoryList();
   }
 
   getCartCount() async {
@@ -71,6 +75,41 @@ class _exploreExpState extends State<exploreExp> {
       // var path = await storage.getImageRef(list[i].path!);
       categoryList.add(LabTestCategoryCard(
           list[i].title!, "", list[i].path!, list[i].testList!));
+    }
+
+    setState(() {
+      categoryList = [...categoryList];
+    });
+  }
+
+  getMaleCategoryList() async {
+    List<Category> list = await exploreService.fetchMaleCategoryList();
+
+    for (var i = 0; i < list.length; i++) {
+      // var path = await storage.getImageRef(list[i].path!);
+
+      maleCategoryList.add(MaleFemaleCategory(
+        title: list[i].title!,
+        imagePath: list[i].path!,
+        testList: list[i].testList!,
+      ));
+    }
+
+    setState(() {
+      maleCategoryList = [...maleCategoryList];
+    });
+  }
+
+  getFemaleCategoryList() async {
+    List<Category> list = await exploreService.fetchFemaleCategoryList();
+
+    for (var i = 0; i < list.length; i++) {
+      // var path = await storage.getImageRef(list[i].path!);
+      femaleCategoryList.add(MaleFemaleCategory(
+        title: list[i].title!,
+        imagePath: list[i].path!,
+        testList: list[i].testList!,
+      ));
     }
 
     setState(() {
@@ -121,7 +160,8 @@ class _exploreExpState extends State<exploreExp> {
     return SafeArea(
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
-          backgroundColor: const Color.fromARGB(255, 243, 242, 243),
+          //backgroundColor: const Color.fromARGB(255, 243, 242, 243),
+          backgroundColor: Color.fromARGB(255, 244, 244, 244),
           toolbarHeight: 70,
           leading: null,
           automaticallyImplyLeading: false,
@@ -403,6 +443,9 @@ class _exploreExpState extends State<exploreExp> {
                       decoration: InputDecoration(
                         enabled: false,
                         hintText: 'Search for Lab/Tests',
+                        hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         prefixIcon: Icon(
                           Icons.search,
                           color: Theme.of(context).colorScheme.primary,
@@ -458,8 +501,9 @@ class _exploreExpState extends State<exploreExp> {
                 ),
 
                 Container(
-                  width: double.infinity,
-                  height: 250,
+                  width: MediaQuery.sizeOf(context).height * 0.4,
+                  height: MediaQuery.sizeOf(context).height * 0.28,
+
                   // decoration: const BoxDecoration(
                   //     gradient: LinearGradient(colors: [
                   //   Color.fromARGB(255, 231, 243, 253),
@@ -467,22 +511,15 @@ class _exploreExpState extends State<exploreExp> {
                   // ])),
                   child: GridView.count(
                     crossAxisCount: 3,
-                    mainAxisSpacing: 4.0,
-                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 0.0,
+                    crossAxisSpacing: 0.0,
                     physics: const NeverScrollableScrollPhysics(),
                     childAspectRatio:
-                        1, // Adjust the aspect ratio to control the card height
+                        0.9, // Adjust the aspect ratio to control the card height
                     children: [...categoryList],
                   ),
                 ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 5,
-                // ),
+
                 Align(
                   alignment: Alignment.topLeft,
                   child: ListTile(
@@ -512,64 +549,7 @@ class _exploreExpState extends State<exploreExp> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "men",
-                                ageGroup: "young",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "Under 25 Years",
-                          imagePath: "./assets/images/men4.png",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "men",
-                                ageGroup: "mid",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "  25-50 Years  ",
-                          imagePath: "./assets/images/men4.png",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "men",
-                                ageGroup: "old",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "Above 50 Years",
-                          imagePath: "./assets/images/men4.png",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "men",
-                                ageGroup: "all",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "All Packages",
-                          imagePath: "./assets/images/fam1.jpg",
-                        ),
-                      ),
-                    ],
+                    children: [...maleCategoryList],
                   ),
                 ),
                 const SizedBox(
@@ -589,89 +569,49 @@ class _exploreExpState extends State<exploreExp> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "women",
-                                ageGroup: "young",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "Under 25 Years",
-                          imagePath: "./assets/images/women4.png",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "women",
-                                ageGroup: "mid",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "  25-50 Years  ",
-                          imagePath: "./assets/images/women1.png",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "women",
-                                ageGroup: "old",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "Above 50 years",
-                          imagePath: "./assets/images/women2.jpg",
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          globalservice.navigate(
-                              context,
-                              FilterCategoryListPage(
-                                sexCategory: "women",
-                                ageGroup: "all",
-                              ));
-                        },
-                        child: MaleFemaleCategory(
-                          name: "All Packages",
-                          imagePath: "./assets/images/fam1.jpg",
-                        ),
-                      ),
-                    ],
+                    children: [...femaleCategoryList],
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 25,
                 ),
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text("How it Works",
-                          style: Theme.of(context).textTheme.headlineMedium),
-                    )),
+                // Align(
+                //     alignment: Alignment.topLeft,
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(12.0),
+                //       child: Text("How it Works",
+                //           style: Theme.of(context).textTheme.headlineMedium),
+                //     )),
 
-                const HowItWorks(
-                    heading: "1. Book Test",
-                    description:
-                        "Find a Health Test you are looking for from your desired diagnostics."),
-                const HowItWorks(
-                    heading: "2. Sample Collection",
-                    description:
-                        "Our Phlebo will collect the sample from your doorstep ensuring the highest safety"),
-                const HowItWorks(
-                    heading: "3. Get Reports",
-                    description:
-                        "Test reports can be downloaded easily from Emial and MedCapH"),
+                // const HowItWorks(
+                //     heading: "1. Book Test",
+                //     description:
+                //         "Find a Health Test you are looking for from your desired diagnostics."),
+                // const HowItWorks(
+                //     heading: "2. Sample Collection",
+                //     description:
+                //         "Our Phlebo will collect the sample from your doorstep ensuring the highest safety"),
+                // const HowItWorks(
+                //     heading: "3. Get Reports",
+                //     description:
+                //         "Test reports can be downloaded easily from Emial and MedCapH"),
+
+                ConstrainedBox(
+                    constraints: const BoxConstraints(
+                        maxHeight: 500,
+                        minHeight: 50,
+                        maxWidth: 500,
+                        minWidth: 20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        //imagePath.toString(),
+                        "./assets/images/How_it_works.png",
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.height * 0.41,
+                        fit: BoxFit.fill,
+                      ),
+                    )),
                 const SizedBox(
                   height: 10,
                 ),

@@ -174,7 +174,7 @@ class _addressOperationState extends State<addressOperation> {
                 height: 5,
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Container(
                 alignment: Alignment.centerLeft,

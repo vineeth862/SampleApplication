@@ -38,7 +38,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       ),
       body: Stack(children: [
         Container(
-          height: double.infinity,
+          height: MediaQuery.sizeOf(context).height * 1,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
@@ -63,16 +63,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8.0),
-                        gradient: LinearGradient(colors: [
-                          //Theme.of(context).colorScheme.primary,
-                          Theme.of(context)
-                              .colorScheme
-                              .tertiary
-                              .withOpacity(0.5),
-                          Theme.of(context).colorScheme.tertiary,
-                        ])),
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -179,42 +172,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                   const Divider(thickness: 2),
                   // const SizedBox(height: 5),
 
-                  GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Center(
-                            child: Allert(),
-                          ); // Custom widget for the dialog content
-                        },
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add_circle_outline,
-                            size: 18,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Add More Test/Packages",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
                   Text('Test/Packages',
                       style: Theme.of(context).textTheme.headlineMedium),
                   Container(
@@ -258,18 +215,77 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       },
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: Allert(),
+                          ); // Custom widget for the dialog content
+                        },
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle_outline,
+                            size: 18,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "Add More Test/Packages",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.tertiary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Divider(
                     thickness: 1,
+                  ),
+                  Text("Payment details",
+                      style: Theme.of(context).textTheme.headlineMedium),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Cart Value",
+                        "MRP",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Spacer(),
                       Text(
                         "₹ ${widget.orderItems['totalAmount']}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "MedCapH Discount",
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Spacer(),
+                      Text(
+                        " - ₹ ${widget.orderItems['totalAmount']}",
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
@@ -309,6 +325,44 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.secondary),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Total Savings",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary),
+                          ),
+                          Spacer(),
+                          Text(
+                            " ₹ ${widget.orderItems['totalAmount']}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Divider(
                     thickness: 1,
                   ),
@@ -324,7 +378,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
-                  )
+                  ),
+                  SizedBox(height: 180)
 
                   // const Divider(),
                   // Row(

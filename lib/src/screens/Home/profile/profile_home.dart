@@ -6,6 +6,8 @@ import 'package:sample_application/src/screens/Home/explore/explore_exp.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/orderTracker_progress.dart';
+import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentGateway.dart';
+import 'package:sample_application/src/screens/payment/paymentScreen.dart';
 import 'package:sample_application/src/screens/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/order-summary/orderSummary.dart';
 import 'package:sample_application/src/screens/category/filtered_category_list.dart';
@@ -97,8 +99,13 @@ class ProfileScreen extends StatelessWidget {
                         width: 2.0,
                       ),
                       gradient: LinearGradient(colors: [
-                        Colors.grey.shade50,
-                        Colors.grey.shade100,
+                        // Colors.grey.shade50,
+                        // Colors.grey.shade100,
+                        Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.5),
+                        Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
@@ -124,8 +131,41 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             ElevatedButton.icon(
                               onPressed: () {
-                                globalservice.navigate(
-                                    context, EditProfileScreen());
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation,
+                                        secondaryAnimation) {
+                                      return EditProfileScreen();
+                                    },
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.fastOutSlowIn;
+
+                                      var tween = Tween(begin: begin, end: end)
+                                          .chain(CurveTween(curve: curve));
+                                      var offsetAnimation =
+                                          animation.drive(tween);
+
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                      // var fadeAnimation =
+                                      //     Tween<double>(begin: 0.0, end: 1.0)
+                                      //         .animate(animation);
+
+                                      // return FadeTransition(
+                                      //   opacity: fadeAnimation,
+                                      //   child: SlideTransition(
+                                      //     position: offsetAnimation,
+                                      //     child: child,
+                                      //   ),
+                                      // );
+                                    },
+                                  ),
+                                );
                               },
                               icon: const Icon(
                                 Icons.edit,
@@ -217,8 +257,16 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         gradient: LinearGradient(
                             colors: [
-                              Colors.grey.shade50,
-                              Colors.grey.shade100,
+                              // Colors.grey.shade50,
+                              // Colors.grey.shade100,
+                              Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.5),
+                              Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.5)
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight),
@@ -268,6 +316,13 @@ class ProfileScreen extends StatelessWidget {
                   globalservice.navigate(context, GitHubRepositoriesScreen());
                 },
                 child: const Text('uploadList'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, paymentScreen1());
+                },
+                child: const Text('Payment'),
               ),
               // const SizedBox(height: 20),
               // TextButton(

@@ -59,26 +59,7 @@ class Radiology extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   childAspectRatio:
                       1.2, // Adjust the aspect ratio to control the card height
-                  children: [
-                    const MaleFemaleCategory(
-                      name: "MRI",
-                    ),
-                    const MaleFemaleCategory(
-                      name: "X-Ray",
-                    ),
-                    const MaleFemaleCategory(
-                      name: "X-Ray",
-                    ),
-                    const MaleFemaleCategory(
-                      name: "X-Ray",
-                    ),
-                    const MaleFemaleCategory(
-                      name: "X-Ray",
-                    ),
-                    const MaleFemaleCategory(
-                      name: "X-Ray",
-                    ),
-                  ],
+                  children: [],
                 ),
               ),
             ),

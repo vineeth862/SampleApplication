@@ -191,59 +191,61 @@ class labPackageCard extends StatelessWidget {
 }
 
 class MaleFemaleCategory extends StatelessWidget {
-  final Image? image;
-  final String? name;
+  final String? title;
   final String? imagePath;
-  const MaleFemaleCategory({super.key, this.image, this.name, this.imagePath});
+  final List? testList;
+  const MaleFemaleCategory(
+      {super.key, this.title, this.imagePath, this.testList});
 
   @override
   Widget build(BuildContext context) {
     GlobalService globalservice = GlobalService();
-    return Card(
-        child: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0),
-          child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                  maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
-              // child: Container(
-              //   padding: EdgeInsets.all(5),
-              //   decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10),
-              //       color: Theme.of(context).colorScheme.secondaryContainer),
-              //   child: Image.asset(
-              //     imagePath.toString(),
-              //     height: 70,
-              //     width: 100,
-              //     fit: BoxFit.fill,
-              //   ),
-              // ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(
-                  imagePath.toString(),
-                  height: 80.0,
-                  width: 120.0,
-                  fit: BoxFit.fill,
-                ),
-              )),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                    Theme.of(context).colorScheme.secondaryContainer,
-                    Theme.of(context).colorScheme.secondaryContainer,
-                  ]),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(name.toString()),
-              )),
-        )
-      ],
-    ));
+    return GestureDetector(
+      onTap: () {
+        globalservice.navigate(
+            context,
+            FilterCategoryListPage(
+              sexCategory: title,
+              testList: testList,
+            ));
+      },
+      child: Card(
+          child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                    maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(
+                    imagePath.toString(),
+                    height: 80.0,
+                    width: 120.0,
+                    fit: BoxFit.fill,
+                  ),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Theme.of(context).colorScheme.secondaryContainer,
+                      Theme.of(context).colorScheme.secondaryContainer,
+                    ]),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "      " + title.toString() + "      ",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                )),
+          )
+        ],
+      )),
+    );
   }
 }
