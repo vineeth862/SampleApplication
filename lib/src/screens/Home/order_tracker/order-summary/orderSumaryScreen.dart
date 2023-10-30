@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_application/src/global_service/global_service.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/confirmation-allert.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
+import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import 'package:sample_application/src/utils/helper_widgets/slot-booking-card.dart';
 
@@ -25,8 +29,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   }
 
   bool expandDetails = false;
+  GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
@@ -415,20 +421,19 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 contentColor: false,
                 height: 150,
                 content: Price(
-                  finalAmount: "3432",
+                  finalAmount: widget.orderItems['totalAmount'].toString(),
                   discount: "10",
                   totalPrice: true,
                 ),
                 subContent: "",
                 hyperLink: false,
                 buttonClicked: () {
-                  // Order order = selectedOrder.getOrder;
-
+                  widget.orderItems['totalAmount'];
                   // Widget widget = order.statusCode == 1
                   //     ? PaymentScreeen()
                   //     : StepOneToBookTest();
 
-                  //globalservice.navigate(context, PaymentScreeen());
+                  globalservice.navigate(context, PaymentScreeen());
                 },
                 expandDetail: () {
                   setState(() {

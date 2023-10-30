@@ -74,7 +74,7 @@ class SearchListState with ChangeNotifier {
           // ignore: iterable_contains_unrelated_type
           myController.availabelLabs.forEach((element) {
             if (!flag)
-              flag = (element.hf_lab_code.toString() == test.data()['labCode']);
+              flag = (element.labCode.toString() == test.data()['labCode']);
           });
           if (filteredTest.isEmpty && flag) {
             filteredTests.add(Test.fromJson(test.data()));
@@ -103,7 +103,7 @@ class SearchListState with ChangeNotifier {
         bool flag = false;
         myController.availabelLabs.forEach((element) {
           if (!flag)
-            flag = (element.hf_lab_code.toString() == test.data()['labCode']);
+            flag = (element.labCode.toString() == test.data()['labCode']);
         });
         if (flag) {
           if (uniqueTets.add(TestCard.fromJson(test.data()).name)) {
@@ -145,7 +145,7 @@ class SearchListState with ChangeNotifier {
         bool flag = false;
         myController.availabelLabs.forEach((element) {
           if (!flag)
-            flag = (element.hf_lab_code.toString() == test.testObject.labCode);
+            flag = (element.labCode.toString() == test.testObject.labCode);
         });
         return flag;
       }).toList();
@@ -173,7 +173,7 @@ class SearchListState with ChangeNotifier {
       }).where((test) {
         bool flag = false;
         myController.availabelLabs.forEach((element) {
-          if (!flag) flag = (element.hf_lab_code.toString() == test.labCode);
+          if (!flag) flag = (element.labCode.toString() == test.labCode);
         });
         return flag;
       }).toList();
@@ -252,7 +252,7 @@ class SearchListState with ChangeNotifier {
         bool flag = false;
         myController.availabelLabs.forEach((element) {
           if (!flag)
-            flag = (element.hf_lab_code.toString() == test.testObject.labCode);
+            flag = (element.labCode.toString() == test.testObject.labCode);
         });
         return flag;
       }).toList();

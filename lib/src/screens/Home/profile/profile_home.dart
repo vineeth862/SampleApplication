@@ -1,3 +1,4 @@
+import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_application/src/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/authentication/auth_validation/welcome_signin.dart';
@@ -323,6 +324,23 @@ class ProfileScreen extends StatelessWidget {
                   globalservice.navigate(context, paymentScreen1());
                 },
                 child: const Text('Payment'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle edit profile button press
+                  final res =
+                      await EasyUpiPaymentPlatform.instance.startPayment(
+                    EasyUpiPaymentModel(
+                      payeeVpa: 'Q720679555@ybl',
+                      payeeName: 'Archana S',
+                      amount: 1.0,
+                      description: 'Testing payment',
+                    ),
+                  );
+
+                  print(res);
+                },
+                child: const Text('Payment2'),
               ),
               // const SizedBox(height: 20),
               // TextButton(

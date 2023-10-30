@@ -62,7 +62,7 @@ class LabListScreen extends StatelessWidget {
                       ),
                       //subtitle: "lab",
                       labCode:
-                          searchState.getlabSuggetionList[index].hf_lab_code,
+                          searchState.getlabSuggetionList[index].labCode,
                       testCode: '',
                       onTap: (title, labCode, tesCode) async {
                         await searchState.cardClicked(labCode, false);
@@ -74,7 +74,7 @@ class LabListScreen extends StatelessWidget {
                                 location: searchState.getlabSuggetionList[index]
                                     .branchDetails[0].locality,
                                 labCode: searchState
-                                    .getlabSuggetionList[index].hf_lab_code));
+                                    .getlabSuggetionList[index].labCode));
                       },
                     );
                   },

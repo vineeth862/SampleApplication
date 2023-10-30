@@ -11,7 +11,8 @@ class Price extends StatelessWidget {
   GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
-    int amount = int.parse(finalAmount!);
+    print(finalAmount.toString() + "Hiuiii");
+    double amount = double.parse(finalAmount!.toString());
     int disc = int.parse(discount!);
     return Row(
       children: <Widget>[

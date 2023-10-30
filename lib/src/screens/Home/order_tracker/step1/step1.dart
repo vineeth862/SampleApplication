@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/step1/step1-screen.dart';
+import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../../../../global_service/global_service.dart';
@@ -18,10 +20,13 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
   // Add your state variables and methods here
   bool expandDetails = false;
   GlobalService globalservice = GlobalService();
+
   @override
   Widget build(BuildContext context) {
     final widget = StepOneScreen();
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
@@ -85,7 +90,7 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                         contentColor: false,
                         height: 150,
                         content: Price(
-                          finalAmount: "3432",
+                          finalAmount: "123",
                           discount: "10",
                           totalPrice: true,
                         ),
