@@ -93,7 +93,9 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                             finalAmount: selectedTest.totalPriceSum.toString(),
                             discount: selectedTest.discount.toString(),
                             isTotalPricePresent: true,
-                            discountedAmount: selectedTest.discount.toString()),
+                            discountedAmount: selectedTest
+                                .totalDiscountedPriceSum
+                                .toString()),
                         subContent: "",
                         hyperLink: false,
                         buttonClicked: () async {

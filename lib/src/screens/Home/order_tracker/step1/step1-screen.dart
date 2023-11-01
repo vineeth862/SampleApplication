@@ -8,6 +8,7 @@ import 'package:sample_application/src/screens/Home/models/package/package.dart'
 import 'package:sample_application/src/screens/Home/models/test/test.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
 import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
+import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import '../../../../authentication/user_repository.dart';
 import '../../../../global_service/global_service.dart';
 import '../../../../utils/Provider/search_provider.dart';
@@ -137,7 +138,15 @@ class _StepOneScreenState extends State<StepOneScreen> {
   Column generateListTileBodyForTest(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(test.testName), Text(test.price)],
+      children: [
+        Text(test.testName),
+        Price(
+          discountedAmount: test.discountedPrice,
+          isTotalPricePresent: false,
+          discount: test.discount,
+          finalAmount: test.price,
+        )
+      ],
     );
   }
 

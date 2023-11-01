@@ -20,9 +20,9 @@ class Test {
   int labOpeningTime;
   int labClosingTime;
   String displayName;
-  String discount;
+  dynamic discount;
 
-  String discountedPrice;
+  dynamic discountedPrice;
 
   Test(
       {required this.medCapTestCode,

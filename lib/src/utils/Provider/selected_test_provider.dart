@@ -26,13 +26,15 @@ class SelectedTestState with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTest(test) {
+  void removeTest(test) async {
     selectedTest.remove(test);
+    await getTotalSum();
     notifyListeners();
   }
 
-  void removeAllTest() {
+  void removeAllTest() async {
     selectedTest.clear();
+    await getTotalSum();
     notifyListeners();
   }
 
