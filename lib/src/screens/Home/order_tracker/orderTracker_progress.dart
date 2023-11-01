@@ -50,6 +50,14 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     });
   }
 
+  String getTechnicianName(technician) {
+    return technician != null ? technician['name'] : ' - ';
+  }
+
+  String getTechnicianMob(technician) {
+    return technician != null ? technician['phone'] : ' - ';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -204,7 +212,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                   Step(
                     isActive: step >= 2,
-                    title: Text('Carrier Status'),
+                    title: Text('Technician Status'),
                     content: Container(
                       alignment: Alignment.centerLeft,
                       child: Column(
@@ -214,12 +222,13 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                           //   subtitle: Text(order!.statusLabel.toString()),
                           // ),
                           ListTile(
-                            title: Text("Carrier Name:"),
-                            subtitle: Text(order!.carrierName.toString()),
+                            title: Text("Technician Name:"),
+                            subtitle:
+                                Text(getTechnicianName(order!.technician)),
                           ),
                           ListTile(
-                            title: Text("Carrier mob:"),
-                            subtitle: Text(order!.carrierCode.toString()),
+                            title: Text("Technician mob:"),
+                            subtitle: Text(getTechnicianMob(order!.technician)),
                           )
                         ],
                       ),

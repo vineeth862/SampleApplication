@@ -55,7 +55,7 @@ class SearchListState with ChangeNotifier {
     if (value.isNotEmpty) {
       filteredLabs = await searchLab(value, myController.pinCode);
       var testList = await FirebaseFirestore.instance
-          .collection('test2')
+          .collection('test')
           .where(
             'displayName',
             isGreaterThanOrEqualTo: value.toUpperCase(),
@@ -90,7 +90,7 @@ class SearchListState with ChangeNotifier {
   searchTestByLabCode(String value, String labCode) async {
     filteredTestCardList = [];
     var result = await FirebaseFirestore.instance
-        .collection('test2')
+        .collection('test')
         .where("labCode", isEqualTo: labCode)
         .where('displayName', isGreaterThanOrEqualTo: value.toUpperCase())
         .where('displayName',
@@ -136,7 +136,7 @@ class SearchListState with ChangeNotifier {
 
   setTestCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
-        .collection('test2')
+        .collection('test')
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {
@@ -243,7 +243,7 @@ class SearchListState with ChangeNotifier {
   List<TestCard> filteredMaleCardList = [];
   setFilteredMaleCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
-        .collection('test2')
+        .collection('test')
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {

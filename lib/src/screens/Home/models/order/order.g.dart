@@ -11,8 +11,6 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       booked: json['booked'] == null
           ? null
           : Booked.fromJson(json['booked'] as Map<String, dynamic>),
-      carrierCode: json['carrierCode'] as int?,
-      carrierName: json['carrierName'] as String?,
       createdDate: json['createdDate'] as String?,
       orderNumber: json['orderNumber'] as String?,
       labCode: json['labCode'] as String,
@@ -38,8 +36,6 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'orderNumber': instance.orderNumber,
-      'carrierCode': instance.carrierCode,
-      'carrierName': instance.carrierName,
       'statusCode': instance.statusCode,
       'statusLabel': instance.statusLabel,
       'createdDate': instance.createdDate,

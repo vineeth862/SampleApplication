@@ -2,6 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sample_application/src/screens/Home/models/order/payment.dart';
+import 'package:sample_application/src/screens/Home/models/order/technician.dart';
 import 'package:sample_application/src/screens/Home/models/package/package.dart';
 import 'package:sample_application/src/screens/Home/models/user/user.dart';
 
@@ -12,8 +13,6 @@ part 'order.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Order {
   String? orderNumber;
-  int? carrierCode;
-  String? carrierName;
   int? statusCode = 0;
   String? statusLabel;
   String? createdDate;
@@ -29,12 +28,11 @@ class Order {
   String? specificInstruction;
   Payment? payment;
   String? address;
+  Technician? technician;
 
   Order(
       {this.address,
       this.booked,
-      this.carrierCode,
-      this.carrierName,
       this.createdDate,
       this.orderNumber,
       this.patient,
@@ -48,7 +46,8 @@ class Order {
       this.totalPrice,
       this.user,
       this.labCode,
-      this.labName});
+      this.labName,
+      this.technician});
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
