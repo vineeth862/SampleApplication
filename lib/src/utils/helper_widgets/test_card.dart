@@ -215,9 +215,11 @@ class TestCardWidget extends StatelessWidget {
                           // You can navigate to a new screen or trigger some other action.
                         },
                         child: Price(
-                          discount: "25",
+                          discount: test.discount.toString(),
                           finalAmount: test.price,
-                          totalPrice: false,
+                          discountedAmount: test.discountedPrice.toString(),
+                          isTotalPricePresent: false,
+                          //totalPrice: false,
                         )
 
                         // Row(

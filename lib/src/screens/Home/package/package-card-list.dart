@@ -141,7 +141,8 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         content: Price(
                           finalAmount: "3432",
                           discount: "10",
-                          totalPrice: true,
+                          discountedAmount: "100",
+                          isTotalPricePresent: true,
                         ),
                         height: slotBookingCardHeight,
                         subContent: "",

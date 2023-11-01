@@ -550,9 +550,11 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           contentColor: false,
                           height: slotBookingCardHeight,
                           content: Price(
-                            finalAmount: "3432",
-                            discount: "10",
-                            totalPrice: true,
+                            finalAmount: selectedTest.totalPriceSum.toString(),
+                            discount: selectedTest.discount.toString(),
+                            isTotalPricePresent: true,
+                            discountedAmount:
+                                selectedTest.totalDiscountedPriceSum.toString(),
                           ),
                           subContent: "",
                           hyperLink: false,

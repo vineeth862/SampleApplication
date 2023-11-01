@@ -217,7 +217,8 @@ class PackageCardWidget extends StatelessWidget {
                         child: Price(
                           discount: "25",
                           finalAmount: package.price,
-                          totalPrice: false,
+                          discountedAmount: "100",
+                          isTotalPricePresent: false,
                         )
 
                         // Row(

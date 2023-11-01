@@ -4,22 +4,27 @@ import '../../global_service/global_service.dart';
 
 class Price extends StatelessWidget {
   String? finalAmount;
-  bool totalPrice;
+  bool isTotalPricePresent;
   String? discount;
 
-  Price({this.finalAmount, this.discount, required this.totalPrice});
+  String? discountedAmount;
+
+  Price(
+      {this.finalAmount,
+      this.discount,
+      required this.isTotalPricePresent,
+      required this.discountedAmount});
   GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
-    print(finalAmount.toString() + "Hiuiii");
-    double amount = double.parse(finalAmount!.toString());
-    int disc = int.parse(discount!);
+    //double amount = double.parse(finalAmount!.toString());
+    //int disc = int.parse(discount!);
     return Row(
       children: <Widget>[
         Container(
           child: Row(
             children: [
-              totalPrice!
+              isTotalPricePresent!
                   ? Text(" Total Price : ",
                       style: Theme.of(context)
                           .textTheme
@@ -28,23 +33,21 @@ class Price extends StatelessWidget {
                               color:
                                   Theme.of(context).colorScheme.inverseSurface))
                   : Container(),
-              Text("₹${amount}",
+              Text("₹$discountedAmount",
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(
                 width: 5,
               ),
-              discount!.isNotEmpty
-                  ? Text((amount + ((disc / 100) * amount)).toString(),
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Color.fromARGB(255, 210, 55, 31),
-                            decoration: TextDecoration.lineThrough,
-                          ))
-                  : Text(""),
+              Text(finalAmount.toString(),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Color.fromARGB(255, 210, 55, 31),
+                        decoration: TextDecoration.lineThrough,
+                      )),
               const SizedBox(
                 width: 5,
               ),
               discount!.isNotEmpty
-                  ? Text(disc.toString() + "%",
+                  ? Text(discount.toString() + "%",
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!

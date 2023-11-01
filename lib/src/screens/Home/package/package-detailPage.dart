@@ -555,7 +555,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           content: Price(
                             finalAmount: "3432",
                             discount: "10",
-                            totalPrice: true,
+                            isTotalPricePresent: true,
+                            discountedAmount: "100",
                           ),
                           subContent: "",
                           hyperLink: false,

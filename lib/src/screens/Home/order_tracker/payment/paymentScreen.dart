@@ -72,7 +72,8 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
                     EasyUpiPaymentModel(
                       payeeVpa: 'Q720679555@ybl',
                       payeeName: 'MedcapH',
-                      amount: double.parse(order.totalPrice.toString()),
+                      //amount: double.parse(order.totalPrice.toString()),
+                      amount: 1,
                       description: 'Testing payment',
                     ),
                   );

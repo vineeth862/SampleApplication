@@ -51,7 +51,12 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
       'items': [
         ...order.tests!.map((Test test) {
           totalAmmount += int.parse(test.price);
-          return {'name': test.testName, 'price': test.price};
+          return {
+            'name': test.testName,
+            'price': test.price,
+            "discount": test.discount,
+            "discountedPrice": test.discountedPrice
+          };
         }),
         ...order.packages!.map((Package package) {
           totalAmmount += int.parse(package.price);

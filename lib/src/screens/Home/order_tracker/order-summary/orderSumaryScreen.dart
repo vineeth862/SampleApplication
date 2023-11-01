@@ -5,6 +5,7 @@ import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/confirmation-allert.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 import 'package:sample_application/src/utils/Provider/selected_order_provider.dart';
+import 'package:sample_application/src/utils/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/price_container.dart';
 import 'package:sample_application/src/utils/helper_widgets/slot-booking-card.dart';
 
@@ -32,6 +33,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   GlobalService globalservice = GlobalService();
   @override
   Widget build(BuildContext context) {
+    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
     return Scaffold(
       appBar: AppBar(
@@ -209,9 +211,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           ),
                           title: Text(item['name']),
                           subtitle: Price(
-                            totalPrice: false,
+                            isTotalPricePresent: false,
                             finalAmount: item['price'],
-                            discount: "10",
+                            discount: item['discount'],
+                            discountedAmount: item["discountedPrice"],
                           ),
                           leading: Icon(
                             Icons.check_box_sharp,
@@ -420,11 +423,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                 title: "Total amount payable",
                 contentColor: false,
                 height: 150,
+                // content: Price(
+                //   finalAmount: widget.orderItems['totalAmount'].toString(),
+                //   discount: "10",
+                //   totalPrice: true,
+                // ),
                 content: Price(
-                  finalAmount: widget.orderItems['totalAmount'].toString(),
-                  discount: "10",
-                  totalPrice: true,
-                ),
+                    discountedAmount:
+                        selectedTest.totalDiscountedPriceSum.toString(),
+                    isTotalPricePresent: true,
+                    finalAmount: selectedTest.totalPriceSum.toString(),
+                    discount: selectedTest.discount.toString()),
                 subContent: "",
                 hyperLink: false,
                 buttonClicked: () {

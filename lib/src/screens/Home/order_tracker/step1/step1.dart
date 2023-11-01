@@ -90,10 +90,10 @@ class _StepOneToBookTest extends State<StepOneToBookTest> {
                         contentColor: false,
                         height: 150,
                         content: Price(
-                          finalAmount: "123",
-                          discount: "10",
-                          totalPrice: true,
-                        ),
+                            finalAmount: selectedTest.totalPriceSum.toString(),
+                            discount: selectedTest.discount.toString(),
+                            isTotalPricePresent: true,
+                            discountedAmount: selectedTest.discount.toString()),
                         subContent: "",
                         hyperLink: false,
                         buttonClicked: () async {
