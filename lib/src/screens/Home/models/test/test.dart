@@ -20,6 +20,9 @@ class Test {
   int labOpeningTime;
   int labClosingTime;
   String displayName;
+  String discount;
+
+  String discountedPrice;
 
   Test(
       {required this.medCapTestCode,
@@ -38,7 +41,9 @@ class Test {
       required this.daily,
       required this.displayName,
       required this.labOpeningTime,
-      required this.labClosingTime});
+      required this.labClosingTime,
+      required this.discount,
+      required this.discountedPrice});
   factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
   Map<String, dynamic> toJson() => _$TestToJson(this);
 }

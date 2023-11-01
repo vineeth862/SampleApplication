@@ -8,6 +8,10 @@ class SelectedTestState with ChangeNotifier {
   List<Package> selectedPackage = [];
   bool _detailExpanded = false;
 
+  int totalPriceSum = 0;
+  int totalDiscountedPriceSum = 0;
+  int discount = 0;
+
   List<Test> get getSelectedTest {
     return selectedTest;
   }
@@ -16,8 +20,9 @@ class SelectedTestState with ChangeNotifier {
     return selectedPackage;
   }
 
-  void addTest(test) {
+  void addTest(test) async {
     selectedTest.add(test);
+    await getTotalSum();
     notifyListeners();
   }
 
@@ -58,5 +63,23 @@ class SelectedTestState with ChangeNotifier {
   void setDetailExpanded(value) {
     _detailExpanded = value;
     notifyListeners();
+  }
+
+  getTotalSum() {
+    int tempTotalPriceSum = 0;
+    int tempTotalDiscountedPriceSum = 0;
+
+    for (var item in selectedTest) {
+      tempTotalPriceSum += int.parse(item.price);
+      tempTotalDiscountedPriceSum += int.parse(item.discountedPrice);
+    }
+    totalPriceSum = tempTotalPriceSum;
+    totalDiscountedPriceSum = tempTotalDiscountedPriceSum;
+    discount =
+        (((totalPriceSum - totalDiscountedPriceSum) / totalPriceSum) * 100)
+            .toInt();
+    print(totalDiscountedPriceSum);
+    notifyListeners();
+    return "";
   }
 }

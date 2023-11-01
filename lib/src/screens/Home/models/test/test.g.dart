@@ -23,7 +23,9 @@ Test _$TestFromJson(Map<String, dynamic> json) => Test(
     daily: json['daily'],
     displayName: json['displayName'],
     labOpeningTime: json['labOpeningTime'],
-    labClosingTime: json['labClosingTime']);
+    labClosingTime: json['labClosingTime'],
+    discount: json['discount'].toString(),
+    discountedPrice: json['discountedPrice'].toString());
 
 Map<String, dynamic> _$TestToJson(Test instance) => <String, dynamic>{
       'medCapTestCode': instance.medCapTestCode,
@@ -42,5 +44,7 @@ Map<String, dynamic> _$TestToJson(Test instance) => <String, dynamic>{
       'daily': instance.daily,
       'category': instance.category,
       'labOpeningTime': instance.labOpeningTime,
-      'labClosingTime': instance.labClosingTime
+      'labClosingTime': instance.labClosingTime,
+      'discount': instance.discount,
+      'discountedPrice': instance.discountedPrice
     };
