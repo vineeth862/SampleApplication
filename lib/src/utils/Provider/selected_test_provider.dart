@@ -28,6 +28,7 @@ class SelectedTestState with ChangeNotifier {
 
   void removeTest(test) async {
     selectedTest.remove(test);
+
     await getTotalSum();
     notifyListeners();
   }
@@ -77,9 +78,12 @@ class SelectedTestState with ChangeNotifier {
     }
     totalPriceSum = tempTotalPriceSum;
     totalDiscountedPriceSum = tempTotalDiscountedPriceSum;
-    discount =
-        (((totalPriceSum - totalDiscountedPriceSum) / totalPriceSum) * 100)
-            .toInt();
+    if (totalPriceSum > 0 && totalDiscountedPriceSum > 0) {
+      discount =
+          (((totalPriceSum - totalDiscountedPriceSum) / totalPriceSum) * 100)
+              .toInt();
+    }
+
     print(totalDiscountedPriceSum);
     notifyListeners();
     return "";

@@ -37,18 +37,20 @@ class _StepThreeScreen extends State<StepThreeScreen> {
     if (dateTimePresent) {
       String datePresent = orderObject.booked!.bookedDate.toString();
       String timePresent = orderObject.booked!.bookedSlot.toString();
-      selectedDate = DateFormat("dd-MM-yyyy hh:mm:ss").parse(datePresent);
+      selectedDate = DateFormat("dd-MM-yyyy").parse(datePresent);
+      var tempHour = timePresent.split("-")[0].trim();
+      var tempMin = timePresent.split("-")[1].trim();
       selectedTime = TimeOfDay(
-          hour: int.parse(timePresent.split(":")[0]),
-          minute: int.parse(timePresent.split(":")[1]));
+          hour: int.parse(tempHour.substring(0, tempHour.length - 2)),
+          minute: int.parse(tempMin.substring(0, tempMin.length - 2)));
       //selectedTime = TimeOfDay(hour: 00, minute: 00);
       Future.delayed(Duration.zero, () {
         _selectDate(selectedDate!);
       });
       Future.delayed(Duration.zero, () {
         selectedTime = TimeOfDay(
-            hour: int.parse(timePresent.split(":")[0]),
-            minute: int.parse(timePresent.split(":")[1]));
+            hour: int.parse(tempHour.substring(0, tempHour.length - 2)),
+            minute: int.parse(tempMin.substring(0, tempMin.length - 2)));
         _selectTime(selectedTime!);
       });
     }

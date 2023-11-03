@@ -213,10 +213,10 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                 trailing: IconButton(
                     onPressed: () {
                       selectedTest!.removeTest(test);
-                      if ((selectedTest!.getSelectedPackage.length == 0 &&
-                          selectedTest!.getSelectedTest.length == 0)) {
-                        this.globalservice.navigate(context, SearchBarPage());
-                      }
+                      // if ((selectedTest!.getSelectedPackage.length == 0 &&
+                      //     selectedTest!.getSelectedTest.length == 0)) {
+                      //   this.globalservice.navigate(context, SearchBarPage());
+                      // }
                     },
                     icon: Icon(
                       Icons.delete_outlined,

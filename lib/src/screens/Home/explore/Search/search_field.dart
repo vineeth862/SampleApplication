@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filterd_test_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filtered_lab_list.dart';
+import 'package:sample_application/src/screens/Home/home.dart';
 import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/location_unavailable_card.dart';
@@ -97,7 +98,8 @@ class _SearchBarPageState extends State<SearchBarPage>
               alignment: Alignment.topCenter,
               color: Theme.of(context).colorScheme.onBackground,
               onPressed: () {
-                Navigator.pop(context);
+                //Navigator.pop(context);
+                globalservice.navigate(context, HomePage());
               },
             ),
             actions: [

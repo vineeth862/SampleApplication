@@ -55,7 +55,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
             'name': test.testName,
             'price': test.price,
             "discount": test.discount,
-            "discountedPrice": test.discountedPrice
+            "discountedPrice": test.discountedPrice,
+            "testObj": test
           };
         }),
         ...order.packages!.map((Package package) {

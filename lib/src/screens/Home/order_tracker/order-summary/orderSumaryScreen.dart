@@ -204,6 +204,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                             ),
                             onPressed: () {
                               setState(() {
+                                selectedTest.removeTest(item["testObj"]);
                                 widget.orderItems['items'].removeAt(index);
                                 calculateTotalAmount();
                               });
@@ -275,7 +276,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "₹ ${widget.orderItems['totalAmount']}",
+                        "₹ ${selectedTest.totalPriceSum.toString()}",
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
@@ -294,7 +295,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       ),
                       Spacer(),
                       Text(
-                        " - ₹ ${widget.orderItems['totalAmount']}",
+                        " % ${selectedTest.discount.toString()}",
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
@@ -357,7 +358,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           ),
                           Spacer(),
                           Text(
-                            " ₹ ${widget.orderItems['totalAmount']}",
+                            " ₹ ${selectedTest.totalPriceSum - selectedTest.totalDiscountedPriceSum}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -383,7 +384,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "₹ ${widget.orderItems['totalAmount']}",
+                        "₹ ${selectedTest.totalDiscountedPriceSum.toString()}",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
