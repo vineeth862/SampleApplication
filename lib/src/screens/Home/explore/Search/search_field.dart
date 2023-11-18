@@ -8,7 +8,6 @@ import 'package:sample_application/src/global_service/user_location.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filterd_test_list.dart';
 import 'package:sample_application/src/screens/Home/explore/Search/tabs/filtered_lab_list.dart';
 import 'package:sample_application/src/screens/Home/home.dart';
-import 'package:sample_application/src/screens/userAdress/initial_adress.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
 import 'package:sample_application/src/utils/helper_widgets/location_unavailable_card.dart';
 import 'package:sample_application/src/utils/themes/themedata.dart';

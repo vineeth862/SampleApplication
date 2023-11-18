@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class GlobalService {
   final _db = FirebaseFirestore.instance;
@@ -110,22 +112,9 @@ class GlobalService {
         .join('&');
   }
 
-  // Future<DocumentSnapshot<Map<String, dynamic>>> getCurrentUser() async {
-  //   final userKey = getCurrentUserKey();
+  Uint8List getImageByteCode(data) {
+    Uint8List bytes = base64.decode(data.split(',').last);
 
-  //   var user = await _db.collection("user").doc(userKey).get();
-  //   print(user);
-  //   return user;
-  // }
-
-  // static final GlobalService _instance = GlobalService._privateConstructor();
-
-  // GlobalService._privateConstructor();
-
-  // static GlobalService get instance => _instance;
-
-  // String get globalString => userInitialAddress;
-
-  // set globalString(String newValue) {
-  //   userInitialAddress = newValue;}
+    return bytes;
+  }
 }

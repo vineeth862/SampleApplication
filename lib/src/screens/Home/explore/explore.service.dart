@@ -8,7 +8,7 @@ class ExploreService {
   final _db = FirebaseFirestore.instance;
   fetchCategoryList() async {
     final categoryList = await _db
-        .collection("packages/category/popularCategory")
+        .collection("prod-package/category/popularCategory")
         //.where("type", isEqualTo: 'category')
         .get();
 
@@ -35,7 +35,8 @@ class ExploreService {
   }
 
   fetchMaleCategoryList() async {
-    final categoryList = await _db.collection("packages/category/men").get();
+    final categoryList =
+        await _db.collection("prod-package/category/men").get();
     if (categoryList.docs.isNotEmpty) {
       return categoryList.docs.map((doc) {
         return category.Category.fromJson(doc.data());
@@ -45,7 +46,8 @@ class ExploreService {
   }
 
   fetchFemaleCategoryList() async {
-    final categoryList = await _db.collection("packages/category/women").get();
+    final categoryList =
+        await _db.collection("prod-package/category/women").get();
     if (categoryList.docs.isNotEmpty) {
       return categoryList.docs.map((doc) {
         return category.Category.fromJson(doc.data());

@@ -44,7 +44,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
 
   Future<String> loadData() async {
     Order order = await selectedOrder.getOrder;
-    double totalAmmount = 0;
+    int totalAmmount = 0;
 
     orderItems = {
       'orderNumber': order.orderNumber,
@@ -98,13 +98,6 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
             return OrderSummaryScreen(
               orderItems: orderItems,
               buttonClicked: () async {
-                Order order = selectedOrder.getOrder;
-                order.statusCode = 1;
-                order.statusLabel = "Payment Pending";
-                selectedOrder.setOrder = order;
-                addLog();
-                await selectedOrder.createOrder();
-
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => PaymentScreeen()));
                 // globalservice.navigate(context, PaymentScreeen());

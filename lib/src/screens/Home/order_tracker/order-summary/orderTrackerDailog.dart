@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/screens/Home/models/order/order.dart';
 import 'package:sample_application/src/screens/Home/order_tracker/payment/paymentScreen.dart';
 
-class OrderTrackerDialog extends StatelessWidget {
+import '../../../../utils/Provider/selected_order_provider.dart';
+
+class OrderTrackerDialog extends StatefulWidget {
   Order order;
 
   OrderTrackerDialog({super.key, required this.order});
+
+  @override
+  State<OrderTrackerDialog> createState() => _OrderTrackerDialogState();
+}
+
+class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
   GlobalService globalservice = GlobalService();
+
+  SelectedOrderState? selectedOrder;
+
   String generateString(value) {
     return value == null ? '' : value.toString();
   }
 
   @override
   Widget build(BuildContext context) {
+    selectedOrder = Provider.of<SelectedOrderState>(context);
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -29,7 +42,7 @@ class OrderTrackerDialog extends StatelessWidget {
             ),
           ),
           Text(
-            order.orderNumber!,
+            widget.order.orderNumber!,
             softWrap: true,
           ),
         ],
@@ -84,7 +97,7 @@ class OrderTrackerDialog extends StatelessWidget {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Text(
-                            generateString(order.user?.userName),
+                            generateString(widget.order.user?.userName),
                             style: Theme.of(context).textTheme.bodyMedium,
                             softWrap: true,
                           )
@@ -95,7 +108,7 @@ class OrderTrackerDialog extends StatelessWidget {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Text(
-                              generateString(order.user?.mobile)
+                              generateString(widget.order.user?.mobile)
                                   .substring(3, 13),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
@@ -148,8 +161,8 @@ class OrderTrackerDialog extends StatelessWidget {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Text(
-                              generateString(
-                                  order.booked?.bookedDate?.substring(0, 10)),
+                              generateString(widget.order.booked?.bookedDate
+                                  ?.substring(0, 10)),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
@@ -157,7 +170,7 @@ class OrderTrackerDialog extends StatelessWidget {
                           Text('Collection Slot : ',
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
-                          Text(generateString(order.booked?.bookedSlot),
+                          Text(generateString(widget.order.booked?.bookedSlot),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
@@ -166,7 +179,7 @@ class OrderTrackerDialog extends StatelessWidget {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Expanded(
-                            child: Text(order.address!,
+                            child: Text(widget.order.address!,
                                 overflow: TextOverflow.visible,
                                 softWrap: true,
                                 style: Theme.of(context).textTheme.bodyMedium),
@@ -179,7 +192,7 @@ class OrderTrackerDialog extends StatelessWidget {
                                   Theme.of(context).textTheme.headlineMedium),
                           Expanded(
                             child: Text(
-                              order.labName!,
+                              widget.order.labName!,
                               style: Theme.of(context).textTheme.bodyMedium,
                               softWrap: true,
                             ),
@@ -194,11 +207,13 @@ class OrderTrackerDialog extends StatelessWidget {
                         Row(children: [
                           Expanded(
                             child: Text(
-                              order.tests!
+                              widget.order.tests!
                                       .map((e) => e.displayName)
                                       .join(",  ") +
-                                  (order.packages!.isNotEmpty ? ',  ' : '') +
-                                  order.packages!
+                                  (widget.order.packages!.isNotEmpty
+                                      ? ',  '
+                                      : '') +
+                                  widget.order.packages!
                                       .map((e) => e.displayName)
                                       .join(",  "),
                               style: Theme.of(context).textTheme.bodyMedium,
@@ -279,7 +294,7 @@ class OrderTrackerDialog extends StatelessWidget {
                           Text('Item Total : ',
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
-                          Text(order.totalPrice.toString(),
+                          Text(widget.order.totalPrice.toString(),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
@@ -298,7 +313,7 @@ class OrderTrackerDialog extends StatelessWidget {
                           Text('Payable Amount : ',
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
-                          Text(order.totalPrice.toString(),
+                          Text(widget.order.totalPrice.toString(),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
                         SizedBox(height: 10),
@@ -309,9 +324,10 @@ class OrderTrackerDialog extends StatelessWidget {
                         //       style: Theme.of(context).textTheme.titleMedium)
                         // ]),
                         SizedBox(height: 25),
-                        order.statusCode == 1
+                        widget.order.statusCode == 1
                             ? ElevatedButton(
                                 onPressed: () {
+                                  selectedOrder?.setOrder = widget.order;
                                   globalservice.navigate(
                                       context, PaymentScreeen());
                                 },

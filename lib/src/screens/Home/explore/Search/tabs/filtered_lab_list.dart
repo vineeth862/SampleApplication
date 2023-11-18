@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/global_service/global_service.dart';
 import 'package:sample_application/src/utils/Provider/search_provider.dart';
@@ -53,16 +54,16 @@ class LabListScreen extends StatelessWidget {
                           //color: Theme.of(context).colorScheme.tertiary,
                           // decoration: BoxDecoration(
                           //     border: Border.all(color: Colors.black)),
-                          child: Image.network(
-                            searchState.getlabSuggetionList[index].logo,
-                            // scale: 1,
-                            fit: BoxFit.cover,
+                          child: Image.memory(
+                            this.globalservice.getImageByteCode(
+                                searchState.getlabSuggetionList[index].logo),
+                            fit: BoxFit
+                                .contain, // Adjust this to control the image size within its parent widget
                           ),
                         ),
                       ),
                       //subtitle: "lab",
-                      labCode:
-                          searchState.getlabSuggetionList[index].labCode,
+                      labCode: searchState.getlabSuggetionList[index].labCode,
                       testCode: '',
                       onTap: (title, labCode, tesCode) async {
                         await searchState.cardClicked(labCode, false);

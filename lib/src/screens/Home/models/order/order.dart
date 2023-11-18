@@ -16,7 +16,7 @@ class Order {
   int? statusCode = 0;
   String? statusLabel;
   String? createdDate;
-  double? totalPrice;
+  int? totalPrice;
   bool? self;
   User? user;
   User? patient;

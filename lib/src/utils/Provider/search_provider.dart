@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +31,7 @@ class SearchListState with ChangeNotifier {
   }
 
   searchLab(value, pinCode) async {
-    var labList = await FirebaseFirestore.instance.collection('lab').get();
+    var labList = await FirebaseFirestore.instance.collection('prod-lab').get();
 
     // here we are filtering labs based on the input value and assigned to the filteredLabs.
     if (labList.docs.isNotEmpty) {
@@ -55,7 +57,7 @@ class SearchListState with ChangeNotifier {
     if (value.isNotEmpty) {
       filteredLabs = await searchLab(value, myController.pinCode);
       var testList = await FirebaseFirestore.instance
-          .collection('test')
+          .collection('prod-test')
           .where(
             'displayName',
             isGreaterThanOrEqualTo: value.toUpperCase(),
@@ -90,7 +92,7 @@ class SearchListState with ChangeNotifier {
   searchTestByLabCode(String value, String labCode) async {
     filteredTestCardList = [];
     var result = await FirebaseFirestore.instance
-        .collection('test')
+        .collection('prod-test')
         .where("labCode", isEqualTo: labCode)
         .where('displayName', isGreaterThanOrEqualTo: value.toUpperCase())
         .where('displayName',
@@ -120,7 +122,7 @@ class SearchListState with ChangeNotifier {
 
   setLabCardList(labCode) async {
     var result = await FirebaseFirestore.instance
-        .collection('lab')
+        .collection('prod-lab')
         .where('labName', isEqualTo: labCode)
         .get();
     if (result.docs.isNotEmpty) {
@@ -136,7 +138,7 @@ class SearchListState with ChangeNotifier {
 
   setTestCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
-        .collection('test')
+        .collection('prod-test')
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {
@@ -162,7 +164,7 @@ class SearchListState with ChangeNotifier {
         .get();
 
     var labList = await FirebaseFirestore.instance
-        .collection('lab')
+        .collection('prod-lab')
         // .where("priority", isEqualTo: true)
         // .orderBy('priorityOrder')
         .get();
@@ -217,7 +219,7 @@ class SearchListState with ChangeNotifier {
   }
 
   filterLabOnPinCode() async {
-    var labList = await FirebaseFirestore.instance.collection('lab').get();
+    var labList = await FirebaseFirestore.instance.collection('prod-lab').get();
     myController.availabelLabs = labList.docs.map((doc) {
       return Lab.fromJson(doc.data());
     }).where((element) {
@@ -243,7 +245,7 @@ class SearchListState with ChangeNotifier {
   List<TestCard> filteredMaleCardList = [];
   setFilteredMaleCardList(testCode, condition) async {
     var result = await FirebaseFirestore.instance
-        .collection('test')
+        .collection('prod-test')
         .where(condition, isEqualTo: testCode)
         .get();
     if (result.docs.isNotEmpty) {

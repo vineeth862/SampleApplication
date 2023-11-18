@@ -130,6 +130,11 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                           selectedOrder.setOrder = orderObject;
 
                           await selectedOrder.docInIt();
+
+                          orderObject.statusCode = 1;
+                          orderObject.statusLabel = "Payment Pending";
+                          selectedOrder.setOrder = orderObject;
+                          await selectedOrder.createOrder();
                           this
                               .globalservice
                               .navigate(context, OrderSummaryPage());

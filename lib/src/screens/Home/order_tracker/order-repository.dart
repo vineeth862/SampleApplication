@@ -13,34 +13,36 @@ class OrderRepository extends GetxController {
 
   fetchAllOrders(List orderIds, from) async {
     orderList = [];
-    if (from == "cart") {
-      final orders = await _db
-          .collection("order")
-          .where("orderNumber", whereIn: orderIds)
-          .get();
+    if (orderIds.length > 0) {
+      if (from == "cart") {
+        final orders = await _db
+            .collection("order")
+            .where("orderNumber", whereIn: orderIds)
+            .get();
 
-      if (orders.docs.isNotEmpty) {
-        orders.docs.map((doc) {
-          return orderModule.Order.fromJson(doc.data());
-        }).forEach((orderModule.Order element) {
-          if (element.statusCode == 1) {
-            orderList.add(element);
-          }
-        });
-      }
-    } else {
-      final orders = await _db
-          .collection("order")
-          .where("orderNumber", whereIn: orderIds)
-          .get();
-      if (orders.docs.isNotEmpty) {
-        orders.docs.map((doc) {
-          return orderModule.Order.fromJson(doc.data());
-        }).forEach((orderModule.Order element) {
-          if (element.statusCode != 1) {
-            orderList.add(element);
-          }
-        });
+        if (orders.docs.isNotEmpty) {
+          orders.docs.map((doc) {
+            return orderModule.Order.fromJson(doc.data());
+          }).forEach((orderModule.Order element) {
+            if (element.statusCode == 1) {
+              orderList.add(element);
+            }
+          });
+        }
+      } else {
+        final orders = await _db
+            .collection("order")
+            .where("orderNumber", whereIn: orderIds)
+            .get();
+        if (orders.docs.isNotEmpty) {
+          orders.docs.map((doc) {
+            return orderModule.Order.fromJson(doc.data());
+          }).forEach((orderModule.Order element) {
+            if (element.statusCode != 1) {
+              orderList.add(element);
+            }
+          });
+        }
       }
     }
     // notifyListeners();

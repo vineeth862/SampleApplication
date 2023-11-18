@@ -58,11 +58,12 @@ class LabTestCategoryCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius:
                     BorderRadius.circular(10), // Set your desired corner radius
-                child: Image.network(
-                  imagePath, // Replace with your image URL
-                  width: 100, // Set your desired width
-                  height: 80, // Set your desired height
-                  fit: BoxFit.cover, // Set your desired image fit
+                child: Image.memory(
+                  globalservice.getImageByteCode(imagePath),
+                  height: 80.0,
+                  width: 120.0,
+                  fit: BoxFit
+                      .fill, // Adjust this to control the image size within its parent widget
                 ),
               ),
             ),
@@ -219,11 +220,12 @@ class MaleFemaleCategory extends StatelessWidget {
                     maxHeight: 100, minHeight: 50, maxWidth: 100, minWidth: 20),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.network(
-                    imagePath.toString(),
+                  child: Image.memory(
+                    globalservice.getImageByteCode(imagePath),
                     height: 80.0,
                     width: 120.0,
-                    fit: BoxFit.fill,
+                    fit: BoxFit
+                        .fill, // Adjust this to control the image size within its parent widget
                   ),
                 )),
           ),
