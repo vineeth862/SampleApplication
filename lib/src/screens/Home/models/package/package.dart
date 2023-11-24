@@ -3,7 +3,8 @@ part 'package.g.dart';
 
 @JsonSerializable()
 class Package {
-  String medCaPackageCode;
+  String id;
+  String medCapPackageCode;
   String labCode;
   String labName;
   String method;
@@ -20,9 +21,15 @@ class Package {
   int labClosingTime;
   String displayName;
   String testList;
+  String discount;
+  String discountedPrice;
+  dynamic discountedDates = [];
+  dynamic discountsHistory = [];
+  dynamic packageUpdationLogs;
 
   Package(
-      {required this.medCaPackageCode,
+      {required this.id,
+      required this.medCapPackageCode,
       required this.labCode,
       required this.labName,
       required this.method,
@@ -38,7 +45,12 @@ class Package {
       required this.displayName,
       required this.labOpeningTime,
       required this.labClosingTime,
-      required this.testList});
+      required this.testList,
+      required this.discount,
+      required this.discountedDates,
+      required this.discountedPrice,
+      required this.discountsHistory,
+      required this.packageUpdationLogs});
   factory Package.fromJson(Map<String, dynamic> json) =>
       _$PackageFromJson(json);
   Map<String, dynamic> toJson() => _$PackageToJson(this);
