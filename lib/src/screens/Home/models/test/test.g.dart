@@ -7,6 +7,7 @@ part of 'test.dart';
 // **************************************************************************
 
 Test _$TestFromJson(Map<String, dynamic> json) => Test(
+    id: json['id'].toString(),
     medCapTestCode: json['medCapTestCode'] as String,
     labCode: json['labCode'] as String,
     labName: json['labName'] as String,
@@ -25,9 +26,13 @@ Test _$TestFromJson(Map<String, dynamic> json) => Test(
     labOpeningTime: json['labOpeningTime'],
     labClosingTime: json['labClosingTime'],
     discount: json['discount'].toString(),
-    discountedPrice: json['discountedPrice'].toString());
+    discountedPrice: json['discountedPrice'].toString(),
+    discountedDates: json['discountedDates'],
+    discountsHistory: json['discountsHistory'],
+    testUpdationLogs: json['testUpdationLogs']);
 
 Map<String, dynamic> _$TestToJson(Test instance) => <String, dynamic>{
+      'id': instance.id,
       'medCapTestCode': instance.medCapTestCode,
       'labCode': instance.labCode,
       'labName': instance.labName,
@@ -46,5 +51,8 @@ Map<String, dynamic> _$TestToJson(Test instance) => <String, dynamic>{
       'labOpeningTime': instance.labOpeningTime,
       'labClosingTime': instance.labClosingTime,
       'discount': instance.discount,
-      'discountedPrice': instance.discountedPrice
+      'discountedPrice': instance.discountedPrice,
+      'discountedDates': instance.discountedDates,
+      'discountsHistory': instance.discountsHistory,
+      'testUpdationLogs': instance.testUpdationLogs
     };

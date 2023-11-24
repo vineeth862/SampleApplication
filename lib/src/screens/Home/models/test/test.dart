@@ -3,6 +3,7 @@ part 'test.g.dart';
 
 @JsonSerializable()
 class Test {
+  String id;
   String medCapTestCode;
   String labCode;
   String labName;
@@ -17,15 +18,18 @@ class Test {
   String testName;
   String category;
   bool daily;
+  String displayName;
+  String discount;
+  String discountedPrice;
+  dynamic discountedDates = [];
+  dynamic discountsHistory = [];
+  dynamic testUpdationLogs;
   int labOpeningTime;
   int labClosingTime;
-  String displayName;
-  dynamic discount;
-
-  dynamic discountedPrice;
 
   Test(
-      {required this.medCapTestCode,
+      {required this.id,
+      required this.medCapTestCode,
       required this.labCode,
       required this.labName,
       required this.method,
@@ -43,7 +47,10 @@ class Test {
       required this.labOpeningTime,
       required this.labClosingTime,
       required this.discount,
-      required this.discountedPrice});
+      required this.discountedPrice,
+      required this.discountedDates,
+      required this.discountsHistory,
+      required this.testUpdationLogs});
   factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
   Map<String, dynamic> toJson() => _$TestToJson(this);
 }
