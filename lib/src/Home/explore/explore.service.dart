@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sample_application/src/Home/models/category/category.dart'
     as category;
 
+import '../models/category/category.dart';
 import '../models/lab/labMasterData.dart';
 
 class ExploreService {
   final _db = FirebaseFirestore.instance;
-  fetchCategoryList() async {
+  Future<List<Category>> fetchCategoryList() async {
     final categoryList = await _db
-        .collection("prod-package/category/popularCategory")
+        .collection("prod-category/category/popularCategory")
         //.where("type", isEqualTo: 'category')
         .get();
 
@@ -34,9 +35,9 @@ class ExploreService {
     return [];
   }
 
-  fetchMaleCategoryList() async {
+  Future<List<Category>> fetchMaleCategoryList() async {
     final categoryList =
-        await _db.collection("prod-package/category/men").get();
+        await _db.collection("prod-category/category/men").get();
     if (categoryList.docs.isNotEmpty) {
       return categoryList.docs.map((doc) {
         return category.Category.fromJson(doc.data());
@@ -45,9 +46,9 @@ class ExploreService {
     return [];
   }
 
-  fetchFemaleCategoryList() async {
+  Future<List<Category>> fetchFemaleCategoryList() async {
     final categoryList =
-        await _db.collection("prod-package/category/women").get();
+        await _db.collection("prod-category/category/women").get();
     if (categoryList.docs.isNotEmpty) {
       return categoryList.docs.map((doc) {
         return category.Category.fromJson(doc.data());
