@@ -6,7 +6,8 @@ class PackageService {
   List<PackageCard> packageList = [];
   Set<String> allPackagesNameList = {};
   loadPackageList() async {
-    var result = await FirebaseFirestore.instance.collection('package').get();
+    var result =
+        await FirebaseFirestore.instance.collection('prod-package').get();
     if (result.docs.isNotEmpty) {
       allPackagesNameList = result.docs
           .map((e) => PackageCard.fromJson(e.data()).pacName.toString())
@@ -18,7 +19,7 @@ class PackageService {
 
   loadPackageListByLabCode(labCode) async {
     var result = await FirebaseFirestore.instance
-        .collection('package')
+        .collection('prod-package')
         .where('labCode', isEqualTo: labCode)
         .get();
     if (result.docs.isNotEmpty) {
@@ -32,7 +33,7 @@ class PackageService {
 
   getAllLabsByPackage(String displayName) async {
     var result = await FirebaseFirestore.instance
-        .collection('package')
+        .collection('prod-package')
         .where("displayName", isEqualTo: displayName)
         .get();
     if (result.docs.isNotEmpty) {
