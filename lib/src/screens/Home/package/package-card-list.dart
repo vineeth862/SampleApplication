@@ -50,7 +50,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
     bool isPackageSelected(Package package) {
       return (selectedPackage.getSelectedPackage
           .where((element) =>
-              element.medCaPackageCode == package.medCaPackageCode &&
+              element.medCapPackageCode == package.medCapPackageCode &&
               element.labCode == package.labCode)
           .isNotEmpty);
     }
@@ -61,7 +61,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
       } else {
         List<Package> duplicateTest = selectedPackage.getSelectedPackage
             .where((element) =>
-                element.medCaPackageCode == packageObj.medCaPackageCode)
+                element.medCapPackageCode == packageObj.medCapPackageCode)
             .toList();
 
         if (duplicateTest.isNotEmpty) {
