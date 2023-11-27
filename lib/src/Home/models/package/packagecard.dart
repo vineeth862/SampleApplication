@@ -4,7 +4,7 @@ class PackageCard {
   final String? pacName;
   final bool? pacSelcted;
   final String? pacCode;
-  final String? price;
+  final int? price;
   final String? testList;
   final Package? packageObject;
 
@@ -22,5 +22,5 @@ class PackageCard {
       pacName: json['displayName'],
       pacSelcted: false,
       packageObject: Package.fromJson(json),
-      price: json['price'].toString());
+      price: json['price']);
 }

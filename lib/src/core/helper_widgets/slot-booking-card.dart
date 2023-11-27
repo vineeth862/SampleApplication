@@ -48,7 +48,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
   Column generateListTileBodyForPackage(Package package) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(package.displayName), Text(package.price)],
+      children: [Text(package.displayName), Text(package.price.toString())],
     );
   }
 

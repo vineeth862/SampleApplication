@@ -100,7 +100,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         title: list[index].pacName!,
                         package: list[index].packageObject!,
                         testList: list[index].testList!,
-                        price: list[index].price!,
+                        price: list[index].price.toString(),
                         isTest: false,
                         isTestSelected:
                             isPackageSelected(list[index].packageObject!),

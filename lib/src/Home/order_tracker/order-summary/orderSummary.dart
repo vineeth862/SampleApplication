@@ -58,7 +58,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           };
         }),
         ...order.packages!.map((Package package) {
-          totalAmmount += int.parse(package.price);
+          totalAmmount += int.parse(package.price.toString());
           return {'name': package.packageName, 'price': package.price};
         })
       ],

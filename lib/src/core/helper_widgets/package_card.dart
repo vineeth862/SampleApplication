@@ -217,7 +217,7 @@ class PackageCardWidget extends StatelessWidget {
                         },
                         child: Price(
                           discount: "25",
-                          finalAmount: package.price,
+                          finalAmount: package.price.toString(),
                           discountedAmount: "100",
                           isTotalPricePresent: false,
                         )

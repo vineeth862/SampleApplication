@@ -135,7 +135,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                             Text("Price : ",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
-                            Text("₹" + widget.package.price,
+                            Text("₹" + widget.package.price.toString(),
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
@@ -148,7 +148,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                             Text("Report : ",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
-                            Text(widget.package.tat + " Hours",
+                            Text(widget.package.tat.toString() + " Hours",
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),

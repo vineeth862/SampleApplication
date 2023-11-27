@@ -18,7 +18,7 @@ class _PackageSliderState extends State<PackageSlider> {
   GlobalService globalservice = GlobalService();
   final List<labPackageCard> cardList = [
     labPackageCard(
-      pacName: "Basic General Health Checkup",
+      pacName: "MASTER HEALTH PACKAGE 2",
       pacDes: "Measure Vitamin D & B12 levels and others",
       pacPrice: "1999",
       pacFullPrice: "2599",
@@ -42,7 +42,7 @@ class _PackageSliderState extends State<PackageSlider> {
       pacLab: "RV Metropolis Diagnostic and Healthcare center Pvt.Ltd",
     ),
     labPackageCard(
-      pacName: "Basic General Health Checkup",
+      pacName: "MASTER HEALTH PACKAGE1 ",
       pacDes: "Measure Vitamin D & B12 levels and others",
       pacPrice: "6999",
       pacFullPrice: "7599",

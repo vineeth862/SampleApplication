@@ -8,10 +8,10 @@ class Package {
   String labCode;
   String labName;
   String method;
-  String price;
+  int price;
   String sampleContainer;
   String sampletypeName;
-  String tat;
+  int tat;
   String testProcessingDays;
   String packageCode;
   String packageDes;
@@ -21,8 +21,8 @@ class Package {
   int labClosingTime;
   String displayName;
   String testList;
-  String discount;
-  String discountedPrice;
+  int discount;
+  int discountedPrice;
   dynamic discountedDates = [];
   dynamic discountsHistory = [];
   dynamic packageUpdationLogs;
