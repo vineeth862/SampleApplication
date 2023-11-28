@@ -12,7 +12,7 @@ Technician _$BookedFromJson(Map<String, dynamic> json) => Technician(
       completedDateTime: json['completedDateTime'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
-      phone: json['phone'] as num?,
+      phone: json['phone'] as String?,
     );
 
 Map<String, dynamic> _$BookedToJson(Technician instance) => <String, dynamic>{

@@ -8,7 +8,7 @@ class Technician {
   String? completedDateTime;
   String? name;
   String? email;
-  num? phone;
+  String? phone;
   Technician({
     this.assignedDateTime,
     this.name,

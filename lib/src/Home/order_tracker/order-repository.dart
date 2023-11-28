@@ -13,35 +13,49 @@ class OrderRepository extends GetxController {
 
   fetchAllOrders(List orderIds, from) async {
     orderList = [];
-    if (orderIds.length > 0) {
-      if (from == "cart") {
-        final orders = await _db
-            .collection("order")
-            .where("orderNumber", whereIn: orderIds)
-            .get();
 
-        if (orders.docs.isNotEmpty) {
-          orders.docs.map((doc) {
-            return orderModule.Order.fromJson(doc.data());
-          }).forEach((orderModule.Order element) {
-            if (element.statusCode == 1) {
-              orderList.add(element);
-            }
-          });
+    if (orderIds.length > 0) {
+      List<dynamic> batches = [];
+      for (int i = 0; i < orderIds.length; i += 10) {
+        try {
+          batches.add(orderIds.sublist(i, i + 10));
+        } catch (e) {
+          batches.add(orderIds.sublist(i, orderIds.length));
+        }
+      }
+
+      if (from == "cart") {
+        for (var batch in batches) {
+          final orders = await _db
+              .collection("order")
+              .where("orderNumber", whereIn: batch)
+              .get();
+
+          if (orders.docs.isNotEmpty) {
+            orders.docs.map((doc) {
+              return orderModule.Order.fromJson(doc.data());
+            }).forEach((orderModule.Order element) {
+              if (element.statusCode == 1) {
+                orderList.add(element);
+              }
+            });
+          }
         }
       } else {
-        final orders = await _db
-            .collection("order")
-            .where("orderNumber", whereIn: orderIds)
-            .get();
-        if (orders.docs.isNotEmpty) {
-          orders.docs.map((doc) {
-            return orderModule.Order.fromJson(doc.data());
-          }).forEach((orderModule.Order element) {
-            if (element.statusCode != 1) {
-              orderList.add(element);
-            }
-          });
+        for (var batch in batches) {
+          final orders = await _db
+              .collection("order")
+              .where("orderNumber", whereIn: batch)
+              .get();
+          if (orders.docs.isNotEmpty) {
+            orders.docs.map((doc) {
+              return orderModule.Order.fromJson(doc.data());
+            }).forEach((orderModule.Order element) {
+              if (element.statusCode != 1) {
+                orderList.add(element);
+              }
+            });
+          }
         }
       }
     }

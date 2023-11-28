@@ -44,7 +44,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
         context: context,
         builder: (BuildContext context) {
           return OrderTrackerDialog(
-            order: order!,
+            order: order,
           ); // Custom widget for the dialog content
         },
       );
