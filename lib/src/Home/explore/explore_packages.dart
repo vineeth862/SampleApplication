@@ -1,8 +1,10 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/Home/explore/category/explore_category.dart';
+import 'package:sample_application/src/Home/explore/explore.service.dart';
 import '../../core/globalServices/global_service.dart';
+import '../models/package/packageCard.dart';
+import '../models/package/packageSliderCard.dart';
 import '../package/package-suggetion-list.dart';
 
 class PackageSlider extends StatefulWidget {
@@ -16,52 +18,42 @@ class _PackageSliderState extends State<PackageSlider> {
   int _currentIndex = 0;
   final CarouselController _carouselController = CarouselController();
   GlobalService globalservice = GlobalService();
-  final List<labPackageCard> cardList = [
-    labPackageCard(
-      pacName: "MASTER HEALTH PACKAGE 2",
-      pacDes: "Measure Vitamin D & B12 levels and others",
-      pacPrice: "1999",
-      pacFullPrice: "2599",
-      pacDiscount: "20%",
-      pacLab: "Apollo Diagnostics",
-    ),
-    labPackageCard(
-      pacName: "Basic General Health Checkup 2",
-      pacDes: "Measure Vitamin D & B12 levels and others",
-      pacPrice: "2999",
-      pacFullPrice: "3599",
-      pacDiscount: "20%",
-      pacLab: "Dr Lal Path Labs",
-    ),
-    labPackageCard(
-      pacName: "Basic General Health Checkup-3",
-      pacDes: "Measure Vitamin D & B12 levels and others",
-      pacPrice: "4999",
-      pacFullPrice: "5599",
-      pacDiscount: "30%",
-      pacLab: "RV Metropolis Diagnostic and Healthcare center Pvt.Ltd",
-    ),
-    labPackageCard(
-      pacName: "MASTER HEALTH PACKAGE1 ",
-      pacDes: "Measure Vitamin D & B12 levels and others",
-      pacPrice: "6999",
-      pacFullPrice: "7599",
-      pacDiscount: "10%",
-      pacLab: "Apollo Diagnostics",
-    )
-  ];
+  ExploreService exploreService = ExploreService();
+  List<PackageSliderCard> cardList = [];
+
+  void initState() {
+    loadData();
+  }
+
+  loadData() async {
+    cardList = await exploreService.fetchPackageCardsList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CarouselSlider(
-          items: cardList.map((labPackageCard card) {
+          items: cardList.map((PackageSliderCard card) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: card,
+                return InkWell(
+                  onTap: () {
+                    globalservice.navigate(
+                        context,
+                        PackageSuggetionList(
+                          labCode: card.labCode!,
+                        ));
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Image.memory(
+                      globalservice.getImageByteCode(card.image),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 );
               },
             );
@@ -84,15 +76,17 @@ class _PackageSliderState extends State<PackageSlider> {
             },
           ),
         ),
-        CarouselIndicator(
-          count: cardList.length,
-          index: _currentIndex,
-          color: const Color.fromARGB(255, 170, 170, 170),
-          activeColor: Theme.of(context).colorScheme.primary,
-          height: 8,
-          width: 8,
-          space: 5,
-        ),
+        cardList.length > 0
+            ? CarouselIndicator(
+                count: cardList.length,
+                index: _currentIndex,
+                color: const Color.fromARGB(255, 170, 170, 170),
+                activeColor: Theme.of(context).colorScheme.primary,
+                height: 8,
+                width: 8,
+                space: 5,
+              )
+            : Card(),
         const SizedBox(
           height: 5,
         ),
