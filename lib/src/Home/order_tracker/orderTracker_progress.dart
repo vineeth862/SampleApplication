@@ -44,17 +44,17 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     await selectedOrder.fetchStatus(order!.statusCode);
     status = selectedOrder.getStatus;
     statusCode = status!.statusCode!;
-    if (status!.statusCode! <= 3) {
+    if (status!.statusCode! <= 2) {
       setState(() {
         _currentStep = 0;
       });
     }
-    if (status!.statusCode! <= 11) {
+    if (status!.statusCode! <= 3) {
       setState(() {
         _currentStep = 1;
       });
     }
-    if (status!.statusCode! > 11) {
+    if (status!.statusCode! < 12) {
       setState(() {
         _currentStep = 2;
       });
@@ -366,18 +366,76 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                       // content: Step2Widget(
                       //     orderObj: widget.orderObj,
                       //     details: proceedToNextStep),
-                      content: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      "Medcaph Verified Phlebotomist",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
+                                    ),
+                                    leading: Icon(
+                                      Icons.verified,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
+                                    ),
+                                  ),
+                                  RichTextWidget(
+                                      headline: "Assigned Plebo",
+                                      title:
+                                          order!.technician!.name.toString()),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  RichTextWidget(
+                                      headline: "Plebo Contact",
+                                      title:
+                                          order!.technician!.phone.toString()),
+                                  // Divider(
+                                  //   thickness: 0.6,
+                                  // ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              )),
+                          SizedBox(
+                            height: 10,
                           ),
-                          child: Column(
-                            children: [
-                              RichTextWidget(
-                                  headline: "Assigned Plebo",
-                                  title: order!.technician.toString())
-                            ],
-                          )),
+                          Text(
+                            "Feed Back for plebo",
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextField(
+                            maxLines: 3,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10),
+                              labelText: 'Please give feedback',
+                              //hintText: 'Enter Your Name',
+                            ),
+                          ),
+                          Center(
+                            child: OutlinedButton(
+                                onPressed: () {}, child: Text("Submit")),
+                          )
+                        ],
+                      ),
                       isActive: statusCode >= 6,
                       state: statusCode >= 6
                           ? StepState.complete
