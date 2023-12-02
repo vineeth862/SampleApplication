@@ -1,14 +1,9 @@
-import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
-import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
-
-import '../../core/globalServices/db-operation/db_operations.dart';
-
-// import '../../../utils/db-operation/db_operations.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -303,30 +298,30 @@ class ProfileScreen extends StatelessWidget {
               //   },
               //   child: const Text('SlotBooking'),
               // ),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, GitHubRepositoriesScreen());
-                },
-                child: const Text('uploadList'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  // Handle edit profile button press
-                  final res =
-                      await EasyUpiPaymentPlatform.instance.startPayment(
-                    EasyUpiPaymentModel(
-                      payeeVpa: 'Q720679555@ybl',
-                      payeeName: 'Archana S',
-                      amount: 1.0,
-                      description: 'Testing payment',
-                    ),
-                  );
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, GitHubRepositoriesScreen());
+              //   },
+              //   child: const Text('uploadList'),
+              // ),
+              // TextButton(
+              //   onPressed: () async {
+              //     // Handle edit profile button press
+              //     final res =
+              //         await EasyUpiPaymentPlatform.instance.startPayment(
+              //       EasyUpiPaymentModel(
+              //         payeeVpa: 'Q720679555@ybl',
+              //         payeeName: 'Archana S',
+              //         amount: 1.0,
+              //         description: 'Testing payment',
+              //       ),
+              //     );
 
-                  print(res);
-                },
-                child: const Text('Payment2'),
-              ),
+              //     print(res);
+              //   },
+              //   child: const Text('Payment2'),
+              // ),
               // const SizedBox(height: 20),
               // TextButton(
               //   onPressed: () {

@@ -4,7 +4,6 @@ import 'package:sample_application/src/Home/models/category/category.dart'
 
 import '../models/category/category.dart';
 import '../models/lab/labMasterData.dart';
-import '../models/package/packageCard.dart';
 import '../models/package/packageSliderCard.dart';
 
 class ExploreService {

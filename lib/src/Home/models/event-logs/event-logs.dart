@@ -1,5 +1,3 @@
-import 'package:sample_application/src/Home/models/user/user.dart';
-
 class EventLog {
   String id;
   String module;

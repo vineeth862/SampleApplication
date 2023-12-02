@@ -1,5 +1,3 @@
-import 'package:sample_application/src/Home/models/package/package.dart';
-
 class PackageSliderCard {
   final String? title;
   final String? image;

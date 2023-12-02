@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/global_service.dart';
-import 'package:sample_application/src/Home/models/order/order.dart';
 import 'package:sample_application/src/Home/order_tracker/confirmation-allert.dart';
-import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 

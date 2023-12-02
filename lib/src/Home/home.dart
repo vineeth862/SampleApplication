@@ -1,17 +1,16 @@
-import 'dart:ffi';
-
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
-import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/doctor_consultation.dart/doctorConsultation.dart';
 import 'package:sample_application/src/Home/explore/explore.dart';
-import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 import 'package:sample_application/src/Home/home_service.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/Home/radiology/radiology.dart';
 import 'package:sample_application/src/core/Provider/loading_provider.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
+import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
+
 import '../core/Provider/selected_order_provider.dart';
 import '../core/Provider/selected_test_provider.dart';
 import '../core/helper_widgets/slot-booking-card.dart';

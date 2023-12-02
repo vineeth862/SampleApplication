@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
-import 'package:sample_application/src/core/globalServices/userAdress/widgets/UseCurrentLocationStepTwo.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addAddressStepTwo.dart';
 
 class addressOperationStepTwo extends StatefulWidget {

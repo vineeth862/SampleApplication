@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/Home/explore/category/explore_category.dart';
-import 'package:sample_application/src/Home/explore/category/filtered_category_list.dart';
 
 class Radiology extends StatelessWidget {
   const Radiology({super.key});
