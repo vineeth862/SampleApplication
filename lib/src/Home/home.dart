@@ -13,6 +13,7 @@ import 'package:sample_application/src/core/globalServices/userAdress/locatonSer
 
 import '../core/Provider/selected_order_provider.dart';
 import '../core/Provider/selected_test_provider.dart';
+import '../core/globalServices/execution-stack/execution_stack_operation.dart';
 import '../core/helper_widgets/slot-booking-card.dart';
 import 'models/order/order.dart';
 import 'order_tracker/step1/step1.dart';
@@ -31,7 +32,7 @@ class HomePageState extends State<HomePage> {
   var Controller = Get.put(UserCurrentLocation());
   final myController = Get.find<UserCurrentLocation>();
   RxString Adress = "Fetching adress...".obs;
-
+  ExecutionStackOperation executionStackOperation = ExecutionStackOperation();
   String postalCode = "";
   String Locality = "";
   int selectedIndex = 0;
@@ -102,154 +103,159 @@ class HomePageState extends State<HomePage> {
     print(myController.availabelLabs);
 
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   title: TextButton.icon(
-        //     icon: Icon(Icons.location_on),
-        //     label: Text(appStates
-        //         .globalString), // label: Obx(() => Text(myController.globalString.value)),
+      child: WillPopScope(
+        onWillPop: () async {
+          return await executionStackOperation.isRemoveWidget("home", context);
+        },
+        child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   title: TextButton.icon(
+          //     icon: Icon(Icons.location_on),
+          //     label: Text(appStates
+          //         .globalString), // label: Obx(() => Text(myController.globalString.value)),
 
-        //     // label: Text(
-        //     //   "${myController.globalString.value}",
-        //     //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-        //     //         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
-        //     //         fontWeight: FontWeight.bold,
-        //     //       ),
-        //     // ),
-        //     onPressed: () {
-        //       globalservice.navigate(context, InitialAdress());
-        //     },
-        //   ),
-        //   actions: [
-        //     Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Icon(
-        //         Icons.rocket,
-        //         color: Theme.of(context).colorScheme.primary,
-        //       ),
-        //     )
-        //   ],
-        //   foregroundColor: Theme.of(context).colorScheme.background,
-        //   backgroundColor: Theme.of(context).colorScheme.background,
-        // ),
-        // ignore: unrelated_type_equality_checks
+          //     // label: Text(
+          //     //   "${myController.globalString.value}",
+          //     //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+          //     //         color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+          //     //         fontWeight: FontWeight.bold,
+          //     //       ),
+          //     // ),
+          //     onPressed: () {
+          //       globalservice.navigate(context, InitialAdress());
+          //     },
+          //   ),
+          //   actions: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Icon(
+          //         Icons.rocket,
+          //         color: Theme.of(context).colorScheme.primary,
+          //       ),
+          //     )
+          //   ],
+          //   foregroundColor: Theme.of(context).colorScheme.background,
+          //   backgroundColor: Theme.of(context).colorScheme.background,
+          // ),
+          // ignore: unrelated_type_equality_checks
 
-        // Obx(
-        //   () => (myController.pinCodeExists.value)
-        //       ?
-        body: Stack(
-          children: [
-            _widgetOptions.elementAt(selectedIndex),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: Container(
-                  child: (selectedTest.getSelectedTest.isNotEmpty ||
-                          selectedTest.getSelectedPackage.isNotEmpty)
-                      ? SlotBookingCard(
-                          selectedCount: selectedTest.getSelectedTest.length +
-                              selectedTest.getSelectedPackage.length,
-                          title: " Test/Package Selected",
-                          content: "view details",
-                          subContent: "",
-                          contentColor: false,
-                          height: slotBookingCardHeight,
-                          buttonClicked: () {
-                            Order order = selectedOrder.getOrder;
+          // Obx(
+          //   () => (myController.pinCodeExists.value)
+          //       ?
+          body: Stack(
+            children: [
+              _widgetOptions.elementAt(selectedIndex),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: Container(
+                    child: (selectedTest.getSelectedTest.isNotEmpty ||
+                            selectedTest.getSelectedPackage.isNotEmpty)
+                        ? SlotBookingCard(
+                            selectedCount: selectedTest.getSelectedTest.length +
+                                selectedTest.getSelectedPackage.length,
+                            title: " Test/Package Selected",
+                            content: "view details",
+                            subContent: "",
+                            contentColor: false,
+                            height: slotBookingCardHeight,
+                            buttonClicked: () {
+                              Order order = selectedOrder.getOrder;
 
-                            Widget widget = order.statusCode == 1
-                                ? PaymentScreeen()
-                                : StepOneToBookTest();
+                              Widget widget = order.statusCode == 1
+                                  ? PaymentScreeen()
+                                  : StepOneToBookTest();
 
-                            globalservice.navigate(context, widget);
-                          },
-                          hyperLink: true,
-                          expandDetail: () {
-                            setState(() {
-                              expandDetails = true;
-                            });
-                          },
-                        )
-                      : const Card()),
-            ),
-          ],
-        ),
-        // : Container(
-        //     //color: Theme.of(context).colorScheme.primary,
-        //     decoration: BoxDecoration(
-        //         // image: DecorationImage(
-        //         //     image: AssetImage("./assets/images/MedCapH.jpg"),
-        //         //     fit: BoxFit.cover
-        //         //     // Set your desired image fit
-        //         //     ),
-        //         gradient: LinearGradient(colors: [
-        //       Theme.of(context).colorScheme.primary.withOpacity(0.5),
-        //       Theme.of(context).colorScheme.primary.withOpacity(0.1)
-        //     ])),
-        //     //color: Theme.of(context).colorScheme.primary,
+                              globalservice.navigate(context, widget);
+                            },
+                            hyperLink: true,
+                            expandDetail: () {
+                              setState(() {
+                                expandDetails = true;
+                              });
+                            },
+                          )
+                        : const Card()),
+              ),
+            ],
+          ),
+          // : Container(
+          //     //color: Theme.of(context).colorScheme.primary,
+          //     decoration: BoxDecoration(
+          //         // image: DecorationImage(
+          //         //     image: AssetImage("./assets/images/MedCapH.jpg"),
+          //         //     fit: BoxFit.cover
+          //         //     // Set your desired image fit
+          //         //     ),
+          //         gradient: LinearGradient(colors: [
+          //       Theme.of(context).colorScheme.primary.withOpacity(0.5),
+          //       Theme.of(context).colorScheme.primary.withOpacity(0.1)
+          //     ])),
+          //     //color: Theme.of(context).colorScheme.primary,
 
-        //     child: AlertDialog(
-        //       //icon: Icon(Icons.time_to_leave),
-        //       alignment: const AlignmentDirectional(1, 0),
-        //       shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(10)),
-        //       title: Text("Oh,no!",
-        //           style: Theme.of(context)
-        //               .textTheme
-        //               .headlineMedium!
-        //               .copyWith(
-        //                   color: Theme.of(context).colorScheme.primary)),
-        //       content: Obx(() => Text(
-        //             "Service not available in " +
-        //                 myController.addressToBeConsidered.value,
-        //             style: Theme.of(context).textTheme.titleMedium!,
-        //           )),
-        //       actions: [
-        //         // Define buttons for the AlertDialog
-        //         ElevatedButton(
-        //           style: ButtonStyle(
-        //               // minimumSize: MaterialStateProperty.all(
-        //               //     const Size(80, 25)), // Set the desired size
-        //               ),
-        //           child: const Text("Change Location"),
-        //           onPressed: () {
-        //             globalservice.navigate(context,
-        //                 const InitialAdress()); // Close the AlertDialog
-        //           },
-        //         ),
-        //       ],
-        //       actionsAlignment: MainAxisAlignment.end,
-        //     ),
-        //   ),
+          //     child: AlertDialog(
+          //       //icon: Icon(Icons.time_to_leave),
+          //       alignment: const AlignmentDirectional(1, 0),
+          //       shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10)),
+          //       title: Text("Oh,no!",
+          //           style: Theme.of(context)
+          //               .textTheme
+          //               .headlineMedium!
+          //               .copyWith(
+          //                   color: Theme.of(context).colorScheme.primary)),
+          //       content: Obx(() => Text(
+          //             "Service not available in " +
+          //                 myController.addressToBeConsidered.value,
+          //             style: Theme.of(context).textTheme.titleMedium!,
+          //           )),
+          //       actions: [
+          //         // Define buttons for the AlertDialog
+          //         ElevatedButton(
+          //           style: ButtonStyle(
+          //               // minimumSize: MaterialStateProperty.all(
+          //               //     const Size(80, 25)), // Set the desired size
+          //               ),
+          //           child: const Text("Change Location"),
+          //           onPressed: () {
+          //             globalservice.navigate(context,
+          //                 const InitialAdress()); // Close the AlertDialog
+          //           },
+          //         ),
+          //       ],
+          //       actionsAlignment: MainAxisAlignment.end,
+          //     ),
+          //   ),
 
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.airline_seat_flat),
-              label: 'Radiology',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_hospital_sharp),
-              label: 'Dr.Consultation',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.moped_outlined),
-              label: 'Track Order',
-            ),
-          ],
-          currentIndex: selectedIndex,
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          onTap: _onItemTapped,
-          showUnselectedLabels: true,
-          unselectedItemColor: Theme.of(context).colorScheme.onBackground,
-          type: BottomNavigationBarType.fixed,
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.airline_seat_flat),
+                label: 'Radiology',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_hospital_sharp),
+                label: 'Dr.Consultation',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.moped_outlined),
+                label: 'Track Order',
+              ),
+            ],
+            currentIndex: selectedIndex,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            onTap: _onItemTapped,
+            showUnselectedLabels: true,
+            unselectedItemColor: Theme.of(context).colorScheme.onBackground,
+            type: BottomNavigationBarType.fixed,
+          ),
         ),
       ),
     );
