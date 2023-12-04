@@ -97,11 +97,11 @@ class UserCurrentLocation extends GetxController {
   @override
   void onReady() {
     Future.delayed(Duration(seconds: 0), () {
-      //loadingProvider.startLoading();
+      //globalservice.showLoader();
 
       loaddata();
 
-      //loadingProvider.stopLoading();
+      //globalservice.hideLoader();
     });
   }
 

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/address_operation.dart';
-import 'package:sample_application/src/core/Provider/loading_provider.dart';
 
 import '../../../../Home/home.dart';
 
@@ -34,7 +32,6 @@ class _InitialAdressState extends State<InitialAdress> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final loadingProvider = Provider.of<LoadingProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -122,9 +119,9 @@ class _InitialAdressState extends State<InitialAdress> {
                                 if (_formKey.currentState!.validate()) {
                                   myController.updateGlobalString(
                                       _pincodeController!.text.toString());
-                                  loadingProvider.startLoading();
+                                  globalservice.showLoader();
                                   Future.delayed(Duration(seconds: 1), () {
-                                    loadingProvider.stopLoading();
+                                    globalservice.hideLoader();
                                     globalservice.navigate(context, HomePage());
                                     // Get.offAll(() => HomePage());
                                   });

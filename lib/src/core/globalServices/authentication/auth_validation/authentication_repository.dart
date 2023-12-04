@@ -20,10 +20,10 @@ class AuthenticationRepository extends GetxController {
     //firebaseUser.bindStream(_auth.userChanges());
     //ever(firebaseUser, _setInitialScreen);
     Future.delayed(Duration(seconds: 2), () {
-      //loadingProvider.startLoading();
+      //globalservice.showLoader();
       //Get.offAll(() => HomePage());
 
-      //loadingProvider.stopLoading();
+      //globalservice.hideLoader();
       _setInitialScreen(firebaseUser.value);
     });
   }

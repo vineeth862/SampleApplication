@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'dart:convert';
 import 'package:flutter/services.dart';
+
+import '../helper_widgets/loader.dart';
 
 class GlobalService {
   final _db = FirebaseFirestore.instance;
@@ -116,5 +121,15 @@ class GlobalService {
     Uint8List bytes = base64.decode(data.split(',').last);
 
     return bytes;
+  }
+
+  showLoader() {
+    Get.to(() => LoaderScreen());
+  }
+
+  hideLoader() {
+    Future.delayed(Duration(seconds: 1), () {
+      Get.back();
+    });
   }
 }

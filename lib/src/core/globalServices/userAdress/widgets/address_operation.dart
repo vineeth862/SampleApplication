@@ -2,13 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_indicator/loading_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressForm.dart';
-import 'package:sample_application/src/core/Provider/loading_provider.dart';
 
 import '../../../../Home/home.dart';
 import '../../../../Home/models/user/address.dart';
@@ -25,7 +22,6 @@ class _addressOperationState extends State<addressOperation> {
   GlobalService globalservice = GlobalService();
 
   var Controller = Get.put((UserRepository()));
-  late LoadingProvider loadingProvider;
   final myController = Get.find<UserCurrentLocation>();
   List<address> items = [];
   concatenatedAddressList() async {
@@ -51,8 +47,9 @@ class _addressOperationState extends State<addressOperation> {
 
       fullAddress.add(addressObj);
     });
-
-    items = fullAddress;
+    setState(() {
+      items = fullAddress;
+    });
 
     if (items.length != 0) {
       dataPresent = true;
@@ -81,13 +78,11 @@ class _addressOperationState extends State<addressOperation> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
-      loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
-      loadingProvider.startLoading();
+      globalservice.showLoader();
       concatenatedAddressList();
     });
-
     Future.delayed(Duration(seconds: 1), () {
-      loadingProvider.stopLoading();
+      globalservice.hideLoader();
     });
   }
 
@@ -102,7 +97,6 @@ class _addressOperationState extends State<addressOperation> {
 
   @override
   Widget build(BuildContext context) {
-    final loadingProvider = Provider.of<LoadingProvider>(context);
     bool isButtonEnabled = false;
 
     bool isItemsNotPresent = false;
@@ -117,170 +111,154 @@ class _addressOperationState extends State<addressOperation> {
       isButtonEnabled = true;
     }
     //print(widget.routeDetails.toString() + " hii");
-    return loadingProvider.isLoading
-        ? Center(
-            child: Padding(
-              padding: const EdgeInsets.all(160.0),
-              child: LoadingIndicator(
-                indicatorType: Indicator.ballPulse,
-                colors: [Theme.of(context).colorScheme.primary],
-                strokeWidth: 10,
-              ),
+    return Column(
+      children: [
+        widget.routeDetails.toString() != "InitialAdress"
+            ? InkWell(
+                onTap: () {
+                  globalservice.navigate(
+                      context, AddAdress(routeInfo: widget.routeDetails));
+                },
+                child: Container(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Text(
+                          "Add Address",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        )),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : Container(),
+        Divider(
+          height: 5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              "Saved addresses",
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
-          )
-        : Column(
-            children: [
-              widget.routeDetails.toString() != "InitialAdress"
-                  ? InkWell(
-                      onTap: () {
-                        globalservice.navigate(
-                            context, AddAdress(routeInfo: widget.routeDetails));
-                      },
-                      child: Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        isItemsNotPresent
+            ? Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "No Saved Address",
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  Divider(
+                    height: 20,
+                  )
+                ],
+              )
+            : SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ListView.builder(
+                  itemCount:
+                      visibleItemCount + 1, // Add 1 for the "Load More" button
+                  itemBuilder: (context, index) {
+                    //final item = items[index];
+                    if (index < visibleItemCount) {
+                      return GestureDetector(
+                        onTap: () async {
+                          if (widget.routeDetails.toString() ==
+                              "InitialAdress") {
+                            myController.updateGlobalString(
+                                items[index].pincode.toString());
+                            BuildContext currentContext = context;
+                            //globalservice.showLoader();
+
+                            globalservice.showLoader();
+                            await Future.delayed(Duration(seconds: 1), () {
+                              globalservice.hideLoader();
+                              Get.offAll(() => HomePage());
+
+                              //globalservice.navigate(context, HomePage());
+                            });
+                          }
+                        },
+                        child: Container(
+                          child: Column(
                             children: [
-                              Icon(
-                                Icons.add,
-                                color: Theme.of(context).colorScheme.primary,
+                              Row(
+                                children: [
+                                  SizedBox(width: 10),
+                                  Icon(
+                                    Icons.home,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Text(
+                                          items[index].fullAddress.toString()),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _removeItem(index);
+                                    },
+                                    child: Icon(Icons.delete,
+                                        color: Colors.red.shade900),
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                "Add Address",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary),
-                              )),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
+                              Divider(
+                                height: 10,
                               )
                             ],
                           ),
                         ),
-                      ),
-                    )
-                  : Container(),
-              Divider(
-                height: 5,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    "Saved addresses",
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+                      );
+                    } else {
+                      return isButtonEnabled
+                          ? ElevatedButton(
+                              onPressed: _loadMoreItems,
+                              child: Text('Load More'),
+                            )
+                          : null;
+                    }
+                  },
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              isItemsNotPresent
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "No Saved Address",
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        Divider(
-                          height: 20,
-                        )
-                      ],
-                    )
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: ListView.builder(
-                        itemCount: visibleItemCount +
-                            1, // Add 1 for the "Load More" button
-                        itemBuilder: (context, index) {
-                          //final item = items[index];
-                          if (index < visibleItemCount) {
-                            return GestureDetector(
-                              onTap: () async {
-                                if (widget.routeDetails.toString() ==
-                                    "InitialAdress") {
-                                  myController.updateGlobalString(
-                                      items[index].pincode.toString());
-                                  BuildContext currentContext = context;
-                                  //loadingProvider.startLoading();
-
-                                  loadingProvider.startLoading();
-                                  await Future.delayed(Duration(seconds: 1),
-                                      () {
-                                    loadingProvider.stopLoading();
-                                    Get.offAll(() => HomePage());
-
-                                    //globalservice.navigate(context, HomePage());
-                                  });
-                                }
-                              },
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          Icons.home,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: ListTile(
-                                            title: Text(items[index]
-                                                .fullAddress
-                                                .toString()),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            _removeItem(index);
-                                          },
-                                          child: Icon(Icons.delete,
-                                              color: Colors.red.shade900),
-                                        )
-                                      ],
-                                    ),
-                                    Divider(
-                                      height: 10,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          } else {
-                            return isButtonEnabled
-                                ? ElevatedButton(
-                                    onPressed: _loadMoreItems,
-                                    child: Text('Load More'),
-                                  )
-                                : null;
-                          }
-                        },
-                      ),
-                    )
-            ],
-          );
+              )
+      ],
+    );
   }
 }

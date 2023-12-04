@@ -1,18 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
-import 'package:sample_application/src/core/spalsh_screen/splashscreen.dart';
+import 'package:sample_application/firebase_options.dart';
 import 'package:sample_application/src/core/Provider/address_provider.dart';
-import 'package:sample_application/src/core/Provider/loading_provider.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
-import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
+import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
+import 'package:sample_application/src/core/spalsh_screen/splashscreen.dart';
 import 'src/core/themes/themedata.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:sample_application/firebase_options.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -25,8 +24,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => SearchListState()),
     ChangeNotifierProvider(create: (_) => SelectedTestState()),
     ChangeNotifierProvider(create: (_) => SelectedOrderState()),
-    ChangeNotifierProvider(create: (_) => AppState()),
-    ChangeNotifierProvider(create: (_) => LoadingProvider())
+    ChangeNotifierProvider(create: (_) => AppState())
   ], child: const MyApp()));
 }
 

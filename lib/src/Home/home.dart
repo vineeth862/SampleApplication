@@ -6,7 +6,6 @@ import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/home_service.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/Home/radiology/radiology.dart';
-import 'package:sample_application/src/core/Provider/loading_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
@@ -78,7 +77,7 @@ class HomePageState extends State<HomePage> {
   //   Adress = postalCode + ', ' + Locality;
   //   _onChangeOfPostalCode(Adress);
   // }
-  late LoadingProvider loadingProvider;
+
   @override
   void initState() {
     super.initState();
@@ -91,7 +90,6 @@ class HomePageState extends State<HomePage> {
     //final appState = context.read<AppState>();
     //final appStates = Provider.of<AppState>(context);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
-    final loadingProvider = Provider.of<LoadingProvider>(context);
     num slotBookingCardHeight = 120;
     if (widget.index != null) {
       setState(() {

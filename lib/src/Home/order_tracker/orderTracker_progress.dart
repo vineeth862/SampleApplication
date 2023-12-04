@@ -6,7 +6,6 @@ import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/richTextWidget.dart';
 
-import '../../core/Provider/loading_provider.dart';
 import '../../core/Provider/selected_order_provider.dart';
 import '../models/status/status.dart';
 import 'order-summary/orderTrackerDailog.dart';
@@ -24,7 +23,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   Order? order;
   Status? status = Status();
   late SelectedOrderState selectedOrder;
-  late LoadingProvider loadingProvider;
   //int step = 0;
   int _currentStep = 0;
   num statusCode = 0;
@@ -36,7 +34,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   //     step = status!.step!.toInt();
   //     statusCode = status!.step!.toInt();
   //     _currentStep = step;
-  //     loadingProvider.stopLoading();
+  //     globalservice.hideLoader();
   //   });
   // }
   void updateStatusCode() async {
@@ -58,7 +56,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
         _currentStep = 2;
       });
     }
-    loadingProvider.stopLoading();
+    globalservice.hideLoader();
   }
 
   @override
@@ -66,9 +64,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     super.initState();
 
     Future.delayed(Duration.zero, () {
-      loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
       selectedOrder = Provider.of<SelectedOrderState>(context, listen: false);
-      loadingProvider.startLoading();
+      globalservice.showLoader();
       this.updateStatusCode();
     });
   }

@@ -1,25 +1,24 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/Home/explore/Search/search_field.dart';
 import 'package:sample_application/src/Home/explore/explore_packages.dart';
 import 'package:sample_application/src/Home/models/category/category.dart';
 import 'package:sample_application/src/Home/models/lab/labMasterData.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/Home/profile/profile_home.dart';
+import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/initial_adress.dart';
-import 'package:sample_application/src/core/Provider/loading_provider.dart';
+
 import '../../core/Provider/search_provider.dart';
 import '../../core/globalServices/authentication/user_repository.dart';
 import '../../core/globalServices/global_service.dart';
 import '../order_tracker/order-repository.dart';
 import 'Search/Cards/filter-test-list.dart';
-import 'explore.service.dart';
 import 'category/explore_category.dart';
+import 'explore.service.dart';
 import 'explore_why-us.dart';
-import 'package:badges/badges.dart' as badges;
 
 class exploreExp extends StatefulWidget {
   const exploreExp({super.key});
@@ -150,8 +149,7 @@ class _exploreExpState extends State<exploreExp> {
   Widget build(BuildContext context) {
     final myController = Get.find<UserCurrentLocation>();
     searchState = Provider.of<SearchListState>(context);
-    final loadingProvider = Provider.of<LoadingProvider>(context);
-    //loadingProvider.startLoading();
+    //globalservice.showLoader();
 
     return SafeArea(
       child: CustomScrollView(controller: _scrollController, slivers: [

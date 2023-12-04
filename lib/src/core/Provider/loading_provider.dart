@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class LoadingProvider extends ChangeNotifier {
-  bool _isLoading = true;
+// class LoadingProvider extends ChangeNotifier {
+//   bool _isLoading = false;
 
-  bool get isLoading => _isLoading;
+//   bool get isLoading => _isLoading;
 
-  void startLoading() {
-    _isLoading = true;
-    notifyListeners();
-  }
+//   void startLoading() {
+//     _isLoading = false;
+//     notifyListeners();
+//   }
 
-  void stopLoading() {
-    _isLoading = false;
-    notifyListeners();
-  }
-}
+//   void stopLoading() {
+//     _isLoading = false;
+//     notifyListeners();
+//   }
+// }
