@@ -10,7 +10,9 @@ import 'package:sample_application/src/core/helper_widgets/price_container.dart'
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
 import '../../../core/globalServices/execution-stack/execution_stack_operation.dart';
+import '../../explore/Search/search_field.dart';
 import '../../home.dart';
+import '../orderTracker_home.dart';
 
 class OrderSummaryScreen extends StatefulWidget {
   Map<String, dynamic> orderItems = {};
@@ -41,7 +43,11 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     final selectedOrder = Provider.of<SelectedOrderState>(context);
     return WillPopScope(
       onWillPop: () async {
-        Get.offAll(HomePage());
+        Get.offAll(OrderTrackerHome(
+          from: 'cart',
+        ));
+        selectedOrder.resetOrder();
+        selectedTest.removeAllTest();
         return false;
       },
       child: Scaffold(

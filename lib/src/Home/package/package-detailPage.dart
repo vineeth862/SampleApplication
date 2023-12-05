@@ -9,6 +9,7 @@ import '../../core/Provider/selected_test_provider.dart';
 import '../../core/globalServices/payment/paymentScreen.dart';
 import '../../core/helper_widgets/price_container.dart';
 import '../../core/helper_widgets/slot-booking-card.dart';
+import '../order_tracker/order-summary/orderSummary.dart';
 import '../order_tracker/step1/step1.dart';
 import '../models/order/order.dart';
 
@@ -562,7 +563,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                             Order order = selectedOrder.getOrder;
 
                             Widget widget = order.statusCode == 1
-                                ? PaymentScreeen()
+                                ? OrderSummaryPage()
                                 : StepOneToBookTest();
 
                             globalservice.navigate(context, widget);

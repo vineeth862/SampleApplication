@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/explore/Search/Cards/card_detail_page.dart';
@@ -12,6 +13,7 @@ import '../../../../core/globalServices/payment/paymentScreen.dart';
 import '../../../../core/helper_widgets/slot-booking-card.dart';
 import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
+import '../../../order_tracker/order-summary/orderSummary.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class FilteredTestCardlistPage extends StatefulWidget {
@@ -141,10 +143,9 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                             Order order = selectedOrder.getOrder;
 
                             Widget widget = order.statusCode == 1
-                                ? PaymentScreeen()
+                                ? OrderSummaryPage()
                                 : StepOneToBookTest();
-
-                            globalservice.navigate(context, widget);
+                            Get.offAll(widget);
                           },
                           expandDetail: () {
                             setState(() {

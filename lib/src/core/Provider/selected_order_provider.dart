@@ -69,6 +69,7 @@ class SelectedOrderState extends ChangeNotifier {
       var id = documentSnapshot.id;
       List<String> result = id.split(RegExp(r'(?<=\D)(?=\d)|(?<=\d)(?=\D)'));
       order.orderNumber = result[0] + (int.parse(result[1]) + 1).toString();
+      order.createdDate = new DateTime.now().toString();
       await _db
           .collection("order")
           .doc(order.orderNumber)

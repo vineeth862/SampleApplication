@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/Home/order_tracker/order-summary/orderSummary.dart';
 import '../../../../core/Provider/search_provider.dart';
 import '../../../../core/Provider/selected_order_provider.dart';
 import '../../../../core/Provider/selected_test_provider.dart';
@@ -63,7 +65,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
           .isNotEmpty);
     }
 
-    void onBookButton(Test testObject) {
+    void onBookButton(Test testObject, Order order) {
       if (selectedTest.getSelectedTest.contains(testObject)) {
         selectedTest.removeTest(testObject);
       } else {
@@ -76,6 +78,8 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
         } else {
           selectedTest.addTest(testObject);
         }
+        order.tests = selectedTest.getSelectedTest;
+        selectedOrder.setOrder = order;
       }
     }
 
@@ -183,15 +187,13 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                       price: list[index].price,
                       isTestSelected: isTestSelected(list[index].testObject),
                       tapOnButton: (test) {
-                        onBookButton(list[index].testObject);
-
                         Order order = selectedOrder.getOrder;
-
+                        onBookButton(list[index].testObject, order);
                         Widget widget = order.statusCode == 1
-                            ? PaymentScreeen()
+                            ? OrderSummaryPage()
                             : StepOneToBookTest();
 
-                        globalservice.navigate(context, widget);
+                        Get.offAll(widget);
 
                         if (selectedTest.getSelectedTest.isEmpty &&
                             selectedTest.getSelectedPackage.isEmpty) {

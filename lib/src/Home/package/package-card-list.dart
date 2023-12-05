@@ -3,16 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/models/package/package.dart';
 import 'package:sample_application/src/Home/package/packageService.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
+
 import '../../core/Provider/selected_order_provider.dart';
 import '../../core/Provider/selected_test_provider.dart';
 import '../../core/globalServices/global_service.dart';
-import '../../core/globalServices/payment/paymentScreen.dart';
 import '../../core/helper_widgets/package_card.dart';
 import '../../core/helper_widgets/slot-booking-card.dart';
 import '../models/order/order.dart';
-import 'package-detailPage.dart';
 import '../models/package/packageCard.dart';
+import '../order_tracker/order-summary/orderSummary.dart';
 import '../order_tracker/step1/step1.dart';
+import 'package-detailPage.dart';
 
 class PackageCardlistPage extends StatefulWidget {
   String title;
@@ -151,7 +152,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                           Order order = selectedOrder.getOrder;
 
                           Widget widget = order.statusCode == 1
-                              ? PaymentScreeen()
+                              ? OrderSummaryPage()
                               : StepOneToBookTest();
 
                           globalservice.navigate(context, widget);

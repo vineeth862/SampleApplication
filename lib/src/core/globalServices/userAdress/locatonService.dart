@@ -117,6 +117,12 @@ class UserCurrentLocation extends GetxController {
     adress = postalCode! + ', ' + locality!;
     location = RxString(place.subLocality.toString());
     area = RxString(add[4].name.toString());
+    for (Placemark place in add) {
+      if (place.name!.length > area.toString().length) {
+        area = RxString(place.name.toString());
+      }
+    }
+
     pinCode = RxString(postalCode.toString());
     SearchListState().filterLabOnPinCode();
     validatePincode(pinCode);

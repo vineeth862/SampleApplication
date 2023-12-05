@@ -15,6 +15,7 @@ import '../core/Provider/selected_test_provider.dart';
 import '../core/globalServices/execution-stack/execution_stack_operation.dart';
 import '../core/helper_widgets/slot-booking-card.dart';
 import 'models/order/order.dart';
+import 'order_tracker/order-summary/orderSummary.dart';
 import 'order_tracker/step1/step1.dart';
 
 class HomePage extends StatefulWidget {
@@ -164,7 +165,7 @@ class HomePageState extends State<HomePage> {
                               Order order = selectedOrder.getOrder;
 
                               Widget widget = order.statusCode == 1
-                                  ? PaymentScreeen()
+                                  ? OrderSummaryPage()
                                   : StepOneToBookTest();
 
                               globalservice.navigate(context, widget);

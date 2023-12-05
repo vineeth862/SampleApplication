@@ -96,9 +96,10 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
             return OrderSummaryScreen(
               orderItems: orderItems,
               buttonClicked: () async {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => PaymentScreeen()));
-                // globalservice.navigate(context, PaymentScreeen());
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OrderSummaryPage()));
               },
             );
           }

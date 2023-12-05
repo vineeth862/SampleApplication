@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -103,31 +104,32 @@ class _StepOneScreenState extends State<StepOneScreen> {
   }
 
   Future<bool> UpdateWidget() async {
-    print(_formKey.currentState);
-    if (_formKey.currentState!.validate()) {
-      if (selectedOrder != null) {
-        Order order = selectedOrder!.getOrder;
-        order.self = isMySelfButtonSelected;
-        order.tests = selectedTest!.getSelectedTest;
-        order.packages = selectedTest!.getSelectedPackage;
-        if (isMySelfButtonSelected) {
-          var user = await Get.put(UserRepository()).getUser();
-          order.user?.gender = selectedGender;
-          order.user?.gender = selectedGender;
-          order.user = User(
-              userName: user.data()?['userName'],
-              age: _agecontroller.text,
-              gender: selectedGender,
-              mobile: user.data()?['mobile']);
-        } else {
-          order.user = User(
-              userName: _namecontroller.text,
-              age: _agecontroller.text,
-              gender: selectedGender);
-        }
+    // print(_formKey.currentState);
+    // if (_formKey.currentState!.validate()) {
+    if (selectedOrder != null) {
+      Order order = selectedOrder!.getOrder;
+      order.self = isMySelfButtonSelected;
+      order.tests = selectedTest!.getSelectedTest;
+      order.packages = selectedTest!.getSelectedPackage;
+      // if (isMySelfButtonSelected) {
+      var user = await Get.put(UserRepository()).getUser();
+      order.patient?.gender = selectedGender;
+      order.patient?.gender = selectedGender;
+      order.patient = User(
+          userName: user.data()?['userName'],
+          age: _agecontroller.text,
+          gender: selectedGender,
+          mobile: user.data()?['mobile']);
+      order.user = order.patient;
+      // } else {
+      //   order.user = User(
+      //       userName: _namecontroller.text,
+      //       age: _agecontroller.text,
+      //       gender: selectedGender);
+      // }
 
-        selectedOrder!.setOrder = order;
-      }
+      selectedOrder!.setOrder = order;
+      // }
       return true;
     } else {
       return false;
@@ -396,9 +398,14 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                           0 &&
                                       selectedTest!.getSelectedTest.length ==
                                           0)) {
-                                    this
-                                        .globalservice
-                                        .navigate(context, SearchBarPage());
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (c) => SearchBarPage()));
+                                    // this
+                                    //     .globalservice
+                                    //     .navigate(context, SearchBarPage());
+                                    selectedOrder!.resetOrder();
                                   }
                                 },
                                 icon: Icon(
@@ -424,8 +431,16 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                           0 &&
                                       selectedTest!.getSelectedTest.length ==
                                           0)) {
-                                    this.globalservice.navigate(context,
-                                        PackageSuggetionList(labCode: ""));
+                                    // this.globalservice.navigate(
+                                    //       context,
+                                    //     );
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (c) =>
+                                                PackageSuggetionList(
+                                                    labCode: "")));
+                                    // Get.to();
                                   }
                                 },
                                 icon: Icon(Icons.delete_outlined)),

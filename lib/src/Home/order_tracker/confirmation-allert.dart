@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/Provider/search_provider.dart';
+import '../../core/Provider/selected_order_provider.dart';
 import '../../core/Provider/selected_test_provider.dart';
 import '../../core/globalServices/global_service.dart';
 import '../explore/Search/Cards/filter-lab-list.dart';
@@ -17,6 +18,7 @@ class _AllertState extends State<Allert> {
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context);
     final searchState = Provider.of<SearchListState>(context);
+    final selectedOrder = Provider.of<SelectedOrderState>(context);
     GlobalService globalservice = GlobalService();
     return Container(
       width: 400,
@@ -64,6 +66,7 @@ class _AllertState extends State<Allert> {
                             ));
                       } else {
                         globalservice.navigate(context, SearchBarPage());
+                        selectedOrder!.resetOrder();
                       }
                     },
                     child: Text('Add Test'),

@@ -5,6 +5,8 @@ import 'package:sample_application/src/Home/models/order/order.dart';
 import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 
 import '../../../core/Provider/selected_order_provider.dart';
+import '../../../core/Provider/selected_test_provider.dart';
+import 'orderSummary.dart';
 
 class OrderTrackerDialog extends StatefulWidget {
   Order order;
@@ -17,7 +19,7 @@ class OrderTrackerDialog extends StatefulWidget {
 
 class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
   GlobalService globalservice = GlobalService();
-
+  SelectedTestState? selectedTest;
   SelectedOrderState? selectedOrder;
 
   String generateString(value) {
@@ -27,6 +29,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
   @override
   Widget build(BuildContext context) {
     selectedOrder = Provider.of<SelectedOrderState>(context);
+    selectedTest = Provider.of<SelectedTestState>(context);
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -328,10 +331,16 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                             ? ElevatedButton(
                                 onPressed: () {
                                   selectedOrder?.setOrder = widget.order;
+                                  widget.order.tests?.forEach((test) {
+                                    selectedTest?.addTest(test);
+                                  });
+                                  widget.order.packages?.forEach((package) {
+                                    selectedTest?.addPackage(package);
+                                  });
                                   globalservice.navigate(
-                                      context, PaymentScreeen());
+                                      context, OrderSummaryPage());
                                 },
-                                child: Text('Proceed Payment'),
+                                child: Text('Proceed'),
                               )
                             : Container(),
                       ],

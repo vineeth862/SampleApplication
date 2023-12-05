@@ -12,6 +12,8 @@ import '../../../core/Provider/selected_order_provider.dart';
 import '../../../core/Provider/selected_test_provider.dart';
 import '../../../core/globalServices/global_service.dart';
 import '../../../core/helper_widgets/slot-booking-card.dart';
+import '../../models/package/package.dart';
+import '../../models/test/test.dart';
 
 class StepThreeToBookTest extends StatefulWidget {
   @override
@@ -133,11 +135,22 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
 
                           orderObject.statusCode = 1;
                           orderObject.statusLabel = "Payment Pending";
+
+                          int totalAmmount = 0;
+                          orderObject.tests!.forEach((Test test) {
+                            totalAmmount += int.parse(test.price);
+                          });
+                          orderObject.packages!.forEach((Package package) {
+                            totalAmmount += int.parse(package.price.toString());
+                          });
+                          orderObject.totalPrice = totalAmmount;
+
+                          orderObject.createdDate =
+                              new DateTime.now().toString();
                           selectedOrder.setOrder = orderObject;
+
                           await selectedOrder.createOrder();
-                          this
-                              .globalservice
-                              .navigate(context, OrderSummaryPage());
+                          Get.off(OrderSummaryPage());
                         } else {
                           Get.snackbar(
                               "Info", "Please Select Both Date and Time",
