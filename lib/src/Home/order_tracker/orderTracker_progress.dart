@@ -41,17 +41,17 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     await selectedOrder.fetchStatus(order!.statusCode);
     status = selectedOrder.getStatus;
     statusCode = status!.statusCode!;
-    if (status!.statusCode! <= 2) {
+    if (status!.statusCode == 1) {
       setState(() {
         _currentStep = 0;
       });
     }
-    if (status!.statusCode! <= 3) {
+    if (status!.statusCode == 2) {
       setState(() {
         _currentStep = 1;
       });
     }
-    if (status!.statusCode! < 12) {
+    if (status!.statusCode! < 12 && status!.statusCode! >= 6) {
       setState(() {
         _currentStep = 2;
       });
@@ -113,27 +113,31 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             //   ),
             // ),
 
-            Row(
-              children: [
-                Expanded(
-                  child: ListTile(
-                    title: Text(
-                      "OrderID: ",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    subtitle: Text(
-                      order!.orderNumber.toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(
-                              color: Theme.of(context).colorScheme.primary),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child:
+                          // ListTile(
+                          //   title: Text(
+                          //     "OrderID: ",
+                          //     style: Theme.of(context).textTheme.headlineMedium,
+                          //   ),
+                          //   subtitle: Text(
+                          //     order!.orderNumber.toString(),
+                          //     style: Theme.of(context)
+                          //         .textTheme
+                          //         .headlineSmall!
+                          //         .copyWith(
+                          //             color: Theme.of(context).colorScheme.primary),
+                          //   ),
+                          // ),
+                          RichTextWidget(
+                    headline: "OrderId",
+                    title: order!.orderNumber.toString(),
+                  )),
+                  ElevatedButton(
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -153,13 +157,15 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                         backgroundColor:
                             Theme.of(context).colorScheme.tertiary),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0),
-              child: Text(status!.statusLabel.toString(),
-                  style: Theme.of(context).textTheme.headlineMedium),
+              child: RichTextWidget(
+                headline: "Status",
+                title: status!.statusLabel.toString(),
+              ),
             ),
             Container(
               //width: double.infinity,
@@ -341,8 +347,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                           ),
                         ],
                       ),
-                      isActive: statusCode >= 3,
-                      state: statusCode >= 3
+                      isActive: statusCode >= 1,
+                      state: statusCode >= 1
                           ? StepState.complete
                           : StepState.disabled),
                   Step(
@@ -352,8 +358,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                       //     orderObj: widget.orderObj,
                       //     details: proceedToNextStep),
                       content: Container(child: Text("Step 2")),
-                      isActive: statusCode >= 3,
-                      state: statusCode >= 3
+                      isActive: statusCode >= 2,
+                      state: statusCode >= 2
                           ? StepState.complete
                           : StepState.disabled),
                   Step(
@@ -388,15 +394,18 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                   ),
                                   RichTextWidget(
                                       headline: "Assigned Plebo",
-                                      title:
-                                          order!.technician!.name.toString()),
+                                      title: order!.technician == null
+                                          ? ""
+                                          : order!.technician!.name.toString()),
                                   SizedBox(
                                     height: 5,
                                   ),
                                   RichTextWidget(
                                       headline: "Plebo Contact",
-                                      title:
-                                          order!.technician!.phone.toString()),
+                                      title: order!.technician == null
+                                          ? ""
+                                          : order!.technician!.phone
+                                              .toString()),
                                   // Divider(
                                   //   thickness: 0.6,
                                   // ),
@@ -408,6 +417,15 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                           SizedBox(
                             height: 10,
                           ),
+                          // Stepper(
+                          //   type: StepperType.horizontal,
+                          //   currentStep: 0,
+                          //   steps: [
+                          //     Step(
+                          //         title: Text("Sample Collection Pending"),
+                          //         content: Container())
+                          //   ],
+                          // ),
                           Text(
                             "Feed Back for plebo",
                             style: Theme.of(context).textTheme.headlineMedium,

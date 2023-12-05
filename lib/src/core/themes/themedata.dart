@@ -6,8 +6,8 @@ final ThemeData theme = ThemeData(
   primarySwatch: Colors.deepPurple,
   fontFamily: GoogleFonts.notoSans().fontFamily,
   colorScheme: const ColorScheme(
-      //primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
-      //primary: Color.fromRGBO(235, 93, 22, 0.984),
+    //primary: Color.fromRGBO(176, 113, 187, 1), // Light purple color
+    //primary: Color.fromRGBO(235, 93, 22, 0.984),
 
       primary: Color.fromRGBO(189, 73, 50, 1),
       primaryContainer: Color.fromRGBO(189, 73, 50, 1),
