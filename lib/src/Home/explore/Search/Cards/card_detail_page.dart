@@ -174,21 +174,29 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     String userKey =
                                         globalservice.getCurrentUserKey();
                                     if (userKey != "null") {
+                                      Order order = selectedOrder.getOrder;
                                       if (selectedTest.getSelectedTest
                                           .contains(widget.test)) {
                                         selectedTest.removeTest(widget.test);
+                                        order.tests =
+                                            selectedTest.getSelectedTest;
                                       } else {
                                         selectedTest.addTest(widget.test);
+                                        order.tests =
+                                            selectedTest.getSelectedTest;
                                       }
-                                      Order order = selectedOrder.getOrder;
-                                      Widget screen = order.statusCode == 1
-                                          ? OrderSummaryScreen()
-                                          : order.tests!.length > 0 ||
-                                                  order.packages!.length > 0
-                                              ? StepOneToBookTest()
-                                              : SearchBarPage();
-
-                                      Get.off(screen);
+                                      if (order.statusCode == 1 &&
+                                              order.tests!.length > 0 ||
+                                          order.packages!.length > 0) {
+                                        Get.off(OrderSummaryScreen());
+                                      } else if (order.tests!.length > 0 ||
+                                          order.packages!.length > 0) {
+                                        Get.off(StepOneToBookTest());
+                                      } else {
+                                        Get.off(SearchBarPage());
+                                        selectedOrder.resetOrder();
+                                        selectedTest.removeAllTest();
+                                      }
                                     } else {
                                       showDialog(
                                           context: context,

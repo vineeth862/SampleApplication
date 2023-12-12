@@ -39,8 +39,14 @@ class SelectedTestState with ChangeNotifier {
     notifyListeners();
   }
 
-  void addPackage(package) async {
-    selectedPackage.add(package);
+  void addPackage(Package package) async {
+    if (selectedPackage
+            .where((element) => package.packageCode == element.packageCode)
+            .length ==
+        0) {
+      selectedPackage.add(package);
+    }
+
     await getTotalSum();
     notifyListeners();
   }

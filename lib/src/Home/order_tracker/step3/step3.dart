@@ -149,7 +149,6 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                               new DateTime.now().toString();
                           selectedOrder.setOrder = orderObject;
 
-                          await selectedOrder.createOrder();
                           Get.off(OrderSummaryScreen());
                         } else {
                           Get.snackbar(

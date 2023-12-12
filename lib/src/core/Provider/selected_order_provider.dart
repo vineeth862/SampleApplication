@@ -60,8 +60,8 @@ class SelectedOrderState extends ChangeNotifier {
           .collection("order")
           .doc(order.orderNumber)
           .set(order.toJson())
-          .whenComplete(
-              () => {UserRepository().addOrderIdsToUser(order.orderNumber)})
+          .whenComplete(() =>
+              {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
           .catchError((error, stackTrace) {
         print("Something went wrong");
       });
@@ -74,8 +74,8 @@ class SelectedOrderState extends ChangeNotifier {
           .collection("order")
           .doc(order.orderNumber)
           .set(order.toJson())
-          .whenComplete(
-              () => {UserRepository().addOrderIdsToUser(order.orderNumber)})
+          .whenComplete(() =>
+              {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
           .catchError((error, stackTrace) {
         print("Something went wrong");
       });
@@ -83,6 +83,11 @@ class SelectedOrderState extends ChangeNotifier {
 
     notifyListeners();
     return true;
+  }
+
+  removeOrder(orderNumber) async {
+    await _db.collection("order").doc(orderNumber).delete();
+    UserRepository().addOrderIdsToUser(order.orderNumber, false);
   }
 
   Future<String> fetchStatus(statusCode) async {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../core/Provider/search_provider.dart';
 import '../../core/Provider/selected_order_provider.dart';
@@ -6,6 +7,7 @@ import '../../core/Provider/selected_test_provider.dart';
 import '../../core/globalServices/global_service.dart';
 import '../explore/Search/Cards/filter-lab-list.dart';
 import '../explore/Search/search_field.dart';
+import '../models/order/order.dart';
 import '../package/package-suggetion-list.dart';
 
 class Allert extends StatefulWidget {
@@ -51,19 +53,24 @@ class _AllertState extends State<Allert> {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
+                      Order order = selectedOrder.getOrder;
                       if (selectedTest.getSelectedTest.isNotEmpty ||
                           selectedTest.getSelectedPackage.isNotEmpty) {
                         dynamic item = selectedTest.getSelectedPackage.isEmpty
                             ? selectedTest.getSelectedTest.elementAt(0)
                             : selectedTest.getSelectedPackage.elementAt(0);
                         await searchState.cardClicked(item.labCode, false);
-                        globalservice.navigate(
-                            context,
-                            FilteredLabCardlistPage(
-                              title: item.labName,
-                              labCode: item.labCode,
-                              location: "location",
-                            ));
+                        Get.off(FilteredLabCardlistPage(
+                          title: item.labName,
+                          labCode: item.labCode,
+                          location: "location",
+                        ));
+                      } else if (order.labCode != null) {
+                        Get.off(FilteredLabCardlistPage(
+                          title: order.labName!,
+                          labCode: order.labCode!,
+                          location: "location",
+                        ));
                       } else {
                         globalservice.navigate(context, SearchBarPage());
                         selectedOrder!.resetOrder();
@@ -73,6 +80,7 @@ class _AllertState extends State<Allert> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      Order order = selectedOrder.getOrder;
                       if (selectedTest.getSelectedTest.isNotEmpty ||
                           selectedTest.getSelectedPackage.isNotEmpty) {
                         String labCode = selectedTest.getSelectedTest.isNotEmpty
@@ -80,11 +88,11 @@ class _AllertState extends State<Allert> {
                             : selectedTest.getSelectedPackage
                                 .elementAt(0)
                                 .labCode;
-                        globalservice.navigate(
-                            context, PackageSuggetionList(labCode: labCode));
+                        Get.off(PackageSuggetionList(labCode: labCode));
+                      } else if (order.labCode != null) {
+                        Get.off(PackageSuggetionList(labCode: order.labCode!));
                       } else {
-                        globalservice.navigate(
-                            context, PackageSuggetionList(labCode: ""));
+                        Get.off(PackageSuggetionList(labCode: ""));
                       }
                     },
                     child: const Text('Add Package'),

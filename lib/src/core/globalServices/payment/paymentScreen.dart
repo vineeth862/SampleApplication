@@ -1,5 +1,6 @@
 import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import '../../../Home/models/order/order.dart';
@@ -33,7 +34,7 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
         selectedTest.removeAllPackage();
       });
     }
-    globalservice.navigate(context, OrderTrackingScreen(order: order));
+    Get.offAll(OrderTrackingScreen(order: order));
   }
 
   GlobalService globalservice = GlobalService();

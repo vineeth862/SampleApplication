@@ -27,6 +27,7 @@ class OrderSummaryScreen extends StatefulWidget {
 class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   double total = 0.0;
   Order order = new Order();
+  late SelectedOrderState selectedOrder;
   void calculateTotalAmount(selectedTest) {
     for (var item in getItems()) {
       total += int.parse(item['price']); //* item['quantity'];
@@ -34,6 +35,18 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     // setState(() {
     // widget.orderItems['totalAmount'] = total;
     // });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      Order order = selectedOrder.getOrder;
+      if (order.orderNumber != null) {
+        selectedOrder.createOrder();
+      }
+    });
   }
 
   getItems() {
@@ -65,10 +78,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   @override
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
-    final selectedOrder = Provider.of<SelectedOrderState>(context);
+    selectedOrder = Provider.of<SelectedOrderState>(context);
     order = selectedOrder.getOrder;
     return WillPopScope(
       onWillPop: () async {
+        if (order.tests!.length == 0 && order.packages!.length == 0) {
+          selectedOrder.removeOrder(order.orderNumber);
+        }
         Get.offAll(OrderTrackerHome(
           from: 'cart',
         ));

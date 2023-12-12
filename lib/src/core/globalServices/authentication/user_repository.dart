@@ -65,12 +65,16 @@ class UserRepository extends GetxController {
     }
   }
 
-  addOrderIdsToUser(orderId) async {
+  addOrderIdsToUser(orderId, add) async {
     String userKey = globalservice.getCurrentUserKey();
 
     List orders = await this.getOrderIds();
     if (orders.where((order) => order == orderId).length == 0) {
       orders.add(orderId);
+    }
+
+    if (!add) {
+      orders.remove(orderId);
     }
 
     //need to change this

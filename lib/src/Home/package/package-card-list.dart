@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/models/package/package.dart';
 import 'package:sample_application/src/Home/package/packageService.dart';
@@ -71,6 +72,13 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
           selectedPackage.addPackage(packageObj);
         }
       }
+      Order order = selectedOrder.getOrder;
+      order.packages = selectedPackage.getSelectedPackage;
+      if (order.statusCode == 1) {
+        Get.off(OrderSummaryScreen());
+      } else if (order.tests!.length > 0 || order.packages!.length > 0) {
+        Get.off(StepOneToBookTest());
+      }
     }
 
     return Scaffold(
@@ -108,8 +116,6 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         tapOnButton: (package) {
                           onBookButton(list[index].packageObject!);
 
-                          globalservice.navigate(context, StepOneToBookTest());
-
                           if (selectedPackage.getSelectedPackage.isEmpty) {
                             selectedPackage.setDetailExpanded(false);
                           }
@@ -140,9 +146,11 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         title: " Test/Package Selected",
                         contentColor: false,
                         content: Price(
-                          finalAmount: selectedPackage.getTotalSum(),
-                          discount: "10",
-                          discountedAmount: "100",
+                          finalAmount: selectedPackage.totalPriceSum.toString(),
+                          discount: selectedPackage.discount.toString(),
+                          discountedAmount: selectedPackage
+                              .totalDiscountedPriceSum
+                              .toString(),
                           isTotalPricePresent: true,
                         ),
                         height: slotBookingCardHeight,
