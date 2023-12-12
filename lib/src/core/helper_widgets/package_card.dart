@@ -216,9 +216,9 @@ class PackageCardWidget extends StatelessWidget {
                           // You can navigate to a new screen or trigger some other action.
                         },
                         child: Price(
-                          discount: "25",
+                          discount: package.discount,
                           finalAmount: package.price.toString(),
-                          discountedAmount: "100",
+                          discountedAmount: package.discountedPrice,
                           isTotalPricePresent: false,
                         )
 

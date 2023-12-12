@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
-import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/Home/explore/Search/search_field.dart';
 import 'package:sample_application/src/Home/models/test/test.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
+
 import '../../../../core/Provider/selected_order_provider.dart';
 import '../../../../core/Provider/selected_test_provider.dart';
-import '../../../../core/globalServices/payment/paymentScreen.dart';
 import '../../../../core/helper_widgets/price_container.dart';
 import '../../../../core/helper_widgets/slot-booking-card.dart';
 import '../../../models/order/order.dart';
-import '../../../order_tracker/order-summary/orderSummary.dart';
+import '../../../order_tracker/order-summary/orderSumaryScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class CardDetailPage extends StatefulWidget {
@@ -132,8 +134,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             Text("Price : ",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
-                            Text("₹" + widget.test.price,
-                                style: Theme.of(context).textTheme.bodyMedium)
+                            Price(
+                              discount: widget.test.discount,
+                              isTotalPricePresent: false,
+                              discountedAmount: widget.test.discountedPrice,
+                              finalAmount: widget.test.price,
+                            )
+                            // Text("₹" + widget.test.price,
+                            //     style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -172,6 +180,15 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       } else {
                                         selectedTest.addTest(widget.test);
                                       }
+                                      Order order = selectedOrder.getOrder;
+                                      Widget screen = order.statusCode == 1
+                                          ? OrderSummaryScreen()
+                                          : order.tests!.length > 0 ||
+                                                  order.packages!.length > 0
+                                              ? StepOneToBookTest()
+                                              : SearchBarPage();
+
+                                      Get.off(screen);
                                     } else {
                                       showDialog(
                                           context: context,
@@ -562,7 +579,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             Order order = selectedOrder.getOrder;
 
                             Widget widget = order.statusCode == 1
-                                ? OrderSummaryPage()
+                                ? OrderSummaryScreen()
                                 : StepOneToBookTest();
 
                             globalservice.navigate(context, widget);

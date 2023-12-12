@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/models/order/order.dart';
-import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
+import 'package:sample_application/src/Home/order_tracker/order-summary/orderSumaryScreen.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
 
 import '../../../core/Provider/selected_order_provider.dart';
 import '../../../core/Provider/selected_test_provider.dart';
-import 'orderSummary.dart';
 
 class OrderTrackerDialog extends StatefulWidget {
   Order order;
@@ -331,14 +331,21 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                             ? ElevatedButton(
                                 onPressed: () {
                                   selectedOrder?.setOrder = widget.order;
+                                  Future.delayed(Duration(milliseconds: 200),
+                                      () {
+                                    widget.order.packages?.forEach((package) {
+                                      selectedTest?.addPackage(package);
+                                    });
+                                  });
                                   widget.order.tests?.forEach((test) {
                                     selectedTest?.addTest(test);
                                   });
-                                  widget.order.packages?.forEach((package) {
-                                    selectedTest?.addPackage(package);
+
+                                  Future.delayed(Duration(milliseconds: 400),
+                                      () {
+                                    globalservice.navigate(
+                                        context, OrderSummaryScreen());
                                   });
-                                  globalservice.navigate(
-                                      context, OrderSummaryPage());
                                 },
                                 child: Text('Proceed'),
                               )

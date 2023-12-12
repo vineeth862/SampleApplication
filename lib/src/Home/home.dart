@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/doctor_consultation.dart/doctorConsultation.dart';
 import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/home_service.dart';
+import 'package:sample_application/src/Home/order_tracker/order-summary/orderSumaryScreen.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/Home/radiology/radiology.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
@@ -15,7 +16,6 @@ import '../core/Provider/selected_test_provider.dart';
 import '../core/globalServices/execution-stack/execution_stack_operation.dart';
 import '../core/helper_widgets/slot-booking-card.dart';
 import 'models/order/order.dart';
-import 'order_tracker/order-summary/orderSummary.dart';
 import 'order_tracker/step1/step1.dart';
 
 class HomePage extends StatefulWidget {
@@ -165,7 +165,7 @@ class HomePageState extends State<HomePage> {
                               Order order = selectedOrder.getOrder;
 
                               Widget widget = order.statusCode == 1
-                                  ? OrderSummaryPage()
+                                  ? OrderSummaryScreen()
                                   : StepOneToBookTest();
 
                               globalservice.navigate(context, widget);

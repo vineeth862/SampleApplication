@@ -39,18 +39,21 @@ class SelectedTestState with ChangeNotifier {
     notifyListeners();
   }
 
-  void addPackage(package) {
+  void addPackage(package) async {
     selectedPackage.add(package);
+    await getTotalSum();
     notifyListeners();
   }
 
-  void removePackage(package) {
+  void removePackage(package) async {
     selectedPackage.remove(package);
+    await getTotalSum();
     notifyListeners();
   }
 
-  void removeAllPackage() {
+  void removeAllPackage() async {
     selectedPackage.clear();
+    await getTotalSum();
     notifyListeners();
   }
 
@@ -75,6 +78,10 @@ class SelectedTestState with ChangeNotifier {
     for (var item in selectedTest) {
       tempTotalPriceSum += int.parse(item.price);
       tempTotalDiscountedPriceSum += int.parse(item.discountedPrice);
+    }
+    for (var item in selectedPackage) {
+      tempTotalPriceSum += int.parse(item.price.toString());
+      tempTotalDiscountedPriceSum += int.parse(item.discountedPrice.toString());
     }
     totalPriceSum = tempTotalPriceSum;
     totalDiscountedPriceSum = tempTotalDiscountedPriceSum;

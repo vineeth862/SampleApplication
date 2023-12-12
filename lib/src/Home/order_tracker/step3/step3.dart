@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/models/order/booked.dart';
 import 'package:sample_application/src/Home/order_tracker/step3/step3-screen.dart';
-import 'package:sample_application/src/Home/order_tracker/order-summary/orderSummary.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:sample_application/src/Home/models/order/order.dart' as order;
 import 'package:intl/intl.dart';
@@ -14,6 +13,7 @@ import '../../../core/globalServices/global_service.dart';
 import '../../../core/helper_widgets/slot-booking-card.dart';
 import '../../models/package/package.dart';
 import '../../models/test/test.dart';
+import '../order-summary/orderSumaryScreen.dart';
 
 class StepThreeToBookTest extends StatefulWidget {
   @override
@@ -150,7 +150,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                           selectedOrder.setOrder = orderObject;
 
                           await selectedOrder.createOrder();
-                          Get.off(OrderSummaryPage());
+                          Get.off(OrderSummaryScreen());
                         } else {
                           Get.snackbar(
                               "Info", "Please Select Both Date and Time",
@@ -166,7 +166,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                               //colorText: Theme.of(context).colorScheme.primary,
                               );
                         }
-                        // OrderSummaryPage()
+                        // OrderSummaryScreen()
                       },
                       expandDetail: () {
                         setState(() {

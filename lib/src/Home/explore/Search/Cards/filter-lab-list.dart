@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/Home/order_tracker/order-summary/orderSummary.dart';
+import 'package:sample_application/src/Home/explore/Search/search_field.dart';
+
 import '../../../../core/Provider/search_provider.dart';
 import '../../../../core/Provider/selected_order_provider.dart';
 import '../../../../core/Provider/selected_test_provider.dart';
 import '../../../../core/globalServices/global_service.dart';
-import '../../../../core/globalServices/payment/paymentScreen.dart';
 import '../../../../core/helper_widgets/test_card.dart';
 import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
 import '../../../models/test/testcard.dart';
+import '../../../order_tracker/order-summary/orderSumaryScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 import '../../explore.service.dart';
 import 'card_detail_page.dart';
@@ -189,11 +190,15 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                       tapOnButton: (test) {
                         Order order = selectedOrder.getOrder;
                         onBookButton(list[index].testObject, order);
-                        Widget widget = order.statusCode == 1
-                            ? OrderSummaryPage()
-                            : StepOneToBookTest();
 
-                        Get.offAll(widget);
+                        Widget widget = order.statusCode == 1
+                            ? OrderSummaryScreen()
+                            : order.tests!.length > 0 ||
+                                    order.packages!.length > 0
+                                ? StepOneToBookTest()
+                                : SearchBarPage();
+
+                        Get.off(widget);
 
                         if (selectedTest.getSelectedTest.isEmpty &&
                             selectedTest.getSelectedPackage.isEmpty) {

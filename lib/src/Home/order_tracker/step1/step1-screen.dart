@@ -140,7 +140,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(test.testName),
+        Text(test.displayName),
         Price(
           discountedAmount: test.discountedPrice,
           isTotalPricePresent: false,
@@ -154,7 +154,15 @@ class _StepOneScreenState extends State<StepOneScreen> {
   Column generateListTileBodyForPackage(Package package) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(package.displayName), Text(package.price.toString())],
+      children: [
+        Text(package.displayName),
+        Price(
+          discountedAmount: package.discountedPrice,
+          isTotalPricePresent: false,
+          discount: package.discount,
+          finalAmount: package.price,
+        )
+      ],
     );
   }
 

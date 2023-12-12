@@ -13,7 +13,7 @@ import '../../../../core/globalServices/payment/paymentScreen.dart';
 import '../../../../core/helper_widgets/slot-booking-card.dart';
 import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';
-import '../../../order_tracker/order-summary/orderSummary.dart';
+import '../../../order_tracker/order-summary/orderSumaryScreen.dart';
 import '../../../order_tracker/step1/step1.dart';
 
 class FilteredTestCardlistPage extends StatefulWidget {
@@ -143,7 +143,7 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                             Order order = selectedOrder.getOrder;
 
                             Widget widget = order.statusCode == 1
-                                ? OrderSummaryPage()
+                                ? OrderSummaryScreen()
                                 : StepOneToBookTest();
                             Get.offAll(widget);
                           },

@@ -10,28 +10,53 @@ import 'package:sample_application/src/core/helper_widgets/price_container.dart'
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
 import '../../../core/globalServices/execution-stack/execution_stack_operation.dart';
-import '../../explore/Search/search_field.dart';
-import '../../home.dart';
+import '../../models/order/order.dart';
+import '../../models/package/package.dart';
+import '../../models/test/test.dart';
 import '../orderTracker_home.dart';
 
+// ignore: must_be_immutable
 class OrderSummaryScreen extends StatefulWidget {
-  Map<String, dynamic> orderItems = {};
-  Function() buttonClicked;
-  OrderSummaryScreen({required this.orderItems, required this.buttonClicked});
+  // Map<String, dynamic> orderItems = {};
+  // Function() buttonClicked;
+  OrderSummaryScreen();
   @override
   _OrderSummaryScreenState createState() => _OrderSummaryScreenState();
 }
 
 class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
-  void calculateTotalAmount() {
-    double total = 0.0;
-
-    for (var item in widget.orderItems['items']) {
+  double total = 0.0;
+  Order order = new Order();
+  void calculateTotalAmount(selectedTest) {
+    for (var item in getItems()) {
       total += int.parse(item['price']); //* item['quantity'];
     }
-    setState(() {
-      widget.orderItems['totalAmount'] = total;
-    });
+    // setState(() {
+    // widget.orderItems['totalAmount'] = total;
+    // });
+  }
+
+  getItems() {
+    return [
+      ...order.tests!.map((Test test) {
+        return {
+          'name': test.testName,
+          'price': test.price,
+          "discount": test.discount,
+          "discountedPrice": test.discountedPrice,
+          "testObj": test
+        };
+      }),
+      ...order.packages!.map((Package package) {
+        return {
+          'name': package.packageName,
+          'price': package.price,
+          "discount": package.discount,
+          "discountedPrice": package.discountedPrice,
+          'packageObj': package
+        };
+      })
+    ];
   }
 
   bool expandDetails = false;
@@ -41,13 +66,17 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   Widget build(BuildContext context) {
     final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     final selectedOrder = Provider.of<SelectedOrderState>(context);
+    order = selectedOrder.getOrder;
     return WillPopScope(
       onWillPop: () async {
         Get.offAll(OrderTrackerHome(
           from: 'cart',
         ));
-        selectedOrder.resetOrder();
-        selectedTest.removeAllTest();
+        Future.delayed(Duration(milliseconds: 200), () {
+          selectedOrder.resetOrder();
+          selectedTest.removeAllTest();
+        });
+
         return false;
       },
       child: Scaffold(
@@ -77,8 +106,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     //   ),
                     // ),
 
-                    Text(
-                        'Order Number: ${widget.orderItems == null ? "" : widget.orderItems['orderNumber']}',
+                    Text('Order Number: ${order.orderNumber}',
                         style: Theme.of(context).textTheme.headlineMedium),
                     SizedBox(
                       height: 10,
@@ -118,9 +146,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                               // ),
                               Expanded(
                                 child: Text(
-                                  widget.orderItems == null
-                                      ? ""
-                                      : widget.orderItems['address'].toString(),
+                                  order.address!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
@@ -152,10 +178,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              Text(
-                                  widget.orderItems == null
-                                      ? ""
-                                      : widget.orderItems['slot'].toString(),
+                              Text(order.booked!.slot!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
@@ -183,10 +206,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                  widget.orderItems == null
-                                      ? ""
-                                      : widget.orderItems['labName'].toString(),
+                              Text(order.labName!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -206,13 +226,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         shrinkWrap: true, // Set this to true
                         physics: NeverScrollableScrollPhysics(),
 
-                        itemCount: widget.orderItems == null
-                            ? 0
-                            : widget.orderItems['items'] == null
-                                ? 0
-                                : widget.orderItems['items'].length,
+                        itemCount: getItems().length,
                         itemBuilder: (context, index) {
-                          final item = widget.orderItems['items'][index];
+                          final item = getItems()[index];
                           return ListTile(
                             titleAlignment: ListTileTitleAlignment.center,
                             trailing: IconButton(
@@ -223,11 +239,42 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                     .inverseSurface,
                               ),
                               onPressed: () {
-                                setState(() {
+                                if (item["testObj"] != null) {
                                   selectedTest.removeTest(item["testObj"]);
-                                  widget.orderItems['items'].removeAt(index);
-                                  calculateTotalAmount();
-                                });
+                                } else {
+                                  selectedTest
+                                      .removePackage(item["packageObj"]);
+                                }
+                                Order order = selectedOrder.getOrder;
+                                order.tests = selectedTest.getSelectedTest;
+                                order.packages =
+                                    selectedTest.getSelectedPackage;
+                                selectedOrder.setOrder = order;
+                                selectedOrder.createOrder();
+                                //  ...selectedTest.getSelectedTest!
+                                //                                       .map((Test test) {
+                                //                                     return {
+                                //                                       'name': test.testName,
+                                //                                       'price': test.price,
+                                //                                       "discount": test.discount,
+                                //                                       "discountedPrice": test.discountedPrice,
+                                //                                       "testObj": test
+                                //                                     };
+                                //                                   }),
+                                //                                   ...selectedTest.getSelectedPackage!
+                                //                                       .map((Package package) {
+                                //                                     return {
+                                //                                       'name': package.packageName,
+                                //                                       'price': package.price,
+                                //                                       "discount": package.discount,
+                                //                                       "discountedPrice":
+                                //                                           package.discountedPrice,
+                                //                                       'packageObj': package
+                                //                                     };
+                                //                                   })
+
+                                // getItems(selectedTest).removeAt(2);
+                                calculateTotalAmount(selectedTest);
                               },
                             ),
                             title: Text(item['name']),
@@ -461,7 +508,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                   subContent: "",
                   hyperLink: false,
                   buttonClicked: () {
-                    widget.orderItems['totalAmount'];
+                    // widget.orderItems['totalAmount'];
                     // Widget widget = order.statusCode == 1
                     //     ? PaymentScreeen()
                     //     : StepOneToBookTest();

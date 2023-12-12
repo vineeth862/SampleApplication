@@ -5,13 +5,13 @@ import '../globalServices/global_service.dart';
 class Price extends StatelessWidget {
   String? finalAmount;
   bool isTotalPricePresent;
-  String? discount;
+  String discount;
 
   String? discountedAmount;
 
   Price(
       {this.finalAmount,
-      this.discount,
+      required this.discount,
       required this.isTotalPricePresent,
       required this.discountedAmount});
   GlobalService globalservice = GlobalService();

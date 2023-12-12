@@ -11,7 +11,7 @@ import '../../core/helper_widgets/package_card.dart';
 import '../../core/helper_widgets/slot-booking-card.dart';
 import '../models/order/order.dart';
 import '../models/package/packageCard.dart';
-import '../order_tracker/order-summary/orderSummary.dart';
+import '../order_tracker/order-summary/orderSumaryScreen.dart';
 import '../order_tracker/step1/step1.dart';
 import 'package-detailPage.dart';
 
@@ -140,7 +140,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                         title: " Test/Package Selected",
                         contentColor: false,
                         content: Price(
-                          finalAmount: "3432",
+                          finalAmount: selectedPackage.getTotalSum(),
                           discount: "10",
                           discountedAmount: "100",
                           isTotalPricePresent: true,
@@ -152,7 +152,7 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
                           Order order = selectedOrder.getOrder;
 
                           Widget widget = order.statusCode == 1
-                              ? OrderSummaryPage()
+                              ? OrderSummaryScreen()
                               : StepOneToBookTest();
 
                           globalservice.navigate(context, widget);

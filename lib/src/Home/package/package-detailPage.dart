@@ -9,7 +9,8 @@ import '../../core/Provider/selected_test_provider.dart';
 import '../../core/globalServices/payment/paymentScreen.dart';
 import '../../core/helper_widgets/price_container.dart';
 import '../../core/helper_widgets/slot-booking-card.dart';
-import '../order_tracker/order-summary/orderSummary.dart';
+import '../order_tracker/order-summary/orderSumaryScreen.dart';
+
 import '../order_tracker/step1/step1.dart';
 import '../models/order/order.dart';
 
@@ -134,8 +135,14 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                             Text("Price : ",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
-                            Text("₹" + widget.package.price.toString(),
-                                style: Theme.of(context).textTheme.bodyMedium)
+                            Price(
+                              discount: widget.package.discount,
+                              isTotalPricePresent: false,
+                              discountedAmount: widget.package.discountedPrice,
+                              finalAmount: widget.package.price,
+                            )
+                            // Text("₹" + widget.package.price.toString(),
+                            //     style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
                         const SizedBox(
@@ -168,11 +175,14 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                     String userKey =
                                         globalservice.getCurrentUserKey();
                                     if (userKey != "null") {
-                                      if (selectedTest.getSelectedTest
+                                      if (selectedTest.getSelectedPackage
                                           .contains(widget.package)) {
-                                        selectedTest.removeTest(widget.package);
+                                        selectedTest
+                                            .removePackage(widget.package);
                                       } else {
-                                        selectedTest.addTest(widget.package);
+                                        selectedTest.addPackage(widget.package);
+                                        globalservice.navigate(
+                                            context, StepOneToBookTest());
                                       }
                                     } else {
                                       showDialog(
@@ -225,21 +235,21 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                                           });
                                     }
                                   },
-                                  child: !selectedTest.getSelectedTest
+                                  child: !selectedTest.getSelectedPackage
                                           .contains(widget.package)
                                       ? Text("BOOK")
                                       : Text("BOOKED"),
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.all(0),
                                     foregroundColor: !selectedTest
-                                            .getSelectedTest
+                                            .getSelectedPackage
                                             .contains(widget.package)
                                         ? Theme.of(context).colorScheme.primary
                                         : Theme.of(context)
                                             .colorScheme
                                             .background,
                                     backgroundColor: !selectedTest
-                                            .getSelectedTest
+                                            .getSelectedPackage
                                             .contains(widget.package)
                                         ? Theme.of(context)
                                             .colorScheme
@@ -552,18 +562,20 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                           contentColor: false,
                           height: slotBookingCardHeight,
                           content: Price(
-                            finalAmount: "3432",
-                            discount: "10",
-                            isTotalPricePresent: true,
-                            discountedAmount: "100",
-                          ),
+                              finalAmount:
+                                  selectedTest.totalPriceSum.toString(),
+                              discount: selectedTest.discount.toString(),
+                              isTotalPricePresent: true,
+                              discountedAmount: selectedTest
+                                  .totalDiscountedPriceSum
+                                  .toString()),
                           subContent: "",
                           hyperLink: false,
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;
 
                             Widget widget = order.statusCode == 1
-                                ? OrderSummaryPage()
+                                ? OrderSummaryScreen()
                                 : StepOneToBookTest();
 
                             globalservice.navigate(context, widget);
