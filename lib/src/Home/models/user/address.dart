@@ -7,13 +7,18 @@ class address {
   String? pincode;
   String? floorNumber;
   String? houseNumber;
+  String? firstName;
+  String? lastName;
+  String? phoneNumber;
 
-  address({
-    this.fullAddress,
-    this.pincode,
-    this.floorNumber,
-    this.houseNumber,
-  });
+  address(
+      {this.fullAddress,
+      this.pincode,
+      this.floorNumber,
+      this.houseNumber,
+      this.firstName,
+      this.lastName,
+      this.phoneNumber});
 
   factory address.fromJson(Map<String, dynamic> json) =>
       _$addressFromJson(json);

@@ -23,13 +23,17 @@ class _addressOperationState extends State<addressOperation> {
 
   var Controller = Get.put((UserRepository()));
   final myController = Get.find<UserCurrentLocation>();
-  List<address> items = [];
-  concatenatedAddressList() async {
-    List<Map<String, dynamic>> items2 =
+
+  //var fetchedAddress = UserRepository.instance.getAdress();
+
+  List<address> concatenatedAddressList = [];
+  concatenateAddressList() async {
+    List<Map<String, dynamic>> fetchedAddress =
         await UserRepository.instance.getAdress();
+    //print(fetchedAddress.toList());
     bool dataPresent = false;
     List<address> fullAddress = [];
-    items2.forEach((location) {
+    fetchedAddress.forEach((location) {
       address addressObj = address();
       String new1 = '';
       if (location["houseNumber"] != null) {
@@ -44,28 +48,29 @@ class _addressOperationState extends State<addressOperation> {
       new1 += location["pincode"];
       addressObj.fullAddress = new1;
       addressObj.pincode = location["pincode"];
-
+      addressObj.firstName = location['firstName'];
+      addressObj.phoneNumber = location['phoneNumber'];
       fullAddress.add(addressObj);
     });
     setState(() {
-      items = fullAddress;
+      concatenatedAddressList = fullAddress;
     });
 
-    if (items.length != 0) {
+    if (concatenatedAddressList.length != 0) {
       dataPresent = true;
     }
   }
 
-  // List<String> items1 = List.generate(18,
+  // List<String> concatenatedAddressList1 = List.generate(18,
   //     (index) => '4/5, 1st cross road, Byrappa Layout, whitefield, Bangalore');
 
   bool isButtonEnabled = false;
-  bool isItemsNotPresent = false;
+  bool isconcatenatedAddressListNotPresent = false;
   int visibleItemCount = 5;
 
-  void _loadMoreItems() {
+  void _loadMoreconcatenatedAddressList() {
     setState(() {
-      if (visibleItemCount < items.length) {
+      if (visibleItemCount < concatenatedAddressList.length) {
         visibleItemCount += 5;
       } else {
         visibleItemCount = visibleItemCount;
@@ -79,7 +84,7 @@ class _addressOperationState extends State<addressOperation> {
     super.initState();
     Future.delayed(Duration.zero, () {
       globalservice.showLoader();
-      concatenatedAddressList();
+      concatenateAddressList();
     });
     Future.delayed(Duration(seconds: 1), () {
       globalservice.hideLoader();
@@ -89,8 +94,8 @@ class _addressOperationState extends State<addressOperation> {
   //Remove address in local and databse
   void _removeItem(int index) {
     setState(() {
-      //String f = items[index];
-      items.removeAt(index);
+      //String f = concatenatedAddressList[index];
+      concatenatedAddressList.removeAt(index);
       UserRepository.instance.deleteAddress(index);
     });
   }
@@ -99,15 +104,16 @@ class _addressOperationState extends State<addressOperation> {
   Widget build(BuildContext context) {
     bool isButtonEnabled = false;
 
-    bool isItemsNotPresent = false;
+    bool isconcatenatedAddressListNotPresent = false;
 
-    if (items.length == 0) {
-      isItemsNotPresent = true;
+    if (concatenatedAddressList.length == 0) {
+      isconcatenatedAddressListNotPresent = true;
     }
-    if (items.length < visibleItemCount && isItemsNotPresent == false) {
-      visibleItemCount = items.length;
+    if (concatenatedAddressList.length < visibleItemCount &&
+        isconcatenatedAddressListNotPresent == false) {
+      visibleItemCount = concatenatedAddressList.length;
     }
-    if (visibleItemCount < items.length) {
+    if (visibleItemCount < concatenatedAddressList.length) {
       isButtonEnabled = true;
     }
     //print(widget.routeDetails.toString() + " hii");
@@ -169,7 +175,7 @@ class _addressOperationState extends State<addressOperation> {
         SizedBox(
           height: 20,
         ),
-        isItemsNotPresent
+        isconcatenatedAddressListNotPresent
             ? Column(
                 children: [
                   SizedBox(
@@ -191,14 +197,16 @@ class _addressOperationState extends State<addressOperation> {
                   itemCount:
                       visibleItemCount + 1, // Add 1 for the "Load More" button
                   itemBuilder: (context, index) {
-                    //final item = items[index];
+                    //final item = concatenatedAddressList[index];
                     if (index < visibleItemCount) {
                       return GestureDetector(
                         onTap: () async {
                           if (widget.routeDetails.toString() ==
                               "InitialAdress") {
                             myController.updateGlobalString(
-                                items[index].pincode.toString());
+                                concatenatedAddressList[index]
+                                    .pincode
+                                    .toString());
                             BuildContext currentContext = context;
                             //globalservice.showLoader();
 
@@ -228,7 +236,25 @@ class _addressOperationState extends State<addressOperation> {
                                   Expanded(
                                     child: ListTile(
                                       title: Text(
-                                          items[index].fullAddress.toString()),
+                                        concatenatedAddressList[index]
+                                                .firstName
+                                                .toString() +
+                                            ", " +
+                                            concatenatedAddressList[index]
+                                                .phoneNumber
+                                                .toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary),
+                                      ),
+                                      subtitle: Text(
+                                          concatenatedAddressList[index]
+                                              .fullAddress
+                                              .toString()),
                                     ),
                                   ),
                                   GestureDetector(
@@ -250,7 +276,7 @@ class _addressOperationState extends State<addressOperation> {
                     } else {
                       return isButtonEnabled
                           ? ElevatedButton(
-                              onPressed: _loadMoreItems,
+                              onPressed: _loadMoreconcatenatedAddressList,
                               child: Text('Load More'),
                             )
                           : null;

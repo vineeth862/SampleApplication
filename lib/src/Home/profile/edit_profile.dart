@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sample_application/src/Home/profile/profile_home.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/models/user/user.dart';
@@ -18,7 +19,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   GlobalService globalservice = GlobalService();
-  var Controller = Get.put((UserRepository()));
+
   TextEditingController? _nameController;
   TextEditingController? _emailController;
   TextEditingController? _mobilenumbercontroller;
@@ -105,100 +106,104 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           //     width: 3,
                           //     color: Theme.of(context).colorScheme.primary),
                           //borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               image: AssetImage(
                                 "./assets/images/Lab_Single_Person.jpg",
                               ),
                               fit: BoxFit.cover),
                         )),
                   ),
-                  Positioned(
-                    top: 150 -
-                        65, // 200 is cover image height and 65 is tried and tested number,
-                    child: GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Set Profile Image',
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: [
-                                    ElevatedButton.icon(
-                                      icon: Icon(
-                                        Icons.camera_alt_rounded,
-                                        size: 20,
-                                      ),
-                                      label: Text(
-                                        "Take a picture",
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
+                  // Positioned(
+                  //   top: 150 -
+                  //       65, // 200 is cover image height and 65 is tried and tested number,
+                  //   child: GestureDetector(
+                  //     onTap: () {
+                  //       showDialog(
+                  //         context: context,
+                  //         builder: (BuildContext context) {
+                  //           return AlertDialog(
+                  //             title: Text('Set Profile Image',
+                  //                 style: Theme.of(context).textTheme.bodyLarge),
+                  //             shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(10.0),
+                  //             ),
+                  //             content: SingleChildScrollView(
+                  //               child: ListBody(
+                  //                 children: [
+                  //                   ElevatedButton.icon(
+                  //                     icon: Icon(
+                  //                       Icons.camera_alt_rounded,
+                  //                       size: 20,
+                  //                     ),
+                  //                     label: Text(
+                  //                       "Take a picture",
+                  //                     ),
+                  //                     onPressed: () {
+                  //                       Navigator.pop(context);
 
-                                        _pickImage(ImageSource.camera);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              15.0), // Set the border radius value
-                                        ),
-                                        primary: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        //   padding:
-                                        //       EdgeInsets.symmetric(horizontal: 100.0),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16.0),
-                                    ElevatedButton.icon(
-                                      icon: Icon(
-                                        Icons.filter,
-                                        size: 20,
-                                      ),
-                                      label: const Text('Choose from gallery'),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        _pickImage(ImageSource.gallery);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              15.0), // Set the border radius value
-                                        ),
-                                        primary: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        //   padding:
-                                        //       EdgeInsets.symmetric(horizontal: 100.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: CircleAvatar(
-                        radius: 64.0,
-                        backgroundImage: _profileImage != null
-                            ? FileImage(_profileImage!)
-                            : null,
-                        child: _profileImage == null
-                            ? const Icon(Icons.add_a_photo, size: 40.0)
-                            : null,
-                        backgroundColor: Colors.grey.shade200,
-                      ),
-                    ),
-                  ),
+                  //                       _pickImage(ImageSource.camera);
+                  //                     },
+                  //                     style: ElevatedButton.styleFrom(
+                  //                       shape: RoundedRectangleBorder(
+                  //                         borderRadius: BorderRadius.circular(
+                  //                             15.0), // Set the border radius value
+                  //                       ),
+                  //                       primary: Theme.of(context)
+                  //                           .colorScheme
+                  //                           .primary,
+                  //                       //   padding:
+                  //                       //       EdgeInsets.symmetric(horizontal: 100.0),
+                  //                     ),
+                  //                   ),
+                  //                   const SizedBox(height: 16.0),
+                  //                   ElevatedButton.icon(
+                  //                     icon: Icon(
+                  //                       Icons.filter,
+                  //                       size: 20,
+                  //                     ),
+                  //                     label: const Text('Choose from gallery'),
+                  //                     onPressed: () {
+                  //                       Navigator.pop(context);
+                  //                       _pickImage(ImageSource.gallery);
+                  //                     },
+                  //                     style: ElevatedButton.styleFrom(
+                  //                       shape: RoundedRectangleBorder(
+                  //                         borderRadius: BorderRadius.circular(
+                  //                             15.0), // Set the border radius value
+                  //                       ),
+                  //                       primary: Theme.of(context)
+                  //                           .colorScheme
+                  //                           .primary,
+                  //                       //   padding:
+                  //                       //       EdgeInsets.symmetric(horizontal: 100.0),
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           );
+                  //         },
+                  //       );
+                  //     },
+                  //     child: CircleAvatar(
+                  //       radius: 64.0,
+                  //       backgroundImage: _profileImage != null
+                  //           ? FileImage(_profileImage!)
+                  //           : null,
+                  //       child: _profileImage == null
+                  //           ? const Icon(Icons.add_a_photo, size: 40.0)
+                  //           : null,
+                  //       backgroundColor: Colors.grey.shade200,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
-              const SizedBox(height: 80),
+              const Divider(
+                thickness: 0.5,
+              ),
+              //const SizedBox(height: 80),
+              const SizedBox(height: 40),
               SingleChildScrollView(
                 child: Container(
                   width: 320,
@@ -222,7 +227,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   style: TextStyle(color: Colors.red.shade600)),
                               onTap: () {
                                 globalservice.navigate(
-                                    context, changeMobileNumber());
+                                    context, const changeMobileNumber());
                               },
                             ),
                             labelText: 'Mobile Number',
@@ -326,12 +331,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       // Perform the necessary actions to save the changes
       // to the user's profile, such as making an API request.
       Get.snackbar("Success", "Profile changes saved.",
-          colorText: Colors.black);
+          colorText: Colors.black,
+          backgroundColor: Theme.of(context).colorScheme.secondary);
       // Show a snackbar or navigate back to the previous screen
       // ScaffoldMessenger.of(context).showSnackBar(
       //   const SnackBar(
       //     content: Text('Profile changes saved.'),
       //   ),
+      globalservice.navigate(context, ProfileScreen());
     }
   }
 }

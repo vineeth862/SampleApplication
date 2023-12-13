@@ -1,48 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../models/user/user.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    GlobalService globalservice = GlobalService();
-    Widget _CustomTextButton(
-        IconData icon, String label_text, final pageDetails) {
-      return InkWell(
-        onTap: () {
-          globalservice.navigate(context, pageDetails);
-        },
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  Icon(
-                    icon,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: ListTile(
-                      title: Text(label_text),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-    }
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
 
+class _ProfileScreenState extends State<ProfileScreen> {
+  GlobalService globalservice = GlobalService();
+  var Controller = Get.put((UserRepository()));
+  String? userName = "Guest";
+
+  updateUserName() async {
+    User sampleDatatemp = await UserRepository.instance.getUserData();
+
+    setState(() {
+      if (sampleDatatemp.userName != null) {
+        userName = sampleDatatemp.userName;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print("hih");
+    updateUserName();
+  }
+
+  Widget _CustomTextButton(
+      IconData icon, String label_text, final pageDetails) {
+    return InkWell(
+      onTap: () {
+        globalservice.navigate(context, pageDetails);
+      },
+      child: Container(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 10),
+                Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text(label_text),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -106,9 +135,9 @@ class ProfileScreen extends StatelessWidget {
                               AssetImage("./assets/images/user.png"),
                         ),
                         const SizedBox(height: 20),
-                        const Text(
-                          'Guest', //Nedd to change as per user name
-                          style: TextStyle(
+                        Text(
+                          userName.toString(), //Nedd to change as per user name
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),

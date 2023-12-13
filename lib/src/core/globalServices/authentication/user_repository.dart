@@ -107,7 +107,10 @@ class UserRepository extends GetxController {
                 "fullAddress": addressObj.fullAddress,
                 "pincode": addressObj.pincode,
                 "floorNumber": addressObj.floorNumber,
-                "houseNumber": addressObj.houseNumber
+                "houseNumber": addressObj.houseNumber,
+                "firstName": addressObj.firstName,
+                "lastName": addressObj.lastName,
+                "phoneNumber": addressObj.phoneNumber
               }
             ],
           )
@@ -124,7 +127,7 @@ class UserRepository extends GetxController {
     final data = await _db.collection("user").doc(userKey).get();
 
     List<dynamic> locationArray = data.data()?['locations'];
-
+    // print(locationArray.toList());
     if (locationArray != null && locationArray is List) {
       List<Map<String, dynamic>> locationList =
           List<Map<String, dynamic>>.from(locationArray);
