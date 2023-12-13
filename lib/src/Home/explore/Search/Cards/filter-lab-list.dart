@@ -198,7 +198,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                                 ? StepOneToBookTest()
                                 : SearchBarPage();
 
-                        Get.off(widget);
+                        Get.off(() => widget);
 
                         if (selectedTest.getSelectedTest.isEmpty &&
                             selectedTest.getSelectedPackage.isEmpty) {

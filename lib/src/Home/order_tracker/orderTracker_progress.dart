@@ -96,7 +96,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
-          Get.off(HomePage());
+          Get.off(() => HomePage());
           return await false;
         },
         child: Scaffold(

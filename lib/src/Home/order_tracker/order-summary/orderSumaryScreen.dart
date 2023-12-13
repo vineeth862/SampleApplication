@@ -28,13 +28,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   double total = 0.0;
   Order order = new Order();
   late SelectedOrderState selectedOrder;
-  void calculateTotalAmount(selectedTest) {
+  calculateTotalAmount() {
+    total = 0.0;
     for (var item in getItems()) {
       total += int.parse(item['price']); //* item['quantity'];
     }
     // setState(() {
     // widget.orderItems['totalAmount'] = total;
     // });
+    return total;
   }
 
   @override
@@ -42,7 +44,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
     super.initState();
 
     Future.delayed(Duration.zero, () {
-      Order order = selectedOrder.getOrder;
+      order = selectedOrder.getOrder;
+      calculateTotalAmount();
+      order.totalPrice = total.toInt();
       if (order.orderNumber != null) {
         selectedOrder.createOrder();
       }
@@ -91,6 +95,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         Future.delayed(Duration(milliseconds: 200), () {
           selectedOrder.resetOrder();
           selectedTest.removeAllTest();
+          selectedTest.removeAllPackage();
         });
 
         return false;
@@ -254,19 +259,23 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                     .colorScheme
                                     .inverseSurface,
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (item["testObj"] != null) {
                                   selectedTest.removeTest(item["testObj"]);
                                 } else {
                                   selectedTest
                                       .removePackage(item["packageObj"]);
                                 }
-                                Order order = selectedOrder.getOrder;
+                                order = selectedOrder.getOrder;
                                 order.tests = selectedTest.getSelectedTest;
                                 order.packages =
                                     selectedTest.getSelectedPackage;
+                                await calculateTotalAmount();
+                                order.totalPrice = total.toInt();
                                 selectedOrder.setOrder = order;
+
                                 selectedOrder.createOrder();
+
                                 //  ...selectedTest.getSelectedTest!
                                 //                                       .map((Test test) {
                                 //                                     return {
@@ -290,7 +299,6 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                 //                                   })
 
                                 // getItems(selectedTest).removeAt(2);
-                                calculateTotalAmount(selectedTest);
                               },
                             ),
                             title: Text(item['name']),
@@ -499,45 +507,47 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Container(
-                height: 150,
-                child: SlotBookingCard(
-                  selectedCount: 0,
-                  title: "Total amount payable",
-                  contentColor: false,
-                  height: 150,
-                  // content: Price(
-                  //   finalAmount: widget.orderItems['totalAmount'].toString(),
-                  //   discount: "10",
-                  //   totalPrice: true,
-                  // ),
-                  content: Price(
-                      discountedAmount:
-                          selectedTest.totalDiscountedPriceSum.toString(),
-                      isTotalPricePresent: true,
-                      finalAmount: selectedTest.totalPriceSum.toString(),
-                      discount: selectedTest.discount.toString()),
-                  subContent: "",
-                  hyperLink: false,
-                  buttonClicked: () {
-                    // widget.orderItems['totalAmount'];
-                    // Widget widget = order.statusCode == 1
-                    //     ? PaymentScreeen()
-                    //     : StepOneToBookTest();
+          (order.tests!.length == 0 && order.packages!.length == 0)
+              ? Card()
+              : Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                      height: 150,
+                      child: SlotBookingCard(
+                        selectedCount: 0,
+                        title: "Total amount payable",
+                        contentColor: false,
+                        height: 150,
+                        // content: Price(
+                        //   finalAmount: widget.orderItems['totalAmount'].toString(),
+                        //   discount: "10",
+                        //   totalPrice: true,
+                        // ),
+                        content: Price(
+                            discountedAmount:
+                                selectedTest.totalDiscountedPriceSum.toString(),
+                            isTotalPricePresent: true,
+                            finalAmount: selectedTest.totalPriceSum.toString(),
+                            discount: selectedTest.discount.toString()),
+                        subContent: "",
+                        hyperLink: false,
+                        buttonClicked: () {
+                          // widget.orderItems['totalAmount'];
+                          // Widget widget = order.statusCode == 1
+                          //     ? PaymentScreeen()
+                          //     : StepOneToBookTest();
 
-                    globalservice.navigate(context, PaymentScreeen());
-                  },
-                  expandDetail: () {
-                    setState(() {
-                      expandDetails = false;
-                    });
-                  },
-                )),
-          ),
+                          globalservice.navigate(context, PaymentScreeen());
+                        },
+                        expandDetail: () {
+                          setState(() {
+                            expandDetails = false;
+                          });
+                        },
+                      )),
+                )
         ]),
       ),
     );

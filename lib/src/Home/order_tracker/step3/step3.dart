@@ -149,7 +149,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                               new DateTime.now().toString();
                           selectedOrder.setOrder = orderObject;
 
-                          Get.off(OrderSummaryScreen());
+                          Get.off(() => OrderSummaryScreen());
                         } else {
                           Get.snackbar(
                               "Info", "Please Select Both Date and Time",
