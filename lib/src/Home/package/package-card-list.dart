@@ -75,9 +75,9 @@ class _PackageCardlistPage extends State<PackageCardlistPage> {
       Order order = selectedOrder.getOrder;
       order.packages = selectedPackage.getSelectedPackage;
       if (order.statusCode == 1) {
-        Get.off(OrderSummaryScreen());
+        Get.off(() => OrderSummaryScreen());
       } else if (order.tests!.length > 0 || order.packages!.length > 0) {
-        Get.off(StepOneToBookTest());
+        Get.off(() => StepOneToBookTest());
       }
     }
 

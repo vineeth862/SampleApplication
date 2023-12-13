@@ -188,12 +188,12 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                       if (order.statusCode == 1 &&
                                               order.tests!.length > 0 ||
                                           order.packages!.length > 0) {
-                                        Get.off(OrderSummaryScreen());
+                                        Get.off(() => OrderSummaryScreen());
                                       } else if (order.tests!.length > 0 ||
                                           order.packages!.length > 0) {
-                                        Get.off(StepOneToBookTest());
+                                        Get.off(() => StepOneToBookTest());
                                       } else {
-                                        Get.off(SearchBarPage());
+                                        Get.off(() => SearchBarPage());
                                         selectedOrder.resetOrder();
                                         selectedTest.removeAllTest();
                                       }

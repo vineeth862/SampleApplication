@@ -60,17 +60,17 @@ class _AllertState extends State<Allert> {
                             ? selectedTest.getSelectedTest.elementAt(0)
                             : selectedTest.getSelectedPackage.elementAt(0);
                         await searchState.cardClicked(item.labCode, false);
-                        Get.off(FilteredLabCardlistPage(
-                          title: item.labName,
-                          labCode: item.labCode,
-                          location: "location",
-                        ));
+                        Get.off(() => FilteredLabCardlistPage(
+                              title: item.labName,
+                              labCode: item.labCode,
+                              location: "location",
+                            ));
                       } else if (order.labCode != null) {
-                        Get.off(FilteredLabCardlistPage(
-                          title: order.labName!,
-                          labCode: order.labCode!,
-                          location: "location",
-                        ));
+                        Get.off(() => FilteredLabCardlistPage(
+                              title: order.labName!,
+                              labCode: order.labCode!,
+                              location: "location",
+                            ));
                       } else {
                         globalservice.navigate(context, SearchBarPage());
                         selectedOrder!.resetOrder();
@@ -88,11 +88,12 @@ class _AllertState extends State<Allert> {
                             : selectedTest.getSelectedPackage
                                 .elementAt(0)
                                 .labCode;
-                        Get.off(PackageSuggetionList(labCode: labCode));
+                        Get.off(() => PackageSuggetionList(labCode: labCode));
                       } else if (order.labCode != null) {
-                        Get.off(PackageSuggetionList(labCode: order.labCode!));
+                        Get.off(() =>
+                            PackageSuggetionList(labCode: order.labCode!));
                       } else {
-                        Get.off(PackageSuggetionList(labCode: ""));
+                        Get.off(() => PackageSuggetionList(labCode: ""));
                       }
                     },
                     child: const Text('Add Package'),
