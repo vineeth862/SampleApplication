@@ -101,25 +101,25 @@ class UserRepository extends GetxController {
         .collection("user")
         .doc(userKey) //need to change this
         .set({
-          "locations": FieldValue.arrayUnion(
-            [
-              {
-                "fullAddress": addressObj.fullAddress,
-                "pincode": addressObj.pincode,
-                "floorNumber": addressObj.floorNumber,
-                "houseNumber": addressObj.houseNumber,
-                "firstName": addressObj.firstName,
-                "lastName": addressObj.lastName,
-                "phoneNumber": addressObj.phoneNumber
-              }
-            ],
-          )
-        }, SetOptions(merge: true))
-        .whenComplete(
-            () => Get.snackbar("Success", "Your Address is Added Successfully"))
-        .catchError((error, stackTrace) {
-          Get.snackbar("Failed", "Something went wrong");
-        });
+      "locations": FieldValue.arrayUnion(
+        [
+          {
+            "fullAddress": addressObj.fullAddress,
+            "pincode": addressObj.pincode,
+            "floorNumber": addressObj.floorNumber,
+            "houseNumber": addressObj.houseNumber,
+            "firstName": addressObj.firstName,
+            "lastName": addressObj.lastName,
+            "phoneNumber": addressObj.phoneNumber
+          }
+        ],
+      )
+    }, SetOptions(merge: true));
+    // .whenComplete(
+    //     () => Get.snackbar("Success", "Your Address is Added Successfully"))
+    // .catchError((error, stackTrace) {
+    //   Get.snackbar("Failed", "Something went wrong");
+    // });
   }
 
   getAdress() async {

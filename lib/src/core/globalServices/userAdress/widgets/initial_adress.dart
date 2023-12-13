@@ -119,9 +119,9 @@ class _InitialAdressState extends State<InitialAdress> {
                                 if (_formKey.currentState!.validate()) {
                                   myController.updateGlobalString(
                                       _pincodeController!.text.toString());
-                                  globalservice.showLoader();
-                                  Future.delayed(Duration(seconds: 1), () {
-                                    globalservice.hideLoader();
+                                  //globalservice.showLoader();
+                                  Future.delayed(Duration(seconds: 0), () {
+                                    //globalservice.hideLoader();
                                     globalservice.navigate(context, HomePage());
                                     // Get.offAll(() => HomePage());
                                   });

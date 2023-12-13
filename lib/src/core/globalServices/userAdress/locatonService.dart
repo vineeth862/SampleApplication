@@ -34,7 +34,7 @@ class UserCurrentLocation extends GetxController {
       //print('Performing one-time operation');
       addressToBeConsidered.value = newValue;
 
-      //validatePincode(pinCode);
+      //validateAvailablePincode(pinCode);
     } else {
       appState.updateGlobalStringValue(newValue);
       // Perform your one-time operation here
@@ -44,7 +44,7 @@ class UserCurrentLocation extends GetxController {
       location.value = newValue;
       area.value = newValue;
       filterLabOnPinCode();
-      validatePincode(pinCode);
+      validateAvailablePincode(pinCode);
     }
   }
 
@@ -125,7 +125,7 @@ class UserCurrentLocation extends GetxController {
 
     pinCode = RxString(postalCode.toString());
     SearchListState().filterLabOnPinCode();
-    validatePincode(pinCode);
+    validateAvailablePincode(pinCode);
     //print(fulladd.Name);
     updateGlobalString(adress);
     //print(globalString.value);
@@ -144,11 +144,18 @@ class UserCurrentLocation extends GetxController {
     print(availabelLabs);
   }
 
-  validatePincode(pinCode) async {
+  validateAvailablePincode(pinCode) async {
     var pinCodeList = FirebaseFirestore.instance.collection('pincode');
     final isPincode = await pinCodeList.doc(pinCode.toString()).get();
 
     pinCodeExists.value = isPincode.exists;
     //print(pinCodeExists);
+  }
+
+  validateUserEnteredAddressPincode(pincode) async {
+    var pinCodeList = FirebaseFirestore.instance.collection('pincode');
+    final isPincode = await pinCodeList.doc(pincode.toString()).get();
+
+    return isPincode.exists;
   }
 }

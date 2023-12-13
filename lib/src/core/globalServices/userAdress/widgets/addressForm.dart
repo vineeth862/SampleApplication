@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 
 import '../../../../Home/models/user/address.dart';
 
@@ -20,28 +21,33 @@ class AddAdress extends StatelessWidget {
   TextEditingController PinCode = TextEditingController();
   TextEditingController HouseNumber = TextEditingController();
   TextEditingController FloorNumber = TextEditingController();
-
-  void saveAdress(context) {
+  final myController = Get.find<UserCurrentLocation>();
+  void saveAdress(context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      addressObj.firstName = firstName.text.trim();
-      if (lastName.text.isNotEmpty) {
-        addressObj.lastName = lastName.text.trim();
-      }
-      addressObj.phoneNumber = phoneNumber.text.trim();
+      if (await validatePincode(PinCode.text.trim())) {
+        addressObj.firstName = firstName.text.trim();
+        if (lastName.text.isNotEmpty) {
+          addressObj.lastName = lastName.text.trim();
+        }
+        addressObj.phoneNumber = phoneNumber.text.trim();
 
-      addressObj.fullAddress = FullAdress.text.trim();
-      addressObj.pincode = PinCode.text.trim();
-      if (HouseNumber.text.isNotEmpty) {
-        addressObj.houseNumber = HouseNumber.text.trim();
-      }
-      if (FloorNumber.text.isNotEmpty) {
-        addressObj.floorNumber = FloorNumber.text.trim();
-      }
+        addressObj.fullAddress = FullAdress.text.trim();
+        addressObj.pincode = PinCode.text.trim();
+        if (HouseNumber.text.isNotEmpty) {
+          addressObj.houseNumber = HouseNumber.text.trim();
+        }
+        if (FloorNumber.text.isNotEmpty) {
+          addressObj.floorNumber = FloorNumber.text.trim();
+        }
 
-      UserRepository.instance.updateAdress(addressObj);
-      UserRepository.instance.getAdress();
-      globalservice.navigate(context, routeInfo);
+        UserRepository.instance.updateAdress(addressObj);
+        UserRepository.instance.getAdress();
+        globalservice.navigate(context, routeInfo);
+      } else {
+        Get.snackbar(
+            "Error", "The selected picode is not under serviceable area");
+      }
     }
   }
 
@@ -162,6 +168,13 @@ class AddAdress extends StatelessWidget {
                                 if (value!.isEmpty || value == null) {
                                   return 'Please enter a Phone Number';
                                 }
+
+                                if (value.length != 10) {
+                                  return 'Invalid Mobile Number';
+                                }
+                                if (!value.isNumericOnly) {
+                                  return 'Mobile Number must be digits';
+                                }
                                 return null;
                               },
                             ),
@@ -195,6 +208,7 @@ class AddAdress extends StatelessWidget {
                                 if (!value.isNumericOnly) {
                                   return 'Pincode must be digits';
                                 }
+
                                 return null;
                               },
                             ),
@@ -299,5 +313,11 @@ class AddAdress extends StatelessWidget {
         // ),
       ),
     );
+  }
+
+  validatePincode(pincode) async {
+    var boolValue =
+        await myController.validateUserEnteredAddressPincode(pincode);
+    return boolValue;
   }
 }

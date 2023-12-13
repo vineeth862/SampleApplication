@@ -127,7 +127,7 @@ class GlobalService {
     Get.to(() => LoaderScreen());
   }
 
-  hideLoader() {
+  hideLoader() async {
     Future.delayed(Duration(seconds: 1), () {
       Get.back();
     });
