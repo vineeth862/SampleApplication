@@ -308,7 +308,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      "Booked Test/Packages:",
+                                      "Booked Test:",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
@@ -351,7 +351,67 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                             },
                                           ),
                                         )
-                                      : Container()
+                                      : Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, bottom: 5),
+                                            child: Text("No Tests booked"),
+                                          ),
+                                        ), //add info if no tests are booked
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Booked Packages:",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
+                                    ),
+                                  ),
+                                  order!.packages!.isNotEmpty
+                                      ? Container(
+                                          //height: 100,
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: order!.packages!.length,
+                                            itemBuilder: (context, index) {
+                                              // return ListTile(
+                                              //   leading: Text(
+                                              //     (index + 1).toString() + " -->",
+                                              //     style: Theme.of(context)
+                                              //         .textTheme
+                                              //         .headlineSmall,
+                                              //   ),
+                                              //   title: Text(order!
+                                              //       .tests![index].testName),
+                                              // );
+                                              return ListTile(
+                                                title: Text(
+                                                    (index + 1).toString() +
+                                                        " : " +
+                                                        order!.packages![index]
+                                                            .packageName),
+                                                subtitle: Price(
+                                                  isTotalPricePresent: false,
+                                                  finalAmount: order!
+                                                      .packages![index].price,
+                                                  discount: order!
+                                                      .packages![index]
+                                                      .discount,
+                                                  discountedAmount: order!
+                                                      .packages![index]
+                                                      .discountedPrice,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      : Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, bottom: 5),
+                                            child: Text("No Packages booked"),
+                                          ),
+                                        )
                                 ],
                               ),
                             ),

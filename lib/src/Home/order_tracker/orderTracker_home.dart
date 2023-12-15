@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/Home/models/order/order.dart';
 import 'package:sample_application/src/Home/models/package/package.dart';
 import 'package:sample_application/src/Home/order_tracker/order-repository.dart';
+import 'package:sample_application/src/Home/order_tracker/orderTracker_progress_exp.dart';
 
 import '../../core/Provider/selected_order_provider.dart';
 import '../../core/globalServices/authentication/user_repository.dart';
@@ -51,9 +52,10 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
     } else {
       this.globalservice.navigate(
           context,
-          OrderTrackingScreen(
-            order: order,
-          ));
+          // OrderTrackingScreen(
+          //   order: order,
+          // )
+          orderTraExp());
     }
   }
 
@@ -75,7 +77,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Text(item.testName),
+            child: Text("Test -" + item.testName),
           ),
         )));
 
@@ -83,7 +85,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Text(item.packageName),
+            child: Text("Package -" + item.packageName),
           ),
         )));
     return list;
@@ -251,36 +253,37 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                 ),
                                 Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        orders[index].booked!.slot!,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 70),
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            navigate(orders[index], context);
-                                          },
-                                          child: const Text("Track Order"),
-                                          style: ElevatedButton.styleFrom(
-                                              minimumSize: const Size(10, 30),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              backgroundColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary),
+                                            horizontal: 8.0),
+                                        child: Text(
+                                          "Booked Slot " +
+                                              orders[index].booked!.slot!,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
                                         ),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          navigate(orders[index], context);
+                                        },
+                                        child: const Text("Track Order"),
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(10, 30),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            backgroundColor: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
                                       ),
                                     ),
                                   ],

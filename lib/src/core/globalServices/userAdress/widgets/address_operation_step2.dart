@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addAddressStepTwo.dart';
@@ -19,30 +20,64 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
   GlobalService globalservice = GlobalService();
   var Controller = Get.put((UserRepository()));
 
-  concatenatedAddressList() async {
-    List<Map<String, dynamic>> items2 =
+  // concatenatedAddressList() async {
+  //   List<Map<String, dynamic>> items2 =
+  //       await UserRepository.instance.getAdress();
+  //   bool dataPresent = false;
+  //   List<String> fullAddress = [];
+  //   items2.forEach((location) {
+  //     String new1 = '';
+  //     if (location["houseNumber"] != null) {
+  //       new1 += "House Number:" + location["houseNumber"] + ", ";
+  //     }
+  //     if (location["floorNumber"] != null) {
+  //       new1 += "Floor Number" + location["floorNumber"] + ", ";
+  //     }
+  //     new1 += location["fullAddress"] + "-";
+  //     new1 += location["pincode"];
+
+  //     fullAddress.add(new1);
+  //   });
+  //   setState(() {
+  //     items = fullAddress;
+  //     if (items.length != 0) {
+  //       dataPresent = true;
+  //     }
+  //   });
+  // }
+  List<address> concatenatedAddressList = [];
+  concatenateAddressList() async {
+    List<Map<String, dynamic>> fetchedAddress =
         await UserRepository.instance.getAdress();
+    //print(fetchedAddress.toList());
     bool dataPresent = false;
-    List<String> fullAddress = [];
-    items2.forEach((location) {
+    List<address> fullAddress = [];
+    fetchedAddress.forEach((location) {
+      address addressObj = address();
       String new1 = '';
       if (location["houseNumber"] != null) {
         new1 += "House Number:" + location["houseNumber"] + ", ";
+        addressObj.houseNumber = location["houseNumber"];
       }
       if (location["floorNumber"] != null) {
         new1 += "Floor Number" + location["floorNumber"] + ", ";
+        addressObj.floorNumber = location["floorNumber"];
       }
       new1 += location["fullAddress"] + "-";
       new1 += location["pincode"];
-
-      fullAddress.add(new1);
+      addressObj.fullAddress = new1;
+      addressObj.pincode = location["pincode"];
+      addressObj.firstName = location['firstName'];
+      addressObj.phoneNumber = location['phoneNumber'];
+      fullAddress.add(addressObj);
     });
     setState(() {
-      items = fullAddress;
-      if (items.length != 0) {
-        dataPresent = true;
-      }
+      concatenatedAddressList = fullAddress;
     });
+
+    if (concatenatedAddressList.length != 0) {
+      dataPresent = true;
+    }
   }
 
   // List<String> items1 = List.generate(18,
@@ -52,9 +87,9 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
   bool isItemsNotPresent = false;
   int visibleItemCount = 5;
 
-  void _loadMoreItems() {
+  void _loadMoreconcatenatedAddressList() {
     setState(() {
-      if (visibleItemCount < items.length) {
+      if (visibleItemCount < concatenatedAddressList.length) {
         visibleItemCount += 5;
       } else {
         visibleItemCount = visibleItemCount;
@@ -67,14 +102,14 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
     // TODO: implement initState
     super.initState();
 
-    concatenatedAddressList();
+    concatenateAddressList();
   }
 
   //Remove address in local and databse
   void _removeItem(int index) {
     setState(() {
-      String f = items[index];
-      items.removeAt(index);
+      //String f = concatenatedAddressList[index];
+      concatenatedAddressList.removeAt(index);
       UserRepository.instance.deleteAddress(index);
     });
   }
@@ -85,13 +120,14 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
     bool isButtonEnabled = false;
 
     bool isItemsNotPresent = false;
-    if (items.length == 0) {
+    if (concatenatedAddressList.length == 0) {
       isItemsNotPresent = true;
     }
-    if (items.length < visibleItemCount && isItemsNotPresent == false) {
-      visibleItemCount = items.length;
+    if (concatenatedAddressList.length < visibleItemCount &&
+        isItemsNotPresent == false) {
+      visibleItemCount = concatenatedAddressList.length;
     }
-    if (visibleItemCount < items.length) {
+    if (visibleItemCount < concatenatedAddressList.length) {
       isButtonEnabled = true;
     }
     return SafeArea(
@@ -218,7 +254,10 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                           if (index < visibleItemCount) {
                             return InkWell(
                               onTap: () {
-                                widget.addressSelected(items[index]);
+                                widget.addressSelected(
+                                    concatenatedAddressList[index]
+                                        .fullAddress
+                                        .toString());
                                 selectedIndex = index;
                               },
                               child: Container(
@@ -245,22 +284,27 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                           ),
                                           Expanded(
                                             child: ListTile(
-                                              title: selectedIndex == index
-                                                  ? Text(
-                                                      items[index],
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleMedium!
-                                                          .copyWith(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primary),
-                                                    )
-                                                  : Text(items[index],
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleMedium),
+                                              title: Text(
+                                                concatenatedAddressList[index]
+                                                        .firstName
+                                                        .toString() +
+                                                    ", " +
+                                                    concatenatedAddressList[
+                                                            index]
+                                                        .phoneNumber
+                                                        .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall!
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary),
+                                              ),
+                                              subtitle: Text(
+                                                  concatenatedAddressList[index]
+                                                      .fullAddress
+                                                      .toString()),
                                             ),
                                           ),
                                           GestureDetector(
@@ -285,7 +329,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                           } else {
                             return isButtonEnabled
                                 ? ElevatedButton(
-                                    onPressed: _loadMoreItems,
+                                    onPressed: _loadMoreconcatenatedAddressList,
                                     child: Text('Load More'),
                                   )
                                 : null;
