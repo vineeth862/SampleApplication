@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/Home/explore/Search/search_field.dart';
+import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import '../../Home/models/package/package.dart';
 import '../../Home/models/test/test.dart';
 import '../../Home/order_tracker/confirmation-allert.dart';
 import '../../Home/package/package-suggetion-list.dart';
+import '../Provider/selected_order_provider.dart';
 import '../globalServices/global_service.dart';
 
 class SlotBookingCard extends StatefulWidget {
@@ -38,6 +42,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
   bool detailsExpanded = false;
   GlobalService globalservice = GlobalService();
   late SelectedTestState selectedTest;
+  late SelectedOrderState selectedOrder;
   Column generateListTileBodyForTest(Test test) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +60,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
   @override
   Widget build(BuildContext context) {
     selectedTest = Provider.of<SelectedTestState>(context);
-
+    selectedOrder = Provider.of<SelectedOrderState>(context);
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -212,10 +217,11 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                 trailing: IconButton(
                     onPressed: () {
                       selectedTest!.removeTest(test);
-                      // if ((selectedTest!.getSelectedPackage.length == 0 &&
-                      //     selectedTest!.getSelectedTest.length == 0)) {
-                      //   this.globalservice.navigate(context, SearchBarPage());
-                      // }
+                      if ((selectedTest!.getSelectedPackage.length == 0 &&
+                          selectedTest!.getSelectedTest.length == 0)) {
+                        selectedOrder!.resetOrder();
+                        globalservice.navigate(context, SearchBarPage());
+                      }
                     },
                     icon: Icon(
                       Icons.delete_outlined,
@@ -235,11 +241,14 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                       selectedTest!.removePackage(package);
                       if ((selectedTest!.getSelectedPackage.length == 0 &&
                           selectedTest!.getSelectedTest.length == 0)) {
-                        this.globalservice.navigate(
-                            context, PackageSuggetionList(labCode: ""));
+                        selectedOrder!.resetOrder();
+                        Get.offAll(PackageSuggetionList(labCode: ""));
                       }
                     },
-                    icon: Icon(Icons.delete_outlined)),
+                    icon: Icon(
+                      Icons.delete_outlined,
+                      color: Theme.of(context).colorScheme.inverseSurface,
+                    )),
               ),
             )
             .toList(),

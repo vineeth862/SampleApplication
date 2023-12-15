@@ -186,12 +186,21 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                             selectedTest.getSelectedTest;
                                       }
                                       if (order.statusCode == 1 &&
-                                              order.tests!.length > 0 ||
-                                          order.packages!.length > 0) {
+                                              globalservice
+                                                      .getLength(order.tests) >
+                                                  0 ||
+                                          globalservice
+                                                  .getLength(order.packages) >
+                                              0) {
                                         Get.off(() => OrderSummaryScreen());
-                                      } else if (order.tests!.length > 0 ||
-                                          order.packages!.length > 0) {
-                                        Get.off(() => StepOneToBookTest());
+                                      } else if (globalservice
+                                                  .getLength(order.tests) >
+                                              0 ||
+                                          globalservice
+                                                  .getLength(order.packages) >
+                                              0) {
+                                        globalservice.navigate(
+                                            context, StepOneToBookTest());
                                       } else {
                                         Get.off(() => SearchBarPage());
                                         selectedOrder.resetOrder();

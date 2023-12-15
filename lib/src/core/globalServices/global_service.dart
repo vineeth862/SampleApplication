@@ -132,4 +132,10 @@ class GlobalService {
       Get.back();
     });
   }
+
+  getLength(list) {
+    if (list == null) return 0;
+
+    return list.length;
+  }
 }

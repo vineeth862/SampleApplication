@@ -142,7 +142,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
               ),
               InkWell(
                 onTap: () {
-                  globalservice.navigate(context, AddAdressStepTwo());
+                  Get.off(() => AddAdressStepTwo());
                 },
                 child: Container(
                   alignment: Alignment.bottomLeft,

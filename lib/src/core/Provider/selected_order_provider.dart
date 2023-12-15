@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 
 import '../../Home/models/order/order.dart' as orderModule;
@@ -45,40 +46,60 @@ class SelectedOrderState extends ChangeNotifier {
     return true;
   }
 
+  Future<bool> validateOrder() async {
+    if (order.orderNumber == null || order.orderNumber.toString() == "") {
+      return false;
+    } else if (order.labCode == null || order.labCode.toString() == "") {
+      return false;
+    } else if ((order.tests == null || order.packages == null)) {
+      return false;
+    } else if (order.tests!.length == 0 && order.packages!.length == 0) {
+      return false;
+    }
+    // if user face any issue while creating test info should reflect in admin dashboard.
+    return true;
+  }
+
   Future<bool> createOrder() async {
-    dynamic documentSnapshot = await FirebaseFirestore.instance
-        .collection("order")
-        .doc(order.orderNumber)
-        .get();
+    bool flag = await validateOrder();
 
-    print(documentSnapshot.data()?['orderNumber']);
-    print(order.orderNumber);
-
-    if (!documentSnapshot.exists ||
-        documentSnapshot.data()?['orderNumber'] == order.orderNumber) {
-      await _db
+    if (flag) {
+      dynamic documentSnapshot = await FirebaseFirestore.instance
           .collection("order")
           .doc(order.orderNumber)
-          .set(order.toJson())
-          .whenComplete(() =>
-              {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
-          .catchError((error, stackTrace) {
-        print("Something went wrong");
-      });
+          .get();
+
+      print(documentSnapshot.data()?['orderNumber']);
+      print(order.orderNumber);
+
+      if (!documentSnapshot.exists ||
+          documentSnapshot.data()?['orderNumber'] == order.orderNumber) {
+        await _db
+            .collection("order")
+            .doc(order.orderNumber)
+            .set(order.toJson())
+            .whenComplete(() =>
+                {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
+            .catchError((error, stackTrace) {
+          print("Something went wrong");
+        });
+      } else {
+        var id = documentSnapshot.id;
+        List<String> result = id.split(RegExp(r'(?<=\D)(?=\d)|(?<=\d)(?=\D)'));
+        order.orderNumber = result[0] + (int.parse(result[1]) + 1).toString();
+        order.createdDate = new DateTime.now().toString();
+        await _db
+            .collection("order")
+            .doc(order.orderNumber)
+            .set(order.toJson())
+            .whenComplete(() =>
+                {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
+            .catchError((error, stackTrace) {
+          print("Something went wrong");
+        });
+      }
     } else {
-      var id = documentSnapshot.id;
-      List<String> result = id.split(RegExp(r'(?<=\D)(?=\d)|(?<=\d)(?=\D)'));
-      order.orderNumber = result[0] + (int.parse(result[1]) + 1).toString();
-      order.createdDate = new DateTime.now().toString();
-      await _db
-          .collection("order")
-          .doc(order.orderNumber)
-          .set(order.toJson())
-          .whenComplete(() =>
-              {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
-          .catchError((error, stackTrace) {
-        print("Something went wrong");
-      });
+      Get.snackbar("Booking!", "un able to book the order please check later");
     }
 
     notifyListeners();

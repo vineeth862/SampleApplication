@@ -142,10 +142,12 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;
 
-                            Widget widget = order.statusCode == 1
-                                ? OrderSummaryScreen()
-                                : StepOneToBookTest();
-                            Get.offAll(widget);
+                            if (order.statusCode == 1) {
+                              Get.off(() => OrderSummaryScreen());
+                            } else {
+                              globalservice.navigate(
+                                  context, StepOneToBookTest());
+                            }
                           },
                           expandDetail: () {
                             setState(() {

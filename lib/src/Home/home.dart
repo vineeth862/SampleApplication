@@ -8,7 +8,6 @@ import 'package:sample_application/src/Home/order_tracker/order-summary/orderSum
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/Home/radiology/radiology.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
-import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 
 import '../core/Provider/selected_order_provider.dart';

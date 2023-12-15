@@ -116,11 +116,12 @@ class _StepOneScreenState extends State<StepOneScreen> {
       order.patient?.gender = selectedGender;
       order.patient?.gender = selectedGender;
       order.patient = User(
-          userName: user.data()?['userName'],
+          userName: _namecontroller.text.toString(),
           age: _agecontroller.text,
           gender: selectedGender,
           mobile: user.data()?['mobile']);
-      order.user = order.patient;
+      order.user = User(
+          userName: user.data()?['userName'], mobile: user.data()?['mobile']);
       // } else {
       //   order.user = User(
       //       userName: _namecontroller.text,
@@ -206,7 +207,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                 order.user?.age = null;
                                 order.user?.gender = '';
                               }
-                              _agecontroller.text = '';
+                              _agecontroller.clear();
                               selectedGender = '';
                               this.loadUserName("");
                             });
@@ -235,7 +236,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                               }
                               isMySelfButtonSelected = false;
                               isOthersButtonSelected = true;
-                              _agecontroller.text = '';
+                              _agecontroller.clear();
                               selectedGender = '';
                               this.loadUserName("");
                             });
@@ -406,10 +407,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                           0 &&
                                       selectedTest!.getSelectedTest.length ==
                                           0)) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (c) => SearchBarPage()));
+                                    Get.offAll(SearchBarPage());
                                     // this
                                     //     .globalservice
                                     //     .navigate(context, SearchBarPage());
@@ -442,16 +440,23 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                     // this.globalservice.navigate(
                                     //       context,
                                     //     );
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (c) =>
-                                                PackageSuggetionList(
-                                                    labCode: "")));
+                                    selectedOrder!.resetOrder();
+                                    Get.offAll(
+                                        PackageSuggetionList(labCode: ""));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (c) =>
+                                    //             ));
                                     // Get.to();
                                   }
                                 },
-                                icon: Icon(Icons.delete_outlined)),
+                                icon: Icon(
+                                  Icons.delete_outlined,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface,
+                                )),
                           ),
                         )
                         .toList(),

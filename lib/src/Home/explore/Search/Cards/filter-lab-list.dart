@@ -191,14 +191,14 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                         Order order = selectedOrder.getOrder;
                         onBookButton(list[index].testObject, order);
 
-                        Widget widget = order.statusCode == 1
-                            ? OrderSummaryScreen()
-                            : order.tests!.length > 0 ||
-                                    order.packages!.length > 0
-                                ? StepOneToBookTest()
-                                : SearchBarPage();
-
-                        Get.off(() => widget);
+                        if (order.statusCode == 1) {
+                          Get.off(() => OrderSummaryScreen());
+                        } else if (globalservice.getLength(order.tests) > 0 ||
+                            globalservice.getLength(order.packages) > 0) {
+                          globalservice.navigate(context, StepOneToBookTest());
+                        } else {
+                          Get.off(() => SearchBarPage());
+                        }
 
                         if (selectedTest.getSelectedTest.isEmpty &&
                             selectedTest.getSelectedPackage.isEmpty) {
