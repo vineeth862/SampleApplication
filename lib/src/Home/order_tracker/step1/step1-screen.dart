@@ -372,11 +372,12 @@ class _StepOneScreenState extends State<StepOneScreen> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
-          SizedBox(
-            height: 500,
-            child: Card(
+          Card(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 180.0),
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -460,35 +461,34 @@ class _StepOneScreenState extends State<StepOneScreen> {
                           ),
                         )
                         .toList(),
-                    ListTile(
-                      onTap: () async {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Center(
-                              child: Allert(),
-                            ); // Custom widget for the dialog content
-                          },
-                        );
-
-                        UpdateWidget();
-                      },
-                      title: Text(
-                        "Add more Items",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.primary),
-                      ),
-                      iconColor: Theme.of(context).colorScheme.primary,
-                      leading: Icon(Icons.add_circle_outline),
-                    )
                   ],
                 ),
               ),
             ),
-          ),
+          )),
+          ListTile(
+            onTap: () async {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Center(
+                    child: Allert(),
+                  ); // Custom widget for the dialog content
+                },
+              );
+
+              UpdateWidget();
+            },
+            title: Text(
+              "Add more Items",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.primary),
+            ),
+            iconColor: Theme.of(context).colorScheme.primary,
+            leading: Icon(Icons.add_circle_outline),
+          )
         ],
       ),
     );

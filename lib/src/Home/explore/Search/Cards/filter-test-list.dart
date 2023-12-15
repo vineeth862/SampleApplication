@@ -141,8 +141,9 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
                           hyperLink: true,
                           buttonClicked: () {
                             Order order = selectedOrder.getOrder;
-
-                            if (order.statusCode == 1) {
+                            if (selectedTest!.getSelectedPackage.length == 0 &&
+                                selectedTest!.getSelectedTest.length == 0) {
+                            } else if (order.statusCode == 1) {
                               Get.off(() => OrderSummaryScreen());
                             } else {
                               globalservice.navigate(

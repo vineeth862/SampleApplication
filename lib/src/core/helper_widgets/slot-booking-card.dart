@@ -190,103 +190,108 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
   }
 
   getDetails() {
-    return Column(
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        ...selectedTest!.getSelectedTest
-            .map(
-              (test) => ListTile(
-                title: generateListTileBodyForTest(test),
-                iconColor: Theme.of(context).colorScheme.primary,
-                leading: ClipOval(
-                  child: Container(
-                    width: 20,
-                    height: 30,
-                    //color: Theme.of(context).colorScheme.tertiary,
-                    // decoration: BoxDecoration(
-                    //     border: Border.all(color: Colors.black)),
-                    child: Image.asset(
-                      "./assets/images/blood-test.png",
-                      // scale: 1,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ),
-                trailing: IconButton(
-                    onPressed: () {
-                      selectedTest!.removeTest(test);
-                      if ((selectedTest!.getSelectedPackage.length == 0 &&
-                          selectedTest!.getSelectedTest.length == 0)) {
-                        selectedOrder!.resetOrder();
-                        globalservice.navigate(context, SearchBarPage());
-                      }
-                    },
-                    icon: Icon(
-                      Icons.delete_outlined,
-                      color: Theme.of(context).colorScheme.inverseSurface,
-                    )),
-              ),
-            )
-            .toList(),
-        ...selectedTest!.getSelectedPackage
-            .map(
-              (package) => ListTile(
-                title: generateListTileBodyForPackage(package),
-                iconColor: Theme.of(context).colorScheme.primary,
-                leading: Icon(Icons.medical_services),
-                trailing: IconButton(
-                    onPressed: () {
-                      selectedTest!.removePackage(package);
-                      if ((selectedTest!.getSelectedPackage.length == 0 &&
-                          selectedTest!.getSelectedTest.length == 0)) {
-                        selectedOrder!.resetOrder();
-                        Get.offAll(PackageSuggetionList(labCode: ""));
-                      }
-                    },
-                    icon: Icon(
-                      Icons.delete_outlined,
-                      color: Theme.of(context).colorScheme.inverseSurface,
-                    )),
-              ),
-            )
-            .toList(),
-        GestureDetector(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return Center(
-                  child: Allert(),
-                ); // Custom widget for the dialog content
-              },
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.add_circle_outline,
-                  size: 18,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "Add more Items",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 300.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
-        )
-      ],
+            ...selectedTest!.getSelectedTest
+                .map(
+                  (test) => ListTile(
+                    title: generateListTileBodyForTest(test),
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    leading: ClipOval(
+                      child: Container(
+                        width: 20,
+                        height: 30,
+                        //color: Theme.of(context).colorScheme.tertiary,
+                        // decoration: BoxDecoration(
+                        //     border: Border.all(color: Colors.black)),
+                        child: Image.asset(
+                          "./assets/images/blood-test.png",
+                          // scale: 1,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                    trailing: IconButton(
+                        onPressed: () {
+                          selectedTest!.removeTest(test);
+                          if ((selectedTest!.getSelectedPackage.length == 0 &&
+                              selectedTest!.getSelectedTest.length == 0)) {
+                            selectedOrder!.resetOrder();
+                            globalservice.navigate(context, SearchBarPage());
+                          }
+                        },
+                        icon: Icon(
+                          Icons.delete_outlined,
+                          color: Theme.of(context).colorScheme.inverseSurface,
+                        )),
+                  ),
+                )
+                .toList(),
+            ...selectedTest!.getSelectedPackage
+                .map(
+                  (package) => ListTile(
+                    title: generateListTileBodyForPackage(package),
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    leading: Icon(Icons.medical_services),
+                    trailing: IconButton(
+                        onPressed: () {
+                          selectedTest!.removePackage(package);
+                          if ((selectedTest!.getSelectedPackage.length == 0 &&
+                              selectedTest!.getSelectedTest.length == 0)) {
+                            selectedOrder!.resetOrder();
+                            Get.offAll(PackageSuggetionList(labCode: ""));
+                          }
+                        },
+                        icon: Icon(
+                          Icons.delete_outlined,
+                          color: Theme.of(context).colorScheme.inverseSurface,
+                        )),
+                  ),
+                )
+                .toList(),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Center(
+                      child: Allert(),
+                    ); // Custom widget for the dialog content
+                  },
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_circle_outline,
+                      size: 18,
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Add more Items",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

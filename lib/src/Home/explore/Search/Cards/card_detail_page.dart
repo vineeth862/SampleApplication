@@ -185,7 +185,13 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         order.tests =
                                             selectedTest.getSelectedTest;
                                       }
-                                      if (order.statusCode == 1 &&
+                                      if (selectedTest!
+                                                  .getSelectedPackage.length ==
+                                              0 &&
+                                          selectedTest!
+                                                  .getSelectedTest.length ==
+                                              0) {
+                                      } else if (order.statusCode == 1 &&
                                               globalservice
                                                       .getLength(order.tests) >
                                                   0 ||
