@@ -138,4 +138,9 @@ class GlobalService {
 
     return list.length;
   }
+
+  getString(obj) {
+    if (obj == null) return "";
+    return obj;
+  }
 }

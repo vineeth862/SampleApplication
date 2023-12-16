@@ -167,7 +167,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                               // ),
                               Expanded(
                                 child: Text(
-                                  order.address!,
+                                  order.address!.fullAddress!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!

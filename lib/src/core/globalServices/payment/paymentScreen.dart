@@ -7,6 +7,7 @@ import '../../../Home/models/order/order.dart';
 import '../../../Home/order_tracker/orderTracker_progress.dart';
 import '../../Provider/selected_order_provider.dart';
 import '../../Provider/selected_test_provider.dart';
+import 'dart:convert';
 
 class PaymentScreeen extends StatefulWidget {
   //final String? totalAmount;
@@ -23,9 +24,12 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
   void _doPayment() async {
     _payment = "Payment Successfull";
     Order order = selectedOrder.getOrder;
+
     order.statusCode = 2;
     order.statusLabel = "Payment Successfull";
+    var tempOrder = json.decode(json.encode(order));
     selectedOrder.setOrder = order;
+
     if (order.orderNumber != null) {
       await selectedOrder.createOrder();
       setState(() {
@@ -34,7 +38,7 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
         selectedTest.removeAllPackage();
       });
     }
-    Get.offAll(OrderTrackingScreen(order: order));
+    Get.offAll(OrderTrackingScreen(order: Order.fromJson(tempOrder)));
   }
 
   GlobalService globalservice = GlobalService();

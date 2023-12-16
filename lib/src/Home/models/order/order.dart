@@ -4,8 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:sample_application/src/Home/models/order/payment.dart';
 import 'package:sample_application/src/Home/models/order/technician.dart';
 import 'package:sample_application/src/Home/models/package/package.dart';
+import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/Home/models/user/user.dart';
 
+import '../user/address.dart';
 import 'booked.dart';
 import '../test/test.dart';
 part 'order.g.dart';
@@ -27,7 +29,7 @@ class Order {
   Booked? booked;
   String? specificInstruction;
   Payment? payment;
-  String? address;
+  Address? address;
   Technician? technician;
 
   Order(

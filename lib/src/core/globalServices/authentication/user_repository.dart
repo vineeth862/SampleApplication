@@ -95,7 +95,7 @@ class UserRepository extends GetxController {
     return data;
   }
 
-  updateAdress(address addressObj) async {
+  updateAdress(Address addressObj) async {
     String userKey = globalservice.getCurrentUserKey();
     await _db
         .collection("user")

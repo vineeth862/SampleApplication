@@ -7,7 +7,7 @@ import 'package:sample_application/src/core/globalServices/userAdress/widgets/ad
 
 class addressOperationStepTwo extends StatefulWidget {
   final Widget routeDetails;
-  final Function(String address) addressSelected;
+  final Function(Address address) addressSelected;
   addressOperationStepTwo(
       {super.key, required this.routeDetails, required this.addressSelected});
 
@@ -45,15 +45,15 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
   //     }
   //   });
   // }
-  List<address> concatenatedAddressList = [];
+  List<Address> concatenatedAddressList = [];
   concatenateAddressList() async {
     List<Map<String, dynamic>> fetchedAddress =
         await UserRepository.instance.getAdress();
     //print(fetchedAddress.toList());
     bool dataPresent = false;
-    List<address> fullAddress = [];
+    List<Address> fullAddress = [];
     fetchedAddress.forEach((location) {
-      address addressObj = address();
+      Address addressObj = Address();
       String new1 = '';
       if (location["houseNumber"] != null) {
         new1 += "House Number:" + location["houseNumber"] + ", ";
@@ -255,9 +255,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                             return InkWell(
                               onTap: () {
                                 widget.addressSelected(
-                                    concatenatedAddressList[index]
-                                        .fullAddress
-                                        .toString());
+                                    concatenatedAddressList[index]);
                                 selectedIndex = index;
                               },
                               child: Container(

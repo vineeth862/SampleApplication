@@ -13,7 +13,7 @@ class AddAdress extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   var Controller = Get.put(UserRepository());
   GlobalService globalservice = GlobalService();
-  address addressObj = address();
+  Address addressObj = Address();
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();

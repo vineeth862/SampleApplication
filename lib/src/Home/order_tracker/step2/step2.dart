@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/Home/order_tracker/step1/step1.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/order_tracker/step2/step2-screen.dart';
@@ -16,8 +17,9 @@ class StepTwoToBookTest extends StatefulWidget {
 
 class _StepTwoToBookTest extends State<StepTwoToBookTest> {
   // Add your state variables and methods here
+  GlobalService gs = GlobalService();
   bool expandDetails = false;
-  String selectedAdress = "";
+  Address selectedAdress = Address();
   String displayAdress = "";
   num slotBookingCardHeight = 120;
   @override
@@ -95,14 +97,18 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                       ? SlotBookingCard(
                           selectedCount: 0,
                           title: "Your Location",
-                          contentColor: selectedAdress.isEmpty,
+                          contentColor:
+                              gs.getString(selectedAdress.fullAddress).isEmpty,
                           height: slotBookingCardHeight,
-                          content: selectedAdress.isEmpty
-                              ? displayAdress
-                              : selectedAdress,
+                          content:
+                              gs.getString(selectedAdress.fullAddress).isEmpty
+                                  ? displayAdress
+                                  : selectedAdress.fullAddress,
                           subContent: "",
                           buttonClicked: () async {
-                            if (selectedAdress.isNotEmpty) {
+                            if (gs
+                                .getString(selectedAdress.fullAddress)
+                                .isNotEmpty) {
                               GlobalService()
                                   .navigate(context, StepThreeToBookTest());
                             } else {

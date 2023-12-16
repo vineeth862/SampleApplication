@@ -182,7 +182,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Expanded(
-                            child: Text(widget.order.address!,
+                            child: Text(widget.order.address!.fullAddress!,
                                 overflow: TextOverflow.visible,
                                 softWrap: true,
                                 style: Theme.of(context).textTheme.bodyMedium),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/models/order/order.dart';
+import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/address_operation_step2.dart';
 
 import '../../../core/Provider/selected_order_provider.dart';
@@ -8,8 +9,8 @@ import '../../../core/globalServices/global_service.dart';
 
 class StepTwoScreen extends StatefulWidget {
   final screen = _StepTwoScreenState();
-  String selectedAdress = "";
-  Function(String address) addressChanged;
+  Address? selectedAdress;
+  Function(Address address) addressChanged;
 
   StepTwoScreen({required this.addressChanged});
 

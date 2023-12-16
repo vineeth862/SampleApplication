@@ -251,7 +251,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                     ),
                                     RichTextWidget(
                                         headline: "Address",
-                                        title: order!.address.toString()),
+                                        title: order!.address!.fullAddress
+                                            .toString()),
                                     SizedBox(
                                       height: 5,
                                     ),

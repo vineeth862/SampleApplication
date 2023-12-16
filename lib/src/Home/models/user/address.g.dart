@@ -6,7 +6,7 @@ part of 'address.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-address _$addressFromJson(Map<String, dynamic> json) => address(
+Address _$addressFromJson(Map<String, dynamic> json) => Address(
       fullAddress: json['fullAddress'] as String?,
       pincode: json['pincode'] as String?,
       floorNumber: json['floorNumber'] as String?,
@@ -16,7 +16,7 @@ address _$addressFromJson(Map<String, dynamic> json) => address(
       phoneNumber: json['phoneNumber'] as String?,
     );
 
-Map<String, dynamic> _$addressToJson(address instance) => <String, dynamic>{
+Map<String, dynamic> _$addressToJson(Address instance) => <String, dynamic>{
       'fullAddress': instance.fullAddress,
       'pincode': instance.pincode,
       'floorNumber': instance.floorNumber,

@@ -53,11 +53,11 @@ class _StepOneScreenState extends State<StepOneScreen> {
   }
 
   void loadUserName(name) async {
-    if (selectedOrder != null && selectedOrder?.order?.user?.age != null) {
+    if (selectedOrder != null && selectedOrder?.order?.patient?.age != null) {
       Order order = selectedOrder?.getOrder;
-      String? gender = order.user?.gender;
-      String? name = order.user?.userName;
-      String? age = order.user?.age;
+      String? gender = order.patient?.gender;
+      String? name = order.patient?.userName;
+      String? age = order.patient?.age;
 
       if (name != null && name.isNotEmpty) {
         _namecontroller.setText(name);

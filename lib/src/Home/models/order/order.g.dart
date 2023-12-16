@@ -7,7 +7,7 @@ part of 'order.dart';
 // **************************************************************************
 
 Order _$OrderFromJson(Map<String, dynamic> json) => Order(
-    address: json['address'] as String?,
+    address: Address.fromJson(json['address'] as Map<String, dynamic>),
     booked: json['booked'] == null
         ? null
         : Booked.fromJson(json['booked'] as Map<String, dynamic>),
@@ -49,7 +49,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'packages': instance.packages?.map((e) => e.toJson()).toList(),
       'booked': instance.booked?.toJson(),
       'specificInstruction': instance.specificInstruction,
-      'address': instance.address,
+      'address': instance.address?.toJson(),
       'labCode': instance.labCode,
       'labName': instance.labName
     };

@@ -17,7 +17,7 @@ class UseCurrentLocationStepTwo extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   var Controller = Get.put(UserRepository());
   GlobalService globalservice = GlobalService();
-  address addressObj = address();
+  Address addressObj = Address();
   TextEditingController FullAdress = TextEditingController();
   TextEditingController PinCode =
       TextEditingController(text: UserCurrentLocation.instance.postalCode);
@@ -47,7 +47,8 @@ class UseCurrentLocationStepTwo extends StatelessWidget {
       concatenatedAddress += PinCode.text.trim();
 
       Order order = selectedOrder!.getOrder;
-      order.address = concatenatedAddress;
+      //order.address = concatenatedAddress;
+      order.address = addressObj;
       selectedOrder!.setOrder = order;
       //UserRepository.instance.getAdress();
       Navigator.pop(context);

@@ -26,15 +26,15 @@ class _addressOperationState extends State<addressOperation> {
 
   //var fetchedAddress = UserRepository.instance.getAdress();
 
-  List<address> concatenatedAddressList = [];
+  List<Address> concatenatedAddressList = [];
   concatenateAddressList() async {
     List<Map<String, dynamic>> fetchedAddress =
         await UserRepository.instance.getAdress();
     //print(fetchedAddress.toList());
     bool dataPresent = false;
-    List<address> fullAddress = [];
+    List<Address> fullAddress = [];
     fetchedAddress.forEach((location) {
-      address addressObj = address();
+      Address addressObj = Address();
       String new1 = '';
       if (location["houseNumber"] != null) {
         new1 += "House Number:" + location["houseNumber"] + ", ";
