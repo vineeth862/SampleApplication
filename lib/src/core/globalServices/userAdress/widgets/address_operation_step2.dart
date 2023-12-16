@@ -244,10 +244,10 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                         )
                       ],
                     )
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      width: MediaQuery.of(context).size.width * 0.9,
+                  : ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: 380.0),
                       child: ListView.builder(
+                        padding: EdgeInsets.all(5),
                         itemCount: visibleItemCount +
                             1, // Add 1 for the "Load More" button
                         itemBuilder: (context, index) {
@@ -326,17 +326,15 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                 ),
                               ),
                             );
-                          } else {
-                            return isButtonEnabled
-                                ? ElevatedButton(
-                                    onPressed: _loadMoreconcatenatedAddressList,
-                                    child: Text('Load More'),
-                                  )
-                                : null;
                           }
                         },
-                      ),
+                      )),
+              isButtonEnabled
+                  ? ElevatedButton(
+                      onPressed: _loadMoreconcatenatedAddressList,
+                      child: Text('Load More'),
                     )
+                  : Card()
             ],
           ),
         ),
