@@ -241,15 +241,15 @@ class _exploreExpState extends State<exploreExp> {
                                 child: ConstrainedBox(
                                   constraints: const BoxConstraints(
                                     maxHeight: 100,
-                                    minHeight: 50,
+                                    minHeight: 20,
                                     maxWidth: 100,
-                                    minWidth: 20,
+                                    minWidth: 10,
                                   ),
                                   child: CircleAvatar(
                                     backgroundImage: AssetImage(
-                                      './assets/images/5856.jpg',
+                                      './assets/images/user.png',
                                     ),
-                                    radius: 20,
+                                    radius: 14,
                                   ),
                                 ),
                               ),
