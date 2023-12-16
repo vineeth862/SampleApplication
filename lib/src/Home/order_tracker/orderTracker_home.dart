@@ -52,10 +52,11 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
     } else {
       this.globalservice.navigate(
           context,
-          // OrderTrackingScreen(
-          //   order: order,
-          // )
-          orderTraExp());
+          OrderTrackingScreen(
+            order: order,
+          )
+          //orderTraExp()
+          );
     }
   }
 

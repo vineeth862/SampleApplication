@@ -28,6 +28,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   //int step = 0;
   int _currentStep = 0;
   num statusCode = 0;
+
   _OrderTrackingScreenState({this.order});
   // loadData() async {
   //   await selectedOrder.fetchStatus(order!.statusCode);
@@ -58,8 +59,13 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
         _currentStep = 2;
       });
     }
+    setState(() {
+      customStep = _currentStep;
+    });
     globalservice.hideLoader();
   }
+
+  late var customStep = _currentStep;
 
   @override
   void initState() {
@@ -417,7 +423,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                             ),
                           ],
                         ),
-                        isActive: statusCode >= 1,
+                        //isActive: statusCode >= 1,
+                        isActive: customStep == 0,
                         state: statusCode >= 1
                             ? StepState.complete
                             : StepState.disabled),
@@ -428,7 +435,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                         //     orderObj: widget.orderObj,
                         //     details: proceedToNextStep),
                         content: Container(child: Text("Step 2")),
-                        isActive: statusCode >= 2,
+                        //isActive: statusCode >= 2,
+                        isActive: customStep == 1,
                         state: statusCode >= 2
                             ? StepState.complete
                             : StepState.disabled),
@@ -522,7 +530,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                             )
                           ],
                         ),
-                        isActive: statusCode >= 6,
+                        //isActive: statusCode >= 6,
+                        isActive: customStep == 3,
                         state: statusCode >= 6
                             ? StepState.complete
                             : StepState.disabled),
@@ -533,7 +542,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                         //     orderObj: widget.orderObj,
                         //     details: proceedToNextStep),
                         content: Container(child: Text("Step 1")),
-                        isActive: _currentStep >= 3,
+                        //isActive: _currentStep >= 3,
+                        isActive: customStep == 4,
                         state: _currentStep > 3
                             ? StepState.complete
                             : StepState.disabled),
@@ -549,6 +559,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   onStepTapped: (step) {
                     setState(() {
                       _currentStep = step;
+
+                      customStep = step;
                     });
                   },
                   controlsBuilder: controlsBuilder,

@@ -65,7 +65,7 @@ dependencies:
   cc_avenue: ^1.0.3
   upi_india: ^3.0.1
   easy_upi_payment: ^0.1.5
-  stepper_a: ^1.3.0
+  another_stepper: ^1.2.2
   
 dev_dependencies:
   flutter_test:
