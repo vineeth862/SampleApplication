@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/home.dart';
+import 'package:sample_application/src/Home/package/package-card.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/package/package-card-list.dart';
 import 'package:sample_application/src/Home/package/packageService.dart';
@@ -11,8 +12,9 @@ import 'package:sample_application/src/core/helper_widgets/category_card.dart';
 import '../../core/Provider/selected_test_provider.dart';
 
 class PackageSuggetionList extends StatefulWidget {
-  PackageSuggetionList({super.key, required this.labCode});
+  PackageSuggetionList({super.key, required this.title, required this.labCode});
   String labCode;
+  String title;
   @override
   State<PackageSuggetionList> createState() => _PackageSuggetionList();
 }
@@ -23,15 +25,17 @@ class _PackageSuggetionList extends State<PackageSuggetionList> {
   @override
   void initState() {
     Future(() {
-      loadList(widget.labCode.isNotEmpty);
+      loadList(widget.labCode, widget.title);
     });
   }
 
-  loadList(bool isNotEmpty) async {
-    if (isNotEmpty) {
-      await packageService.loadPackageListByLabCode(widget.labCode);
-    } else {
+  loadList(String labCode, String title) async {
+    if (labCode.isEmpty && title.isEmpty) {
       await packageService.loadPackageList();
+    } else if (title.isNotEmpty) {
+      await packageService.loadPackageListByTitle(widget.title);
+    } else {
+      await packageService.loadPackageListByLabCode(widget.labCode);
     }
 
     setState(() {});
@@ -65,7 +69,7 @@ class _PackageSuggetionList extends State<PackageSuggetionList> {
                               .elementAt(index),
                         ));
                   },
-                  child: categoryCard(
+                  child: packageCard(
                       displayName:
                           packageService.allPackagesNameList.elementAt(index),
                       logo: "package")

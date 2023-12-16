@@ -17,10 +17,24 @@ class PackageService {
     return "";
   }
 
-  loadPackageListByLabCode(labCode) async {
+  loadPackageListByTitle(title) async {
     var result = await FirebaseFirestore.instance
         .collection('prod-package')
-        .where('labCode', isEqualTo: labCode)
+        .where('displayName', isEqualTo: title)
+        .get();
+    if (result.docs.isNotEmpty) {
+      allPackagesNameList = result.docs
+          .map((e) => PackageCard.fromJson(e.data()).pacName.toString())
+          .toSet();
+    }
+
+    return "";
+  }
+
+  loadPackageListByLabCode(displyName) async {
+    var result = await FirebaseFirestore.instance
+        .collection('prod-package')
+        .where('displayName', isEqualTo: displyName)
         .get();
     if (result.docs.isNotEmpty) {
       allPackagesNameList = result.docs

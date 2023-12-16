@@ -442,8 +442,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                     //       context,
                                     //     );
                                     selectedOrder!.resetOrder();
-                                    Get.offAll(
-                                        PackageSuggetionList(labCode: ""));
+                                    Get.offAll(PackageSuggetionList(
+                                      labCode: "",
+                                      title: "",
+                                    ));
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(

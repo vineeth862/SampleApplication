@@ -7,10 +7,10 @@ import 'package:sample_application/src/core/Provider/search_provider.dart';
 import '../../Home/explore/Search/Cards/filter-test-list.dart';
 import '../../Home/package/package-card-list.dart';
 
-class categoryCard extends StatelessWidget {
+class packageCard extends StatelessWidget {
   final String? displayName;
   final String? logo;
-  categoryCard({super.key, required this.displayName, required this.logo});
+  packageCard({super.key, required this.displayName, required this.logo});
 
   GlobalService globalservice = GlobalService();
   @override
@@ -103,22 +103,14 @@ class categoryCard extends StatelessWidget {
                       width: 80,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // globalservice.navigate(
-                          //     context,
-                          //     PackageCardlistPage(
-                          //       category: displayName.toString(),
-                          //       title: displayName.toString(),
-                          //     ));
                           String userKey = globalservice.getCurrentUserKey();
 
                           if (userKey != "null") {
-                            searchState.categoryClicked(
-                                "displayName", displayName.toString());
                             globalservice.navigate(
                                 context,
-                                FilteredTestCardlistPage(
-                                  title: displayName.toString(),
+                                PackageCardlistPage(
                                   category: displayName.toString(),
+                                  title: displayName.toString(),
                                 ));
                           } else {
                             showDialog(
@@ -163,6 +155,66 @@ class categoryCard extends StatelessWidget {
                                   );
                                 });
                           }
+                          // globalservice.navigate(
+                          //     context,
+                          //     PackageCardlistPage(
+                          //       category: displayName.toString(),
+                          //       title: displayName.toString(),
+                          //     ));
+                          // String userKey = globalservice.getCurrentUserKey();
+
+                          // if (userKey != "null") {
+                          //   searchState.categoryClicked(
+                          //       "displayName", displayName.toString());
+                          //   // globalservice.navigate(
+                          //   //     context,
+                          //   //     FilteredTestCardlistPage(
+                          //   //       title: displayName.toString(),
+                          //   //       category: displayName.toString(),
+                          //   //     ));
+                          // } else {
+                          //   showDialog(
+                          //       context: context,
+                          //       builder: (BuildContext context) {
+                          //         return AlertDialog(
+                          //           //icon: Icon(Icons.time_to_leave),
+                          //           alignment: const AlignmentDirectional(1, 0),
+                          //           shape: RoundedRectangleBorder(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10)),
+                          //           title: Text("Please Login",
+                          //               style: Theme.of(context)
+                          //                   .textTheme
+                          //                   .headlineMedium!
+                          //                   .copyWith(
+                          //                       color: Theme.of(context)
+                          //                           .colorScheme
+                          //                           .primary)),
+                          //           content: Text(
+                          //             "Please Login to book test",
+                          //             style: Theme.of(context)
+                          //                 .textTheme
+                          //                 .headlineMedium!,
+                          //           ),
+                          //           actions: [
+                          //             // Define buttons for the AlertDialog
+                          //             ElevatedButton(
+                          //               style: ButtonStyle(
+                          //                 minimumSize: MaterialStateProperty
+                          //                     .all(const Size(80,
+                          //                         25)), // Set the desired size
+                          //               ),
+                          //               child: const Text("Login"),
+                          //               onPressed: () {
+                          //                 globalservice.navigate(context,
+                          //                     const Welcomesignin()); // Close the AlertDialog
+                          //               },
+                          //             ),
+                          //           ],
+                          //           actionsAlignment: MainAxisAlignment.end,
+                          //         );
+                          //       });
+                          // }
                         },
                         // icon: const Icon(
                         //   Icons.add,

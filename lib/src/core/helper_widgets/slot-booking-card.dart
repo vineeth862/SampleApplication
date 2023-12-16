@@ -245,7 +245,10 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                           if ((selectedTest!.getSelectedPackage.length == 0 &&
                               selectedTest!.getSelectedTest.length == 0)) {
                             selectedOrder!.resetOrder();
-                            Get.offAll(PackageSuggetionList(labCode: ""));
+                            Get.offAll(PackageSuggetionList(
+                              labCode: "",
+                              title: "",
+                            ));
                           }
                         },
                         icon: Icon(

@@ -43,7 +43,8 @@ class _PackageSliderState extends State<PackageSlider> {
                     globalservice.navigate(
                         context,
                         PackageSuggetionList(
-                          labCode: card.labCode!,
+                          title: card.title!,
+                          labCode: "",
                         ));
                   },
                   child: Container(
@@ -97,6 +98,7 @@ class _PackageSliderState extends State<PackageSlider> {
             globalservice.navigate(
                 context,
                 PackageSuggetionList(
+                  title: "",
                   labCode: "",
                 ));
           },

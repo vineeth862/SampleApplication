@@ -88,12 +88,20 @@ class _AllertState extends State<Allert> {
                             : selectedTest.getSelectedPackage
                                 .elementAt(0)
                                 .labCode;
-                        Get.off(() => PackageSuggetionList(labCode: labCode));
+                        Get.off(() => PackageSuggetionList(
+                              labCode: labCode,
+                              title: "",
+                            ));
                       } else if (order.labCode != null) {
-                        Get.off(() =>
-                            PackageSuggetionList(labCode: order.labCode!));
+                        Get.off(() => PackageSuggetionList(
+                              labCode: order.labCode!,
+                              title: "",
+                            ));
                       } else {
-                        Get.off(() => PackageSuggetionList(labCode: ""));
+                        Get.off(() => PackageSuggetionList(
+                              labCode: "",
+                              title: "",
+                            ));
                       }
                     },
                     child: const Text('Add Package'),
