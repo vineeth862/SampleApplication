@@ -158,4 +158,29 @@ class UserCurrentLocation extends GetxController {
 
     return isPincode.exists;
   }
+
+  validateUserSelectedPincode(String labCode, selectedAddress) async {
+    //String labCode = orderObj.labCode;
+
+    String selectedPincode = selectedAddress.pincode;
+
+    var labList = await FirebaseFirestore.instance
+        .collection('prod-lab')
+        .where("labCode", isEqualTo: labCode)
+        .get();
+    var availablePincodeList = [];
+    var availablePincodeListNested = labList.docs.map((doc) {
+      return doc.data()['branchDetails'].map((element) {
+        return element['availablePincodeDetails'];
+      });
+    }).toList();
+    for (var sublist in availablePincodeListNested) {
+      availablePincodeList.addAll(sublist);
+    }
+
+    availablePincodeList =
+        availablePincodeList.expand((element) => element).toList();
+    //var availablePincodeList = labList.docs.map((lab) => {lab.data()}).toList();
+    return availablePincodeList.contains(selectedPincode);
+  }
 }
