@@ -39,8 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     updateUserName();
   }
 
-  Widget _CustomTextButton(
-      IconData icon, String label_text, final pageDetails) {
+  Widget _CustomTextButton(String path, String label_text, final pageDetails) {
     return InkWell(
       onTap: () {
         globalservice.navigate(context, pageDetails);
@@ -51,9 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Row(
               children: [
                 SizedBox(width: 10),
-                Icon(
-                  icon,
-                  color: Theme.of(context).colorScheme.primary,
+                Image.asset(
+                  path,
+                  height: 20,
                 ),
                 SizedBox(
                   width: 10,
@@ -244,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       "|",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 30,
                         color: Colors.red.shade700,
                         fontWeight: FontWeight.w900,
                       ),
@@ -292,23 +291,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _CustomTextButton(
-                            Icons.home, "My Address Book", AdressBook()),
+                        _CustomTextButton('assets/images/home.jpeg',
+                            "My Address Book", AdressBook()),
                         const Divider(
                           color: Colors.black,
                           thickness: 0.2,
                           height: 1,
                         ),
-                        _CustomTextButton(Icons.settings_suggest_sharp,
+                        _CustomTextButton('assets/images/setting.jpeg',
                             "Settings", LogoutScreen()),
                         const Divider(
                             color: Colors.black, thickness: 0.2, height: 1),
-                        _CustomTextButton(Icons.help_sharp, "Help or Support",
-                            EditProfileScreen()),
+                        _CustomTextButton('assets/images/support.jpeg',
+                            "Help or Support", EditProfileScreen()),
                         const Divider(
                             color: Colors.black, thickness: 0.2, height: 1),
-                        _CustomTextButton(Icons.menu_book_sharp, "About Us",
-                            EditProfileScreen()),
+                        _CustomTextButton('assets/images/about.jpeg',
+                            "About Us", EditProfileScreen()),
                       ],
                     ),
                   )),
