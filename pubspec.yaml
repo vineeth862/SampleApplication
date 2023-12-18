@@ -119,6 +119,7 @@ flutter:
     - assets/images/blood-tube.png
     - assets/images/blood-test.png
     - assets/images/How_it_works.png
+    - assets/images/empty-cart.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -323,20 +323,21 @@ class _exploreExpState extends State<exploreExp> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.3,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: GestureDetector(
-                                onTap: () {
-                                  globalservice.navigate(
-                                      context,
-                                      OrderTrackerHome(
-                                        from: 'cart',
-                                      ));
-                                },
+                            GestureDetector(
+                              onTap: () {
+                                globalservice.navigate(
+                                    context,
+                                    OrderTrackerHome(
+                                      from: 'cart',
+                                    ));
+                              },
+                              child: Container(
+                                color: const Color.fromARGB(255, 252, 252, 252),
+                                padding: const EdgeInsets.all(30),
                                 child: badges.Badge(
                                   badgeContent: Text(
                                     orderRepo.orderList.length.toString(),
-                                    style: TextStyle(fontSize: 8),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                   showBadge: true,
                                   badgeAnimation: badges.BadgeAnimation.slide(

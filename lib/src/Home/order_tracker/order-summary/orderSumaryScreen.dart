@@ -31,7 +31,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   calculateTotalAmount() {
     total = 0.0;
     for (var item in getItems()) {
-      total += int.parse(item['price']); //* item['quantity'];
+      total += int.parse(item['discountedPrice']); //* item['quantity'];
     }
     // setState(() {
     // widget.orderItems['totalAmount'] = total;
