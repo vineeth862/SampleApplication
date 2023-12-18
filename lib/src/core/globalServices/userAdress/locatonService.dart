@@ -132,7 +132,7 @@ class UserCurrentLocation extends GetxController {
   }
 
   filterLabOnPinCode() async {
-    var labList = await FirebaseFirestore.instance.collection('lab').get();
+    var labList = await FirebaseFirestore.instance.collection('prod-lab').get();
     availabelLabs = labList.docs.map((doc) {
       return Lab.fromJson(doc.data());
     }).where((element) {

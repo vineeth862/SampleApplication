@@ -333,7 +333,7 @@ class _exploreExpState extends State<exploreExp> {
                               },
                               child: Container(
                                 color: const Color.fromARGB(255, 252, 252, 252),
-                                padding: const EdgeInsets.all(30),
+                                padding: const EdgeInsets.all(20),
                                 child: badges.Badge(
                                   badgeContent: Text(
                                     orderRepo.orderList.length.toString(),
