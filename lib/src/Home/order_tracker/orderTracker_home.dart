@@ -162,7 +162,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                       : 2,
                               childAspectRatio:
                                   MediaQuery.of(context).size.width < 600
-                                      ? 3.8
+                                      ? 1.7
                                       : 1.8, // number of items in each row
                               mainAxisSpacing: 4.0, // spacing between rows
                               crossAxisSpacing: 16.0, // spacing between columns
