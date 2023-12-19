@@ -153,7 +153,20 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                           height: MediaQuery.of(context).size.height *
                               0.84, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
                           width: MediaQuery.of(context).size.width * 0.9,
-                          child: ListView.builder(
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  MediaQuery.of(context).size.width < 600
+                                      ? 1
+                                      : 2,
+                              childAspectRatio:
+                                  MediaQuery.of(context).size.width < 600
+                                      ? 3.8
+                                      : 1.8, // number of items in each row
+                              mainAxisSpacing: 4.0, // spacing between rows
+                              crossAxisSpacing: 16.0, // spacing between columns
+                            ),
                             itemCount: orders
                                 .length, //GET THE COUNT OF BOOKING DONE BY USER AND UPDATE HERE
                             itemBuilder: (context, index) {
