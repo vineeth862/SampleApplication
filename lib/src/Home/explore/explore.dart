@@ -218,7 +218,7 @@ class _exploreExpState extends State<exploreExp> {
                   ],
                 )
               : Container(),
-          expandedHeight: !_isAppBarExpanded ? 60.0 : 0.0,
+          expandedHeight: !_isAppBarExpanded ? 70.0 : 0.0,
           flexibleSpace: FlexibleSpaceBar(
             background: !_isAppBarExpanded
                 ? SafeArea(
@@ -229,181 +229,104 @@ class _exploreExpState extends State<exploreExp> {
                           Theme.of(context).colorScheme.surface,
                           //Color.fromARGB(255, 5, 84, 8)
                         ])),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                globalservice.navigate(
-                                    context, const ProfileScreen());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 180,
+                                height: 200,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    globalservice.navigate(
+                                        context, const InitialAdress());
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ListTile(
+                                        visualDensity: VisualDensity(
+                                            horizontal: 1, vertical: -1),
+                                        contentPadding:
+                                            const EdgeInsets.only(left: 5),
+                                        title: Text(
+                                          "Choose Location",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
+                                        ),
+                                        subtitle: Obx(() => Text(
+                                            myController
+                                                .addressToBeConsidered.value,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium)),
+                                        trailing: Container(
+                                          width: 30,
+                                          alignment:
+                                              AlignmentDirectional(-10, 0.9),
+                                          child: Icon(
+                                              Icons.keyboard_arrow_down_sharp),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              GestureDetector(
+                                onTap: () {
+                                  globalservice.navigate(
+                                      context,
+                                      OrderTrackerHome(
+                                        from: 'cart',
+                                      ));
+                                },
+                                child: Container(
+                                  color:
+                                      const Color.fromARGB(255, 252, 252, 252),
+                                  padding: const EdgeInsets.all(20),
+                                  child: badges.Badge(
+                                    badgeContent: Text(
+                                      orderRepo.orderList.length.toString(),
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                    showBadge: true,
+                                    badgeAnimation: badges.BadgeAnimation.slide(
+                                        animationDuration: Duration(
+                                          seconds: 1,
+                                        ),
+                                        curve: Curves.bounceInOut),
+                                    child: Icon(Icons.shopping_cart),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  globalservice.navigate(
+                                      context, const ProfileScreen());
+                                },
                                 child: ConstrainedBox(
                                   constraints: const BoxConstraints(
                                     maxHeight: 100,
                                     minHeight: 20,
                                     maxWidth: 100,
-                                    minWidth: 10,
+                                    minWidth: 15,
                                   ),
                                   child: CircleAvatar(
+                                    backgroundColor: Colors.white,
                                     backgroundImage: AssetImage(
-                                      './assets/images/user.png',
+                                      './assets/images/profile.png',
                                     ),
                                     radius: 14,
                                   ),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              width: 150,
-                              height: 200,
-                              child: GestureDetector(
-                                onTap: () {
-                                  globalservice.navigate(
-                                      context, const InitialAdress());
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ListTile(
-                                      visualDensity: VisualDensity(
-                                          horizontal: 1, vertical: -1),
-                                      contentPadding:
-                                          const EdgeInsets.only(left: 5),
-                                      title: Text(
-                                        "Choose Location",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                      subtitle: Obx(() => Text(
-                                          myController
-                                              .addressToBeConsidered.value,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium)),
-                                      trailing: Container(
-                                        width: 30,
-                                        alignment:
-                                            AlignmentDirectional(-10, 0.9),
-                                        child: Icon(
-                                            Icons.keyboard_arrow_down_sharp),
-                                      ),
-                                    ),
-
-                                    // TextButton(
-                                    //     onPressed: () {
-                                    //       globalservice.navigate(
-                                    //           context, const InitialAdress());
-                                    //     },
-                                    //     child: Obx(() => Text(
-                                    //         myController.globalString.value,
-                                    //         style: Theme.of(context)
-                                    //             .textTheme
-                                    //             .titleLarge!
-                                    //             .copyWith(
-                                    //                 color: Colors.black,
-                                    //                 fontSize: 12)))),
-
-                                    // Padding(
-                                    //   padding: const EdgeInsets.all(8.0),
-                                    //   child: MySlider(),
-                                    // )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 0),
-                            //   child: Icon(
-                            //     Icons.keyboard_arrow_down_sharp,
-                            //   ),
-
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                globalservice.navigate(
-                                    context,
-                                    OrderTrackerHome(
-                                      from: 'cart',
-                                    ));
-                              },
-                              child: Container(
-                                color: const Color.fromARGB(255, 252, 252, 252),
-                                padding: const EdgeInsets.all(20),
-                                child: badges.Badge(
-                                  badgeContent: Text(
-                                    orderRepo.orderList.length.toString(),
-                                    style: TextStyle(fontSize: 10),
-                                  ),
-                                  showBadge: true,
-                                  badgeAnimation: badges.BadgeAnimation.slide(
-                                      animationDuration: Duration(
-                                        seconds: 1,
-                                      ),
-                                      curve: Curves.bounceInOut),
-                                  child: Icon(Icons.shopping_cart),
-                                ),
-                              ),
-                            )
-                            // Expanded(
-                            //   child: GestureDetector(
-                            //     onTap: () {
-                            //       globalservice.navigate(
-                            //           context,
-                            //           OrderTrackerHome(
-                            //             from: 'cart',
-                            //           ));
-                            //     },
-                            //     child: Padding(
-                            //       padding: const EdgeInsets.only(
-                            //           top: 20.0, right: 0),
-                            //       child: Column(
-                            //         children: [
-                            //           Icon(
-                            //             Icons.shopping_cart,
-                            //             // color: Theme.of(context)
-                            //             //     .colorScheme
-                            //             //     .primary,
-                            //           ),
-                            //           Text("Cart",
-                            //               style: Theme.of(context)
-                            //                   .textTheme
-                            //                   .titleLarge!
-                            //                   .copyWith(
-                            //                       color: Colors.black,
-                            //                       fontSize: 12))
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 8.0),
-                            //   child: ConstrainedBox(
-                            //     constraints: const BoxConstraints(
-                            //       maxHeight: 200,
-                            //       minHeight: 50,
-                            //       maxWidth: 200,
-                            //       minWidth: 20,
-                            //     ),
-                            //     child: CircleAvatar(
-                            //       backgroundImage: AssetImage(
-                            //         './assets/images/MedCapH.jpg',
-                            //       ),
-                            //       radius: 20,
-                            //     ),
-                            //     // child: Image.asset(
-                            //     //   './assets/images/MedCapH.jpg',
-                            //     //   height: 100,
-                            //     // )
-                            //   ),
-                            // ),
-                          ],
+                              )
+                            ],
+                          ),
                         )),
                   )
                 : Container(),
@@ -426,8 +349,6 @@ class _exploreExpState extends State<exploreExp> {
                   height: 8,
                 ),
                 Container(
-                  // padding:
-                  //     const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(),
                   child: GestureDetector(
@@ -456,36 +377,6 @@ class _exploreExpState extends State<exploreExp> {
                 const SizedBox(
                   height: 5,
                 ),
-                // Card(
-                //   child: AspectRatio(
-                //     aspectRatio: 1 / 1,
-                //     // padding: const EdgeInsets.all(16.0),
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(16),
-                //       child: Column(
-                //         crossAxisAlignment: CrossAxisAlignment.center,
-                //         children: [
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Row(
-                //     children: [
-                //       Container(
-                //         width: MediaQuery.of(context).size.width * 0.07,
-                //         height: MediaQuery.of(context).size.width * 0.07,
-                //         child: Image.asset('./assets/images/flask.jpg',
-                //             fit: BoxFit.cover),
-                //       ),
-                //       const SizedBox(
-                //         width: 10,
-                //       ),
-                //       Text("Popular Categories",
-                //           style: TextStyle(
-                //             fontSize: MediaQuery.of(context).size.width * 0.05,
-                //             fontWeight: FontWeight.bold,
-                //           )),
-                //     ],
-                //   ),
-                // ),
                 ListTile(
                   title: Text("Popular Categories",
                       style: Theme.of(context).textTheme.headlineMedium),
@@ -496,22 +387,19 @@ class _exploreExpState extends State<exploreExp> {
                 ),
 
                 Container(
-                  width: MediaQuery.sizeOf(context).height * 0.4,
-                  height: MediaQuery.sizeOf(context).height * 0.28,
-
-                  // decoration: const BoxDecoration(
-                  //     gradient: LinearGradient(colors: [
-                  //   Color.fromARGB(255, 231, 243, 253),
-                  //   Color.fromARGB(255, 231, 243, 253),
-                  // ])),
-                  child: GridView.count(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 0.0,
-                    crossAxisSpacing: 0.0,
-                    physics: const NeverScrollableScrollPhysics(),
-                    childAspectRatio:
-                        0.9, // Adjust the aspect ratio to control the card height
-                    children: [...categoryList],
+                  width: MediaQuery.sizeOf(context).width * 0.9,
+                  height: MediaQuery.sizeOf(context).height * 0.35,
+                  child: Center(
+                    child: GridView.count(
+                      crossAxisCount:
+                          MediaQuery.sizeOf(context).width > 500 ? 6 : 3,
+                      mainAxisSpacing: 0.0,
+                      crossAxisSpacing: 0.0,
+                      physics: const NeverScrollableScrollPhysics(),
+                      childAspectRatio:
+                          1, // Adjust the aspect ratio to control the card height
+                      children: [...categoryList],
+                    ),
                   ),
                 ),
 
@@ -527,9 +415,6 @@ class _exploreExpState extends State<exploreExp> {
                   ),
                 ),
                 const PackageSlider(),
-                // const SizedBox(
-                //   height: 5,
-                // ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: ListTile(
@@ -570,26 +455,6 @@ class _exploreExpState extends State<exploreExp> {
                 const SizedBox(
                   height: 25,
                 ),
-                // Align(
-                //     alignment: Alignment.topLeft,
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(12.0),
-                //       child: Text("How it Works",
-                //           style: Theme.of(context).textTheme.headlineMedium),
-                //     )),
-
-                // const HowItWorks(
-                //     heading: "1. Book Test",
-                //     description:
-                //         "Find a Health Test you are looking for from your desired diagnostics."),
-                // const HowItWorks(
-                //     heading: "2. Sample Collection",
-                //     description:
-                //         "Our Phlebo will collect the sample from your doorstep ensuring the highest safety"),
-                // const HowItWorks(
-                //     heading: "3. Get Reports",
-                //     description:
-                //         "Test reports can be downloaded easily from Emial and MedCapH"),
 
                 ConstrainedBox(
                     constraints: const BoxConstraints(
