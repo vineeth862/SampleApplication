@@ -125,7 +125,7 @@ flutter:
     - assets/images/setting.jpeg
     - assets/images/support.jpeg
     - assets/images/profile.png
-
+    - assets/images/Designer.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

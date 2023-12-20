@@ -45,8 +45,11 @@ class _WelcomesigninState extends State<Welcomesignin> {
               children: [
                 Image.asset(
                   "./assets/images/Lab_two_people.jpg",
-                  width: double.infinity,
-                  height: 250,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width > 600
+                      ? MediaQuery.of(context).size.height * 0.4
+                      : MediaQuery.of(context).size.height * 0.2,
+                  fit: BoxFit.fill,
                 ),
                 Positioned(
                   top: 0,
