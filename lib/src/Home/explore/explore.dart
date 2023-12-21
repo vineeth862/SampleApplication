@@ -377,31 +377,51 @@ class _exploreExpState extends State<exploreExp> {
                 const SizedBox(
                   height: 5,
                 ),
-                ListTile(
-                  title: Text("Popular Categories",
-                      style: Theme.of(context).textTheme.headlineMedium),
-                  subtitle: Text(
-                    "MedCapH recomended Health Categories",
-                    style: Theme.of(context).textTheme.bodyMedium,
+                AspectRatio(
+                  aspectRatio:
+                      MediaQuery.of(context).size.width > 500 ? 2 : 1.2,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text("Popular Categories",
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        subtitle: Text(
+                          "MedCapH recomended Health Categories",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      Expanded(
+                        child: GridView.count(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          physics: const NeverScrollableScrollPhysics(),
+                          childAspectRatio: MediaQuery.of(context).size.width >
+                                  500
+                              ? 1.5
+                              : 1, // Adjust the aspect ratio to control the card height
+                          children: [...categoryList],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
-                Container(
-                  width: MediaQuery.sizeOf(context).width * 0.9,
-                  height: MediaQuery.sizeOf(context).height * 0.35,
-                  child: Center(
-                    child: GridView.count(
-                      crossAxisCount:
-                          MediaQuery.sizeOf(context).width > 500 ? 6 : 3,
-                      mainAxisSpacing: 0.0,
-                      crossAxisSpacing: 0.0,
-                      physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio:
-                          1, // Adjust the aspect ratio to control the card height
-                      children: [...categoryList],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   width: MediaQuery.sizeOf(context).width * 0.9,
+                //   height: MediaQuery.sizeOf(context).height * 0.35,
+                //   child: Center(
+                //     child: GridView.count(
+                //       crossAxisCount:
+                //           MediaQuery.sizeOf(context).width > 500 ? 6 : 3,
+                //       mainAxisSpacing: 0.0,
+                //       crossAxisSpacing: 0.0,
+                //       physics: const NeverScrollableScrollPhysics(),
+                //       childAspectRatio:
+                //           1, // Adjust the aspect ratio to control the card height
+                //       children: [...categoryList],
+                //     ),
+                //   ),
+                // ),
 
                 Align(
                   alignment: Alignment.topLeft,
@@ -415,63 +435,115 @@ class _exploreExpState extends State<exploreExp> {
                   ),
                 ),
                 const PackageSlider(),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: ListTile(
-                    title: Text("Test/Packages for Men",
-                        style: Theme.of(context).textTheme.headlineMedium),
-                    subtitle: Text(
-                      "Highly Prescribed test and packages by doctor",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: ListTile(
+                //     title: Text("Test/Packages for Men",
+                //         style: Theme.of(context).textTheme.headlineMedium),
+                //     subtitle: Text(
+                //       "Highly Prescribed test and packages by doctor",
+                //       style: Theme.of(context).textTheme.bodyMedium,
+                //     ),
+                //   ),
+                // ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [...maleCategoryList],
+                //   ),
+                // ),
+                AspectRatio(
+                  aspectRatio:
+                      MediaQuery.of(context).size.width > 500 ? 2.3 : 2,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text("Test/Packages for Men",
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        subtitle: Text(
+                          "Highly Prescribed test and packages by doctor",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      Expanded(
+                        child: GridView.count(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          physics: const NeverScrollableScrollPhysics(),
+                          childAspectRatio: MediaQuery.of(context).size.width >
+                                  500
+                              ? 4 / 4
+                              : 1, // Adjust the aspect ratio to control the card height
+                          children: [...maleCategoryList],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [...maleCategoryList],
+
+                AspectRatio(
+                  aspectRatio:
+                      MediaQuery.of(context).size.width > 500 ? 2.3 : 2,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text("Test/Packages for Women",
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        subtitle: Text(
+                          "Highly Prescribed test and packages by doctor",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      Expanded(
+                        child: GridView.count(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          physics: const NeverScrollableScrollPhysics(),
+                          childAspectRatio: MediaQuery.of(context).size.width >
+                                  500
+                              ? 4 / 4
+                              : 1, // Adjust the aspect ratio to control the card height
+                          children: [...femaleCategoryList],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: ListTile(
-                    title: Text("Test/Packages for Women",
-                        style: Theme.of(context).textTheme.headlineMedium),
-                    subtitle: Text(
-                      "Highly Prescribed test and packages by doctor",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [...femaleCategoryList],
-                  ),
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: ListTile(
+                //     title: Text("Test/Packages for Women",
+                //         style: Theme.of(context).textTheme.headlineMedium),
+                //     subtitle: Text(
+                //       "Highly Prescribed test and packages by doctor",
+                //       style: Theme.of(context).textTheme.bodyMedium,
+                //     ),
+                //   ),
+                // ),
+
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [...femaleCategoryList],
+                //   ),
+                // ),
                 const SizedBox(
                   height: 25,
                 ),
 
-                ConstrainedBox(
-                    constraints: const BoxConstraints(
-                        maxHeight: 500,
-                        minHeight: 50,
-                        maxWidth: 500,
-                        minWidth: 20),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(
-                        //imagePath.toString(),
-                        "./assets/images/How_it_works.png",
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        width: MediaQuery.of(context).size.height * 0.41,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.asset(
+                    //imagePath.toString(),
+                    "./assets/images/How_it_works.png",
+                    // height: MediaQuery.of(context).size.height * 0.7,
+                    // width: MediaQuery.of(context).size.height * 0.41,
+                    fit: BoxFit.fill,
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -533,9 +605,9 @@ class _exploreExpState extends State<exploreExp> {
                 const SizedBox(
                   height: 25,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
               ],
             ),
           ),
