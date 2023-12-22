@@ -85,7 +85,16 @@ class _FilteredTestCardlistPageState extends State<FilteredTestCardlistPage> {
             Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width < 600 ? 1 : 2,
+                      childAspectRatio: MediaQuery.of(context).size.width < 600
+                          ? 2.18
+                          : 2.37, // number of items in each row
+                      mainAxisSpacing: 4.0, // spacing between rows
+                      crossAxisSpacing: 16.0, // spacing between columns
+                    ),
                     shrinkWrap: true,
                     itemCount: list.length,
                     itemBuilder: (BuildContext context, int index) {
