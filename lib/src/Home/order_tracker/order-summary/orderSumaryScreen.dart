@@ -6,6 +6,7 @@ import 'package:sample_application/src/core/Provider/selected_order_provider.dar
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
+import 'package:sample_application/src/core/globalServices/payment/phonepePaymentTesting.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
@@ -538,8 +539,72 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           // Widget widget = order.statusCode == 1
                           //     ? PaymentScreeen()
                           //     : StepOneToBookTest();
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            context: context,
+                            builder: (context) => Wrap(children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                          "Pay ₹" +
+                                              selectedTest
+                                                  .totalDiscountedPriceSum
+                                                  .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium,
+                                        )),
+                                        Spacer(),
+                                        GestureDetector(
+                                          onTap: () {
+                                            globalservice.navigate(context,
+                                                PhonePayPaymentScreen()); //Send payment details and change the phonepaypayment screen into a class
+                                          },
+                                          child: Text("More Option",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Divider(
+                                      thickness: 1,
+                                    ),
+                                    ListTile(
+                                      leading: Icon(
+                                        Icons.payment,
+                                      ),
+                                      title: Text("Pay by Any UPI app"),
+                                      subtitle: Text(
+                                          "Use any UPI app on your phone to pay"),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          globalservice.navigate(context,
+                                              PaymentScreeen()); //Replace paymentScrenn with phonepe provided fetch upi apps and execute this function
+                                        },
+                                        child: Text("Proceed to Pay"))
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          );
 
-                          globalservice.navigate(context, PaymentScreeen());
+                          //globalservice.navigate(context, PaymentScreeen());
                         },
                         expandDetail: () {
                           setState(() {
