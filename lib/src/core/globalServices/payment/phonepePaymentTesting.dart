@@ -135,17 +135,11 @@ class _PhonePayPaymentScreenState extends State<PhonePayPaymentScreen> {
   void initState() {
     initPhonePeSdk();
     body = getBody().toString();
+    startPGTransaction();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Phonepay"),
-      ),
-      body: Center(
-          child: ElevatedButton(
-              onPressed: startPGTransaction, child: Text("Test"))),
-    );
+    return Scaffold();
   }
 }
