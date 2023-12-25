@@ -6,7 +6,6 @@ import 'package:sample_application/src/Home/models/package/package.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
 import '../../core/Provider/selected_order_provider.dart';
 import '../../core/Provider/selected_test_provider.dart';
-import '../../core/globalServices/payment/paymentScreen.dart';
 import '../../core/helper_widgets/price_container.dart';
 import '../../core/helper_widgets/slot-booking-card.dart';
 import '../order_tracker/order-summary/orderSumaryScreen.dart';

@@ -4,14 +4,14 @@ part 'payment.g.dart';
 @JsonSerializable()
 class Payment {
   bool status;
-  String statusLabel;
-  String paymentMode;
-  String merchantId;
-  String merchantTransactionId;
-  String transactionId;
+  String? statusLabel;
+  String? paymentMode;
+  String? merchantId;
+  String? merchantTransactionId;
+  String? transactionId;
   int amount;
   String pgTransactionId;
-  String brn;
+  String? brn;
 
   String? cardType;
 

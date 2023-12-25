@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:get/get.dart';
 import "package:http/http.dart" as http;
 import 'package:crypto/crypto.dart';
@@ -6,12 +7,19 @@ import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 import 'package:sample_application/src/Home/models/order/payment.dart';
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
+import 'package:sample_application/src/core/globalServices/global_service.dart';
 
 import '../../../Home/models/order/order.dart';
 import '../../../Home/order_tracker/orderTracker_progress.dart';
 
 class PaymentService {
   PaymentService();
+
+  late Order order;
+  late SelectedOrderState selectedOrder;
+  late SelectedTestState selectedTest;
+  GlobalService globalService = GlobalService();
+
   // Function(Payment payment) payment;
   String environmentValue = 'UAT_SIM';
   String transactionId = DateTime.now().millisecondsSinceEpoch.toString();
@@ -31,18 +39,9 @@ class PaymentService {
   String apiEndPoint = "/pg/v1/pay";
   bool enableLogs = true;
   Map<dynamic, dynamic> status = {};
-  //  payment( Payment(
-  //         amount: 0,
-  //         transactionId: '',
-  //         brn: '',
-  //         merchantId: '',
-  //         merchantTransactionId: '',
-  //         paymentMode: '',
-  //         pgTransactionId: '',
-  //         status: false,
-  //         statusLabel: ''););
-  checkStatus(SelectedOrderState selectedOrder, SelectedTestState selectedTest,
-      Order order) {
+
+  checkStatus() {
+    globalService.showLoader();
     String url =
         "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/$merchantId/$transactionId";
 
@@ -65,32 +64,20 @@ class PaymentService {
         var res = jsonDecode(value.body);
         result = res;
 
-        order.payment == null
-            ? order.payment = [Payment.fromJson(result)]
-            : order.payment?.add(Payment.fromJson(result));
-        order.statusCode = 2;
-        order.statusLabel = "Order Placed";
-        selectedOrder.setOrder = order;
-        var tempOrder = json.decode(json.encode(order));
-        selectedOrder.setOrder = order;
-
-        if (order.orderNumber != null) {
-          await selectedOrder.createOrder();
-          // setState(() {
-          selectedOrder.resetOrder();
-          selectedTest.removeAllTest();
-          selectedTest.removeAllPackage();
-          // });
-        }
-        Get.offAll(OrderTrackingScreen(order: Order.fromJson(tempOrder)));
-
-        // payment = Rx(Payment.fromJson(result));
+        updateOrder(result, false);
       }
+    }).catchError((err) {
+      globalService.hideLoader();
+      Get.back();
+      Get.snackbar("Failed", "Transaction failed");
     });
-    // return await result;
   }
 
-  connect() async {
+  connect(Order order, SelectedOrderState selectedOrder,
+      SelectedTestState selectedTest) async {
+    this.order = order;
+    this.selectedOrder = selectedOrder;
+    this.selectedTest = selectedTest;
     body = getBody().toString();
     PhonePePaymentSdk.init(environmentValue, appId, merchantId, enableLogs)
         .then((isInitialized) {
@@ -116,14 +103,13 @@ class PaymentService {
     return base64body;
   }
 
-  startPGTransaction(SelectedOrderState selectedOrder,
-      SelectedTestState selectedTest, Order order) async {
+  startPGTransaction() async {
     try {
       PhonePePaymentSdk.startPGTransaction(
               body, callback, checkSum, pgHeaders, apiEndPoint, "")
           .then((response) async {
         if (response?['status'] == 'SUCCESS') {
-          checkStatus(selectedOrder, selectedTest, order);
+          checkStatus();
         }
         updateStatus(
           'paymentStatus',
@@ -141,6 +127,51 @@ class PaymentService {
         'FAILURE',
       );
     }
+  }
+
+  startEasyUpiPaymentTransaction() async {
+    final res = await EasyUpiPaymentPlatform.instance
+        .startPayment(
+      EasyUpiPaymentModel(
+        payeeVpa: 'Q720679555@ybl',
+        payeeName: 'MedcapH',
+        // amount: double.parse(order.totalPrice.toString()),
+        amount: 1.0,
+        description: 'Testing payment',
+      ),
+    )
+        .then((value) async {
+      updateOrder(value, true);
+    }).catchError((err) {
+      Get.back();
+      Get.snackbar("Failed", "Transaction failed");
+    });
+  }
+
+  updateOrder(result, isUPI) async {
+    Order order = selectedOrder.getOrder;
+
+    if (!isUPI) {
+      order.payment == null
+          ? order.payment = [Payment.fromJson(result)]
+          : order.payment?.add(Payment.fromJson(result));
+    }
+
+    order.statusCode = 2;
+    order.statusLabel = "Order Placed";
+    var tempOrder = json.decode(json.encode(order));
+    selectedOrder.setOrder = order;
+
+    if (order.orderNumber != null) {
+      await selectedOrder.createOrder();
+      // setState(() {
+      selectedOrder.resetOrder();
+      selectedTest.removeAllTest();
+      selectedTest.removeAllPackage();
+      // });
+    }
+
+    Get.offAll(OrderTrackingScreen(order: Order.fromJson(tempOrder)));
   }
 
   updateStatus(key, value) {
