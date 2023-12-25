@@ -28,7 +28,7 @@ class Order {
   String? labName;
   Booked? booked;
   String? specificInstruction;
-  Payment? payment;
+  List<Payment>? payment;
   Address? address;
   Technician? technician;
 

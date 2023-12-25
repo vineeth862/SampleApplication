@@ -1,20 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/Home/models/order/payment.dart';
 import 'package:sample_application/src/Home/order_tracker/confirmation-allert.dart';
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
-import 'package:sample_application/src/core/globalServices/payment/phonepePaymentTesting.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
 import '../../../core/globalServices/execution-stack/execution_stack_operation.dart';
+import '../../../core/globalServices/payment/paymentService.dart';
 import '../../models/order/order.dart';
 import '../../models/package/package.dart';
 import '../../models/test/test.dart';
 import '../orderTracker_home.dart';
+import '../orderTracker_progress.dart';
 
 // ignore: must_be_immutable
 class OrderSummaryScreen extends StatefulWidget {
@@ -29,6 +33,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   double total = 0.0;
   Order order = new Order();
   late SelectedOrderState selectedOrder;
+  late SelectedTestState selectedTest;
+  PaymentService paymentService = PaymentService();
   calculateTotalAmount() {
     total = 0.0;
     for (var item in getItems()) {
@@ -43,7 +49,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   @override
   void initState() {
     super.initState();
-
+    paymentService.connect();
     Future.delayed(Duration.zero, () {
       order = selectedOrder.getOrder;
       calculateTotalAmount();
@@ -82,7 +88,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   ExecutionStackOperation executionStackOperation = ExecutionStackOperation();
   @override
   Widget build(BuildContext context) {
-    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
+    selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     selectedOrder = Provider.of<SelectedOrderState>(context);
     order = selectedOrder.getOrder;
     return WillPopScope(
@@ -564,9 +570,14 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                         )),
                                         Spacer(),
                                         GestureDetector(
-                                          onTap: () {
-                                            globalservice.navigate(context,
-                                                PhonePayPaymentScreen()); //Send payment details and change the phonepaypayment screen into a class
+                                          onTap: () async {
+                                            if (paymentService
+                                                .status['connection']) {
+                                              paymentService.startPGTransaction(
+                                                  selectedOrder,
+                                                  selectedTest,
+                                                  order);
+                                            }
                                           },
                                           child: Text("More Option",
                                               style: Theme.of(context)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/payment/paymentService.dart';
 import '../../../Home/models/order/order.dart';
 import '../../../Home/order_tracker/orderTracker_progress.dart';
 import '../../Provider/selected_order_provider.dart';
@@ -131,11 +132,6 @@ class _MyPaymentScreeen extends State<PaymentScreeen> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _doPayment,
-        tooltip: 'pay',
-        child: Icon(Icons.payment_outlined),
       ),
     );
   }
