@@ -28,7 +28,8 @@ Payment _$PaymentFromDBJson(Map<String, dynamic> json) => Payment(
     merchantTransactionId: json['merchantTransactionId'],
     pgTransactionId: json['pgTransactionId'],
     statusLabel: json['statusLabel'],
-    transactionId: json['transactionId']);
+    transactionId: json['transactionId'],
+    transactionDate: json['transactionDate']);
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'paymentMode': instance.paymentMode,
@@ -40,5 +41,6 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'merchantTransactionId': instance.merchantTransactionId,
       'pgTransactionId': instance.pgTransactionId,
       'statusLabel': instance.statusLabel,
-      'transactionId': instance.transactionId
+      'transactionId': instance.transactionId,
+      'transactionDate': instance.transactionDate
     };

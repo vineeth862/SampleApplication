@@ -145,8 +145,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                           });
                           orderObject.totalPrice = totalAmmount;
 
-                          orderObject.createdDate =
-                              new DateTime.now().toString();
+                          orderObject.createdDate = DateTime.now().toString();
                           selectedOrder.setOrder = orderObject;
 
                           Get.off(() => OrderSummaryScreen());

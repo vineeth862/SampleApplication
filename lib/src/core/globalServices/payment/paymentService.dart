@@ -41,7 +41,6 @@ class PaymentService {
   Map<dynamic, dynamic> status = {};
 
   checkStatus() {
-    globalService.showLoader();
     String url =
         "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/$merchantId/$transactionId";
 
@@ -152,9 +151,11 @@ class PaymentService {
     Order order = selectedOrder.getOrder;
 
     if (!isUPI) {
+      Payment payment = Payment.fromJson(result);
+      payment.transactionDate = DateTime.now().toString();
       order.payment == null
-          ? order.payment = [Payment.fromJson(result)]
-          : order.payment?.add(Payment.fromJson(result));
+          ? order.payment = [payment]
+          : order.payment?.add(payment);
     }
 
     order.statusCode = 2;
@@ -170,7 +171,7 @@ class PaymentService {
       selectedTest.removeAllPackage();
       // });
     }
-
+    // globalService.showLoader();
     Get.offAll(OrderTrackingScreen(order: Order.fromJson(tempOrder)));
   }
 

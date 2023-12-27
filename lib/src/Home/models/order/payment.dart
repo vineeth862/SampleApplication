@@ -12,7 +12,7 @@ class Payment {
   int amount;
   String pgTransactionId;
   String? brn;
-
+  String? transactionDate;
   String? cardType;
 
   Payment(
@@ -25,6 +25,7 @@ class Payment {
       required this.merchantTransactionId,
       required this.pgTransactionId,
       required this.transactionId,
+      this.transactionDate,
       this.cardType});
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
