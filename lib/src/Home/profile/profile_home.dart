@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/payment/customPaymentPage.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
 
 import '../models/user/user.dart';
@@ -351,14 +352,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //   child: const Text('Payment2'),
               // ),
               // const SizedBox(height: 20),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     //globalservice.navigate(context, OrderTrackingScreen());
-              //     UserCurrentLocation.instance.validateUserSelectedPincode();
-              //   },
-              //   child: const Text('Order Tracking'),
-              // ),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, CustomPaymentPage());
+                },
+                child: const Text('Order Tracking'),
+              ),
             ],
           ),
         ),
