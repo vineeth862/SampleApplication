@@ -27,7 +27,7 @@ class LocationNotAvailable extends StatelessWidget {
 
       child: AlertDialog(
         //icon: Icon(Icons.time_to_leave),
-        alignment: const AlignmentDirectional(1, 0),
+        alignment: const AlignmentDirectional(0, 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: Text("Oh,no!",
             style: Theme.of(context)

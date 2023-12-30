@@ -9,6 +9,7 @@ import 'package:sample_application/src/core/helper_widgets/price_container.dart'
 import 'package:sample_application/src/core/helper_widgets/richTextWidget.dart';
 
 import '../../core/Provider/selected_order_provider.dart';
+import '../explore/Search/search_field.dart';
 import '../models/status/status.dart';
 import 'order-summary/orderTrackerDailog.dart';
 
@@ -435,7 +436,112 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                         // content: Step2Widget(
                         //     orderObj: widget.orderObj,
                         //     details: proceedToNextStep),
-                        content: Container(child: Text("Step 2")),
+                        content: Container(
+                            child: Column(
+                          children: [
+                            Container(
+                              child: Image.asset(
+                                  'assets/images/payment-success.jpeg'),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  //border: Border.all(),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichTextWidget(
+                                        headline: "Payment Type ",
+                                        title:
+                                            order!.payment!.first.paymentMode!),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    RichTextWidget(
+                                        headline: "Amount ",
+                                        title: order!.payment!.first.amount
+                                            .toString()),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    RichTextWidget(
+                                        headline: "Transaction ID ",
+                                        title: order!
+                                            .payment!.first.transactionId!),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    RichTextWidget(
+                                        headline: "Transaction Time ",
+                                        title: globalservice
+                                            .getString(order!
+                                                .payment!.first.transactionDate)
+                                            .toString()),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        globalservice.navigate(
+                                            context, SearchBarPage());
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Center(
+                                          child: Container(
+                                            width: 250,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Color.fromARGB(
+                                                            141, 133, 133, 133)
+                                                        .withOpacity(
+                                                            0.5), // Shadow color
+                                                    spreadRadius:
+                                                        5, // Spread radius
+                                                    blurRadius:
+                                                        7, // Blur radius
+                                                    offset: Offset(0,
+                                                        3), // Offset in the x and y directions
+                                                  )
+                                                ]),
+                                            child: Center(
+                                              child: Text(
+                                                'Explore More',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium!
+                                                    .copyWith(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            255,
+                                                            255,
+                                                            255)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
                         //isActive: statusCode >= 2,
                         isActive: customStep == 1,
                         state: statusCode >= 2

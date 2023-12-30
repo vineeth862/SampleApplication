@@ -9,7 +9,6 @@ import 'package:sample_application/src/Home/explore/explore.service.dart';
 import 'package:sample_application/src/core/helper_widgets/test_card.dart';
 import '../../../../core/Provider/selected_order_provider.dart';
 import '../../../../core/Provider/selected_test_provider.dart';
-import '../../../../core/globalServices/payment/paymentScreen.dart';
 import '../../../../core/helper_widgets/slot-booking-card.dart';
 import '../../../models/order/order.dart';
 import '../../../models/test/test.dart';

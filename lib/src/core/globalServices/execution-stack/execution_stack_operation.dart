@@ -20,11 +20,11 @@ class ExecutionStackOperation {
       builder: (BuildContext context1) {
         return Center(
           child: Confirm(
-            headerText: "Leaving So Soon?",
-            leftBtnText: 'close',
-            rightBtnText: 'leave',
+            headerText: "Leaving So Soon ?",
+            leftBtnText: 'Cancel',
+            rightBtnText: 'Exit',
             onClick: (click) {
-              if (click == 'leave') {
+              if (click == 'Exit') {
                 flag = true;
               } else {
                 flag = false;

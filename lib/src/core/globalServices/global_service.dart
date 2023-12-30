@@ -124,7 +124,9 @@ class GlobalService {
   }
 
   showLoader() {
-    Get.to(() => LoaderScreen());
+    if (Get.currentRoute != '/LoaderScreen') {
+      Get.to(() => LoaderScreen());
+    }
   }
 
   hideLoader() async {

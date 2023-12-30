@@ -7,7 +7,7 @@ class LoaderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        print(Get.currentRoute != '/LoaderScreen');
+        // print(Get.currentRoute != '/LoaderScreen');
         return Get.currentRoute != '/LoaderScreen';
       },
       child: SafeArea(

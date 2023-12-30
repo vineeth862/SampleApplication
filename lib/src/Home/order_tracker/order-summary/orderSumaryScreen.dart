@@ -5,12 +5,11 @@ import 'package:sample_application/src/Home/order_tracker/confirmation-allert.da
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
-import 'package:sample_application/src/core/globalServices/payment/paymentScreen.dart';
-import 'package:sample_application/src/core/globalServices/payment/phonepePaymentTesting.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
 import '../../../core/globalServices/execution-stack/execution_stack_operation.dart';
+import '../../../core/globalServices/payment/paymentService.dart';
 import '../../models/order/order.dart';
 import '../../models/package/package.dart';
 import '../../models/test/test.dart';
@@ -29,6 +28,8 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   double total = 0.0;
   Order order = new Order();
   late SelectedOrderState selectedOrder;
+  late SelectedTestState selectedTest;
+  PaymentService paymentService = PaymentService();
   calculateTotalAmount() {
     total = 0.0;
     for (var item in getItems()) {
@@ -50,6 +51,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
       order.totalPrice = total.toInt();
       if (order.orderNumber != null) {
         selectedOrder.createOrder();
+        paymentService.connect(order, selectedOrder, selectedTest);
       }
     });
   }
@@ -82,9 +84,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
   ExecutionStackOperation executionStackOperation = ExecutionStackOperation();
   @override
   Widget build(BuildContext context) {
-    final selectedTest = Provider.of<SelectedTestState>(context, listen: true);
+    selectedTest = Provider.of<SelectedTestState>(context, listen: true);
     selectedOrder = Provider.of<SelectedOrderState>(context);
     order = selectedOrder.getOrder;
+
     return WillPopScope(
       onWillPop: () async {
         if (order.tests!.length == 0 && order.packages!.length == 0) {
@@ -564,14 +567,20 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                         )),
                                         Spacer(),
                                         GestureDetector(
-                                          onTap: () {
-                                            globalservice.navigate(context,
-                                                PhonePayPaymentScreen()); //Send payment details and change the phonepaypayment screen into a class
+                                          onTap: () async {
+                                            if (paymentService
+                                                .status['connection']) {
+                                              paymentService
+                                                  .startPGTransaction();
+                                            }
                                           },
                                           child: Text("More Option",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headlineMedium),
+                                                  .headlineMedium!
+                                                  .copyWith(
+                                                      color: Color.fromARGB(
+                                                          255, 52, 22, 203))),
                                         )
                                       ],
                                     ),
@@ -582,9 +591,11 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                       thickness: 1,
                                     ),
                                     ListTile(
-                                      leading: Icon(
-                                        Icons.payment,
-                                      ),
+                                      tileColor:
+                                          Color.fromARGB(255, 206, 222, 251),
+                                      leading: Icon(Icons.payment_outlined,
+                                          color: Color.fromARGB(
+                                              255, 249, 120, 111)),
                                       title: Text("Pay by Any UPI app"),
                                       subtitle: Text(
                                           "Use any UPI app on your phone to pay"),
@@ -593,9 +604,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                       height: 10,
                                     ),
                                     ElevatedButton(
-                                        onPressed: () {
-                                          globalservice.navigate(context,
-                                              PaymentScreeen()); //Replace paymentScrenn with phonepe provided fetch upi apps and execute this function
+                                        onPressed: () async {
+                                          paymentService
+                                              .startEasyUpiPaymentTransaction();
                                         },
                                         child: Text("Proceed to Pay"))
                                   ],
