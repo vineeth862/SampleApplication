@@ -50,18 +50,34 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
             selectedOrder!.setOrder = order;
           });
         } else {
-          Get.snackbar(
-              "Info", "Address is not servicable for the selected lab,",
+          Get.showSnackbar(
+            GetSnackBar(
+              backgroundColor: Color.fromARGB(255, 203, 57, 24),
+
               icon: Icon(
                 Icons.warning_amber_rounded,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-              dismissDirection: DismissDirection.horizontal,
-              forwardAnimationCurve: ElasticInOutCurve(),
-              duration: Duration(seconds: 2),
-              snackPosition: SnackPosition.TOP
-              //colorText: Theme.of(context).colorScheme.primary,
-              );
+              forwardAnimationCurve: Curves.decelerate,
+              //margin: EdgeInsets.all(10),
+              message: 'Address is not servicable for the selected lab',
+              maxWidth: 400, // Set the desired width
+              duration: Duration(seconds: 3),
+              snackPosition: SnackPosition.BOTTOM, // Optional: Specify position
+            ),
+          );
+          // Get.snackbar("", "Address is not servicable for the selected lab,",
+          //     colorText: Colors.white,
+          //     icon: Icon(
+          //       Icons.warning_amber_rounded,
+          //     ),
+          //     backgroundColor: Color.fromARGB(255, 9, 78, 9),
+          //     dismissDirection: DismissDirection.horizontal,
+          //     //forwardAnimationCurve: ElasticInOutCurve(),
+          //     duration: Duration(seconds: 2),
+          //     snackPosition: SnackPosition.BOTTOM
+          //     //colorText: Theme.of(context).colorScheme.primary,
+          //     );
         }
       },
     );

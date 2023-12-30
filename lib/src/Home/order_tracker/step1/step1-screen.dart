@@ -482,13 +482,13 @@ class _StepOneScreenState extends State<StepOneScreen> {
               UpdateWidget();
             },
             title: Text(
-              "Add more Items",
+              "Add more Test/Package",
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium!
-                  .copyWith(color: Theme.of(context).colorScheme.primary),
+                  .copyWith(color: Theme.of(context).colorScheme.tertiary),
             ),
-            iconColor: Theme.of(context).colorScheme.primary,
+            iconColor: Theme.of(context).colorScheme.tertiary,
             leading: Icon(Icons.add_circle_outline),
           )
         ],

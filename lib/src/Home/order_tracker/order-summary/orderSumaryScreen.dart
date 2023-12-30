@@ -390,7 +390,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                         Spacer(),
                         Text(
-                          " % ${selectedTest.discount.toString()}",
+                          "${selectedTest.discount.toString()}%",
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
@@ -409,13 +409,13 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                         Spacer(),
                         Text(
-                          "₹100",
+                          "₹200",
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
                               .copyWith(
                                   decoration: TextDecoration.lineThrough,
-                                  color: Colors.black26),
+                                  color: Colors.red),
                         ),
                         SizedBox(
                           width: 5,
@@ -455,7 +455,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                             ),
                             Spacer(),
                             Text(
-                              " ₹ ${selectedTest.totalPriceSum - selectedTest.totalDiscountedPriceSum}",
+                              " ₹ ${200 + (selectedTest.totalPriceSum - selectedTest.totalDiscountedPriceSum)}",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall!

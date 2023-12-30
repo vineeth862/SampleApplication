@@ -271,11 +271,16 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                       child: Row(
                                         children: [
                                           SizedBox(width: 10),
-                                          Icon(
-                                            Icons.home,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
+                                          // Icon(
+                                          //   Icons.home,
+                                          //   color: Theme.of(context)
+                                          //       .colorScheme
+                                          //       .primary,
+                                          // ),
+                                          Container(
+                                            width: 20,
+                                            child: Image.asset(
+                                                'assets/images/home.jpeg'),
                                           ),
                                           SizedBox(
                                             width: 10,
@@ -294,10 +299,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall!
-                                                    .copyWith(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primary),
+                                                    .copyWith(),
                                               ),
                                               subtitle: Text(
                                                   concatenatedAddressList[index]
@@ -309,10 +311,17 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                             onTap: () {
                                               _removeItem(index);
                                             },
-                                            child: Icon(Icons.delete,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Icon(
+                                                Icons.delete,
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .inverseSurface),
+                                                    .inverseSurface,
+                                                size: 15,
+                                              ),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -328,9 +337,28 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                         },
                       )),
               isButtonEnabled
-                  ? ElevatedButton(
-                      onPressed: _loadMoreconcatenatedAddressList,
-                      child: Text('Load More'),
+                  ? SizedBox(
+                      height: 28,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              return Color.fromARGB(255, 181, 233, 227);
+
+                              // Use the component's default.
+                            },
+                          ),
+                        ),
+                        onPressed: _loadMoreconcatenatedAddressList,
+                        child: Text(
+                          'Load More',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Colors.black),
+                        ),
+                      ),
                     )
                   : Card()
             ],
