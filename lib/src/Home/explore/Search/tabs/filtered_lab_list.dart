@@ -75,7 +75,9 @@ class LabListScreen extends StatelessWidget {
                                 location: searchState.getlabSuggetionList[index]
                                     .branchDetails[0].locality,
                                 labCode: searchState
-                                    .getlabSuggetionList[index].labCode));
+                                    .getlabSuggetionList[index].labCode,
+                                logo: searchState
+                                    .getlabSuggetionList[index].logo));
                       },
                     );
                   },

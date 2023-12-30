@@ -175,13 +175,14 @@ class MaleFemaleCategory extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: MediaQuery.of(context).size.width > 500 ? 30 : 20,
+                  height: MediaQuery.of(context).size.width > 500 ? 30 : 30,
                   padding: EdgeInsets.symmetric(vertical: 2.0),
                   width: double.infinity,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(138, 84, 208, 250)
-                        .withOpacity(0.5), // Example background color for text
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondaryContainer, // Example background color for text
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8),
@@ -191,7 +192,7 @@ class MaleFemaleCategory extends StatelessWidget {
                     title!,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Colors.white, // Example text color
+                          color: Colors.black, // Example text color
                         ),
                   ),
                 ),

@@ -530,78 +530,86 @@ class _exploreExpState extends State<exploreExp> {
                 //     children: [...femaleCategoryList],
                 //   ),
                 // ),
+                // const SizedBox(
+                //   height: 25,
+                // ),
+
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(10.0),
+                //   child: Image.asset(
+                //     //imagePath.toString(),
+                //     "./assets/images/How_it_works.png",
+                //     // height: MediaQuery.of(context).size.height * 0.7,
+                //     // width: MediaQuery.of(context).size.height * 0.41,
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
                 const SizedBox(
                   height: 25,
                 ),
-
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
-                    //imagePath.toString(),
-                    "./assets/images/How_it_works.png",
-                    // height: MediaQuery.of(context).size.height * 0.7,
-                    // width: MediaQuery.of(context).size.height * 0.41,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AspectRatio(
-                      aspectRatio: 4 / 3,
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: AspectRatio(
-                              aspectRatio: 4 / 0.75,
-                              child: Row(
-                                children: [
-                                  Image.asset('./assets/images/lab1.png',
-                                      fit: BoxFit.cover),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Choose Most Trusted Labs",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GridView.count(
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 20,
-                                crossAxisSpacing: 20,
-                                physics: const NeverScrollableScrollPhysics(),
-                                childAspectRatio: 16 /
-                                    9, // Adjust the aspect ratio to control the card height
-                                children: [...labList],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                //MySlider(),
+                // Card(
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: AspectRatio(
+                //       aspectRatio: 4 / 3,
+                //       child: Column(
+                //         children: [
+                //           Align(
+                //             alignment: Alignment.centerLeft,
+                //             child: AspectRatio(
+                //               aspectRatio: 4 / 0.75,
+                //               child: Row(
+                //                 children: [
+                //                   Image.asset('./assets/images/lab1.png',
+                //                       fit: BoxFit.cover),
+                //                   const SizedBox(
+                //                     width: 20,
+                //                   ),
+                //                   Align(
+                //                     alignment: Alignment.centerLeft,
+                //                     child: Text("Choose Most Trusted Labs",
+                //                         style: Theme.of(context)
+                //                             .textTheme
+                //                             .headlineMedium),
+                //                   ),
+                //                   const SizedBox(
+                //                     height: 20,
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //           ),
+                //           const SizedBox(
+                //             height: 30,
+                //           ),
+                //           Expanded(
+                //             child: Padding(
+                //               padding: const EdgeInsets.all(8.0),
+                //               child: GridView.count(
+                //                 crossAxisCount: 3,
+                //                 mainAxisSpacing: 20,
+                //                 crossAxisSpacing: 20,
+                //                 physics: const NeverScrollableScrollPhysics(),
+                //                 childAspectRatio: 16 /
+                //                     9, // Adjust the aspect ratio to control the card height
+                //                 children: [...labList],
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // ListTile(
+                //   title: Text("Popular Categories",
+                //       style: Theme.of(context).textTheme.headlineMedium),
+                //   subtitle: Text(
+                //     "MedCapH recomended Health Categories",
+                //     style: Theme.of(context).textTheme.bodyMedium,
+                //   ),
+                // ),
+                MySliderTest(),
                 const SizedBox(
                   height: 25,
                 ),

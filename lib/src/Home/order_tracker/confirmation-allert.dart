@@ -61,16 +61,16 @@ class _AllertState extends State<Allert> {
                             : selectedTest.getSelectedPackage.elementAt(0);
                         await searchState.cardClicked(item.labCode, false);
                         Get.off(() => FilteredLabCardlistPage(
-                              title: item.labName,
-                              labCode: item.labCode,
-                              location: "location",
-                            ));
+                            title: item.labName,
+                            labCode: item.labCode,
+                            location: "location",
+                            logo: "logo"));
                       } else if (order.labCode != null) {
                         Get.off(() => FilteredLabCardlistPage(
-                              title: order.labName!,
-                              labCode: order.labCode!,
-                              location: "location",
-                            ));
+                            title: order.labName!,
+                            labCode: order.labCode!,
+                            location: "location",
+                            logo: "ll"));
                       } else {
                         globalservice.navigate(context, SearchBarPage());
                         selectedOrder!.resetOrder();

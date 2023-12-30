@@ -20,7 +20,7 @@ class _ConfirmState extends State<Confirm> {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
-      height: 175,
+      height: 150,
       margin: EdgeInsets.all(20),
       child: Card(
         elevation: 5,
@@ -41,48 +41,61 @@ class _ConfirmState extends State<Confirm> {
               // SizedBox(height: 8),
               Text(
                 widget.headerText,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        widget.onClick(widget.leftBtnText);
-                      },
-                      child: Text(
-                        widget.leftBtnText,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color?>(
-                          (Set<MaterialState> states) {
-                            return Theme.of(context)
-                                .colorScheme
-                                .inverseSurface; // Default color
-                          },
+                  SizedBox(
+                    height: 25,
+                    width: 75,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          widget.onClick(widget.leftBtnText);
+                        },
+                        child: Text(
+                          widget.leftBtnText,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Colors.white),
                         ),
-                      )),
-                  ElevatedButton(
-                      onPressed: () {
-                        widget.onClick(widget.rightBtnText);
-                      },
-                      child: Text(
-                        widget.rightBtnText,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color?>(
-                          (Set<MaterialState> states) {
-                            return Theme.of(context)
-                                .colorScheme
-                                .tertiary; // Default color
-                          },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              return Theme.of(context)
+                                  .colorScheme
+                                  .tertiary; // Default color
+                            },
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 25,
+                    width: 75,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          widget.onClick(widget.rightBtnText);
+                        },
+                        child: Text(
+                          widget.rightBtnText,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Colors.white),
                         ),
-                      )),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              return Color.fromARGB(255, 238, 94, 94);
+                              // Default color
+                            },
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ],

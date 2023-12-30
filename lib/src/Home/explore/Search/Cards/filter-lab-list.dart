@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +22,13 @@ class FilteredLabCardlistPage extends StatefulWidget {
   String title;
   String location;
   String labCode;
+  String logo;
+
   FilteredLabCardlistPage(
-      {required this.title, required this.location, required this.labCode});
+      {required this.title,
+      required this.location,
+      required this.labCode,
+      required this.logo});
   @override
   _FilteredLabCardlistPage createState() => _FilteredLabCardlistPage();
 }
@@ -35,6 +42,7 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
   @override
   void initState() {
     super.initState();
+    print(widget.logo);
     _scrollController.addListener(() {
       setState(() {
         _isAppBarExpanded = _scrollController.offset > 143.0;
@@ -144,25 +152,43 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                             .secondary
                             .withOpacity(0.9),
                         child: Center(
-                          child: Column(
+                          child: Stack(
                             children: [
-                              SizedBox(
-                                height: 30,
+                              Container(
+                                width: double.infinity,
+                                child: Opacity(
+                                  opacity: 0.1,
+                                  child: Image.memory(
+                                    globalservice.getImageByteCode(widget.logo),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
-                              Text(widget.title.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineLarge),
-
-                              // ListTile(
-                              //   //leading: Icon(Icons.location_on_outlined),
-                              //   titleAlignment: ListTileTitleAlignment.center,
-                              //   title: Text(
-                              //     widget.location.toString(),
-                              //     textAlign: TextAlign.center,
-                              //   ),
-                              // )
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Text(widget.title.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge!
+                                          .copyWith(
+                                              color: Color.fromARGB(
+                                                  255, 1, 5, 3))),
+                                  ListTile(
+                                    //leading: Icon(Icons.location_on_outlined),
+                                    titleAlignment:
+                                        ListTileTitleAlignment.center,
+                                    title: Text(widget.location.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
