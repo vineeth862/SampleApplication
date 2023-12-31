@@ -156,6 +156,7 @@ class SearchListState with ChangeNotifier {
   }
 
   searchPriorityTestAndLabs() async {
+    filterLabOnPinCode();
     input = '';
     var testList = await FirebaseFirestore.instance
         .collection('priorityTest')

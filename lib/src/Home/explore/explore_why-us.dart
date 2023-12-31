@@ -9,12 +9,16 @@ class MySlider extends StatefulWidget {
 
 class _MySliderState extends State<MySlider> {
   final List<String> imageUrls = [
-    //'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy1.png?alt=media&token=7828f712-5515-4d22-8a8e-88a52e0d2512',
-    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Designer.png?alt=media&token=964f2b67-e165-4cf9-b07e-7eea7bbb449a',
-    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Designer%20(1).png?alt=media&token=c69af3d3-1195-4755-a3d1-7b7dbf84c4c4',
-    //'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy2.png?alt=media&token=735fb633-0ddb-4353-9454-ede6167f90b5',
-    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy3.png?alt=media&token=6f4ee468-3ca4-460c-bbc1-b959ca44b0b9',
-    // './assets/images/why-us4.png',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Convinient%20.png?alt=media&token=d75cc1cf-ce35-46d1-8bc5-9b27b80542e6',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Affordable%20.png?alt=media&token=b2bb03b6-fe5f-4506-b463-30eb01841d2b',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Best%20lab.png?alt=media&token=26bb0cf4-aa04-44dc-bef6-4a03def05014',
+    'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Genuine%202.png?alt=media&token=2e8c43b8-a740-4b6f-9b57-f41c15c5f80c'
+    // //'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy1.png?alt=media&token=7828f712-5515-4d22-8a8e-88a52e0d2512',
+    // 'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Designer.png?alt=media&token=964f2b67-e165-4cf9-b07e-7eea7bbb449a',
+    // 'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/Designer%20(1).png?alt=media&token=c69af3d3-1195-4755-a3d1-7b7dbf84c4c4',
+    // //'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy2.png?alt=media&token=735fb633-0ddb-4353-9454-ede6167f90b5',
+    // 'https://firebasestorage.googleapis.com/v0/b/experimentdatabase-87de1.appspot.com/o/why-us%2Fwhy3.png?alt=media&token=6f4ee468-3ca4-460c-bbc1-b959ca44b0b9',
+    // // './assets/images/why-us4.png',
   ];
 
   int _currentIndex = 0;
