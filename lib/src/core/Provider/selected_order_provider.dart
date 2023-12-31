@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../Home/models/order/order.dart' as orderModule;
 import '../../Home/models/status/status.dart';
@@ -99,7 +100,9 @@ class SelectedOrderState extends ChangeNotifier {
         });
       }
     } else {
-      Get.snackbar("Booking!", "un able to book the order please check later");
+      CustomSnackbar.showSnackbar(
+          'Unable to book the order please check later');
+      //Get.snackbar("Booking!", "Unable to book the order please check later");
     }
 
     notifyListeners();

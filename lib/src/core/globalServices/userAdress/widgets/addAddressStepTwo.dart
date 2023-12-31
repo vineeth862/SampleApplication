@@ -5,6 +5,7 @@ import 'package:sample_application/src/core/Provider/selected_order_provider.dar
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../../../Home/models/order/order.dart';
 import '../../../../Home/models/user/address.dart';
@@ -76,8 +77,10 @@ class AddAdressStepTwo extends StatelessWidget {
         Navigator.pop(context);
         globalservice.navigate(context, StepTwoToBookTest());
       } else {
-        Get.snackbar(
-            "Error", "The selected picode is not under serviceable area");
+        CustomSnackbar.showSnackbar(
+            'The selected picode is not under serviceable area');
+        // Get.snackbar(
+        //     "Error", "The selected picode is not under serviceable area");
       }
     }
   }

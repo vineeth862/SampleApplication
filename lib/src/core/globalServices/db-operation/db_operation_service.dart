@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 class dbOperationsService extends GetxController {
   static dbOperationsService get instance => Get.find();
@@ -20,7 +21,8 @@ class dbOperationsService extends GetxController {
           .set(obj)
           .whenComplete(() => Get.snackbar("Success", "data getting added"))
           .catchError((error, stackTrace) {
-        Get.snackbar("Failed", error);
+        CustomSnackbar.showSnackbar('Your account is created');
+        //Get.snackbar("Failed", error);
       });
     } else {
       _db

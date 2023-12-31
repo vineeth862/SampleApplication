@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/Home/order_tracker/step1/step1.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/order_tracker/step2/step2-screen.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../../../core/Provider/selected_test_provider.dart';
 import '../../../core/helper_widgets/slot-booking-card.dart';
@@ -112,20 +113,22 @@ class _StepTwoToBookTest extends State<StepTwoToBookTest> {
                               GlobalService()
                                   .navigate(context, StepThreeToBookTest());
                             } else {
-                              Get.snackbar(
-                                  "Info", "Please Select Any One Address",
-                                  icon: Icon(
-                                    Icons.warning_amber_rounded,
-                                  ),
-                                  backgroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .tertiaryContainer,
-                                  dismissDirection: DismissDirection.horizontal,
-                                  forwardAnimationCurve: ElasticInOutCurve(),
-                                  duration: Duration(seconds: 2),
-                                  snackPosition: SnackPosition.TOP
-                                  //colorText: Theme.of(context).colorScheme.primary,
-                                  );
+                              CustomSnackbar.showSnackbar(
+                                  'Please Select Any One Address');
+                              // Get.snackbar(
+                              //     "Info", "Please Select Any One Address",
+                              //     icon: Icon(
+                              //       Icons.warning_amber_rounded,
+                              //     ),
+                              //     backgroundColor: Theme.of(context)
+                              //         .colorScheme
+                              //         .tertiaryContainer,
+                              //     dismissDirection: DismissDirection.horizontal,
+                              //     forwardAnimationCurve: ElasticInOutCurve(),
+                              //     duration: Duration(seconds: 2),
+                              //     snackPosition: SnackPosition.TOP
+                              //     //colorText: Theme.of(context).colorScheme.primary,
+                              //     );
                               setState(() {
                                 displayAdress =
                                     "You haven't selected any address";

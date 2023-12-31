@@ -8,6 +8,7 @@ import 'package:sample_application/src/Home/models/order/payment.dart';
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../../Home/models/order/order.dart';
 import '../../../Home/order_tracker/orderTracker_progress.dart';
@@ -68,7 +69,8 @@ class PaymentService {
     }).catchError((err) {
       globalService.hideLoader();
       Get.back();
-      Get.snackbar("Failed", "Transaction failed");
+      CustomSnackbar.showSnackbar('Transaction failed');
+      //Get.snackbar("Failed", "Transaction failed");
     });
   }
 
@@ -143,7 +145,8 @@ class PaymentService {
       updateOrder(value, true);
     }).catchError((err) {
       Get.back();
-      Get.snackbar("Failed", "Transaction failed");
+      CustomSnackbar.showSnackbar('Transaction failed');
+      //Get.snackbar("Failed", "Transaction failed");
     });
   }
 

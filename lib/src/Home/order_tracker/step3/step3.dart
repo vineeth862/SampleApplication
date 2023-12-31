@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/models/order/booked.dart';
 import 'package:sample_application/src/Home/order_tracker/step3/step3-screen.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:sample_application/src/Home/models/order/order.dart' as order;
 import 'package:intl/intl.dart';
@@ -150,19 +151,21 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
 
                           Get.off(() => OrderSummaryScreen());
                         } else {
-                          Get.snackbar(
-                              "Info", "Please Select Both Date and Time",
-                              icon: Icon(
-                                Icons.warning_amber_rounded,
-                              ),
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .tertiaryContainer,
-                              dismissDirection: DismissDirection.horizontal,
-                              forwardAnimationCurve: ElasticInOutCurve(),
-                              duration: Duration(seconds: 2)
-                              //colorText: Theme.of(context).colorScheme.primary,
-                              );
+                          CustomSnackbar.showSnackbar(
+                              'Please Select Both Date and Time');
+                          // Get.snackbar(
+                          //     "Info", "Please Select Both Date and Time",
+                          //     icon: Icon(
+                          //       Icons.warning_amber_rounded,
+                          //     ),
+                          //     backgroundColor: Theme.of(context)
+                          //         .colorScheme
+                          //         .tertiaryContainer,
+                          //     dismissDirection: DismissDirection.horizontal,
+                          //     forwardAnimationCurve: ElasticInOutCurve(),
+                          //     duration: Duration(seconds: 2)
+                          //     //colorText: Theme.of(context).colorScheme.primary,
+                          //     );
                         }
                         // OrderSummaryScreen()
                       },

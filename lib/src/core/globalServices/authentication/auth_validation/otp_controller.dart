@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 import '../../../../Home/home.dart';
 import '../../../../Home/models/user/user.dart';
 import '../user_repository.dart';
@@ -23,7 +24,8 @@ class otpController extends GetxController {
 
       userRepository.createUser(user);
     } else {
-      Get.snackbar("Error", "Invalid OTP, Enter a Valid OTP");
+      CustomSnackbar.showSnackbar('Invalid OTP, Enter a Valid OTP');
+      //Get.snackbar("Error", "Invalid OTP, Enter a Valid OTP");
     }
   }
 
@@ -35,7 +37,8 @@ class otpController extends GetxController {
 
       userRepository.updateUser(user, oldUserKey);
     } else {
-      Get.snackbar("Error", "Something went wrong try again");
+      CustomSnackbar.showSnackbar('Something went wrong try again');
+      //Get.snackbar("Error", "Something went wrong try again");
     }
   }
 }

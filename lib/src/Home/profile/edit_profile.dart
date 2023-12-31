@@ -8,6 +8,7 @@ import 'package:sample_application/src/core/globalServices/authentication/user_r
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/Home/models/user/user.dart';
 import 'package:sample_application/src/Home/profile/change_mobileNumber.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 enum Gender { Male, Female, Other }
 
@@ -337,9 +338,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       // Perform the necessary actions to save the changes
       // to the user's profile, such as making an API request.
-      Get.snackbar("Success", "Profile changes saved.",
-          colorText: Colors.black,
-          backgroundColor: Theme.of(context).colorScheme.secondary);
+      CustomSnackbar.showSnackbar('Profile changes saved.');
+      // Get.snackbar("Success", "Profile changes saved.",
+      //     colorText: Colors.black,
+      //     backgroundColor: Theme.of(context).colorScheme.secondary);
       // Show a snackbar or navigate back to the previous screen
       // ScaffoldMessenger.of(context).showSnackBar(
       //   const SnackBar(

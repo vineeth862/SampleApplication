@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../../Home/models/user/address.dart';
 import '../../../Home/models/user/user.dart';
@@ -20,10 +21,11 @@ class UserRepository extends GetxController {
           .doc(user.mobile)
           .set(user.toJson())
           .whenComplete(
-              () => Get.snackbar("Success", "Your account is created"))
+              () => CustomSnackbar.showSnackbar('Your account is created'))
           .catchError((error, stackTrace) {
         print(error);
-        Get.snackbar("Failed", "Something went wrong");
+        CustomSnackbar.showSnackbar('Something went wrong');
+        //Get.snackbar("Failed", "Something went wrong");
         // print(_db.collection('user').snapshots().length.toString());
       });
     }
@@ -47,7 +49,8 @@ class UserRepository extends GetxController {
         .whenComplete(() =>
             Get.snackbar("Success", "Your Mobile Number Changed Successfully"))
         .catchError((error, stackTrace) {
-      Get.snackbar("Failed", "Something went wrong");
+      CustomSnackbar.showSnackbar('Something went wrong');
+      //Get.snackbar("Failed", "Something went wrong");
     });
 
     // Step 3: Delete the old document (optional)

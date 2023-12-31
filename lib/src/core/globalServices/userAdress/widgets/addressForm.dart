@@ -3,6 +3,7 @@ import 'package:sample_application/src/core/globalServices/authentication/user_r
 import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../../../Home/models/user/address.dart';
 
@@ -45,8 +46,10 @@ class AddAdress extends StatelessWidget {
         UserRepository.instance.getAdress();
         globalservice.navigate(context, routeInfo);
       } else {
-        Get.snackbar(
-            "Error", "The selected picode is not under serviceable area");
+        CustomSnackbar.showSnackbar(
+            'The selected picode is not under serviceable area');
+        // Get.snackbar(
+        //     "Error", "The selected picode is not under serviceable area");
       }
     }
   }

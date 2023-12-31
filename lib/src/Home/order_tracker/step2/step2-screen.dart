@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/models/order/order.dart';
 import 'package:sample_application/src/Home/models/user/address.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/address_operation_step2.dart';
+import 'package:sample_application/src/core/helper_widgets/snackbar.dart';
 
 import '../../../core/Provider/selected_order_provider.dart';
 import '../../../core/globalServices/global_service.dart';
@@ -50,22 +51,25 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
             selectedOrder!.setOrder = order;
           });
         } else {
-          Get.showSnackbar(
-            GetSnackBar(
-              backgroundColor: Color.fromARGB(255, 203, 57, 24),
+          // ignore: use_build_context_synchronously
+          CustomSnackbar.showSnackbar(
+              'Address is not servicable for the selected lab');
+          // Get.showSnackbar(
+          //   GetSnackBar(
+          //     backgroundColor: Color.fromARGB(255, 203, 57, 24),
 
-              icon: Icon(
-                Icons.warning_amber_rounded,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              forwardAnimationCurve: Curves.decelerate,
-              //margin: EdgeInsets.all(10),
-              message: 'Address is not servicable for the selected lab',
-              maxWidth: 400, // Set the desired width
-              duration: Duration(seconds: 3),
-              snackPosition: SnackPosition.BOTTOM, // Optional: Specify position
-            ),
-          );
+          //     icon: Icon(
+          //       Icons.warning_amber_rounded,
+          //       color: Theme.of(context).colorScheme.secondary,
+          //     ),
+          //     forwardAnimationCurve: Curves.decelerate,
+          //     //margin: EdgeInsets.all(10),
+          //     message: 'Address is not servicable for the selected lab',
+          //     maxWidth: 400, // Set the desired width
+          //     duration: Duration(seconds: 3),
+          //     snackPosition: SnackPosition.BOTTOM, // Optional: Specify position
+          //   ),
+          // );
           // Get.snackbar("", "Address is not servicable for the selected lab,",
           //     colorText: Colors.white,
           //     icon: Icon(
