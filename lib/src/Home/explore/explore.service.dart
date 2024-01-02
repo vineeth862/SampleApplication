@@ -68,4 +68,17 @@ class ExploreService {
 
     return [];
   }
+
+  fetchSliderCards(type) async {
+    final sliderCards = await _db
+        .collection("prod-slider")
+        .where("sliderType", isEqualTo: type)
+        .get();
+    if (sliderCards.docs.isNotEmpty) {
+      return sliderCards.docs.map((doc) {
+        return doc.get("imageUrl").toString();
+      }).toList();
+    }
+    return [];
+  }
 }

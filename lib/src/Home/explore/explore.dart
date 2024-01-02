@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/explore/Search/search_field.dart';
 import 'package:sample_application/src/Home/explore/explore_packages.dart';
+import 'package:sample_application/src/Home/explore/slider_test_details.dart';
 import 'package:sample_application/src/Home/models/category/category.dart';
 import 'package:sample_application/src/Home/models/lab/labMasterData.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';

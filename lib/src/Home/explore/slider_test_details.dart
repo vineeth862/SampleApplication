@@ -1,24 +1,23 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/explore/explore.service.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 
-ExploreService exploreService = ExploreService();
-GlobalService globalservice = GlobalService();
+class MySliderTest extends StatefulWidget {
+  const MySliderTest({super.key});
 
-class MySlider extends StatefulWidget {
   @override
-  _MySliderState createState() => _MySliderState();
+  State<MySliderTest> createState() => _MySliderTestState();
 }
 
-class _MySliderState extends State<MySlider> {
+class _MySliderTestState extends State<MySliderTest> {
+  ExploreService exploreService = ExploreService();
+  GlobalService globalservice = GlobalService();
+
   List<String> imageUrls = [];
-  //ExploreService exploreService = ExploreService();
-  //GlobalService globalservice = GlobalService();
   loadSlider() async {
-    var imageUrlsLoaded = await exploreService.fetchSliderCards("about-us");
+    var imageUrlsLoaded = await exploreService.fetchSliderCards("about-test");
     setState(() {
       imageUrls = imageUrlsLoaded;
     });
@@ -50,7 +49,7 @@ class _MySliderState extends State<MySlider> {
                   );
                 }).toList(),
                 options: CarouselOptions(
-                  aspectRatio: 16 / 4,
+                  aspectRatio: 12 / 5,
                   viewportFraction: 1.0,
                   enableInfiniteScroll: false,
                   autoPlay: true, // Enable auto-playing of slides
