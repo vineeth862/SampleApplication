@@ -19,7 +19,7 @@ class LoaderScreen extends StatelessWidget {
               width: 100,
               // Make container background transparent
               child: LoadingIndicator(
-                indicatorType: Indicator.circleStrokeSpin,
+                indicatorType: Indicator.ballSpinFadeLoader,
                 colors: [Colors.red.shade400], // Set loader color to white
                 strokeWidth: 10, // Adjust the strokeWidth as needed
               ),

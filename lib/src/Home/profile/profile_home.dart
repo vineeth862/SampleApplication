@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/Home/home.dart';
+import 'package:sample_application/src/Home/order_tracker/orderTrackerCard.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -93,6 +95,7 @@ class AddAdressStepTwo extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.background,
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -105,13 +108,114 @@ class AddAdressStepTwo extends StatelessWidget {
                           //globalservice.navigate(context, routeInfo);
                         }),
                     SizedBox(
-                      width: 45,
+                      width: 10,
                     ),
                     Expanded(
                       child: Text(
                         "Enter Complete Address",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Text(
+                  "Servicable Cities *",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      height: 50,
+                      width: 100,
+                      child: Stack(children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: ColorFiltered(
+                            colorFilter: ColorFilter.mode(
+                              Color.fromARGB(255, 81, 81, 81).withOpacity(
+                                  0.5), // Set the overlay color and opacity
+                              BlendMode.srcATop,
+                            ),
+                            child: Image.network(
+                                width: 100,
+                                fit: BoxFit.fill,
+                                "https://www.trawell.in/admin/images/upload/793916327vidhansoudha_Main.jpg"),
+                          ),
+                        ),
+                        Positioned(
+                            bottom: 1,
+                            left: 20,
+                            child: Text(
+                              "Bengaluru",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(color: Colors.white),
+                            ))
+                      ]),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      height: 50,
+                      width: 100,
+                      child: Stack(children: [
+                        Positioned(
+                            bottom: 15,
+                            left: 20,
+                            child: Text(
+                              "Arriving..",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0)),
+                            ))
+                      ]),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      height: 50,
+                      width: 100,
+                      child: Stack(children: [
+                        Positioned(
+                            bottom: 15,
+                            left: 20,
+                            child: Text(
+                              "Arriving..",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0)),
+                            ))
+                      ]),
                     ),
                   ],
                 ),

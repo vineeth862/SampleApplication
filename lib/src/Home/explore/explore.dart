@@ -251,8 +251,8 @@ class _exploreExpState extends State<exploreExp> {
                                       ListTile(
                                         visualDensity: VisualDensity(
                                             horizontal: 1, vertical: -1),
-                                        contentPadding:
-                                            const EdgeInsets.only(left: 5),
+                                        contentPadding: const EdgeInsets.only(
+                                            left: 5, right: 23),
                                         title: Text(
                                           "Choose Location",
                                           style: Theme.of(context)
