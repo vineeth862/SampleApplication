@@ -58,38 +58,58 @@ class AddAdress extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            leading: Icon(
+              Icons.keyboard_double_arrow_down,
+              color: Colors.black,
+            ),
+            title: Text("Enter Complete Address",
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith())),
         backgroundColor: Theme.of(context).colorScheme.background,
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Padding(
+              //   padding: const EdgeInsets.all(20.0),
+              //   child: Row(
+              //     children: [
+              //       InkWell(
+              //           child: Icon(Icons.keyboard_double_arrow_down),
+              //           onTap: () {
+              //             //Navigator.pop(context);
+              //             globalservice.navigate(context, routeInfo);
+              //           }),
+              //       SizedBox(
+              //         width: 45,
+              //       ),
+              //       Expanded(
+              //         child: Text(
+              //           "Enter Complete Address",
+              //           style: Theme.of(context).textTheme.headlineMedium,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    InkWell(
-                        child: Icon(Icons.keyboard_double_arrow_down),
-                        onTap: () {
-                          //Navigator.pop(context);
-                          globalservice.navigate(context, routeInfo);
-                        }),
-                    SizedBox(
-                      width: 45,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Enter Complete Address",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ),
-                  ],
+                padding: EdgeInsets.only(left: 15, top: 8),
+                child: Text(
+                  "Contact Details",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.only(left: 15.0, right: 15),
                 child: Form(
                   key: _formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -102,8 +122,8 @@ class AddAdress extends StatelessWidget {
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "First Name *",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                // border: OutlineInputBorder(
+                                //     borderRadius: BorderRadius.circular(10)),
                                 // prefixIcon: Icon(
                                 //   Icons.person,
                                 //   color: Theme.of(context).colorScheme.primary,
@@ -129,8 +149,8 @@ class AddAdress extends StatelessWidget {
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "Last Name",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                // border: OutlineInputBorder(
+                                //     borderRadius: BorderRadius.circular(10)),
                                 // prefixIcon: Icon(
                                 //   Icons.home,
                                 //   color: Theme.of(context).colorScheme.primary,
@@ -151,6 +171,10 @@ class AddAdress extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          Text("+91"),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Expanded(
                             child: TextFormField(
                               controller: phoneNumber,
@@ -160,8 +184,8 @@ class AddAdress extends StatelessWidget {
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "Phone Number *",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                // border: OutlineInputBorder(
+                                //     borderRadius: BorderRadius.circular(10)),
                                 // prefixIcon: Icon(
                                 //   Icons.person,
                                 //   color: Theme.of(context).colorScheme.primary,
@@ -185,38 +209,48 @@ class AddAdress extends StatelessWidget {
                           SizedBox(
                             width: 10,
                           ),
-                          Expanded(
-                            child: TextFormField(
-                              controller: PinCode,
-                              obscureText: false,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 1.0, horizontal: 5),
-                                labelText: "Pincode *",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                // prefixIcon: Icon(
-                                //   Icons.post_add,
-                                //   color: Theme.of(context).colorScheme.primary,
-                                // ),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter a pincode';
-                                }
-                                if (value.length != 6) {
-                                  return 'Pincode must be 6 digits';
-                                }
-                                if (!value.isNumericOnly) {
-                                  return 'Pincode must be digits';
-                                }
+                          // Expanded(
+                          //   child: TextFormField(
+                          //     controller: PinCode,
+                          //     obscureText: false,
+                          //     keyboardType: TextInputType.number,
+                          //     decoration: InputDecoration(
+                          //       contentPadding: EdgeInsets.symmetric(
+                          //           vertical: 1.0, horizontal: 5),
+                          //       labelText: "Pincode *",
+                          //       border: OutlineInputBorder(
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       // prefixIcon: Icon(
+                          //       //   Icons.post_add,
+                          //       //   color: Theme.of(context).colorScheme.primary,
+                          //       // ),
+                          //     ),
+                          //     validator: (value) {
+                          //       if (value!.isEmpty) {
+                          //         return 'Please enter a pincode';
+                          //       }
+                          //       if (value.length != 6) {
+                          //         return 'Pincode must be 6 digits';
+                          //       }
+                          //       if (!value.isNumericOnly) {
+                          //         return 'Pincode must be digits';
+                          //       }
 
-                                return null;
-                              },
-                            ),
-                          ),
+                          //       return null;
+                          //     },
+                          //   ),
+                          // ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Address Details",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -228,9 +262,9 @@ class AddAdress extends StatelessWidget {
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 1.0, horizontal: 5),
-                          labelText: "Full Address (Street,Area)*",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                          labelText: "House/Flat Number/Building*",
+                          // border: OutlineInputBorder(
+                          //     borderRadius: BorderRadius.circular(10)),
                           // prefixIcon: Icon(
                           //   Icons.home,
                           //   color: Theme.of(context).colorScheme.primary,
@@ -253,40 +287,123 @@ class AddAdress extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Column(
-                        children: [
-                          TextFormFieldMethod(context, HouseNumber,
-                              "House Number *", Icons.post_add),
-                        ],
-                      ),
+
+                      TextFormFieldMethod(context, HouseNumber,
+                          "Street/Locality *", Icons.post_add),
+
                       SizedBox(
                         height: 10,
                       ),
                       Column(
                         children: [
-                          TextFormFieldMethod(context, FloorNumber,
-                              "Floor Number *", Icons.post_add),
+                          TextFormFieldMethod(
+                              context, FloorNumber, "LandMark", Icons.post_add),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          saveAdress(context);
-                          //globalservice.navigate(context, routeInfo);
-                          //Navigator.pop(context);
-                        },
-                        child: const Text("Submit"),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Set the border radius value
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: TextFormField(
+                                controller: PinCode,
+                                obscureText: false,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 1.0, horizontal: 5),
+                                  labelText: "Pincode *",
+                                  // border: OutlineInputBorder(
+                                  //     borderRadius: BorderRadius.circular(10)),
+                                  // prefixIcon: Icon(
+                                  //   Icons.post_add,
+                                  //   color: Theme.of(context).colorScheme.primary,
+                                  // ),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a pincode';
+                                  }
+                                  if (value.length != 6) {
+                                    return 'Pincode must be 6 digits';
+                                  }
+                                  if (!value.isNumericOnly) {
+                                    return 'Pincode must be digits';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                            ),
                           ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 100.0),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: TextFormField(
+                                controller: PinCode,
+                                obscureText: false,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 1.0, horizontal: 5),
+                                  labelText: "City *",
+                                  // border: OutlineInputBorder(
+                                  //     borderRadius: BorderRadius.circular(10)),
+                                  // prefixIcon: Icon(
+                                  //   Icons.post_add,
+                                  //   color: Theme.of(context).colorScheme.primary,
+                                  // ),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a pincode';
+                                  }
+                                  if (value.length != 6) {
+                                    return 'Pincode must be 6 digits';
+                                  }
+                                  if (!value.isNumericOnly) {
+                                    return 'Pincode must be digits';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // Text(
+                      //   "Save Address as",
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .headlineSmall!
+                      //       .copyWith(fontWeight: FontWeight.bold),
+                      // ),
+
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            saveAdress(context);
+                            //globalservice.navigate(context, routeInfo);
+                            //Navigator.pop(context);
+                          },
+                          child: const Text("Add Address"),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  20.0), // Set the border radius value
+                            ),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.tertiary,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 100.0),
+                          ),
                         ),
                       ),
                     ],
@@ -309,7 +426,7 @@ class AddAdress extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 5),
         labelText: label,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        //border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         // prefixIcon: Icon(
         //   iconDetails,
         //   color: Theme.of(context).colorScheme.primary,
