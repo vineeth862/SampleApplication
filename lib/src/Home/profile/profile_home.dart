@@ -293,7 +293,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _CustomTextButton('assets/images/home.jpeg',
+                        _CustomTextButton('assets/images/home.png',
                             "My Address Book", AdressBook()),
                         const Divider(
                           color: Colors.black,

@@ -280,7 +280,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                           Container(
                                             width: 20,
                                             child: Image.asset(
-                                                'assets/images/home.jpeg'),
+                                                'assets/images/home.png'),
                                           ),
                                           SizedBox(
                                             width: 10,

@@ -134,7 +134,7 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                           padding: const EdgeInsets.only(
                               top: 0.0, left: 10, bottom: 10),
                           child: Image.asset(
-                            "assets/images/home.jpeg",
+                            "assets/images/home.png",
                             width: 25,
                           )),
                       contentPadding: EdgeInsets.only(left: 0),
@@ -164,7 +164,7 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                           padding: const EdgeInsets.only(
                               top: 0.0, left: 5, bottom: 10),
                           child: Image.asset(
-                            "assets/images/icons8-laboratory-50.png",
+                            "assets/images/lab.png",
                             width: 40,
                           )),
                       contentPadding: EdgeInsets.only(right: 10),
