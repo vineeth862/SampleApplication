@@ -4,6 +4,7 @@ import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTrackerCard.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/otpTestScreen.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/payment/customPaymentPage.dart';
@@ -357,6 +358,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () {
                   // Handle edit profile button press
                   globalservice.navigate(context, CustomPaymentPage());
+                },
+                child: const Text('Order Tracking'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle edit profile button press
+                  globalservice.navigate(context, otpTestScreen());
                 },
                 child: const Text('Order Tracking'),
               ),

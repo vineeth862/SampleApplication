@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:countries_flag/countries_flag.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/otp_controller.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/otp_form_screen.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/timerWidget.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import '../../../../Home/home.dart';
 import '../../../../Home/models/user/user.dart';
@@ -33,6 +36,13 @@ class _WelcomesigninState extends State<Welcomesignin> {
     user.userName = nameController.text.trim();
 
     AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
   }
 
   @override
@@ -215,6 +225,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   //     context, OtpScreen(phone: mobileNumberController.text));
 
                   showModalBottomSheet(
+                    isScrollControlled: false,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     context: context,
@@ -275,7 +286,15 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           //           const EdgeInsets.symmetric(horizontal: 100.0),
                           //     ),
                           //   ),
-                          OtpPhoneWidget(user: user)
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          OtpPhoneWidget(user: user),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TimerBottomSheet(),
                         ],
                       ),
                     ),

@@ -109,7 +109,8 @@ class UserRepository extends GetxController {
           {
             "fullAddress": addressObj.fullAddress,
             "pincode": addressObj.pincode,
-            "floorNumber": addressObj.floorNumber,
+            "street": addressObj.street,
+            "landmark": addressObj.landmark,
             "houseNumber": addressObj.houseNumber,
             "firstName": addressObj.firstName,
             "lastName": addressObj.lastName,

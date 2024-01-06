@@ -36,16 +36,16 @@ class _addressOperationState extends State<addressOperation> {
     fetchedAddress.forEach((location) {
       Address addressObj = Address();
       String new1 = '';
-      if (location["houseNumber"] != null) {
-        new1 += "House Number:" + location["houseNumber"] + ", ";
-        addressObj.houseNumber = location["houseNumber"];
-      }
-      if (location["floorNumber"] != null) {
-        new1 += "Floor Number" + location["floorNumber"] + ", ";
-        addressObj.floorNumber = location["floorNumber"];
-      }
-      new1 += location["fullAddress"] + "-";
-      new1 += location["pincode"];
+      // if (location["houseNumber"] != null) {
+      //   new1 += "House Number:" + location["houseNumber"] + ", ";
+      //   addressObj.houseNumber = location["houseNumber"];
+      // }
+      // if (location["floorNumber"] != null) {
+      //   new1 += "Floor Number" + location["floorNumber"] + ", ";
+      //   addressObj.floorNumber = location["floorNumber"];
+      // }
+      new1 += location["fullAddress"];
+      //new1 += location["pincode"];
       addressObj.fullAddress = new1;
       addressObj.pincode = location["pincode"];
       addressObj.firstName = location['firstName'];

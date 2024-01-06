@@ -24,10 +24,11 @@ class AddAdressStepTwo extends StatelessWidget {
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
-  TextEditingController FullAdress = TextEditingController();
+  TextEditingController flatBuildingNumber = TextEditingController();
   TextEditingController PinCode = TextEditingController();
-  TextEditingController HouseNumber = TextEditingController();
-  TextEditingController FloorNumber = TextEditingController();
+  TextEditingController street = TextEditingController();
+  TextEditingController landmark = TextEditingController();
+  TextEditingController city = TextEditingController();
   Widget TextFormFieldMethod(
       BuildContext context, controllerDetails, label, iconDetails) {
     return TextFormField(
@@ -55,21 +56,34 @@ class AddAdressStepTwo extends StatelessWidget {
   void saveAdress(context) async {
     if (_formKey.currentState!.validate()) {
       if (await validatePincode(PinCode.text.trim())) {
+        String fulladdress = "";
         addressObj.firstName = firstName.text.trim();
         if (lastName.text.isNotEmpty) {
           addressObj.lastName = lastName.text.trim();
         }
         addressObj.phoneNumber = phoneNumber.text.trim();
 
-        addressObj.fullAddress = FullAdress.text.trim();
-        addressObj.pincode = PinCode.text.trim();
-        if (HouseNumber.text.isNotEmpty) {
-          addressObj.houseNumber = HouseNumber.text.trim();
+        //addressObj.fullAddress = FullAdress.text.trim();
+
+        if (flatBuildingNumber.text.isNotEmpty) {
+          addressObj.houseNumber = flatBuildingNumber.text.trim();
+          fulladdress += flatBuildingNumber.text.trim() + ",";
         }
-        if (FloorNumber.text.isNotEmpty) {
-          addressObj.floorNumber = FloorNumber.text.trim();
+        if (street.text.isNotEmpty) {
+          addressObj.street = street.text.trim();
+          fulladdress += street.text.trim() + ",";
         }
 
+        if (landmark.text.isNotEmpty) {
+          addressObj.landmark = landmark.text.trim();
+          fulladdress += street.text.trim() + ",";
+        }
+        addressObj.pincode = PinCode.text.trim();
+        fulladdress += PinCode.text.trim() + ",";
+
+        addressObj.city = city.text.trim();
+        fulladdress += city.text.trim();
+        addressObj.fullAddress = fulladdress;
         UserRepository.instance.updateAdress(addressObj);
 
         Order order = selectedOrder!.getOrder;
@@ -402,7 +416,7 @@ class AddAdressStepTwo extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
-                        controller: FullAdress,
+                        controller: flatBuildingNumber,
                         obscureText: false,
                         //keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -418,7 +432,7 @@ class AddAdressStepTwo extends StatelessWidget {
                         ),
                         validator: (value) {
                           if (value!.isEmpty || value == null) {
-                            return 'Please enter an address';
+                            return 'Please enter House/Flat Number/Building';
                           }
                           return null;
                         },
@@ -434,8 +448,8 @@ class AddAdressStepTwo extends StatelessWidget {
                         height: 10,
                       ),
 
-                      TextFormFieldMethod(context, HouseNumber,
-                          "Street/Locality *", Icons.post_add),
+                      TextFormFieldMethod(
+                          context, street, "Street/Locality *", Icons.post_add),
 
                       SizedBox(
                         height: 10,
@@ -443,7 +457,7 @@ class AddAdressStepTwo extends StatelessWidget {
                       Column(
                         children: [
                           TextFormFieldMethod(
-                              context, FloorNumber, "LandMark", Icons.post_add),
+                              context, landmark, "LandMark", Icons.post_add),
                         ],
                       ),
                       Row(
@@ -489,9 +503,9 @@ class AddAdressStepTwo extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: TextFormField(
-                                controller: PinCode,
+                                controller: city,
                                 obscureText: false,
-                                keyboardType: TextInputType.number,
+                                //keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 1.0, horizontal: 5),
@@ -505,13 +519,7 @@ class AddAdressStepTwo extends StatelessWidget {
                                 ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Please enter a pincode';
-                                  }
-                                  if (value.length != 6) {
-                                    return 'Pincode must be 6 digits';
-                                  }
-                                  if (!value.isNumericOnly) {
-                                    return 'Pincode must be digits';
+                                    return 'Please enter a city name';
                                   }
 
                                   return null;

@@ -13,7 +13,7 @@ final ThemeData theme = ThemeData(
       primaryContainer: Color.fromRGBO(189, 73, 50, 1),
       secondary: Color.fromRGBO(219, 229, 233, 1),
       //secondaryContainer: Color.fromRGBO(253, 247, 247, 1),
-      secondaryContainer: Color.fromRGBO(251, 245, 243, 1),
+      secondaryContainer: Color(0xFFFBF5F3),
       tertiary: Color.fromARGB(225, 81, 174, 128),
       surface: Colors.white,
       inverseSurface: Color.fromARGB(255, 114, 114, 114),
