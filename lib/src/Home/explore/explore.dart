@@ -309,27 +309,6 @@ class _exploreExpState extends State<exploreExp> {
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  globalservice.navigate(
-                                      context, const ProfileScreen());
-                                },
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    maxHeight: 100,
-                                    minHeight: 20,
-                                    maxWidth: 100,
-                                    minWidth: 15,
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    backgroundImage: AssetImage(
-                                      './assets/images/profile.png',
-                                    ),
-                                    radius: 14,
-                                  ),
-                                ),
-                              )
                             ],
                           ),
                         )),

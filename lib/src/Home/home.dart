@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_application/src/Home/doctor_consultation.dart/doctorConsultation.dart';
+import 'package:sample_application/src/Home/doctor_consultation.dart/home-care-services.dart';
 import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/home_service.dart';
 import 'package:sample_application/src/Home/order_tracker/order-summary/orderSumaryScreen.dart';
@@ -17,6 +17,8 @@ import '../core/helper_widgets/slot-booking-card.dart';
 import 'models/order/order.dart';
 import 'order_tracker/step1/step1.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTrackerCard.dart';
+
+import 'profile/profile_home.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key, this.index});
@@ -39,14 +41,14 @@ class HomePageState extends State<HomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    //ProfileScreen(),
     //Explore(),
     const exploreExp(),
-    const Radiology(),
-    const DoctorConsultation(),
+
+    const HomeCareServices(),
     OrderTrackerHome(
       from: 'home',
     ),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -235,18 +237,22 @@ class HomePageState extends State<HomePage> {
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.airline_seat_flat),
-                label: 'Radiology',
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.airline_seat_flat),
+              //   label: 'Radiology',
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.local_hospital_sharp),
-                label: 'Dr.Consultation',
+                label: 'Home Care Services',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.moped_outlined),
                 label: 'Track Order',
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outlined),
+                label: 'Profile',
+              )
             ],
             currentIndex: selectedIndex,
             selectedItemColor: Theme.of(context).colorScheme.primary,

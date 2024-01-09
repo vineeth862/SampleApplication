@@ -354,20 +354,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //   child: const Text('Payment2'),
               // ),
               // const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, CustomPaymentPage());
-                },
-                child: const Text('Order Tracking'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle edit profile button press
-                  globalservice.navigate(context, otpTestScreen());
-                },
-                child: const Text('Order Tracking'),
-              ),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, CustomPaymentPage());
+              //   },
+              //   child: const Text('Order Tracking'),
+              // ),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     globalservice.navigate(context, otpTestScreen());
+              //   },
+              //   child: const Text('Order Tracking'),
+              // ),
             ],
           ),
         ),

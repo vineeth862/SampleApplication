@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DoctorConsultation extends StatelessWidget {
-  const DoctorConsultation({super.key});
+class HomeCareServices extends StatelessWidget {
+  const HomeCareServices({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class DoctorConsultation extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
           title: Text(
-        "Radiology",
+        "Home Care Services",
         style: Theme.of(context)
             .textTheme
             .headlineMedium!
