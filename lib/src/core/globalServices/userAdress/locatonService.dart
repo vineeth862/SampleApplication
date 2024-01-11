@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import '../../Provider/search_provider.dart';
 
 class UserCurrentLocation extends GetxController {
   static UserCurrentLocation get instance => Get.find();
+  RxBool locationAccessRequest = false.obs;
   RxString addressToBeConsidered = 'Fetching adress'.obs;
   RxString location = 'Fetching adress'.obs;
   RxString pinCode = 'Fetching adress'.obs;
@@ -25,6 +27,7 @@ class UserCurrentLocation extends GetxController {
   //RxString globalString = 'Initial Value'.obs;
   bool hasInitialValueChanged = false;
 
+  var locationPermission = LocationPermission.whileInUse;
   GlobalService globalService = GlobalService();
   void updateGlobalString(String newValue) {
     if (!hasInitialValueChanged) {
@@ -50,41 +53,48 @@ class UserCurrentLocation extends GetxController {
 
   Future<Position> determinePosition() async {
     bool serviceEnabled;
-    LocationPermission permission;
+    //LocationPermission permission;
 
     // Test if location services are enabled.
+
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
       await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
+      //return Future.error('Location services are disabled.');
     }
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
+    locationPermission = await Geolocator.checkPermission();
+    if (locationPermission == LocationPermission.denied) {
+      await requestLocationPermission();
+      //locationPermission = await Geolocator.requestPermission();
+      // if (locationPermission == LocationPermission.denied) {
+      //   showPermissionDeniedDialog();
+      //   //locationPermission = await Geolocator.requestPermission();
+      //   // Permissions are denied, next time you could try
+      //   // requesting permissions again (this is also where
+      //   // Android's shouldShowRequestPermissionRationale
+      //   // returned true. According to Android guidelines
+      //   // your App should show an explanatory UI now.
+      //   //locationAccessRequest.value = false;
+      //   //return Future.error('Location permissions are denied');
+      // }
+    } else if (locationPermission == LocationPermission.deniedForever) {
+      showPermissionDeniedDialog();
       // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      // return Future.error(
+      //     'Location permissions are permanently denied, we cannot request permissions.');
     }
+
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
+    // return await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.best);
   }
 
   GetFullAdress(Position pos) async {
@@ -92,6 +102,42 @@ class UserCurrentLocation extends GetxController {
         await placemarkFromCoordinates(pos.latitude, pos.longitude);
     //print(placemark);
     return placemark;
+  }
+
+  void showPermissionDeniedDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Location Permission'),
+        content:
+            Text('Please enable location services in your device settings.'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              requestLocationPermission();
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> requestLocationPermission() async {
+    try {
+      locationPermission = await Geolocator.requestPermission();
+
+      if (locationPermission == LocationPermission.deniedForever) {
+        await Geolocator.openLocationSettings();
+
+        //showPermissionDeniedDialog();
+      } else if (locationPermission == LocationPermission.denied) {
+        showPermissionDeniedDialog();
+      } else {
+        Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+      }
+    } catch (e) {
+      print("Error requesting location permission: $e");
+    }
   }
 
   @override

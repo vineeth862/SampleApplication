@@ -8,6 +8,7 @@ import 'package:sample_application/src/core/globalServices/authentication/auth_v
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/payment/customPaymentPage.dart';
+import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
 
 import '../models/user/user.dart';
@@ -365,6 +366,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //   onPressed: () {
               //     // Handle edit profile button press
               //     globalservice.navigate(context, otpTestScreen());
+              //   },
+              //   child: const Text('Order Tracking'),
+              // ),
+              // TextButton(
+              //   onPressed: () {
+              //     // Handle edit profile button press
+              //     UserCurrentLocation.instance.loaddata();
               //   },
               //   child: const Text('Order Tracking'),
               // ),

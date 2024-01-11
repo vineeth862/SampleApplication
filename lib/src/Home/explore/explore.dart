@@ -493,9 +493,9 @@ class _exploreExpState extends State<exploreExp> {
                     ],
                   ),
                 ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
+                const SizedBox(
+                  height: 10,
+                ),
                 // Align(
                 //   alignment: Alignment.topLeft,
                 //   child: ListTile(
