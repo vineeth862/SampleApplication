@@ -518,16 +518,16 @@ class _exploreExpState extends State<exploreExp> {
                 //   height: 25,
                 // ),
 
-                // ClipRRect(
-                //   borderRadius: BorderRadius.circular(10.0),
-                //   child: Image.asset(
-                //     //imagePath.toString(),
-                //     "./assets/images/How_it_works.png",
-                //     // height: MediaQuery.of(context).size.height * 0.7,
-                //     // width: MediaQuery.of(context).size.height * 0.41,
-                //     fit: BoxFit.fill,
-                //   ),
-                // ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.asset(
+                    //imagePath.toString(),
+                    "./assets/images/How Medcaph Works (1).png",
+                    // height: MediaQuery.of(context).size.height * 0.7,
+                    // width: MediaQuery.of(context).size.height * 0.41,
+                    fit: BoxFit.fill,
+                  ),
+                ),
                 const SizedBox(
                   height: 25,
                 ),
@@ -585,14 +585,14 @@ class _exploreExpState extends State<exploreExp> {
                 //     ),
                 //   ),
                 // ),
-                // ListTile(
-                //   title: Text("Popular Categories",
-                //       style: Theme.of(context).textTheme.headlineMedium),
-                //   subtitle: Text(
-                //     "MedCapH recomended Health Categories",
-                //     style: Theme.of(context).textTheme.bodyMedium,
-                //   ),
-                // ),
+                ListTile(
+                  title: Text("Know about Tests",
+                      style: Theme.of(context).textTheme.headlineMedium),
+                  subtitle: Text(
+                    "Information about popular test profiles",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
                 MySliderTest(),
                 const SizedBox(
                   height: 25,

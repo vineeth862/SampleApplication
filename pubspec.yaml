@@ -128,8 +128,11 @@ flutter:
     - assets/images/profile.png
     - assets/images/Designer.jpeg
     - assets/images/payment-success.jpeg 
-    - assets/images/home.png
-    - assets/images/lab.png
+    - assets/images/icons8-laboratory-50.png
+    - assets/images/home.jpg
+    - assets/images/lab.jpg
+    - assets/images/How Medcaph Works (1).png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
