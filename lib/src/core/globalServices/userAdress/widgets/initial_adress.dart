@@ -78,7 +78,8 @@ class _InitialAdressState extends State<InitialAdress> {
                 height: 3,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15, bottom: 8, top: 8),
                 child: Row(
                   children: [
                     Expanded(
@@ -89,11 +90,13 @@ class _InitialAdressState extends State<InitialAdress> {
                           keyboardType: TextInputType.number,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 10),
                             //isCollapsed: true,
                             helperText: ' ',
                             labelText: 'Enter Pincode',
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(0)),
+                                borderRadius: BorderRadius.circular(10)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -110,8 +113,11 @@ class _InitialAdressState extends State<InitialAdress> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Container(
-                        height: 80,
+                        height: 68,
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 24.0),
                           child: ElevatedButton(
@@ -129,10 +135,12 @@ class _InitialAdressState extends State<InitialAdress> {
                               },
                               child: Text("Check"),
                               style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Theme.of(context).colorScheme.tertiary),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
-                                    borderRadius: BorderRadius
-                                        .zero, // Remove circular radius
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Remove circular radius
                                   ),
                                 ),
                               )),

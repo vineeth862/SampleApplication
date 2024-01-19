@@ -23,32 +23,40 @@ class LocationNotAvailable extends StatelessWidget {
           //     // Set your desired image fit
           //     ),
           gradient: LinearGradient(colors: [
-        Theme.of(context).colorScheme.primary.withOpacity(0.5),
-        Theme.of(context).colorScheme.primary.withOpacity(0.1)
+        // Theme.of(context).colorScheme.secondaryContainer,
+        // Theme.of(context).colorScheme.secondaryContainer
+        Color.fromARGB(255, 241, 237, 236),
+        Color.fromARGB(255, 244, 237, 233),
       ])),
       //color: Theme.of(context).colorScheme.primary,
 
       child: AlertDialog(
+        backgroundColor: Color.fromARGB(255, 240, 227, 226),
         //icon: Icon(Icons.time_to_leave),
         alignment: const AlignmentDirectional(0, 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text("Oh,no!",
+
+        title: Text("😞 " + "Oh,no!",
             style: Theme.of(context)
                 .textTheme
-                .headlineMedium!
+                .headlineLarge!
                 .copyWith(color: Theme.of(context).colorScheme.primary)),
         content: Obx(() => Text(
               "Service not available in " +
                   myController.addressToBeConsidered.value,
-              style: Theme.of(context).textTheme.titleMedium!,
+              style: Theme.of(context).textTheme.headlineMedium!,
             )),
         actions: [
           // Define buttons for the AlertDialog
           ElevatedButton(
-            style: ButtonStyle(
-                // minimumSize: MaterialStateProperty.all(
-                //     const Size(80, 25)), // Set the desired size
-                ),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(20.0), // Set the border radius value
+              ),
+              primary: Theme.of(context).colorScheme.tertiary,
+              //padding: const EdgeInsets.symmetric(horizontal: 100.0),
+            ),
             child: const Text("Change Location"),
             onPressed: () {
               globalservice.navigate(

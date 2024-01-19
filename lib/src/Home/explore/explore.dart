@@ -367,7 +367,7 @@ class _exploreExpState extends State<exploreExp> {
                   child: Column(
                     children: [
                       ListTile(
-                        title: Text("Popular Categories",
+                        title: Text("Popular-Test Categories",
                             style: Theme.of(context).textTheme.headlineMedium),
                         subtitle: Text(
                           "MedCapH recomended Health Categories",
@@ -436,6 +436,17 @@ class _exploreExpState extends State<exploreExp> {
                 //     children: [...maleCategoryList],
                 //   ),
                 // ),
+                SizedBox(height: 5),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.asset(
+                    //imagePath.toString(),
+                    "./assets/images/Radiology.png",
+                    // height: MediaQuery.of(context).size.height * 0.7,
+                    // width: MediaQuery.of(context).size.height * 0.41,
+                    fit: BoxFit.fill,
+                  ),
+                ),
                 AspectRatio(
                   aspectRatio:
                       MediaQuery.of(context).size.width > 500 ? 2.3 : 2,

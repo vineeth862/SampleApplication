@@ -246,24 +246,30 @@ class _addressOperationState extends State<addressOperation> {
                                                 .toString(),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headlineSmall!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary),
+                                            .headlineMedium!
+                                            .copyWith(),
                                       ),
                                       subtitle: Text(
-                                          concatenatedAddressList[index]
-                                              .fullAddress
-                                              .toString()),
+                                        concatenatedAddressList[index]
+                                            .fullAddress
+                                            .toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      ),
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
                                       _removeItem(index);
                                     },
-                                    child: Icon(Icons.delete,
-                                        color: Colors.red.shade900),
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .inverseSurface,
+                                      size: 20,
+                                    ),
                                   )
                                 ],
                               ),

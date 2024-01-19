@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(width: 10),
                 Image.asset(
                   path,
-                  height: 20,
+                  height: 30,
                 ),
                 SizedBox(
                   width: 10,

@@ -135,7 +135,7 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                               top: 0.0, left: 10, bottom: 10),
                           child: Image.asset(
                             "assets/images/home.png",
-                            width: 25,
+                            width: 40,
                           )),
                       contentPadding: EdgeInsets.only(left: 0),
                     ),
