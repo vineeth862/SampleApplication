@@ -3,18 +3,26 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/explore/category/filtered_category_list.dart';
+import 'package:sample_application/src/Home/explore/explore_why-us.dart';
 
 import '../../../core/Provider/search_provider.dart';
 import '../../../core/globalServices/global_service.dart';
 
-class LabTestCategoryCard extends StatelessWidget {
+class LabTestCategoryCard extends StatefulWidget {
   final String title;
   final String content;
   final String imagePath;
   final List testList;
 
   LabTestCategoryCard(this.title, this.content, this.imagePath, this.testList);
+
+  @override
+  State<LabTestCategoryCard> createState() => _LabTestCategoryCardState();
+}
+
+class _LabTestCategoryCardState extends State<LabTestCategoryCard> {
   GlobalService globalservice = GlobalService();
+
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
@@ -23,8 +31,8 @@ class LabTestCategoryCard extends StatelessWidget {
         globalservice.navigate(
             context,
             FilterCategoryListPage(
-              sexCategory: title,
-              testList: testList,
+              sexCategory: widget.title,
+              testList: widget.testList,
             ));
       },
       child: Padding(
@@ -44,7 +52,7 @@ class LabTestCategoryCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10), // Set your desired corner radius
                     child: Image.memory(
-                      globalservice.getImageByteCode(imagePath),
+                      globalservice.getImageByteCode(widget.imagePath),
                       // height: 80.0,
                       // width: 120.0,
                       fit: BoxFit
@@ -56,7 +64,8 @@ class LabTestCategoryCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              Text(widget.title,
+                  style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
         ),

@@ -81,4 +81,17 @@ class ExploreService {
     }
     return [];
   }
+
+  fetchTestDescription(displayName) async {
+    final testData = await _db
+        .collection("prod-test")
+        .where("displayName", isEqualTo: displayName)
+        .get();
+    if (testData.docs.isNotEmpty) {
+      return testData.docs.map((doc) {
+        return doc.get("testDes").toString();
+      }).toList();
+    }
+    return "";
+  }
 }
