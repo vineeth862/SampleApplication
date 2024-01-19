@@ -513,7 +513,7 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                     padding: const EdgeInsets.all(4.0),
                     child: Column(children: [
                       Text(
-                        "Know about......",
+                        "Tests Included",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       Divider(
@@ -536,7 +536,8 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                         endIndent: 20, // Right margin of the divider
                       ),
                       Text(
-                        "Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",
+                        //"Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",
+                        widget.package.testList,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(

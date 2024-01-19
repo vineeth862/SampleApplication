@@ -139,10 +139,12 @@ flutter:
     - assets/images/second.png
     - assets/images/third.png
     - assets/images/Services to be offered.png
-    - assets/images/coming soon.png
+    - assets/images/coming_soon.png
     - assets/images/lagout.jpeg
     - assets/images/lagout.png
     - assets/images/logo.png
+    - assets/PRIVACY_POLICY.txt
+    - assets/Refund_and_Cancellation_Policy.txt
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

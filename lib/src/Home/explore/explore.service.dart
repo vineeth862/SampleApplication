@@ -94,4 +94,17 @@ class ExploreService {
     }
     return "";
   }
+
+  fetchPackageDescription(displayName) async {
+    final packageData = await _db
+        .collection("prod-package")
+        .where("displayName", isEqualTo: displayName)
+        .get();
+    if (packageData.docs.isNotEmpty) {
+      return packageData.docs.map((doc) {
+        return doc.get("testList").toString();
+      }).toList();
+    }
+    return "";
+  }
 }

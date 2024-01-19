@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
+import 'package:sample_application/src/Home/profile/policies.dart';
+import 'package:sample_application/src/Home/profile/support.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    print("hih");
+
     updateUserName();
   }
 
@@ -205,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 globalservice.navigate(
                                     context,
                                     HomePage(
-                                      index: 3,
+                                      index: 2,
                                     ));
                               },
                               icon: const Icon(
@@ -276,15 +278,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                       _CustomTextButton('assets/images/support.jpeg',
-                          "Help or Support", EditProfileScreen()),
+                          "Help or Support", Support()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
-                      _CustomTextButton('assets/images/about.jpeg', "About Us",
-                          EditProfileScreen()),
+                      _CustomTextButton(
+                          'assets/images/about.jpeg', "About Us", policices()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                       _CustomTextButton('assets/images/lagout.png', "Log Out",
-                          EditProfileScreen()),
+                          LogoutScreen()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                     ],

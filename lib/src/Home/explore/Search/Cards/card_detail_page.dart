@@ -565,7 +565,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         endIndent: 20, // Right margin of the divider
                       ),
                       Text(
-                        "Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",
+                        //"Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus. Aspergillus Fumigatus test helps detect allergies against aspergillus fumigatus, the most common fungus in our environment. This test measures IgE antibodies in the blood against this fungus.",
+                        widget.test.testDes,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(

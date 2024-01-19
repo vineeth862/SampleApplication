@@ -1,0 +1,21 @@
+Refund and Cancellation Policy
+
+1. Cancellation Policy
+1.1. Client Initiated Cancellations: Clients may request the cancellation of diagnostic services by the following cancellation terms apply:
+1.1.1. Cancellation Period: Clients can cancel their scheduled appointment or services up to 2 hours before the scheduled appointment time without incurring any cancellation fees.
+1.1.2. Cancellation Fees: Cancellations made within 2 hours of the scheduled appointment time may be subject to a cancellation fee of Rs.250.00.
+1.2. Company Initiated Cancellations: MedcapH reserves the right to cancel diagnostic services for reasons such as equipment failure, insufficient sample quality, or any other circumstances that prevent the provision of services. In such cases, clients will be promptly notified, and any fees paid in advance will be refunded in full.
+2. Refund Policy
+2.1. Refunds for Cancelled Services: Refunds for services cancelled by clients will be processed as follows:
+2.1.1. If a client cancels within the cancellation period (as defined in Section 1.1.1), MedcapH will issue a full refund of any fees paid in advance.
+2.1.2. If a client cancels within 2 hours of the scheduled appointment time and is subject to a cancellation fee (as defined in Section 1.1.2), the refund amount will be the total fees paid minus the applicable cancellation fee.
+2.2. Refunds for Unusable Test Samples: If diagnostic tests cannot be performed due to reasons beyond the control of MedcapH, such as insufficient or contaminated samples provided by the client/customer, refunds will be issued if any amount paid in advance.
+2.3. Refund Processing Time: Refunds will typically be processed within 2 business days of receiving a valid cancellation request or when applicable.
+3. Exceptions
+3.1. Exceptions to the cancellation and refund policy may be considered on a case-by-case basis, and MedcapH reserves the right to make decisions based on unique circumstances.
+4. Contact Information
+For any inquiries or requests related to cancellations and refunds, please contact MedcapH at:
+Email: support@medcaph.com
+Phone: 9663383095
+5. Effective Date
+This Refund and Cancellation Policy is effective as of 09th Aug 2023.

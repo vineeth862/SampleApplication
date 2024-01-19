@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/src/Home/explore/explore_why-us.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
@@ -7,12 +8,32 @@ import 'package:sample_application/src/core/Provider/search_provider.dart';
 import '../../Home/explore/Search/Cards/filter-test-list.dart';
 import '../../Home/package/package-card-list.dart';
 
-class packageCard extends StatelessWidget {
+class packageCard extends StatefulWidget {
   final String? displayName;
   final String? logo;
   packageCard({super.key, required this.displayName, required this.logo});
 
+  @override
+  State<packageCard> createState() => _packageCardState();
+}
+
+class _packageCardState extends State<packageCard> {
   GlobalService globalservice = GlobalService();
+  var packageDes = "";
+  getTestdescription(title) async {
+    var package_des_list =
+        await exploreService.fetchPackageDescription(widget.displayName);
+
+    setState(() {
+      packageDes = package_des_list[0];
+    });
+  }
+
+  @override
+  void initState() {
+    getTestdescription(widget.displayName);
+  }
+
   @override
   Widget build(BuildContext context) {
     final searchState = Provider.of<SearchListState>(context);
@@ -45,7 +66,7 @@ class packageCard extends StatelessWidget {
                       //color: Theme.of(context).colorScheme.tertiary,
                       // decoration: BoxDecoration(
                       //     border: Border.all(color: Colors.black)),
-                      child: logo == "category"
+                      child: widget.logo == "category"
                           ? Image.asset(
                               "./assets/images/blood-test.png",
                               // scale: 1,
@@ -63,7 +84,7 @@ class packageCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      displayName.toString(),
+                      widget.displayName.toString(),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),
@@ -71,13 +92,14 @@ class packageCard extends StatelessWidget {
               ),
             ),
             Text(
-              "About test",
+              "Test Included",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "RBC count is a blood test that measures how many red blood cells (RBCs) you have. RBCs contain hemoglobin , which carries oxygen. How much oxygen your body tissues get depends on how many RBCs you have and how well they work.",
+                // "RBC count is a blood test that measures how many red blood cells (RBCs) you have. RBCs contain hemoglobin , which carries oxygen. How much oxygen your body tissues get depends on how many RBCs you have and how well they work.",
+                packageDes,
                 style: Theme.of(context).textTheme.bodyMedium,
                 maxLines: 3,
                 softWrap: true,
@@ -109,8 +131,8 @@ class packageCard extends StatelessWidget {
                             globalservice.navigate(
                                 context,
                                 PackageCardlistPage(
-                                  category: displayName.toString(),
-                                  title: displayName.toString(),
+                                  category: widget.displayName.toString(),
+                                  title: widget.displayName.toString(),
                                 ));
                           } else {
                             showDialog(
