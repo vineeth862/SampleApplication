@@ -202,17 +202,15 @@ class _exploreExpState extends State<exploreExp> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints(
+                        constraints: BoxConstraints(
                           maxHeight: 100,
-                          minHeight: 50,
+                          minHeight: 32,
                           maxWidth: 100,
-                          minWidth: 20,
+                          minWidth: 10,
                         ),
-                        child: const CircleAvatar(
-                          backgroundImage: AssetImage(
-                            './assets/images/MedCapH.jpg',
-                          ),
-                          radius: 20,
+                        child: Image.asset(
+                          './assets/images/logo.png',
+                          height: 10,
                         ),
                       ),
                     ),

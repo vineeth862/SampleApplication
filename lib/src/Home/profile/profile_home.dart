@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/Home/home.dart';
-import 'package:sample_application/src/Home/order_tracker/orderTrackerCard.dart';
 import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
-import 'package:sample_application/src/core/globalServices/authentication/auth_validation/otpTestScreen.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
-import 'package:sample_application/src/core/globalServices/payment/customPaymentPage.dart';
-import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
 
 import '../models/user/user.dart';
@@ -111,21 +107,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.2),
-                        width: 2.0,
-                      ),
+                      // border: Border.all(
+                      //   color: Theme.of(context)
+                      //       .colorScheme
+                      //       .primary
+                      //       .withOpacity(0.2),
+                      //   width: 2.0,
+                      // ),
+
                       gradient: LinearGradient(colors: [
                         // Colors.grey.shade50,
                         // Colors.grey.shade100,
                         Theme.of(context)
                             .colorScheme
                             .secondary
-                            .withOpacity(0.5),
-                        Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                            .withOpacity(0.2),
+                        Theme.of(context).colorScheme.secondary.withOpacity(0.2)
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
@@ -255,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 5,
                     ),
                     Text(
-                      "Preferences & Settings",
+                      "Preferences",
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
@@ -264,118 +261,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 232,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.2),
-                          width: 2.0,
-                        ),
-                        gradient: LinearGradient(
-                            colors: [
-                              // Colors.grey.shade50,
-                              // Colors.grey.shade100,
-                              Theme.of(context)
-                                  .colorScheme
-                                  .secondary
-                                  .withOpacity(0.5),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .secondary
-                                  .withOpacity(0.5)
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _CustomTextButton('assets/images/home.png',
-                            "My Address Book", AdressBook()),
-                        const Divider(
-                          color: Colors.black,
-                          thickness: 0.2,
-                          height: 1,
-                        ),
-                        _CustomTextButton('assets/images/setting.jpeg',
-                            "Settings", LogoutScreen()),
-                        const Divider(
-                            color: Colors.black, thickness: 0.2, height: 1),
-                        _CustomTextButton('assets/images/support.jpeg',
-                            "Help or Support", EditProfileScreen()),
-                        const Divider(
-                            color: Colors.black, thickness: 0.2, height: 1),
-                        _CustomTextButton('assets/images/about.jpeg',
-                            "About Us", EditProfileScreen()),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _CustomTextButton('assets/images/home.png',
+                          "Saved Addres", AdressBook()),
+                      // const Divider(
+                      //   color: Colors.black,
+                      //   thickness: 0.2,
+                      //   height: 1,
+                      // ),
+                      // _CustomTextButton('assets/images/setting.jpeg',
+                      //     "Settings", LogoutScreen()),
+                      const Divider(
+                          color: Colors.black, thickness: 0.2, height: 1),
+                      _CustomTextButton('assets/images/support.jpeg',
+                          "Help or Support", EditProfileScreen()),
+                      const Divider(
+                          color: Colors.black, thickness: 0.2, height: 1),
+                      _CustomTextButton('assets/images/about.jpeg', "About Us",
+                          EditProfileScreen()),
+                      const Divider(
+                          color: Colors.black, thickness: 0.2, height: 1),
+                      _CustomTextButton('assets/images/lagout.png', "Log Out",
+                          EditProfileScreen()),
+                      const Divider(
+                          color: Colors.black, thickness: 0.2, height: 1),
+                    ],
                   )),
-              // const SizedBox(height: 20),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     globalservice.navigate(context, const Welcomesignin());
-              //   },
-              //   child: const Text('Login Screen'),
-              // ),
-              // const SizedBox(height: 20),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     // globalservice.navigate(context, const SlotBooking());
-              //   },
-              //   child: const Text('SlotBooking'),
-              // ),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     globalservice.navigate(context, GitHubRepositoriesScreen());
-              //   },
-              //   child: const Text('uploadList'),
-              // ),
-              // TextButton(
-              //   onPressed: () async {
-              //     // Handle edit profile button press
-              //     final res =
-              //         await EasyUpiPaymentPlatform.instance.startPayment(
-              //       EasyUpiPaymentModel(
-              //         payeeVpa: 'Q720679555@ybl',
-              //         payeeName: 'Archana S',
-              //         amount: 1.0,
-              //         description: 'Testing payment',
-              //       ),
-              //     );
-
-              //     print(res);
-              //   },
-              //   child: const Text('Payment2'),
-              // ),
-              // const SizedBox(height: 20),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     globalservice.navigate(context, CustomPaymentPage());
-              //   },
-              //   child: const Text('Order Tracking'),
-              // ),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     globalservice.navigate(context, otpTestScreen());
-              //   },
-              //   child: const Text('Order Tracking'),
-              // ),
-              // TextButton(
-              //   onPressed: () {
-              //     // Handle edit profile button press
-              //     UserCurrentLocation.instance.loaddata();
-              //   },
-              //   child: const Text('Order Tracking'),
-              // ),
             ],
           ),
         ),
