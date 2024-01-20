@@ -96,39 +96,39 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/Lab_Single_Person.jpg
-    - assets/images/Lab_two_people.jpg
-    - assets/images/rotation.png
-    - assets/images/user.png
-    - assets/images/home_flash_image.png
-    - assets/images/flask.jpg
-    - assets/images/why-us1.png
-    - assets/images/why-us2.png
-    - assets/images/why-us3.png
-    - assets/images/why-us4.png
-    - assets/images/lab1.png
-    - assets/images/MedCapH.jpg
-    - assets/images/5856.jpg
-    - assets/images/men1.jpg
-    - assets/images/women1.png
-    - assets/images/women2.jpg
-    - assets/images/women3.jpg
-    - assets/images/fam1.jpg
-    - assets/images/women4.png
-    - assets/images/men2.png
-    - assets/images/men3.png
-    - assets/images/men4.png
+    # - assets/images/Lab_Single_Person.jpg
+    # - assets/images/Lab_two_people.jpg
+    # - assets/images/rotation.png
+    # - assets/images/user.png
+    # - assets/images/home_flash_image.png
+    # - assets/images/flask.jpg
+    # - assets/images/why-us1.png
+    # - assets/images/why-us2.png
+    # - assets/images/why-us3.png
+    # - assets/images/why-us4.png
+    # - assets/images/lab1.png
+    # - assets/images/MedCapH.jpg
+    # - assets/images/5856.jpg
+    # - assets/images/men1.jpg
+    # - assets/images/women1.png
+    # - assets/images/women2.jpg
+    # - assets/images/women3.jpg
+    # - assets/images/fam1.jpg
+    # - assets/images/women4.png
+    # - assets/images/men2.png
+    # - assets/images/men3.png
+    # - assets/images/men4.png
     - assets/images/blood-tube.png
     - assets/images/blood-test.png
-    - assets/images/How_it_works.png
+    # - assets/images/How_it_works.png
     - assets/images/empty-cart.jpeg
     - assets/images/about.jpeg
     - assets/images/setting.jpeg
     - assets/images/support.jpeg
-    - assets/images/profile.png
+    # - assets/images/profile.png
     - assets/images/Designer.jpeg
     - assets/images/payment-success.jpeg 
-    - assets/images/icons8-laboratory-50.png
+    # - assets/images/icons8-laboratory-50.png
     
     - assets/images/lab.png
     - assets/images/home.png
@@ -140,9 +140,10 @@ flutter:
     - assets/images/third.png
     - assets/images/Services to be offered.png
     - assets/images/coming_soon.png
-    - assets/images/lagout.jpeg
+    # - assets/images/lagout.jpeg
     - assets/images/lagout.png
     - assets/images/logo.png
+    - assets/images/cmng1.png
     - assets/PRIVACY_POLICY.txt
     - assets/Refund_and_Cancellation_Policy.txt
   # An image asset can refer to one or more resolution-specific "variants", see

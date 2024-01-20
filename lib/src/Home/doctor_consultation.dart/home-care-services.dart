@@ -20,9 +20,18 @@ class HomeCareServices extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 0,
+              height: 10,
             ),
-
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.asset(
+                  "./assets/images/cmng1.png",
+                  //height: MediaQuery.of(context).size.width * ,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                ),
+              ),
+            ),
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
             //   child: Text(
@@ -51,17 +60,17 @@ class HomeCareServices extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            Padding(
-              padding: const EdgeInsets.only(left: 0.0, right: 0, top: 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "./assets/images/coming_soon.png",
-                  height: 150,
-                  width: MediaQuery.of(context).size.width * 1,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 0.0, right: 0, top: 0),
+            //   child: ClipRRect(
+            //     borderRadius: BorderRadius.circular(10),
+            //     child: Image.asset(
+            //       "./assets/images/coming_soon.png",
+            //       height: 150,
+            //       width: MediaQuery.of(context).size.width * 1,
+            //     ),
+            //   ),
+            // ),
             SizedBox(height: 0),
 
             // Padding(
@@ -75,43 +84,45 @@ class HomeCareServices extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
-                    child: Image.asset(
-                      "./assets/images/Our loved ones are provided.png",
-                      //height: MediaQuery.of(context).size.width * ,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
-                    child: Image.asset(
-                      "./assets/images/second.png",
-                      //height: MediaQuery.of(context).size.width * ,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
-                    child: Image.asset(
-                      "./assets/images/third.png",
-                      //height: MediaQuery.of(context).size.width * ,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Center(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(15.0),
+            //     child: Row(
+            //       children: [
+            //         ClipRRect(
+            //           borderRadius: BorderRadius.circular(60),
+            //           child: Image.asset(
+            //             "./assets/images/Our loved ones are provided.png",
+            //             //height: MediaQuery.of(context).size.width * ,
+            //             width: MediaQuery.of(context).size.width * 0.25,
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           width: 5,
+            //         ),
+            //         ClipRRect(
+            //           borderRadius: BorderRadius.circular(60),
+            //           child: Image.asset(
+            //             "./assets/images/second.png",
+            //             //height: MediaQuery.of(context).size.width * ,
+            //             width: MediaQuery.of(context).size.width * 0.25,
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           width: 5,
+            //         ),
+            //         ClipRRect(
+            //           borderRadius: BorderRadius.circular(60),
+            //           child: Image.asset(
+            //             "./assets/images/third.png",
+            //             //height: MediaQuery.of(context).size.width * ,
+            //             width: MediaQuery.of(context).size.width * 0.25,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(

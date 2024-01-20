@@ -36,6 +36,7 @@ class _privacyPolicyState extends State<privacyPolicy> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("Privacy Ploicy"),
+            backgroundColor: Theme.of(context).colorScheme.onBackground,
           ),
           body: SingleChildScrollView(
             child: Center(

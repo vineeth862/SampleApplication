@@ -21,7 +21,7 @@ class _policicesState extends State<policices> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.15,
+          //height: MediaQuery.of(context).size.height * 0.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),

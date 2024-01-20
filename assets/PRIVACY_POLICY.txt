@@ -19,9 +19,11 @@ INTRODUCTION
 •	The privacy of our customers and users is of great importance to us. By accessing or using this Website, you agree that you accept the Privacy Policy and the policies and practices outlined herein, and that you hereby consent to the collection, use, and disclosure of your personal information (as defined herein) in accordance with this Privacy Policy. This policy may change from time to time (see Changes to Our Privacy Policy). Your continued use of this Website after we make changes is deemed to be acceptance of those changes, so please check the policy periodically for updates.
 
 Persons Under the Age of 18
+
 •	Our Website and the Services are not intended for persons under 18 years of age. No one under age 18 may provide any information to or on the Website. We do not knowingly collect personal information from persons under 18. If you are under 18, do not use or provide any information on this Website or on or through any of its features. If we learn we have collected or received personal information from a person under 18 without verification of parental consent, we will delete that information.
 
 Information We Collect About You and How We Collect It
+
 •	We collect several types of information from and about users of our Website, including information:
 – By which you may be personally identified, such as name, postal address, e-mail address, telephone number, social security number or any other
 identifier by which you may be contacted online or offline (“personal information”);
@@ -44,6 +46,7 @@ Information You Provide to Us
 
 
 Information We Collect Through Automatic Data Collection Technologies.
+
 •	As you navigate through and interact with our Website, we may use automatic data collection technologies to collect certain information about your equipment, browsing actions, and patterns, including:
 – Details of your visits to our Website, including traffic data, location data, logs, and other communication data and the resources that you access and use on the Website.
 – Information about your computer and internet connection, including your IP address, operating system, and browser type.
@@ -53,3 +56,79 @@ Information We Collect Through Automatic Data Collection Technologies.
 – Cookies (or browser cookies). You may refuse to accept browser cookies by activating the appropriate setting on your browser. However, if you select this setting you may be unable to access certain parts of our Website. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies when you direct your browser to our Website.
 – Flash Cookies. Certain features of our Website may use local stored objects (or Flash cookies) to collect and store information about your preferences and navigation to, from, and on our Website. Flash cookies are not managed by the same browser settings as are used for browser cookies.
 – Web Beacons. Pages of our Website and our emails may contain small electronic files known as web beacons that permit LV Medhealthfine services pvt ltd, for example, to count users who have visited those pages or opened an email and for other related website statistics.
+
+
+Information We Collect From Social Media and Third Party Sources
+
+•	We may collect information from you when you follow or like us on social media sites and platforms, including but not limited to Instagram, Twitter, and Facebook. Such information collected may include your name, email address, other contact information, and/or comments and content you post. We also may collect information about you when you submit information through social media platforms. You can also link your third-party accounts to us; by doing so you authorize us to collect, store, and use any information such third-party services may provide to us.
+
+
+Third-Party Use of Cookies and Other Tracking Technologies
+
+•	Some content or applications, including advertisements, on the Website may be served by third-parties, including advertisers, ad networks and servers, content providers, and application providers. These third parties may use cookies alone or in conjunction with web beacons or other tracking technologies to collect information about you when you use our website. The information they collect may be associated with your personal information or they may collect information, including personal information, about your online activities over time and across different websites and other online services.
+
+•	We do not control these third parties’ tracking technologies or how they may be used. If you have any questions about an advertisement or other targeted content, you should contact the responsible provider directly.
+
+
+Protected Health Information
+
+•	Some of the personal information received by LV Medhealthfine services pvt ltd connection with the Services may be provided to health care providers and/or the Ministry of Health or any other authority as may be required under the Public Health Act Cap 9.29 of the Revised Laws of St. Christopher and Nevis. By accessing and using the Website or the Services, you agree and consent for any information you transmit to LV Medhealthfine services pvt ltd and/or through the Website or otherwise in connection with the Services to be transmitted in any manner required by the Public Health Act.
+
+
+How We Use Your Information
+
+•	We use information that we collect about you or that you provide to us, including any personal information:
+– To present our Website and its contents to you.
+– To provide you with information, products, or services that you request from us.
+– To provide you with notices about your account.
+
+– To carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection.
+– To notify you about changes to our Website or any products or services we offer or provide through it.
+– To allow you to participate in interactive features on our Website.
+– In any other way we may describe when you provide the information.
+– For any other purpose with your consent.
+Choices About How We Use and Disclose Your Information.
+•	We may aggregate and/or combine the information that we collect about you through the Website with information that we receive from other sources, and may use and share such combined information in accordance with this Privacy Policy and applicable law.
+
+•	We may de-identify any information collected through the Website and our services so that such information can no longer be linked to you or your device. We may use such de-identified information for any purposes, including but not limited to aggregating it with other data, for research and marketing, and share such data with third parties, as set forth more fully herein.
+
+•	LV Medhealthfine services pvt ltd does not sell personal medical information. We do not provide your personally-identifiable medical data to third-parties in exchange for payment.
+
+Disclosure of Your Information
+
+•	We may disclose aggregated, deidentified information about our users, and information that does not identify any individual, without restriction.
+•	We may disclose personal information that we collect or you provide as described in this privacy policy:
+– To  a Court or to any other person by order of the Court.
+– To  a third party upon receipt of your written consent.
+– To our subsidiaries and affiliates to deliver Services to you.
+– With healthcare providers or medical practitioners at your request.
+– To a buyer or other successor in the event of a merger, restructuring, reorganization, dissolution, or other sale or transfer of some or all of LV Medhealthfine services pvt ltd ‘s assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which personal information held by LV Medhealthfine services pvt ltd  about our Website users is among the assets transferred.
+– For any other purpose disclosed by us when you provide the information.
+
+•	We may also disclose your personal information with your consent:
+– To enforce or apply our terms of use and other agreements, including for billing and collection purposes.
+– If we believe disclosure is necessary or appropriate to protect the rights, property, or safety of 
+   LV Medhealthfine services pvt ltd,our customers, or others. This includes exchanging information with other companies and organizations for the purposes of fraud protection and credit risk reduction.
+– In de-identified form, whether or not aggregated with other data, at our discretion.
+– As may be required by law, to third parties without your consent if we have reason to believe that disclosing this information is necessary to identify, contact or bring legal action against someone who may be causing injury to or interference with (either intentionally or unintentionally) our rights or property. Further, we may disclose Personal Information when we believe in good faith that such disclosure is required by and in accordance with the law.
+•	We also reserve the right to access, read, preserve, and disclose any information as we reasonably believe is necessary to:
+(i) satisfy any applicable law, regulation, legal process or governmental request
+(ii) enforce our contracts or user agreement, including investigation of potential violations hereof; and 
+(iii) detect, prevent, or otherwise address fraud, security or technical issues. We may disclose Personal Information if we believe it is necessary to investigate potential violations of our Terms of Use, or to enforce those Terms of Use. 
+•	Notwithstanding the general terms of this policy, the collection, use, and disclosure of Personal Information may be made outside of the terms herein to the extent provided for in any applicable privacy or other legislation in effect from time to time, or pursuant to court orders.
+
+Transactions
+
+•	You may be asked to supply certain information in connection with transactions that you conduct through the Websites and/or as part of the Services, including payment transactions. By submitting such information, which may include but is not limited to your name, billing address, shipping address, credit card number and associated information, and age, you grant LV Medhealthfine services pvt ltd the irrevocable and perpetual right to provide such information to third-parties for the purposes of facilitating such transactions. All credit card, debit card, and other financial transactions on or through the Services and Websites may occur through an online payment processing application.
+
+
+Data Security
+
+•	We have implemented measures designed to secure your personal information from accidental loss and from unauthorized access, use, alteration, and disclosure. All information you provide to us is stored on our secure servers behind firewalls. Any payment transactions and protected health information will be encrypted.
+
+•	The safety and security of your information also depends on you. Where we have given you (or where you have chosen) a password for access to certain parts of our Website, you are responsible for keeping this password confidential. We ask you not to share your password with anyone.
+•	Unfortunately, the transmission of information via the internet is not completely secure. Although we do our best to protect your personal information, we cannot guarantee the security of your personal information transmitted to our Website. Any transmission of personal information is at your own risk. We are not responsible for circumvention of any privacy settings or security measures contained on the Website.
+Information Retention
+•	We may keep personal information for as long as necessary for the identified purposes or as required by law.  Such retention period may extend beyond the termination of our relationship with you.  Unless set forth to the contrary in our Terms of Use or another agreement with you governing the Services, if you cease using such Services, we may retain or destroy, at our discretion, all Personal Information and non-personally identifiable information we collect through your use of such Services except to the extent otherwise prohibited by law. Any personal information we retain will remain subject to the terms of this Privacy Policy.
+Changes to Our Privacy Policy
+•	It is our policy to post any changes we make to our privacy policy on this page with a notice that the privacy policy has been updated on the Website home page. If we make material changes to how we treat our users’ personal information, we will notify you through a notice on the Website home page. You are responsible for ensuring we have an up-to-date active and deliverable email address for you, and for periodically visiting our Website and this privacy policy to check for any changes.

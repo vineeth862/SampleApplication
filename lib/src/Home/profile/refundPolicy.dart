@@ -35,6 +35,7 @@ class _RefundPolicyState extends State<RefundPolicy> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("Refund Ploicy"),
+            backgroundColor: Theme.of(context).colorScheme.onBackground,
           ),
           body: SingleChildScrollView(
             child: Center(
