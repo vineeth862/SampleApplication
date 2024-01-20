@@ -365,7 +365,7 @@ class _exploreExpState extends State<exploreExp> {
                   child: Column(
                     children: [
                       ListTile(
-                        title: Text("Popular-Test Categories",
+                        title: Text("Popular Test Categories",
                             style: Theme.of(context).textTheme.headlineMedium),
                         subtitle: Text(
                           "MedCapH recomended Health Categories",

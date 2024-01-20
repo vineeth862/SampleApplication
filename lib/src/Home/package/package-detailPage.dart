@@ -475,9 +475,9 @@ class _PackageDetailPage extends State<PackageDetailPage> {
                               GestureDetector(
                                   onTap: () {
                                     globalservice.sendEmail(
-                                        "pramodcr28@gmail.com",
-                                        "Somthing",
-                                        "testing");
+                                        "support@medcaph.com",
+                                        "Package Queries",
+                                        "Hello medcaph team ,");
                                   },
                                   child: Row(
                                     children: [

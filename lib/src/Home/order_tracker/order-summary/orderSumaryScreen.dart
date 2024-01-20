@@ -156,7 +156,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                 width: 5,
                               ),
                               Text(
-                                'Sample collection address :',
+                                'Sample Collection Address :',
                                 style:
                                     Theme.of(context).textTheme.headlineMedium,
                               ),
@@ -174,7 +174,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                   order.address!.fullAddress!,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyMedium!
+                                      .bodyLarge!
                                       .copyWith(fontWeight: FontWeight.bold),
                                   maxLines: 2,
                                   softWrap: true,
@@ -244,7 +244,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     const Divider(thickness: 2),
                     // const SizedBox(height: 5),
 
-                    Text('Test/Packages',
+                    Text('Tests/Package',
                         style: Theme.of(context).textTheme.headlineMedium),
                     Container(
                       child: ListView.builder(
@@ -358,7 +358,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     Divider(
                       thickness: 1,
                     ),
-                    Text("Payment details",
+                    Text("Payment Details",
                         style: Theme.of(context).textTheme.headlineMedium),
                     SizedBox(
                       height: 10,
@@ -478,12 +478,12 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       children: [
                         Text(
                           "Amount Payable",
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         Spacer(),
                         Text(
                           "₹ ${selectedTest.totalDiscountedPriceSum.toString()}",
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
                     ),
@@ -521,7 +521,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                       height: 150,
                       child: SlotBookingCard(
                         selectedCount: 0,
-                        title: "Total amount payable",
+                        title: "Total Amount Payable",
                         contentColor: false,
                         height: 150,
                         // content: Price(
@@ -608,6 +608,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                           paymentService
                                               .startEasyUpiPaymentTransaction();
                                         },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary),
                                         child: Text("Proceed to Pay"))
                                   ],
                                 ),

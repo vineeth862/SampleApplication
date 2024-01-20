@@ -258,7 +258,7 @@ class AddAdress extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 40,
                       ),
                       Text(
                         "Address Details",
@@ -385,7 +385,7 @@ class AddAdress extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 30,
                       ),
                       // Text(
                       //   "Save Address as",

@@ -44,68 +44,75 @@ class _AllertState extends State<Allert> {
               Divider(), // Add a horizontal line to separate title and body
               // SizedBox(height: 8),
               Text(
-                'Please Click Test OR Package To Add More Items!',
-                style: Theme.of(context).textTheme.bodyMedium,
+                'Please Add More Test/Package',
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () async {
-                      Order order = selectedOrder.getOrder;
-                      if (selectedTest.getSelectedTest.isNotEmpty ||
-                          selectedTest.getSelectedPackage.isNotEmpty) {
-                        dynamic item = selectedTest.getSelectedPackage.isEmpty
-                            ? selectedTest.getSelectedTest.elementAt(0)
-                            : selectedTest.getSelectedPackage.elementAt(0);
-                        await searchState.cardClicked(item.labCode, false);
-                        Get.off(() => FilteredLabCardlistPage(
-                            title: item.labName,
-                            labCode: item.labCode,
-                            location: "location",
-                            logo: "logo"));
-                      } else if (order.labCode != null) {
-                        Get.off(() => FilteredLabCardlistPage(
-                            title: order.labName!,
-                            labCode: order.labCode!,
-                            location: "location",
-                            logo: "ll"));
-                      } else {
-                        globalservice.navigate(context, SearchBarPage());
-                        selectedOrder!.resetOrder();
-                      }
-                    },
-                    child: Text('Add Test'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      Order order = selectedOrder.getOrder;
-                      if (selectedTest.getSelectedTest.isNotEmpty ||
-                          selectedTest.getSelectedPackage.isNotEmpty) {
-                        String labCode = selectedTest.getSelectedTest.isNotEmpty
-                            ? selectedTest.getSelectedTest.elementAt(0).labCode
-                            : selectedTest.getSelectedPackage
-                                .elementAt(0)
-                                .labCode;
-                        Get.off(() => PackageSuggetionList(
-                              labCode: labCode,
-                              title: "",
-                            ));
-                      } else if (order.labCode != null) {
-                        Get.off(() => PackageSuggetionList(
+                      onPressed: () async {
+                        Order order = selectedOrder.getOrder;
+                        if (selectedTest.getSelectedTest.isNotEmpty ||
+                            selectedTest.getSelectedPackage.isNotEmpty) {
+                          dynamic item = selectedTest.getSelectedPackage.isEmpty
+                              ? selectedTest.getSelectedTest.elementAt(0)
+                              : selectedTest.getSelectedPackage.elementAt(0);
+                          await searchState.cardClicked(item.labCode, false);
+                          Get.off(() => FilteredLabCardlistPage(
+                              title: item.labName,
+                              labCode: item.labCode,
+                              location: "location",
+                              logo: "logo"));
+                        } else if (order.labCode != null) {
+                          Get.off(() => FilteredLabCardlistPage(
+                              title: order.labName!,
                               labCode: order.labCode!,
-                              title: "",
-                            ));
-                      } else {
-                        Get.off(() => PackageSuggetionList(
-                              labCode: "",
-                              title: "",
-                            ));
-                      }
-                    },
-                    child: const Text('Add Package'),
-                  ),
+                              location: "location",
+                              logo: "ll"));
+                        } else {
+                          globalservice.navigate(context, SearchBarPage());
+                          selectedOrder!.resetOrder();
+                        }
+                      },
+                      child: Text('Add Test'),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.tertiary)),
+                  ElevatedButton(
+                      onPressed: () async {
+                        Order order = selectedOrder.getOrder;
+                        if (selectedTest.getSelectedTest.isNotEmpty ||
+                            selectedTest.getSelectedPackage.isNotEmpty) {
+                          String labCode =
+                              selectedTest.getSelectedTest.isNotEmpty
+                                  ? selectedTest.getSelectedTest
+                                      .elementAt(0)
+                                      .labCode
+                                  : selectedTest.getSelectedPackage
+                                      .elementAt(0)
+                                      .labCode;
+                          Get.off(() => PackageSuggetionList(
+                                labCode: labCode,
+                                title: "",
+                              ));
+                        } else if (order.labCode != null) {
+                          Get.off(() => PackageSuggetionList(
+                                labCode: order.labCode!,
+                                title: "",
+                              ));
+                        } else {
+                          Get.off(() => PackageSuggetionList(
+                                labCode: "",
+                                title: "",
+                              ));
+                        }
+                      },
+                      child: const Text('Add Package'),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.tertiary)),
                 ],
               ),
             ],

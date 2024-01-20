@@ -159,7 +159,7 @@ class _SearchBarPageState extends State<SearchBarPage>
                   child: TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      hintText: 'Search  Any Labs OR Test',
+                      hintText: 'Search  Any Labs/Test',
                       filled: true,
                       hintStyle: const TextStyle(
                         color: Colors.grey,

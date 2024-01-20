@@ -272,24 +272,26 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     foregroundColor: !selectedTest
                                             .getSelectedTest
                                             .contains(widget.test)
-                                        ? Theme.of(context).colorScheme.primary
+                                        ? Theme.of(context).colorScheme.tertiary
                                         : Theme.of(context)
                                             .colorScheme
-                                            .background,
+                                            .onPrimary,
                                     backgroundColor: !selectedTest
                                             .getSelectedTest
                                             .contains(widget.test)
                                         ? Theme.of(context)
                                             .colorScheme
                                             .onPrimary
-                                        : Theme.of(context).colorScheme.primary,
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           8.0), // Adjust the border radius as needed
                                       side: BorderSide(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .primary,
+                                            .tertiary,
                                       ),
 
                                       // Set the outline color
@@ -477,7 +479,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             children: [
                               GestureDetector(
                                   onTap: () {
-                                    globalservice.makingPhoneCall("8296653901");
+                                    globalservice.makingPhoneCall("9663383095");
                                   },
                                   child: Row(
                                     children: [
@@ -504,9 +506,9 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               GestureDetector(
                                   onTap: () {
                                     globalservice.sendEmail(
-                                        "pramodcr28@gmail.com",
-                                        "Somthing",
-                                        "testing");
+                                        "support@medcaph.com",
+                                        "Test Queries",
+                                        "Hello medcaph team ,");
                                   },
                                   child: Row(
                                     children: [

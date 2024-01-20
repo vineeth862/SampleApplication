@@ -278,7 +278,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                           //       .primary,
                                           // ),
                                           Container(
-                                            width: 20,
+                                            width: 35,
                                             child: Image.asset(
                                                 'assets/images/home.png'),
                                           ),
@@ -298,13 +298,18 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                                         .toString(),
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headlineSmall!
+                                                    .headlineMedium!
                                                     .copyWith(),
                                               ),
                                               subtitle: Text(
-                                                  concatenatedAddressList[index]
-                                                      .fullAddress
-                                                      .toString()),
+                                                concatenatedAddressList[index]
+                                                    .fullAddress
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall!
+                                                    .copyWith(),
+                                              ),
                                             ),
                                           ),
                                           GestureDetector(
@@ -319,7 +324,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .inverseSurface,
-                                                size: 15,
+                                                size: 20,
                                               ),
                                             ),
                                           )

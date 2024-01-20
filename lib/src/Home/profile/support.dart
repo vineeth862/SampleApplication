@@ -67,8 +67,7 @@ class _SupportState extends State<Support> {
               ),
               GestureDetector(
                 onTap: () {
-                  globalService.sendEmail(
-                      "support@medcaph.com", "Somthing", "testing");
+                  globalService.sendEmail("support@medcaph.com", "", "");
                 },
                 child: ListTile(
                   title: Text(
