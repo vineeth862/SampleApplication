@@ -103,8 +103,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         //     ? 150
                         //     : 300,
                         height: MediaQuery.of(context).size.width < 600
-                            ? MediaQuery.of(context).size.height * 0.2
-                            : MediaQuery.of(context).size.height * 0.4,
+                            ? MediaQuery.of(context).size.height * 0.4
+                            : MediaQuery.of(context).size.height * 0.6,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -113,11 +113,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           //     color: Theme.of(context).colorScheme.primary),
                           //borderRadius: BorderRadius.circular(8.0),
                           image: const DecorationImage(
-                              image: AssetImage(
-                                "./assets/images/Designer.jpeg",
-                              ),
-                              fit: BoxFit.fill,
-                              opacity: 0.6),
+                            image: AssetImage(
+                              "./assets/images/editProfile.gif",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
                         )),
                   ),
 
