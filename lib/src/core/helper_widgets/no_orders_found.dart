@@ -48,8 +48,8 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            'assets/images/empty-cart.jpeg',
-            height: 80,
+            'assets/images/search.gif',
+            height: MediaQuery.of(context).size.height * 0.4,
             // color: Color.fromARGB(255, 54, 138, 235),
             // colorBlendMode: BlendMode.color,
           ),

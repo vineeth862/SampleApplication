@@ -153,6 +153,11 @@ flutter:
     - assets/images/search_lab_test.gif
     - assets/images/bookyourslot.gif
     - assets/images/getReport.gif
+    - assets/images/register.gif
+    - assets/images/otp.gif
+    - assets/images/launching.gif
+    - assets/images/search.gif
+    - assets/images/paymentDone.gif
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

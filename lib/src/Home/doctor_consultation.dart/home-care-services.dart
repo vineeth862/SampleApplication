@@ -22,16 +22,35 @@ class HomeCareServices extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  "./assets/images/cmng1.png",
-                  //height: MediaQuery.of(context).size.width * ,
-                  width: MediaQuery.of(context).size.width * 0.6,
+
+            Stack(children: [
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset(
+                    "./assets/images/launching.gif",
+                    //height: MediaQuery.of(context).size.width * ,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                  ),
                 ),
               ),
-            ),
+              // Positioned(
+              //   child: Text(
+              //     "Home Care Servies",
+              //     style: Theme.of(context).textTheme.headlineLarge,
+              //   ),
+              //   left: 10,
+              //   right: 10,
+              // ),
+              Positioned(
+                child: Text(
+                  "Launching Soon.......!",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                bottom: 0,
+                left: 10,
+              )
+            ]),
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
             //   child: Text(

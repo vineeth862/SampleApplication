@@ -50,16 +50,17 @@ class _WelcomesigninState extends State<Welcomesignin> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Stack(
               children: [
                 Image.asset(
-                  "./assets/images/Lab_two_people.jpg",
+                  "./assets/images/register.gif",
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.width > 600
-                      ? MediaQuery.of(context).size.height * 0.4
-                      : MediaQuery.of(context).size.height * 0.2,
-                  fit: BoxFit.fill,
+                      ? MediaQuery.of(context).size.height * 0.6
+                      : MediaQuery.of(context).size.height * 0.4,
+                  fit: BoxFit.cover,
                 ),
                 Positioned(
                   top: 0,
@@ -74,14 +75,17 @@ class _WelcomesigninState extends State<Welcomesignin> {
                       },
                       child: Text(
                         "SKIP",
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: Colors.white),
                       ),
                       style: OutlinedButton.styleFrom(
                         shape: CircleBorder(
                             // borderRadius: BorderRadius.circular(
                             //     20.0), // Set the border radius value
                             ),
-                        backgroundColor: Colors.black12,
+                        backgroundColor: Color.fromARGB(207, 0, 0, 0),
                         fixedSize: Size(5, 5),
                         //padding: const EdgeInsets.symmetric(horizontal: 100.0),
                       ),
@@ -91,25 +95,35 @@ class _WelcomesigninState extends State<Welcomesignin> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Text(
+                "Welcome to MedCapH,",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(fontSize: 25),
+              ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
               child: Text(
-                'Explore the world of diagnostics.',
-                style: Theme.of(context).textTheme.headlineMedium,
+                'Explore the limitless world of diagnostics.',
+                style: Theme.of(context).textTheme.labelSmall,
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35.0),
-              child: Text('Log in or sign up',
-                  style: Theme.of(context).textTheme.headlineMedium!),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 35.0),
+            //   child: Text('Log in or sign up',
+            //       style: Theme.of(context).textTheme.headlineMedium!),
+            // ),
             const SizedBox(height: 10.0),
             Form(
                 key: _formKey,
@@ -143,13 +157,19 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           ),
                           Expanded(
                             child: TextFormField(
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                                cursorHeight: 20,
                                 controller: mobileNumberController,
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   labelText: 'Mobile No.',
                                   prefixText: '+91 ',
-
+                                  labelStyle:
+                                      Theme.of(context).textTheme.headlineSmall,
+                                  hintStyle:
+                                      Theme.of(context).textTheme.headlineSmall,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   //prefixIcon: const Icon(Icons.phone),
@@ -191,13 +211,19 @@ class _WelcomesigninState extends State<Welcomesignin> {
                           ),
                           Expanded(
                             child: TextFormField(
+                              style: Theme.of(context).textTheme.headlineSmall,
+                              cursorHeight: 20,
                               //key: _formKey,
                               controller: nameController,
                               obscureText: false,
 
                               decoration: InputDecoration(
                                 labelText: 'Full Name',
-                                //prefixText: '+91 ',
+
+                                labelStyle:
+                                    Theme.of(context).textTheme.headlineSmall,
+                                hintStyle:
+                                    Theme.of(context).textTheme.headlineSmall,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 //prefixIcon: const Icon(Icons.person_2),
@@ -216,99 +242,103 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   ],
                 )),
             const SizedBox(height: 10.0),
-            ElevatedButton(
-              onPressed: () {
-                //globalservice.navigate(context, const PinputExample());
-                if (_formKey.currentState!.validate()) {
-                  _saveItem();
-                  // globalservice.navigate(
-                  //     context, OtpScreen(phone: mobileNumberController.text));
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  //globalservice.navigate(context, const PinputExample());
+                  if (_formKey.currentState!.validate()) {
+                    _saveItem();
+                    // globalservice.navigate(
+                    //     context, OtpScreen(phone: mobileNumberController.text));
 
-                  showModalBottomSheet(
-                    isScrollControlled: false,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    context: context,
-                    builder: (context) => Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "OTP",
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Please enter the OTP sent to ${user.mobile}  ",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          const SizedBox(height: 20),
-                          // GestureDetector(
-                          //   child: Pinput(
-                          //     controller: AuthenticationRepository
-                          //         .instance.pinController,
-                          //     length: 6,
-                          //     focusNode: focusNode,
-                          //     keyboardType: TextInputType.number,
-                          //     androidSmsAutofillMethod:
-                          //         AndroidSmsAutofillMethod.none,
-                          //     autofocus: true,
-                          //     listenForMultipleSmsOnAndroid: true,
-                          //     validator: (value) {
-                          //       otp = value.toString();
-                          //       otpController.instance
-                          //           .verifyOtpController(otp, user);
-                          //     },
-                          //   ),
-                          // ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          //   ElevatedButton(
-                          //     onPressed: () {
-                          //       _validate();
+                    showModalBottomSheet(
+                      isScrollControlled: false,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      context: context,
+                      builder: (context) => Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "./assets/images/otp.gif",
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.width > 600
+                                  ? MediaQuery.of(context).size.height * 0.4
+                                  : MediaQuery.of(context).size.height * 0.3,
+                              fit: BoxFit.fill,
+                            ),
+                            Text(
+                              "OTP",
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Please enter the OTP sent to ${user.mobile}  ",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const SizedBox(height: 10),
+                            // GestureDetector(
+                            //   child: Pinput(
+                            //     controller: AuthenticationRepository
+                            //         .instance.pinController,
+                            //     length: 6,
+                            //     focusNode: focusNode,
+                            //     keyboardType: TextInputType.number,
+                            //     androidSmsAutofillMethod:
+                            //         AndroidSmsAutofillMethod.none,
+                            //     autofocus: true,
+                            //     listenForMultipleSmsOnAndroid: true,
+                            //     validator: (value) {
+                            //       otp = value.toString();
+                            //       otpController.instance
+                            //           .verifyOtpController(otp, user);
+                            //     },
+                            //   ),
+                            // ),
 
-                          //       otpController.instance
-                          //           .verifyOtpController(otp, user);
-                          //     },
-                          //     child: const Text("Submit"),
-                          //     style: ElevatedButton.styleFrom(
-                          //       shape: RoundedRectangleBorder(
-                          //         borderRadius: BorderRadius.circular(
-                          //             20.0), // Set the border radius value
-                          //       ),
-                          //       backgroundColor:
-                          //           Theme.of(context).colorScheme.primary,
-                          //       padding:
-                          //           const EdgeInsets.symmetric(horizontal: 100.0),
-                          //     ),
-                          //   ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                            //   ElevatedButton(
+                            //     onPressed: () {
+                            //       _validate();
 
-                          OtpPhoneWidget(user: user),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          TimerBottomSheet(),
-                        ],
+                            //       otpController.instance
+                            //           .verifyOtpController(otp, user);
+                            //     },
+                            //     child: const Text("Submit"),
+                            //     style: ElevatedButton.styleFrom(
+                            //       shape: RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(
+                            //             20.0), // Set the border radius value
+                            //       ),
+                            //       backgroundColor:
+                            //           Theme.of(context).colorScheme.primary,
+                            //       padding:
+                            //           const EdgeInsets.symmetric(horizontal: 100.0),
+                            //     ),
+                            //   ),
+
+                            OtpPhoneWidget(user: user),
+
+                            TimerBottomSheet(),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
-              child: const Text('Continue', style: TextStyle(fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                      20.0), // Set the border radius value
+                    );
+                  }
+                },
+                child: const Text('Continue',
+                    style: TextStyle(fontSize: 20, color: Colors.black)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        15.0), // Set the border radius value
+                  ),
+                  primary: Theme.of(context).colorScheme.tertiary,
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
                 ),
-                primary: Theme.of(context).colorScheme.primary,
-                padding: const EdgeInsets.symmetric(horizontal: 100.0),
               ),
             ),
           ]),

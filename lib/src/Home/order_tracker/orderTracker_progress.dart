@@ -440,8 +440,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                             child: Column(
                           children: [
                             Container(
-                              child: Image.asset(
-                                  'assets/images/payment-success.jpeg'),
+                              child:
+                                  Image.asset('assets/images/paymentDone.gif'),
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10)),
