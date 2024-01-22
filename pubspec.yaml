@@ -82,6 +82,8 @@ dev_dependencies:
   flutter_otp_text_field: ^1.1.0+2
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
+  smooth_page_indicator: ^1.1.0
+  get_storage: ^2.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -144,8 +146,13 @@ flutter:
     - assets/images/lagout.png
     - assets/images/logo.png
     - assets/images/cmng1.png
+    - assets/images/Logo_white.png
+    - assets\images\Logo_Gif.gif
     - assets/PRIVACY_POLICY.txt
     - assets/Refund_and_Cancellation_Policy.txt
+    - assets/images/search_lab_test.gif
+    - assets/images/bookyourslot.gif
+    - assets/images/getReport.gif
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

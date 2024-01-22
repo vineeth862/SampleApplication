@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
+import 'package:sample_application/src/core/globalServices/authentication/onboarding/onboarding.dart';
 
 import '../../../../Home/home.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -13,7 +16,7 @@ class AuthenticationRepository extends GetxController {
   late final Rx<User?> firebaseUser;
   var verificationId = "".obs;
   TextEditingController pinController = TextEditingController();
-
+  final deviceStorage = GetStorage();
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
@@ -24,8 +27,17 @@ class AuthenticationRepository extends GetxController {
       //Get.offAll(() => HomePage());
 
       //globalservice.hideLoader();
-      _setInitialScreen(firebaseUser.value);
+      FlutterNativeSplash.remove();
+      screenRedirect();
+      //_setInitialScreen(firebaseUser.value);
     });
+  }
+
+  screenRedirect() async {
+    deviceStorage.writeIfNull("isFirstTime", true);
+    deviceStorage.read("isFirstTime") != true
+        ? _setInitialScreen(firebaseUser.value)
+        : Get.offAll(() => onBoardingScreen());
   }
 
   _setInitialScreen(User? user) {

@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/Home/profile/policies.dart';
 import 'package:sample_application/src/Home/profile/support.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/core/globalServices/authentication/onboarding/onboarding.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
@@ -291,6 +292,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.black, thickness: 0.2, height: 1),
                     ],
                   )),
+              TextButton(
+                  onPressed: () {
+                    globalservice.navigate(context, onBoardingScreen());
+                  },
+                  child: Text("Onboard"))
             ],
           ),
         ),
