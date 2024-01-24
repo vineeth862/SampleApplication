@@ -145,4 +145,26 @@ class GlobalService {
     if (obj == null) return "";
     return obj;
   }
+
+  getLogo(labCode) async {
+    var labReference = await _db
+        .collection("prod-lab")
+        .where("labCode", isEqualTo: labCode)
+        .get();
+    return labReference.docs.map((e) {
+      return e.get("logo").toString();
+    }).toList();
+  }
+
+  getLabLocation(labCode) async {
+    var labReference = await _db
+        .collection("prod-lab")
+        .where("labCode", isEqualTo: labCode)
+        .get();
+    return labReference.docs.map((e) {
+      return e
+          .data()['branchDetails'][0]['locality']
+          .toString(); //need to change this logic
+    }).toList();
+  }
 }

@@ -42,10 +42,30 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
   bool _isAppBarExpanded = false;
   num slotBookingCardHeight = 120;
   bool expandDetails = false;
+
+  getLabLogoLocation(labCode) async {
+    var logoList = await globalservice.getLogo(labCode);
+    var locationList = await globalservice.getLabLocation(labCode);
+    // widget.logo = logoList[0];
+    // widget.location = locationList[0];
+    setState(() {
+      widget.logo = logoList[0];
+      widget.location = locationList[0];
+    });
+    //widget.logo = await globalservice.getLogo(labCode)[0];
+  }
+
   @override
   void initState() {
     super.initState();
-    print(widget.logo);
+    Future.delayed(Duration.zero, () {
+      globalservice.showLoader();
+    });
+    if (widget.logo == "logo" && widget.location == 'location') {
+      getLabLogoLocation(widget.labCode);
+      //getLabLocation(widget.labCode);
+    }
+    globalservice.hideLoader();
     _scrollController.addListener(() {
       setState(() {
         _isAppBarExpanded = _scrollController.offset > 143.0;

@@ -33,6 +33,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
     final selectedOrder = Provider.of<SelectedOrderState>(context);
     num slotBookingCardHeight = 120;
     List<dynamic> list = searchState.getTestCardList;
+    bool isTestSelected(Test test) {
+      return (selectedTest.getSelectedTest
+          .where((element) =>
+              element.medCapTestCode == test.medCapTestCode &&
+              element.labCode == test.labCode)
+          .isNotEmpty);
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -175,8 +183,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         globalservice.getCurrentUserKey();
                                     if (userKey != "null") {
                                       Order order = selectedOrder.getOrder;
-                                      if (selectedTest.getSelectedTest
-                                          .contains(widget.test)) {
+                                      if (isTestSelected(widget.test)) {
                                         selectedTest.removeTest(widget.test);
                                         order.tests =
                                             selectedTest.getSelectedTest;
@@ -263,28 +270,23 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                           });
                                     }
                                   },
-                                  child: !selectedTest.getSelectedTest
-                                          .contains(widget.test)
+                                  child: !isTestSelected(widget.test)
                                       ? Text("BOOK")
                                       : Text("BOOKED"),
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.all(0),
-                                    foregroundColor: !selectedTest
-                                            .getSelectedTest
-                                            .contains(widget.test)
-                                        ? Theme.of(context).colorScheme.tertiary
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
-                                    backgroundColor: !selectedTest
-                                            .getSelectedTest
-                                            .contains(widget.test)
+                                    foregroundColor: isTestSelected(widget.test)
                                         ? Theme.of(context)
                                             .colorScheme
                                             .onPrimary
                                         : Theme.of(context)
                                             .colorScheme
                                             .tertiary,
+                                    backgroundColor: isTestSelected(widget.test)
+                                        ? Theme.of(context).colorScheme.tertiary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           8.0), // Adjust the border radius as needed
