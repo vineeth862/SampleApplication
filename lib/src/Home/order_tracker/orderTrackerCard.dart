@@ -71,11 +71,12 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
     return list;
   }
 
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     var list1 = getBookedItems(widget.order);
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0, right: 8),
+      padding: const EdgeInsets.only(left: 8.0, right: 8),
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondaryContainer,
@@ -114,7 +115,14 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                           ),
                         ),
                       )
-                    : Card()),
+                    : GestureDetector(
+                        onTap: () {},
+                        child: TextButton.icon(
+                          icon: Icon(Icons.delete),
+                          label: Text("Remove"),
+                          onPressed: () {},
+                        ),
+                      )),
             Row(
               children: [
                 Expanded(
@@ -185,6 +193,7 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
               child: Scrollbar(
                 controller: _scrollController,
                 thumbVisibility: true,
+                //trackVisibility: true,
                 child: ListView.builder(
                   controller: _scrollController,
                   itemCount: list1.length,
@@ -194,51 +203,107 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                 ),
               ),
             ),
+
+            // ExpansionTile(
+            //   title: Text('Booked Test/Packages'),
+            //   children: [
+            //     Container(
+            //       height: 100, // Adjust the height as needed
+            //       child: ListView.builder(
+            //         itemCount: list1.length,
+            //         itemBuilder: (context, index) {
+            //           return ListTile(
+            //             title: list1[index],
+            //           );
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // Flexible(
+            //   child: ListTile(
+            //     title: Text("Booked"),
+            //     subtitle: isExpanded
+            //         ? Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text('Additional Detail 1'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               Text('Additional Detail 2'),
+            //               // Add more details as needed
+            //             ],
+            //           )
+            //         : null,
+            //     onTap: () {
+            //       setState(() {
+            //         isExpanded = !isExpanded;
+            //       });
+            //     },
+            //     trailing: Icon(
+            //       isExpanded ? Icons.expand_less : Icons.expand_more,
+            //       color: Colors.blue,
+            //     ),
+            //   ),
+            // ),
             //...getBookedItems(order),
             SizedBox(
               height: 5,
             ),
             Divider(),
-            Row(
-              children: [
-                widget.order.statusCode! >= 11
-                    ? Icon(
-                        Icons.check_circle,
-                        size: 15,
-                        color: Theme.of(context).colorScheme.tertiary,
-                      )
-                    : Icon(Icons.pending_outlined,
-                        size: 15, color: Color.fromARGB(255, 4, 61, 6)),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: Text(
-                    widget.order.statusLabel.toString(),
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: widget.order.statusCode! >= 11
-                            ? Color.fromARGB(255, 11, 114, 14)
-                            : Theme.of(context).colorScheme.primary),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8),
+              child: Row(
+                children: [
+                  widget.order.statusCode! >= 11
+                      ? Icon(
+                          Icons.check_circle,
+                          size: 15,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        )
+                      : Icon(Icons.pending_outlined,
+                          size: 15, color: Color.fromARGB(255, 4, 61, 6)),
+                  SizedBox(
+                    width: 5,
                   ),
-                ),
-                Expanded(
-                    child: ElevatedButton(
-                  onPressed: () {
-                    navigate(widget.order, context);
-                  },
-                  child: Text(widget.order.statusCode! > 1
-                      ? "View Details"
-                      : "Procced"),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20.0), // Set the border radius value
+                  Expanded(
+                    child: Text(
+                      widget.order.statusLabel.toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: widget.order.statusCode! >= 11
+                                  ? Color.fromARGB(255, 11, 114, 14)
+                                  : Theme.of(context).colorScheme.primary),
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.tertiary,
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   ),
-                ))
-              ],
+                  Expanded(
+                      child: ElevatedButton(
+                    onPressed: () {
+                      navigate(widget.order, context);
+                    },
+                    child: Text(widget.order.statusCode! > 1
+                        ? "View Details"
+                        : "Procced"),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            20.0), // Set the border radius value
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    ),
+                  ))
+                ],
+              ),
             )
           ],
         ),

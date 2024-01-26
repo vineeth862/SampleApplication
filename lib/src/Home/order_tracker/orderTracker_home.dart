@@ -152,7 +152,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                         )
                       : SizedBox(
                           height: MediaQuery.of(context).size.height *
-                              0.84, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
+                              0.8, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
                           width: MediaQuery.of(context).size.width * 0.95,
                           child: GridView.builder(
                             gridDelegate:
@@ -163,7 +163,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                       : 2,
                               childAspectRatio:
                                   MediaQuery.of(context).size.width < 600
-                                      ? 1.3
+                                      ? 1.4
                                       : 1.8, // number of items in each row
                               mainAxisSpacing: 4.0, // spacing between rows
                               crossAxisSpacing: 16.0, // spacing between columns

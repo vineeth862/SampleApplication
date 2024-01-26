@@ -57,8 +57,8 @@ class _MySliderState extends State<MySlider> {
                   autoPlayInterval: const Duration(
                       seconds:
                           5), // Set the duration between auto-playing slides
-                  autoPlayAnimationDuration: const Duration(microseconds: 1),
-                  autoPlayCurve: Curves.easeInOutQuart,
+                  autoPlayAnimationDuration: const Duration(microseconds: 150),
+                  autoPlayCurve: Curves.easeIn,
                   enlargeCenterPage: true,
                   pauseAutoPlayOnTouch: true,
                   onPageChanged: (index, reason) {

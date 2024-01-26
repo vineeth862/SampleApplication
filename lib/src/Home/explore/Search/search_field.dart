@@ -159,10 +159,10 @@ class _SearchBarPageState extends State<SearchBarPage>
                   child: TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      hintText: 'Search  Any Labs/Test',
+                      hintText: 'Search Lab/Test',
                       filled: true,
                       hintStyle: const TextStyle(
-                        color: Colors.grey,
+                        color: Color.fromARGB(255, 87, 87, 87),
                       ),
                       fillColor:
                           Theme.of(context).colorScheme.onSecondaryContainer,
@@ -212,6 +212,8 @@ class _SearchBarPageState extends State<SearchBarPage>
             // automaticallyImplyLeading: false,
             bottom: TabBar(
               controller: _tabController,
+
+              indicatorColor: Theme.of(context).colorScheme.primary,
               labelColor: Theme.of(context).colorScheme.primary,
               // indicatorColor: Colors.white,
               tabs: const [Tab(text: 'Labs'), Tab(text: 'Tests')],

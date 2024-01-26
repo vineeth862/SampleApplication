@@ -74,7 +74,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 207, 131),
+                        color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
                           topLeft: Radius.circular(10.0),
@@ -88,7 +88,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                       children: [
                         Text(
                           "User Information",
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         // Divider(
                         //   color: Colors.grey, // You can customize the color
@@ -100,7 +100,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Text(
-                            generateString(widget.order.user?.userName),
+                            generateString(widget.order.patient?.userName),
                             style: Theme.of(context).textTheme.bodyMedium,
                             softWrap: true,
                           )
@@ -111,7 +111,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                           Text(
-                              generateString(widget.order.user?.mobile)
+                              generateString(widget.order.patient?.mobile)
                                   .substring(3, 13),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
@@ -142,7 +142,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 207, 131),
+                        color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
                           topLeft: Radius.circular(10.0),
@@ -156,7 +156,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                       children: [
                         Text(
                           "Collection Information",
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         SizedBox(height: 15),
                         Row(children: [
@@ -276,7 +276,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 207, 131),
+                        color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
                           topLeft: Radius.circular(10.0),
@@ -290,7 +290,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                       children: [
                         Text(
                           "Payment Information",
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         SizedBox(height: 15),
                         Row(children: [
@@ -348,6 +348,9 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                                   });
                                 },
                                 child: Text('Proceed'),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.tertiary),
                               )
                             : Container(),
                       ],

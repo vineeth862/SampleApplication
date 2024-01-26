@@ -49,7 +49,7 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
         children: [
           Image.asset(
             'assets/images/search.gif',
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.22,
             // color: Color.fromARGB(255, 54, 138, 235),
             // colorBlendMode: BlendMode.color,
           ),
