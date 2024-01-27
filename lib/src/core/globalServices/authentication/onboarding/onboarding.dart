@@ -89,7 +89,8 @@ class onBoardingNavigation extends StatelessWidget {
           count: 3,
           effect: ExpandingDotsEffect(
               activeDotColor: Theme.of(context).colorScheme.primary,
-              dotHeight: 8),
+              dotWidth: 10,
+              dotHeight: 4),
         ));
   }
 }
@@ -144,7 +145,8 @@ class onBoardingPage extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge!
-                  .copyWith(fontSize: 35),
+                  .copyWith(fontSize: 25),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 10,
@@ -153,6 +155,7 @@ class onBoardingPage extends StatelessWidget {
               child: Text(
                 subtitle,
                 style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

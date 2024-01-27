@@ -261,14 +261,14 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              "./assets/images/otp.gif",
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.width > 600
-                                  ? MediaQuery.of(context).size.height * 0.4
-                                  : MediaQuery.of(context).size.height * 0.3,
-                              fit: BoxFit.fill,
-                            ),
+                            // Image.asset(
+                            //   "./assets/images/otp.gif",
+                            //   width: MediaQuery.of(context).size.width,
+                            //   height: MediaQuery.of(context).size.width > 600
+                            //       ? MediaQuery.of(context).size.height * 0.4
+                            //       : MediaQuery.of(context).size.height * 0.3,
+                            //   fit: BoxFit.fill,
+                            // ),
                             Text(
                               "OTP",
                               style: Theme.of(context).textTheme.headlineMedium,

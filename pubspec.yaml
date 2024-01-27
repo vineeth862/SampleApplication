@@ -84,6 +84,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   smooth_page_indicator: ^1.1.0
   get_storage: ^2.1.1
+  connectivity: ^3.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -147,6 +148,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/cmng1.png
     - assets/images/Logo_white.png
+    - assets/images/noWifi.png
     - assets\images\Logo_Gif.gif
     - assets/PRIVACY_POLICY.txt
     - assets/Refund_and_Cancellation_Policy.txt

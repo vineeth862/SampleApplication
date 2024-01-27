@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
+import 'package:sample_application/src/core/globalServices/checkOnlineConnectivity.dart';
 import 'package:sample_application/src/core/globalServices/authentication/onboarding/onboarding.dart';
 
 import '../../../../Home/home.dart';
@@ -28,7 +29,8 @@ class AuthenticationRepository extends GetxController {
 
       //globalservice.hideLoader();
       FlutterNativeSplash.remove();
-      screenRedirect();
+      Get.offAll(() => ConnectivityChecker());
+      //screenRedirect();
       //_setInitialScreen(firebaseUser.value);
     });
   }
