@@ -25,7 +25,6 @@ class _categoryCardState extends State<categoryCard> {
   getTestdescription(title) async {
     var test_des_list =
         await exploreService.fetchTestDescription(widget.displayName);
-    print(test_des);
     setState(() {
       test_des = test_des_list[0];
     });

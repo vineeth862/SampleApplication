@@ -104,8 +104,6 @@ class _StepOneScreenState extends State<StepOneScreen> {
   }
 
   Future<bool> UpdateWidget() async {
-    // print(_formKey.currentState);
-    // if (_formKey.currentState!.validate()) {
     if (selectedOrder != null) {
       Order order = selectedOrder!.getOrder;
       order.self = isMySelfButtonSelected;

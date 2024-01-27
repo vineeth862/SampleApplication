@@ -29,9 +29,6 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
   void initState() {
     telephony.listenIncomingSms(
       onNewMessage: (SmsMessage message) {
-        print(message.address);
-        print(message.body);
-
         String sms = message.body.toString();
 
         if (message.body!

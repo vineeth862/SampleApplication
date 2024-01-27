@@ -97,7 +97,6 @@ class SelectedTestState with ChangeNotifier {
               .toInt();
     }
 
-    print(totalDiscountedPriceSum);
     notifyListeners();
     return "";
   }

@@ -70,9 +70,6 @@ class SelectedOrderState extends ChangeNotifier {
           .doc(order.orderNumber)
           .get();
 
-      print(documentSnapshot.data()?['orderNumber']);
-      print(order.orderNumber);
-
       if (!documentSnapshot.exists ||
           documentSnapshot.data()?['orderNumber'] == order.orderNumber) {
         await _db
@@ -81,9 +78,7 @@ class SelectedOrderState extends ChangeNotifier {
             .set(order.toJson())
             .whenComplete(() =>
                 {UserRepository().addOrderIdsToUser(order.orderNumber, true)})
-            .catchError((error, stackTrace) {
-          print("Something went wrong");
-        });
+            .catchError((error, stackTrace) {});
       } else {
         var id = documentSnapshot.id;
         List<String> result = id.split(RegExp(r'(?<=\D)(?=\d)|(?<=\d)(?=\D)'));

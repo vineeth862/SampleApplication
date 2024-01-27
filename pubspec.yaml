@@ -124,40 +124,30 @@ flutter:
     - assets/images/blood-tube.png
     - assets/images/blood-test.png
     # - assets/images/How_it_works.png
-    - assets/images/empty-cart.jpeg
+  
     - assets/images/about.jpeg
     - assets/images/setting.jpeg
     - assets/images/support.jpeg
-    # - assets/images/profile.png
-    - assets/images/Designer.jpeg
-    - assets/images/payment-success.jpeg 
-    # - assets/images/icons8-laboratory-50.png
-    
+
     - assets/images/lab.png
     - assets/images/home.png
     - assets/images/How Medcaph Works (1).png
     - assets/images/Radiology.png
-    - assets/images/homecare1.png
-    - assets/images/Our loved ones are provided.png
-    - assets/images/second.png
-    - assets/images/third.png
     - assets/images/Services to be offered.png
-    - assets/images/coming_soon.png
-    # - assets/images/lagout.jpeg
+
     - assets/images/lagout.png
     - assets/images/logo.png
-    - assets/images/cmng1.png
+
     - assets/images/Logo_white.png
     - assets/images/noWifi.png
-    - assets\images\Logo_Gif.gif
+
     - assets/PRIVACY_POLICY.txt
     - assets/Refund_and_Cancellation_Policy.txt
     - assets/images/search_lab_test.gif
     - assets/images/bookyourslot.gif
     - assets/images/getReport.gif
     - assets/images/register.gif
-    - assets/images/otp.gif
-    - assets/images/launching.gif
+
     - assets/images/search.gif
     - assets/images/paymentDone.gif
     - assets/images/editProfile.gif

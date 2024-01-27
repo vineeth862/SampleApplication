@@ -77,7 +77,7 @@ class _CustomPaymentPageState extends State<CustomPaymentPage> {
                       }
                     }
                     result = 'Installed Upi Apps - $appString';
-                    print(result);
+
                     setState(() {
                       upiApps = upiApps;
                     });

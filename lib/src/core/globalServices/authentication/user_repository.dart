@@ -23,7 +23,6 @@ class UserRepository extends GetxController {
           .whenComplete(
               () => CustomSnackbar.showSnackbar('Your account is created'))
           .catchError((error, stackTrace) {
-        print(error);
         CustomSnackbar.showSnackbar('Something went wrong');
         //Get.snackbar("Failed", "Something went wrong");
         // print(_db.collection('user').snapshots().length.toString());
@@ -86,9 +85,7 @@ class UserRepository extends GetxController {
         .doc(userKey)
         .set({"orders": orders}, SetOptions(merge: true))
         .whenComplete(() => print("order added to user"))
-        .catchError((error, stackTrace) {
-          print("Something went wrong");
-        });
+        .catchError((error, stackTrace) {});
     return true;
   }
 

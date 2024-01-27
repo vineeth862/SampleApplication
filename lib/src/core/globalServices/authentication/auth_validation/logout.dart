@@ -28,7 +28,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                 onPressed: () {
                   // Perform logout logic here
                   // For demonstration purposes, we just print a message
-                  print('Logged out successfully.');
+
                   AuthenticationRepository.instance.logout();
                 },
                 child: Text('Yes, Logout'),

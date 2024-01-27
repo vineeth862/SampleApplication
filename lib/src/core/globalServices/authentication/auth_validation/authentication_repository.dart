@@ -81,7 +81,6 @@ class AuthenticationRepository extends GetxController {
               verificationId: verificationId.value, smsCode: otp));
       return credentials.user != null ? true : false;
     } catch (e) {
-      print(e);
       return false;
     }
   }

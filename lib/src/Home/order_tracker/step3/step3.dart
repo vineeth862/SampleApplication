@@ -45,7 +45,6 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                 bookedSlot: slot,
                 slot: formattedDate + " " + slot);
           });
-          // print(time);
         } else {
           setState(() {
             booked = Booked(

@@ -130,7 +130,7 @@ class _GitHubRepositoriesScreenState extends State<GitHubRepositoriesScreen> {
 
 Future<List<dynamic>> fetchGitHubRepositories(url, collection, id) async {
   final response = await http.get(Uri.parse(url));
-  print(response.body);
+
   if (response.statusCode == 200) {
     List<dynamic> dataList = json.decode(response.body);
     dbOperationsService repository = dbOperationsService();
