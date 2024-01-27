@@ -22,12 +22,13 @@ class LocationNotAvailable extends StatelessWidget {
           //     fit: BoxFit.cover
           //     // Set your desired image fit
           //     ),
-          gradient: LinearGradient(colors: [
-        // Theme.of(context).colorScheme.secondaryContainer,
-        // Theme.of(context).colorScheme.secondaryContainer
-        Color.fromARGB(255, 241, 237, 236),
-        Color.fromARGB(255, 244, 237, 233),
-      ])),
+          //     gradient: LinearGradient(colors: [
+          //   // Theme.of(context).colorScheme.secondaryContainer,
+          //   // Theme.of(context).colorScheme.secondaryContainer
+          //   Color.fromARGB(255, 255, 255, 255),
+          //   Color.fromARGB(255, 255, 255, 255),
+          // ])
+          ),
       //color: Theme.of(context).colorScheme.primary,
 
       child: AlertDialog(

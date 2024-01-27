@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/address_operation.dart';
+import 'package:sample_application/src/core/helper_widgets/location_unavailable_card.dart';
 
 import '../../../../Home/home.dart';
 
@@ -18,6 +19,7 @@ class _InitialAdressState extends State<InitialAdress> {
   //TextEditingController? _nameController;
   final myController = Get.find<UserCurrentLocation>();
   final _pincodeController = TextEditingController();
+  bool isWidgetVisible = false;
   @override
   void dispose() {
     _pincodeController!.dispose();
@@ -35,286 +37,145 @@ class _InitialAdressState extends State<InitialAdress> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                child: Row(
-                  children: [
-                    InkWell(
-                      child: Icon(Icons.keyboard_double_arrow_down_rounded),
-                      onTap: () {
-                        globalservice.navigate(context, HomePage());
-                      },
-                    ),
-                    SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        "Choose Your Location",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
+          child: Stack(children: [
+            Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        child: Icon(Icons.keyboard_double_arrow_down_rounded),
+                        onTap: () {
+                          globalservice.navigate(context, HomePage());
+                        },
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        //Navigator.pop(context);
-                        globalservice.navigate(context, HomePage());
-                      },
-                      child: Icon(
-                        Icons.cancel,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(
-                height: 3,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0, right: 15, bottom: 8, top: 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Form(
-                        key: _formKey,
-                        child: TextFormField(
-                          controller: _pincodeController,
-                          keyboardType: TextInputType.number,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 5.0, horizontal: 10),
-                            //isCollapsed: true,
-                            helperText: ' ',
-                            labelText: 'Enter Pincode',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a pincode';
-                            }
-                            if (value.length != 6) {
-                              return 'Pincode must be 6 digits';
-                            }
-                            if (!value.isNumericOnly) {
-                              return 'Pincode must be digits';
-                            }
-                            return null;
-                          },
+                      SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          "Choose Your Location",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                        height: 68,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 24.0),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  myController.updateGlobalString(
-                                      _pincodeController!.text.toString());
-                                  //globalservice.showLoader();
-                                  Future.delayed(Duration(seconds: 0), () {
-                                    //globalservice.hideLoader();
-                                    globalservice.navigate(context, HomePage());
-                                    // Get.offAll(() => HomePage());
-                                  });
-                                }
-                              },
-                              child: Text("Check"),
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Theme.of(context).colorScheme.tertiary),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10), // Remove circular radius
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          //Navigator.pop(context);
+                          globalservice.navigate(context, HomePage());
+                        },
+                        child: Icon(
+                          Icons.cancel,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(
+                  height: 3,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15, bottom: 8, top: 8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            controller: _pincodeController,
+                            keyboardType: TextInputType.number,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 10),
+                              //isCollapsed: true,
+                              helperText: ' ',
+                              labelText: 'Enter Pincode',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter a pincode';
+                              }
+                              if (value.length != 6) {
+                                return 'Pincode must be 6 digits';
+                              }
+                              if (!value.isNumericOnly) {
+                                return 'Pincode must be digits';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                          height: 68,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 24.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    myController.updateGlobalString(
+                                        _pincodeController!.text.toString());
+                                    // globalservice.showLoader();
+                                    // Future.delayed(Duration(seconds: 2), () {});
+                                    // globalservice.hideLoader();
+                                    globalservice.showLoader();
+                                    Future.delayed(Duration(seconds: 2), () {
+                                      //globalservice.hideLoader();
+                                      Get.back();
+                                      myController.pinCodeExists.value
+                                          ? globalservice.navigate(
+                                              context, HomePage())
+                                          : setState(() {
+                                              isWidgetVisible = true;
+                                            });
+                                      // Get.offAll(() => HomePage());
+                                    });
 
-              // Expanded(
-              //     child: ElevatedButton(
-              //         onPressed: () {}, child: Text("Check")))
-
-              // InkWell(
-              //   onTap: () {
-              //     globalservice.navigate(
-              //         context, getCurrentLocation(title: "Vineeth"));
-              //   },
-              //   child: Container(
-              //     alignment: Alignment.bottomLeft,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(15.0),
-              //       child: Row(
-              //         children: [
-              //           Icon(
-              //             Icons.gps_fixed,
-              //             color: Theme.of(context).colorScheme.primary,
-              //           ),
-              //           SizedBox(
-              //             width: 10,
-              //           ),
-              //           Expanded(
-              //               child: Text(
-              //             "Enter Pincode",
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .bodyLarge!
-              //                 .copyWith(
-              //                     color: Theme.of(context).colorScheme.primary),
-              //           )),
-              //           Icon(
-              //             Icons.arrow_forward_ios_rounded,
-              //           )
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              addressOperation(
-                routeDetails: InitialAdress(),
-              )
-              // InkWell(
-              //   onTap: () {
-              //     globalservice.navigate(context, AddAdress());
-              //   },
-              //   child: Container(
-              //     alignment: Alignment.bottomLeft,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(15.0),
-              //       child: Row(
-              //         children: [
-              //           Icon(
-              //             Icons.add,
-              //             color: Theme.of(context).colorScheme.primary,
-              //           ),
-              //           SizedBox(
-              //             width: 10,
-              //           ),
-              //           Expanded(
-              //               child: Text(
-              //             "Add Address",
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .bodyLarge!
-              //                 .copyWith(
-              //                     color: Theme.of(context).colorScheme.primary),
-              //           )),
-              //           Icon(
-              //             Icons.arrow_forward_ios_rounded,
-              //           )
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Divider(
-              //   height: 5,
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   alignment: Alignment.centerLeft,
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //     child: Text(
-              //       "Saved addresses",
-              //       style: Theme.of(context)
-              //           .textTheme
-              //           .titleLarge!
-              //           .copyWith(fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              // isItemsNotPresent
-              //     ? Column(
-              //         children: [
-              //           SizedBox(
-              //             height: 10,
-              //           ),
-              //           Text(
-              //             "No Saved Address",
-              //             style: Theme.of(context).textTheme.titleLarge,
-              //           ),
-              //           Divider(
-              //             height: 20,
-              //           )
-              //         ],
-              //       )
-              //     : SizedBox(
-              //         height: MediaQuery.of(context).size.height * 0.6,
-              //         width: MediaQuery.of(context).size.width * 0.9,
-              //         child: ListView.builder(
-              //           itemCount: visibleItemCount +
-              //               1, // Add 1 for the "Load More" button
-              //           itemBuilder: (context, index) {
-              //             if (index < visibleItemCount) {
-              //               return InkWell(
-              //                 onTap: () {},
-              //                 child: Container(
-              //                   child: Column(
-              //                     children: [
-              //                       Row(
-              //                         children: [
-              //                           SizedBox(width: 10),
-              //                           Icon(
-              //                             Icons.home,
-              //                             color: Theme.of(context)
-              //                                 .colorScheme
-              //                                 .primary,
-              //                           ),
-              //                           SizedBox(
-              //                             width: 10,
-              //                           ),
-              //                           Expanded(
-              //                             child: ListTile(
-              //                               title: Text(items[index]),
-              //                             ),
-              //                           ),
-              //                         ],
-              //                       ),
-              //                       Divider(
-              //                         height: 10,
-              //                       )
-              //                     ],
-              //                   ),
-              //                 ),
-              //               );
-              //             } else {
-              //               return isButtonEnabled
-              //                   ? ElevatedButton(
-              //                       onPressed: _loadMoreItems,
-              //                       child: Text('Load More'),
-              //                     )
-              //                   : null;
-              //             }
-              //           },
-              //         ),
-              //       )
-            ],
-          ),
+                                    //LocationNotAvailable();
+                                  }
+                                },
+                                child: Text("Check"),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).colorScheme.tertiary),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Remove circular radius
+                                    ),
+                                  ),
+                                )),
+                          )),
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: !isWidgetVisible,
+                  child: addressOperation(
+                    routeDetails: InitialAdress(),
+                  ),
+                ),
+                Visibility(
+                  visible: isWidgetVisible,
+                  child: LocationNotAvailable(),
+                ),
+              ],
+            ),
+          ]),
         ),
       ),
     );

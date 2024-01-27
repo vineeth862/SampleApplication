@@ -274,7 +274,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                             const SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
                             Text(
                               "Please enter the OTP sent to ${user.mobile}  ",
