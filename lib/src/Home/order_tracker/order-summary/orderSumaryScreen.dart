@@ -96,7 +96,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
         Get.offAll(OrderTrackerHome(
           from: 'cart',
         ));
-        Future.delayed(Duration(milliseconds: 200), () {
+        Future.delayed(const Duration(milliseconds: 200), () {
           selectedOrder.resetOrder();
           selectedTest.removeAllTest();
           selectedTest.removeAllPackage();
@@ -133,7 +133,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
 
                     Text('Order Number: ${order.orderNumber}',
                         style: Theme.of(context).textTheme.headlineMedium),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -249,7 +249,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                     Container(
                       child: ListView.builder(
                         shrinkWrap: true, // Set this to true
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
 
                         itemCount: getItems().length,
                         itemBuilder: (context, index) {
@@ -341,7 +341,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                               size: 18,
                               color: Theme.of(context).colorScheme.tertiary,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -355,12 +355,12 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                     ),
                     Text("Payment Details",
                         style: Theme.of(context).textTheme.headlineMedium),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -369,7 +369,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           "MRP",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "₹ ${selectedTest.totalPriceSum.toString()}",
                           style: Theme.of(context)
@@ -379,7 +379,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -388,7 +388,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           "MedCapH Discount",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "${selectedTest.discount.toString()}%",
                           style: Theme.of(context)
@@ -398,7 +398,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -407,7 +407,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           "Sample Collection Charges",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "₹200",
                           style: Theme.of(context)
@@ -417,7 +417,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                   decoration: TextDecoration.lineThrough,
                                   color: Colors.red),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
@@ -431,14 +431,15 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Theme.of(context).colorScheme.secondary),
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8))),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
@@ -453,7 +454,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                           .colorScheme
                                           .tertiary),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               " ₹ ${200 + (selectedTest.totalPriceSum - selectedTest.totalDiscountedPriceSum)}",
                               style: Theme.of(context)
@@ -468,10 +469,10 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                     ),
                     Row(
@@ -480,14 +481,14 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                           "Amount Payable",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "₹ ${selectedTest.totalDiscountedPriceSum.toString()}",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
                     ),
-                    SizedBox(height: 180)
+                    const SizedBox(height: 180)
 
                     // const Divider(),
                     // Row(
@@ -512,7 +513,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
             ),
           ),
           (order.tests!.length == 0 && order.packages!.length == 0)
-              ? Card()
+              ? const Card()
               : Positioned(
                   bottom: 0,
                   right: 0,
@@ -565,7 +566,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                               .textTheme
                                               .headlineMedium,
                                         )),
-                                        Spacer(),
+                                        const Spacer(),
                                         GestureDetector(
                                           onTap: () async {
                                             if (paymentService
@@ -579,18 +580,22 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                                   .textTheme
                                                   .headlineMedium!
                                                   .copyWith(
-                                                      color: Color.fromARGB(
-                                                          255, 52, 22, 203))),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              52,
+                                                              22,
+                                                              203))),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    Divider(
+                                    const Divider(
                                       thickness: 1,
                                     ),
-                                    ListTile(
+                                    const ListTile(
                                       tileColor:
                                           Color.fromARGB(255, 206, 222, 251),
                                       leading: Icon(Icons.payment_outlined,
@@ -600,7 +605,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                       subtitle: Text(
                                           "Use any UPI app on your phone to pay"),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     ElevatedButton(
@@ -612,7 +617,7 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                             backgroundColor: Theme.of(context)
                                                 .colorScheme
                                                 .tertiary),
-                                        child: Text("Proceed to Pay"))
+                                        child: const Text("Proceed to Pay"))
                                   ],
                                 ),
                               ),

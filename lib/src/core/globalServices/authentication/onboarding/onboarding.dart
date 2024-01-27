@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_application/src/Home/explore/explore_why-us.dart';
-import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/core/globalServices/authentication/onboarding/onboardingController.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -20,18 +19,18 @@ class onBoardingScreen extends StatelessWidget {
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndex,
-            children: [
-              const onBoardingPage(
+            children: const [
+              onBoardingPage(
                   image: "assets/images/search_lab_test.gif",
                   title: "Choose Test and Lab",
                   subtitle:
                       "Opt for a test at an NABL-accredited lab for quality assurance"),
-              const onBoardingPage(
+              onBoardingPage(
                   image: "assets/images/bookyourslot.gif",
                   title: "Schedule a doorstep test at your preferred time",
                   subtitle:
                       "Arrange a convenient doorstep test appointment at your preferred time."),
-              const onBoardingPage(
+              onBoardingPage(
                   image: "assets/images/getReport.gif",
                   title: "Genuine Report",
                   subtitle:
@@ -40,7 +39,7 @@ class onBoardingScreen extends StatelessWidget {
           ),
           const onBoardingSkip(),
           const onBoardingNavigation(),
-          onBoardingNextButton()
+          const onBoardingNextButton()
         ],
       )),
     );
@@ -58,7 +57,7 @@ class onBoardingNextButton extends StatelessWidget {
         bottom: 40,
         right: 20,
         child: ElevatedButton(
-          child: Icon(
+          child: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
           ),
@@ -66,7 +65,7 @@ class onBoardingNextButton extends StatelessWidget {
             onBoardingController.instance.nextPage();
           },
           style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
+              shape: const CircleBorder(),
               backgroundColor: Theme.of(context).colorScheme.tertiary),
         ));
   }
@@ -113,7 +112,7 @@ class onBoardingSkip extends StatelessWidget {
           onPressed: () {
             final storage = GetStorage();
             storage.write("isFirstTime", false);
-            globalservice.navigate(context, Welcomesignin());
+            globalservice.navigate(context, const Welcomesignin());
           },
         ));
   }

@@ -1,7 +1,6 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/explore/explore.service.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 
@@ -78,14 +77,14 @@ class _MySliderState extends State<MySlider> {
                 carouselController: _carouselController,
               )
             : Container(),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         imageUrls.length > 0
             ? CarouselIndicator(
                 count: imageUrls.length,
                 index: _currentIndex,
-                color: Color.fromARGB(255, 170, 170, 170),
+                color: const Color.fromARGB(255, 170, 170, 170),
                 activeColor: Theme.of(context).colorScheme.primary,
                 height: 8,
                 width: 8,
@@ -94,7 +93,7 @@ class _MySliderState extends State<MySlider> {
             : CarouselIndicator(
                 count: 4,
                 index: _currentIndex,
-                color: Color.fromARGB(255, 170, 170, 170),
+                color: const Color.fromARGB(255, 170, 170, 170),
                 activeColor: Theme.of(context).colorScheme.primary,
                 height: 8,
                 width: 8,

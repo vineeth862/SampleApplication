@@ -8,7 +8,6 @@ import 'package:sample_application/src/Home/package/package-card-list.dart';
 import 'package:sample_application/src/Home/package/packageService.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
-import 'package:sample_application/src/core/helper_widgets/category_card.dart';
 import 'package:sample_application/src/core/helper_widgets/location_unavailable_card.dart';
 
 import '../../core/Provider/selected_test_provider.dart';

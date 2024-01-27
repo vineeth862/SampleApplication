@@ -30,7 +30,7 @@ class _TimerBottomSheetState extends State<TimerBottomSheet> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_timerDuration > 0) {
           _timerDuration--;
@@ -53,13 +53,13 @@ class _TimerBottomSheetState extends State<TimerBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             isResendVisible
                 ? ElevatedButton(
                     onPressed: () => resendOTP(),
-                    child: Text('Resend OTP'),
+                    child: const Text('Resend OTP'),
                   )
                 : Text(
                     'Resend OTP after : ${_timerDuration}s',

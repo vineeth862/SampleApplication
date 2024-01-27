@@ -6,7 +6,6 @@ import 'package:sample_application/src/core/Provider/search_provider.dart';
 
 import '../../Home/explore/Search/Cards/filter-test-list.dart';
 import '../../Home/explore/explore_why-us.dart';
-import '../../Home/package/package-card-list.dart';
 
 class categoryCard extends StatefulWidget {
   final String? displayName;

@@ -10,7 +10,7 @@ class NoResultFoundCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -19,12 +19,12 @@ class NoResultFoundCard extends StatelessWidget {
             size: 80.0,
             color: Theme.of(context).colorScheme.primary,
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Text(
             title,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Text(
             'Sorry, no results were found',
             textAlign: TextAlign.center,
@@ -32,10 +32,10 @@ class NoResultFoundCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              globalservice.navigate(context, ProfileScreen());
+              globalservice.navigate(context, const ProfileScreen());
             },
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 'Please contact our customer service!',
                 textAlign: TextAlign.center,
@@ -45,7 +45,7 @@ class NoResultFoundCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
         ],
       ),
     );

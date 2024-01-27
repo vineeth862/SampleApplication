@@ -75,7 +75,7 @@ class AddAdress extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            leading: Icon(
+            leading: const Icon(
               Icons.keyboard_double_arrow_down,
               color: Colors.black,
             ),
@@ -109,7 +109,7 @@ class AddAdress extends StatelessWidget {
               //   ),
               // ),
               Padding(
-                padding: EdgeInsets.only(left: 15, top: 8),
+                padding: const EdgeInsets.only(left: 15, top: 8),
                 child: Text(
                   "Contact Details",
                   style: Theme.of(context)
@@ -133,7 +133,7 @@ class AddAdress extends StatelessWidget {
                               controller: firstName,
                               obscureText: false,
                               //keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "First Name *",
@@ -152,7 +152,7 @@ class AddAdress extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -160,7 +160,7 @@ class AddAdress extends StatelessWidget {
                               controller: lastName,
                               obscureText: false,
                               //keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "Last Name",
@@ -181,13 +181,13 @@ class AddAdress extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
-                          Text("+91"),
-                          SizedBox(
+                          const Text("+91"),
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -195,7 +195,7 @@ class AddAdress extends StatelessWidget {
                               controller: phoneNumber,
                               obscureText: false,
                               //keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 1.0, horizontal: 5),
                                 labelText: "Phone Number *",
@@ -221,7 +221,7 @@ class AddAdress extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           // Expanded(
@@ -257,7 +257,7 @@ class AddAdress extends StatelessWidget {
                           // ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       Text(
@@ -267,14 +267,14 @@ class AddAdress extends StatelessWidget {
                             .headlineSmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
                         controller: flatBuildingNumber,
                         obscureText: false,
                         //keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 1.0, horizontal: 5),
                           labelText: "House/Flat Number/Building*",
@@ -299,14 +299,14 @@ class AddAdress extends StatelessWidget {
                       //         context, PinCode, "Pincode *", Icons.post_add),
                       //   ],
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
 
                       TextFormFieldMethod(
                           context, street, "Street/Locality*", Icons.post_add),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Column(
@@ -324,7 +324,7 @@ class AddAdress extends StatelessWidget {
                                 controller: PinCode,
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 1.0, horizontal: 5),
                                   labelText: "Pincode *",
@@ -351,7 +351,7 @@ class AddAdress extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -361,7 +361,7 @@ class AddAdress extends StatelessWidget {
                                 controller: city,
                                 obscureText: false,
                                 //keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 1.0, horizontal: 5),
                                   labelText: "City *",
@@ -384,7 +384,7 @@ class AddAdress extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       // Text(
@@ -433,7 +433,8 @@ class AddAdress extends StatelessWidget {
       obscureText: false,
       //keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 5),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 1.0, horizontal: 5),
         labelText: label,
         //border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         // prefixIcon: Icon(

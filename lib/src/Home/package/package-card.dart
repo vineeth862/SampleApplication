@@ -5,7 +5,6 @@ import 'package:sample_application/src/core/globalServices/authentication/auth_v
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/Provider/search_provider.dart';
 
-import '../../Home/explore/Search/Cards/filter-test-list.dart';
 import '../../Home/package/package-card-list.dart';
 
 class packageCard extends StatefulWidget {
@@ -43,9 +42,10 @@ class _packageCardState extends State<packageCard> {
         //height: 80,
         decoration: BoxDecoration(
             border: Border.all(
-                color: Color.fromARGB(255, 213, 213, 213).withOpacity(0.3)),
+                color:
+                    const Color.fromARGB(255, 213, 213, 213).withOpacity(0.3)),
             color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 // bottomLeft: Radius.circular(35.0),
                 // topRight: Radius.circular(25.0),
                 bottomLeft: Radius.circular(15.0),
@@ -79,7 +79,7 @@ class _packageCardState extends State<packageCard> {
                             ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -106,11 +106,11 @@ class _packageCardState extends State<packageCard> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 1,
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10)),
@@ -242,14 +242,14 @@ class _packageCardState extends State<packageCard> {
                         //   Icons.add,
                         //   size: 20,
                         // ),
-                        child: Text("Select Lab",
+                        child: const Text("Select Lab",
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w500)),
 
                         style: ElevatedButton.styleFrom(
                           // fixedSize: Size(10, 10),
                           // maximumSize: Size(10, 10),
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           foregroundColor:
                               Theme.of(context).colorScheme.tertiary,
                           backgroundColor:

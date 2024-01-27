@@ -52,12 +52,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Row(
               children: [
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Image.asset(
                   path,
                   height: 30,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -269,7 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _CustomTextButton('assets/images/home.png',
-                          "Saved Address", AdressBook()),
+                          "Saved Address", const AdressBook()),
                       // const Divider(
                       //   color: Colors.black,
                       //   thickness: 0.2,
@@ -280,15 +280,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                       _CustomTextButton('assets/images/support.jpeg',
-                          "Help or Support", Support()),
+                          "Help or Support", const Support()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
-                      _CustomTextButton(
-                          'assets/images/about.jpeg', "About Us", policices()),
+                      _CustomTextButton('assets/images/about.jpeg', "About Us",
+                          const policices()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                       _CustomTextButton('assets/images/lagout.png', "Log Out",
-                          LogoutScreen()),
+                          const LogoutScreen()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                     ],

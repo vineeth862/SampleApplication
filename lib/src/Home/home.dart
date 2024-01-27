@@ -6,19 +6,14 @@ import 'package:sample_application/src/Home/explore/explore.dart';
 import 'package:sample_application/src/Home/home_service.dart';
 import 'package:sample_application/src/Home/order_tracker/order-summary/orderSumaryScreen.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
-import 'package:sample_application/src/Home/radiology/radiology.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
-import 'package:sample_application/src/core/helper_widgets/location_unavailable_card.dart';
-
 import '../core/Provider/selected_order_provider.dart';
 import '../core/Provider/selected_test_provider.dart';
 import '../core/globalServices/execution-stack/execution_stack_operation.dart';
 import '../core/helper_widgets/slot-booking-card.dart';
 import 'models/order/order.dart';
 import 'order_tracker/step1/step1.dart';
-import 'package:sample_application/src/Home/order_tracker/orderTrackerCard.dart';
-
 import 'profile/profile_home.dart';
 
 class HomePage extends StatefulWidget {
@@ -72,16 +67,6 @@ class HomePageState extends State<HomePage> {
     }
   }
 
-  // void loaddata() async {
-  //   Position pos = await UserCurrentLocation.instance.determinePosition();
-  //   List<Placemark> add = await UserCurrentLocation.instance.GetFullAdress(pos);
-  //   Placemark place = add[0];
-  //   postalCode = place.postalCode.toString();
-  //   Locality = place.locality.toString();
-  //   Adress = postalCode + ', ' + Locality;
-  //   _onChangeOfPostalCode(Adress);
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -102,7 +87,6 @@ class HomePageState extends State<HomePage> {
       });
     }
     final selectedTest = Provider.of<SelectedTestState>(context);
-    print(myController.availabelLabs);
 
     return SafeArea(
       child: WillPopScope(
@@ -184,53 +168,6 @@ class HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          // : Container(
-          //     //color: Theme.of(context).colorScheme.primary,
-          //     decoration: BoxDecoration(
-          //         // image: DecorationImage(
-          //         //     image: AssetImage("./assets/images/MedCapH.jpg"),
-          //         //     fit: BoxFit.cover
-          //         //     // Set your desired image fit
-          //         //     ),
-          //         gradient: LinearGradient(colors: [
-          //       Theme.of(context).colorScheme.primary.withOpacity(0.5),
-          //       Theme.of(context).colorScheme.primary.withOpacity(0.1)
-          //     ])),
-          //     //color: Theme.of(context).colorScheme.primary,
-
-          //     child: AlertDialog(
-          //       //icon: Icon(Icons.time_to_leave),
-          //       alignment: const AlignmentDirectional(1, 0),
-          //       shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(10)),
-          //       title: Text("Oh,no!",
-          //           style: Theme.of(context)
-          //               .textTheme
-          //               .headlineMedium!
-          //               .copyWith(
-          //                   color: Theme.of(context).colorScheme.primary)),
-          //       content: Obx(() => Text(
-          //             "Service not available in " +
-          //                 myController.addressToBeConsidered.value,
-          //             style: Theme.of(context).textTheme.titleMedium!,
-          //           )),
-          //       actions: [
-          //         // Define buttons for the AlertDialog
-          //         ElevatedButton(
-          //           style: ButtonStyle(
-          //               // minimumSize: MaterialStateProperty.all(
-          //               //     const Size(80, 25)), // Set the desired size
-          //               ),
-          //           child: const Text("Change Location"),
-          //           onPressed: () {
-          //             globalservice.navigate(context,
-          //                 const InitialAdress()); // Close the AlertDialog
-          //           },
-          //         ),
-          //       ],
-          //       actionsAlignment: MainAxisAlignment.end,
-          //     ),
-          //   ),
 
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[

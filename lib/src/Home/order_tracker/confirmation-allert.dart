@@ -25,14 +25,14 @@ class _AllertState extends State<Allert> {
     return Container(
       width: 400,
       height: 175,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -40,14 +40,14 @@ class _AllertState extends State<Allert> {
                 'Confirmation',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              SizedBox(height: 4),
-              Divider(), // Add a horizontal line to separate title and body
+              const SizedBox(height: 4),
+              const Divider(), // Add a horizontal line to separate title and body
               // SizedBox(height: 8),
               Text(
                 'Please Add More Test/Package',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -72,11 +72,12 @@ class _AllertState extends State<Allert> {
                               location: "location",
                               logo: "ll"));
                         } else {
-                          globalservice.navigate(context, SearchBarPage());
+                          globalservice.navigate(
+                              context, const SearchBarPage());
                           selectedOrder!.resetOrder();
                         }
                       },
-                      child: Text('Add Test'),
+                      child: const Text('Add Test'),
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Theme.of(context).colorScheme.tertiary)),

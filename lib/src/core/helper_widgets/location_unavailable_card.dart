@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/initial_adress.dart';
@@ -16,7 +15,7 @@ class LocationNotAvailable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Theme.of(context).colorScheme.primary,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           // image: DecorationImage(
           //     image: AssetImage("./assets/images/MedCapH.jpg"),
           //     fit: BoxFit.cover
@@ -32,7 +31,7 @@ class LocationNotAvailable extends StatelessWidget {
       //color: Theme.of(context).colorScheme.primary,
 
       child: AlertDialog(
-        backgroundColor: Color.fromARGB(255, 240, 227, 226),
+        backgroundColor: const Color.fromARGB(255, 240, 227, 226),
         //icon: Icon(Icons.time_to_leave),
         alignment: const AlignmentDirectional(0, 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -109,7 +108,7 @@ class LocationAccesDeclined extends StatelessWidget {
         actions: [
           // Define buttons for the AlertDialog
           ElevatedButton(
-            style: ButtonStyle(
+            style: const ButtonStyle(
                 // minimumSize: MaterialStateProperty.all(
                 //     const Size(80, 25)), // Set the desired size
                 ),

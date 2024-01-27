@@ -108,11 +108,11 @@ class _SearchBarPageState extends State<SearchBarPage>
                   height: 90,
                   width: MediaQuery.of(context).size.width,
                   child: Container(
-                    padding: EdgeInsets.only(bottom: 30),
+                    padding: const EdgeInsets.only(bottom: 30),
                     child: Row(
                       children: [
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                           ),
                           alignment: Alignment.center,
@@ -142,7 +142,7 @@ class _SearchBarPageState extends State<SearchBarPage>
                                       .textTheme
                                       .bodyMedium!
                                       .copyWith(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 252, 215, 215)),
                                 )),
                           ),

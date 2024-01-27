@@ -15,15 +15,15 @@ class _LogoutScreenState extends State<LogoutScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Are you sure you want to logout?',
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   // Perform logout logic here
@@ -31,7 +31,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
 
                   AuthenticationRepository.instance.logout();
                 },
-                child: Text('Yes, Logout'),
+                child: const Text('Yes, Logout'),
               ),
               TextButton(
                 onPressed: () {
@@ -41,7 +41,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                   Navigator.pop(context);
                   // Close the bottom sheet
                 },
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               ),
             ],
           ),
@@ -58,12 +58,12 @@ class _LogoutScreenState extends State<LogoutScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: Text('Logout Screen')),
+          appBar: AppBar(title: const Text('Logout Screen')),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(

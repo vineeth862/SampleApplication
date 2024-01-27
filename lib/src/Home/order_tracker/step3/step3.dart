@@ -83,8 +83,8 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
           SizedBox(
             width: 50,
             child: StepProgressIndicator(
-              roundedEdges: Radius.circular(50),
-              unselectedGradientColor: LinearGradient(
+              roundedEdges: const Radius.circular(50),
+              unselectedGradientColor: const LinearGradient(
                 colors: [Colors.grey, Colors.grey],
               ),
               totalSteps: 3,
@@ -95,7 +95,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
               selectedColor: Theme.of(context).colorScheme.primary,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           )
         ],
@@ -174,7 +174,7 @@ class _StepThreeToBookTest extends State<StepThreeToBookTest> {
                         });
                       },
                     )
-                  : Card()),
+                  : const Card()),
         ),
       ]),
     );

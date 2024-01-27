@@ -80,7 +80,7 @@ class _PackageSliderState extends State<PackageSlider> {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         cardList.length > 0
@@ -93,7 +93,7 @@ class _PackageSliderState extends State<PackageSlider> {
                 width: 8,
                 space: 5,
               )
-            : Card(),
+            : const Card(),
         const SizedBox(
           height: 5,
         ),

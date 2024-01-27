@@ -135,45 +135,10 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Divider(
+              const Divider(
                 height: 3,
               ),
-              // InkWell(
-              //   onTap: () {
-              //     //Navigator.pop(context);
-              //     globalservice.navigate(context, UseCurrentLocationStepTwo());
-              //   },
-              //   child: Container(
-              //     alignment: Alignment.bottomLeft,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(15.0),
-              //       child: Row(
-              //         children: [
-              //           Icon(
-              //             Icons.gps_fixed,
-              //             color: Theme.of(context).colorScheme.primary,
-              //           ),
-              //           SizedBox(
-              //             width: 10,
-              //           ),
-              //           Expanded(
-              //               child: Text(
-              //             "Use Current Location",
-              //             style: Theme.of(context)
-              //                 .textTheme
-              //                 .bodyLarge!
-              //                 .copyWith(
-              //                     color: Theme.of(context).colorScheme.primary),
-              //           )),
-              //           Icon(
-              //             Icons.arrow_forward_ios_rounded,
-              //           )
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Divider(
+              const Divider(
                 height: 5,
               ),
               InkWell(
@@ -190,7 +155,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                           Icons.add,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Expanded(
@@ -202,7 +167,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                               .copyWith(
                                   color: Theme.of(context).colorScheme.primary),
                         )),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_ios_rounded,
                         )
                       ],
@@ -210,10 +175,10 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                   ),
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 5,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -226,28 +191,28 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               isItemsNotPresent
                   ? Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           "No Saved Address",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        Divider(
+                        const Divider(
                           height: 20,
                         )
                       ],
                     )
                   : ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 380.0),
+                      constraints: const BoxConstraints(maxHeight: 380.0),
                       child: ListView.builder(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         itemCount: visibleItemCount +
                             1, // Add 1 for the "Load More" button
                         itemBuilder: (context, index) {
@@ -270,7 +235,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                           : Colors.transparent,
                                       child: Row(
                                         children: [
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           // Icon(
                                           //   Icons.home,
                                           //   color: Theme.of(context)
@@ -282,7 +247,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                             child: Image.asset(
                                                 'assets/images/home.png'),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Expanded(
@@ -331,7 +296,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                                         ],
                                       ),
                                     ),
-                                    Divider(
+                                    const Divider(
                                       height: 10,
                                     )
                                   ],
@@ -349,7 +314,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                           backgroundColor:
                               MaterialStateProperty.resolveWith<Color?>(
                             (Set<MaterialState> states) {
-                              return Color.fromARGB(255, 181, 233, 227);
+                              return const Color.fromARGB(255, 181, 233, 227);
 
                               // Use the component's default.
                             },
@@ -365,7 +330,7 @@ class _addressOperationStepTwoState extends State<addressOperationStepTwo> {
                         ),
                       ),
                     )
-                  : Card()
+                  : const Card()
             ],
           ),
         ),

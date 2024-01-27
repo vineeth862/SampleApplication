@@ -52,7 +52,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
       ),
       // titlePadding: EdgeInsets.only(top: 15, left: 20, bottom: 25),
       content: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Container(
@@ -60,11 +60,11 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
               // shape: Theme.of(context).cardTheme.shape,
               decoration: BoxDecoration(
                   border: Border.all(
-                      color:
-                          Color.fromARGB(255, 246, 197, 117).withOpacity(0.5)),
+                      color: const Color.fromARGB(255, 246, 197, 117)
+                          .withOpacity(0.5)),
 
                   // color: Color.fromARGB(255, 255, 181, 71),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0),
                     topLeft: Radius.circular(10.0),
@@ -73,7 +73,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
@@ -94,7 +94,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                         //   color: Colors.grey, // You can customize the color
                         //   thickness: 1.0, // You can customize the thickness
                         // ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(children: [
                           Text('Patient Name : ',
                               style:
@@ -105,7 +105,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                             softWrap: true,
                           )
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Mobile : ',
                               style:
@@ -115,24 +115,24 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                                   .substring(3, 13),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               // padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               // shape: Theme.of(context).cardTheme.shape,
               decoration: BoxDecoration(
                   border: Border.all(
-                      color:
-                          Color.fromARGB(255, 246, 197, 117).withOpacity(0.5)),
+                      color: const Color.fromARGB(255, 246, 197, 117)
+                          .withOpacity(0.5)),
 
                   // color: Color.fromARGB(255, 255, 181, 71),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0),
                     topLeft: Radius.circular(10.0),
@@ -141,7 +141,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
@@ -158,7 +158,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                           "Collection Information",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Row(children: [
                           Text('Sample PickUp On : ',
                               style:
@@ -168,7 +168,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                                   ?.substring(0, 10)),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Collection Slot : ',
                               style:
@@ -176,7 +176,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                           Text(generateString(widget.order.booked?.bookedSlot),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Address : ',
                               style:
@@ -188,7 +188,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                                 style: Theme.of(context).textTheme.bodyMedium),
                           )
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Lab Name : ',
                               style:
@@ -201,7 +201,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                             ),
                           )
                         ]),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         Row(children: [
                           Text('Booked Items : ',
                               style:
@@ -256,17 +256,17 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
               ),
             ),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               // padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               // shape: Theme.of(context).cardTheme.shape,
               decoration: BoxDecoration(
                   border: Border.all(
-                      color:
-                          Color.fromARGB(255, 246, 197, 117).withOpacity(0.5)),
+                      color: const Color.fromARGB(255, 246, 197, 117)
+                          .withOpacity(0.5)),
 
                   // color: Color.fromARGB(255, 255, 181, 71),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0),
                     topLeft: Radius.circular(10.0),
@@ -275,7 +275,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 200, 255, 214),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.0),
@@ -292,7 +292,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                           "Payment Information",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Row(children: [
                           Text('Item Total : ',
                               style:
@@ -300,18 +300,18 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                           Text(widget.order.totalPrice.toString(),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Sample Collection Charge : ',
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
-                          Text(
+                          const Text(
                             'FREE',
                             style: TextStyle(
                                 color: Color.fromARGB(255, 255, 119, 0)),
                           )
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           Text('Payable Amount : ',
                               style:
@@ -319,20 +319,20 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                           Text(widget.order.totalPrice.toString(),
                               style: Theme.of(context).textTheme.bodyMedium)
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         // Row(children: [
                         //   Text('Payment Mode : ',
                         //       style: Theme.of(context).textTheme.titleSmall),
                         //   Text('Need Confirmation',
                         //       style: Theme.of(context).textTheme.titleMedium)
                         // ]),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         widget.order.statusCode == 1
                             ? ElevatedButton(
                                 onPressed: () {
                                   selectedOrder?.setOrder = widget.order;
-                                  Future.delayed(Duration(milliseconds: 200),
-                                      () {
+                                  Future.delayed(
+                                      const Duration(milliseconds: 200), () {
                                     widget.order.packages?.forEach((package) {
                                       selectedTest?.addPackage(package);
                                     });
@@ -341,13 +341,13 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
                                     selectedTest?.addTest(test);
                                   });
 
-                                  Future.delayed(Duration(milliseconds: 400),
-                                      () {
+                                  Future.delayed(
+                                      const Duration(milliseconds: 400), () {
                                     globalservice.navigate(
                                         context, OrderSummaryScreen());
                                   });
                                 },
-                                child: Text('Proceed'),
+                                child: const Text('Proceed'),
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
                                         Theme.of(context).colorScheme.tertiary),
@@ -366,7 +366,7 @@ class _OrderTrackerDialogState extends State<OrderTrackerDialog> {
       ),
       actions: [
         TextButton(
-          child: Text('Close'),
+          child: const Text('Close'),
           onPressed: () {
             Navigator.of(context).pop(); // Close the dialog
           },

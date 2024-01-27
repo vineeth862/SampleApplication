@@ -58,7 +58,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
         body: Stack(
           children: [
             Container(
-              color: Color.fromRGBO(219, 229, 233, 1),
+              color: const Color.fromRGBO(219, 229, 233, 1),
               padding: const EdgeInsets.all(8),
               child: ListView(children: [
                 Card(
@@ -165,7 +165,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 style: Theme.of(context).textTheme.bodyMedium)
                           ],
                         ),
-                        Divider(
+                        const Divider(
                           height: 10,
                           thickness: 1,
                           indent: 10,
@@ -215,7 +215,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         globalservice.navigate(
                                             context, StepOneToBookTest());
                                       } else {
-                                        Get.off(() => SearchBarPage());
+                                        Get.off(() => const SearchBarPage());
                                         selectedOrder.resetOrder();
                                         selectedTest.removeAllTest();
                                       }
@@ -271,10 +271,10 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     }
                                   },
                                   child: !isTestSelected(widget.test)
-                                      ? Text("BOOK")
-                                      : Text("BOOKED"),
+                                      ? const Text("BOOK")
+                                      : const Text("BOOKED"),
                                   style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.all(0),
+                                    padding: const EdgeInsets.all(0),
                                     foregroundColor: isTestSelected(widget.test)
                                         ? Theme.of(context)
                                             .colorScheme
@@ -304,113 +304,6 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             ),
                           ),
                         ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.center,
-                        //   children: [
-                        //     Text("start at : ",
-                        //         style: Theme.of(context).textTheme.labelLarge),
-                        //     Expanded(
-                        //       child: ListTile(
-                        //         leading: Icon(Icons.currency_rupee,
-                        //             size: 21, weight: 45, color: Colors.black),
-                        //         horizontalTitleGap: -18.0,
-                        //         title: Text(widget.test.price,
-                        //             textAlign: TextAlign.left,
-                        //             style: Theme.of(context)
-                        //                 .textTheme
-                        //                 .labelLarge
-                        //                 ?.copyWith(
-                        //                     color: Colors.black,
-                        //                     fontSize: 22,
-                        //                     fontWeight: FontWeight.bold)),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-
-                        // Container(
-                        //   width: double.infinity,
-                        //   child: ElevatedButton(
-                        //     onPressed: () {
-                        //       String userKey =
-                        //           globalservice.getCurrentUserKey();
-                        //       if (userKey != "null") {
-                        //         if (selectedTest.getSelectedTest
-                        //             .contains(widget.test)) {
-                        //           selectedTest.removeTest(widget.test);
-                        //         } else {
-                        //           selectedTest.addTest(widget.test);
-                        //         }
-                        //       } else {
-                        //         showDialog(
-                        //             context: context,
-                        //             builder: (BuildContext context) {
-                        //               return AlertDialog(
-                        //                 //icon: Icon(Icons.time_to_leave),
-                        //                 alignment:
-                        //                     const AlignmentDirectional(1, 0),
-                        //                 shape: RoundedRectangleBorder(
-                        //                     borderRadius:
-                        //                         BorderRadius.circular(10)),
-                        //                 title: Text("Please Login",
-                        //                     style: Theme.of(context)
-                        //                         .textTheme
-                        //                         .displayLarge!
-                        //                         .copyWith(
-                        //                             color: Theme.of(context)
-                        //                                 .colorScheme
-                        //                                 .primary)),
-                        //                 content: Text(
-                        //                   "Please Login to book test",
-                        //                   style: Theme.of(context)
-                        //                       .textTheme
-                        //                       .titleMedium!,
-                        //                 ),
-                        //                 actions: [
-                        //                   // Define buttons for the AlertDialog
-                        //                   ElevatedButton(
-                        //                     style: ButtonStyle(
-                        //                       minimumSize: MaterialStateProperty
-                        //                           .all(const Size(80,
-                        //                               25)), // Set the desired size
-                        //                     ),
-                        //                     child: const Text("Login"),
-                        //                     onPressed: () {
-                        //                       globalservice.navigate(context,
-                        //                           const Welcomesignin()); // Close the AlertDialog
-                        //                     },
-                        //                   ),
-                        //                 ],
-                        //                 actionsAlignment: MainAxisAlignment.end,
-                        //               );
-                        //             });
-                        //       }
-                        //     },
-                        //     child: !selectedTest.getSelectedTest
-                        //             .contains(widget.test)
-                        //         ? Text("BOOK")
-                        //         : Text("BOOKED"),
-                        //     style: ElevatedButton.styleFrom(
-                        //       padding: EdgeInsets.all(0),
-                        //       foregroundColor: !selectedTest.getSelectedTest
-                        //               .contains(widget.test)
-                        //           ? Theme.of(context).colorScheme.primary
-                        //           : Theme.of(context).colorScheme.background,
-                        //       backgroundColor: !selectedTest.getSelectedTest
-                        //               .contains(widget.test)
-                        //           ? Theme.of(context).colorScheme.onPrimary
-                        //           : Theme.of(context).colorScheme.primary,
-                        //       shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(
-                        //             8.0), // Adjust the border radius as needed
-                        //         side: BorderSide(
-                        //             color: Theme.of(context)
-                        //                 .colorScheme
-                        //                 .primary), // Set the outline color
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -432,7 +325,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                           indent: 10,
                           endIndent: 10,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
@@ -444,7 +337,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               Icons.food_bank_outlined,
                               color: Theme.of(context).colorScheme.primary,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text("No fasting required.",
@@ -485,12 +378,12 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                   },
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.call_outlined,
                                         color: Color.fromARGB(255, 48, 158, 77),
                                         size: 18,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                       Text(
@@ -504,7 +397,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                               // SizedBox(
                               //   width: 80,
                               // ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                   onTap: () {
                                     globalservice.sendEmail(
@@ -514,12 +407,12 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                   },
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.mail,
                                         color: Color.fromARGB(255, 48, 158, 77),
                                         size: 18,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                       Text(
@@ -540,7 +433,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 248, 240, 240),
+                    color: const Color.fromARGB(255, 248, 240, 240),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -549,7 +442,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         "Know about......",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.grey, // Color of the dots
                         height: 20, // Height of the divider
                         thickness: 1, // Thickness of the divider line
@@ -561,7 +454,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.grey, // Color of the dots
                         height: 20, // Height of the divider
                         thickness: 1, // Thickness of the divider line
@@ -573,7 +466,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                         widget.test.testDes,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                     ]),
@@ -618,7 +511,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             });
                           },
                         )
-                      : Card()),
+                      : const Card()),
             ),
           ],
         ),

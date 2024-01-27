@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/explore/category/filtered_category_list.dart';
-import 'package:sample_application/src/Home/explore/explore_why-us.dart';
-
 import '../../../core/Provider/search_provider.dart';
 import '../../../core/globalServices/global_service.dart';
 
@@ -61,7 +57,7 @@ class _LabTestCategoryCardState extends State<LabTestCategoryCard> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Text(widget.title,
@@ -170,7 +166,7 @@ class MaleFemaleCategory extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
                     child: Image.memory(
@@ -185,14 +181,14 @@ class MaleFemaleCategory extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   height: MediaQuery.of(context).size.width > 500 ? 30 : 30,
-                  padding: EdgeInsets.symmetric(vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
                   width: double.infinity,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Theme.of(context)
                         .colorScheme
                         .secondaryContainer, // Example background color for text
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8),
                     ),

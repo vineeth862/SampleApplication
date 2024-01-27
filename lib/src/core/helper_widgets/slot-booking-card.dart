@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/explore/Search/search_field.dart';
-import 'package:sample_application/src/Home/home.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import '../../Home/models/package/package.dart';
 import '../../Home/models/test/test.dart';
@@ -75,14 +74,14 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                 color: Color.fromARGB(196, 178, 173, 177))
           ]),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 getHeaddingText(),
-                Spacer(),
+                const Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).colorScheme.tertiary),
@@ -99,7 +98,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
               ],
             ),
             // SizedBox(height: 8.0),
-            Divider(),
+            const Divider(),
             getContent(),
             detailsExpanded ? getDetails() : Container()
           ],
@@ -132,7 +131,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
               // SizedBox(width: 4.0),
               Icon(Icons.keyboard_arrow_up_outlined,
                   color: Theme.of(context).colorScheme.primary),
-              Spacer(),
+              const Spacer(),
               Text(
                 "Your Cart",
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -150,7 +149,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                 widget.selectedCount.toString(),
                 style: Theme.of(context).textTheme.headlineLarge,
               )
-            : Text(""),
+            : const Text(""),
         Text(
           widget.title,
           style: Theme.of(context).textTheme.headlineMedium,
@@ -183,7 +182,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                             : Theme.of(context).colorScheme.inverseSurface),
                   )
                 : widget.content,
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         widget.subContent.isNotEmpty ? Text(widget.subContent) : Container(),
       ],
     );
@@ -191,11 +190,11 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
 
   getDetails() {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 300.0),
+      constraints: const BoxConstraints(maxHeight: 300.0),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ...selectedTest!.getSelectedTest
@@ -223,7 +222,8 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                           if ((selectedTest!.getSelectedPackage.length == 0 &&
                               selectedTest!.getSelectedTest.length == 0)) {
                             selectedOrder!.resetOrder();
-                            globalservice.navigate(context, SearchBarPage());
+                            globalservice.navigate(
+                                context, const SearchBarPage());
                           }
                         },
                         icon: Icon(
@@ -238,7 +238,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                   (package) => ListTile(
                     title: generateListTileBodyForPackage(package),
                     iconColor: Theme.of(context).colorScheme.primary,
-                    leading: Icon(Icons.medical_services),
+                    leading: const Icon(Icons.medical_services),
                     trailing: IconButton(
                         onPressed: () {
                           selectedTest!.removePackage(package);
@@ -278,7 +278,7 @@ class _SlotBookingCardState extends State<SlotBookingCard> {
                       size: 18,
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(

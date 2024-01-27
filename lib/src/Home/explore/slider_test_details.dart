@@ -77,14 +77,14 @@ class _MySliderTestState extends State<MySliderTest> {
                 carouselController: _carouselController,
               )
             : Container(),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         imageUrls.length > 0
             ? CarouselIndicator(
                 count: imageUrls.length,
                 index: _currentIndex,
-                color: Color.fromARGB(255, 170, 170, 170),
+                color: const Color.fromARGB(255, 170, 170, 170),
                 activeColor: Theme.of(context).colorScheme.primary,
                 height: 8,
                 width: 8,
@@ -93,7 +93,7 @@ class _MySliderTestState extends State<MySliderTest> {
             : CarouselIndicator(
                 count: 4,
                 index: _currentIndex,
-                color: Color.fromARGB(255, 170, 170, 170),
+                color: const Color.fromARGB(255, 170, 170, 170),
                 activeColor: Theme.of(context).colorScheme.primary,
                 height: 8,
                 width: 8,

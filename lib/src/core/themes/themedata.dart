@@ -28,20 +28,20 @@ final ThemeData theme = ThemeData(
       outlineVariant: Colors.orangeAccent),
   textTheme: TextTheme(
     headlineLarge: GoogleFonts.robotoSlab(
-        fontSize: 21, color: Color.fromARGB(255, 32, 32, 32)),
+        fontSize: 21, color: const Color.fromARGB(255, 32, 32, 32)),
     headlineMedium: GoogleFonts.robotoSlab(
-        fontSize: 16, color: Color.fromARGB(255, 32, 32, 32)),
+        fontSize: 16, color: const Color.fromARGB(255, 32, 32, 32)),
     headlineSmall: GoogleFonts.robotoSlab(
-        fontSize: 12, color: Color.fromARGB(255, 32, 32, 32)),
+        fontSize: 12, color: const Color.fromARGB(255, 32, 32, 32)),
     bodyMedium: GoogleFonts.notoSans(
-        fontSize: 10, color: Color.fromARGB(255, 90, 89, 89)),
+        fontSize: 10, color: const Color.fromARGB(255, 90, 89, 89)),
     bodyLarge: GoogleFonts.notoSans(
-        fontSize: 12, color: Color.fromARGB(255, 90, 89, 89)),
-    titleMedium:
-        GoogleFonts.besley(fontSize: 10, color: Color.fromARGB(255, 0, 0, 0)),
+        fontSize: 12, color: const Color.fromARGB(255, 90, 89, 89)),
+    titleMedium: GoogleFonts.besley(
+        fontSize: 10, color: const Color.fromARGB(255, 0, 0, 0)),
   ),
-  appBarTheme: AppBarTheme(),
-  buttonTheme: ButtonThemeData(
+  appBarTheme: const AppBarTheme(),
+  buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
     buttonColor: Color.fromARGB(
         225, 21, 209, 230), // Change to your desired button color

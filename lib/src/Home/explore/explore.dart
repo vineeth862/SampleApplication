@@ -156,7 +156,7 @@ class _exploreExpState extends State<exploreExp> {
       child: CustomScrollView(controller: _scrollController, slivers: [
         SliverAppBar(
           //backgroundColor: const Color.fromARGB(255, 243, 242, 243),
-          backgroundColor: Color.fromARGB(255, 244, 244, 244),
+          backgroundColor: const Color.fromARGB(255, 244, 244, 244),
           toolbarHeight: 70,
           leading: null,
           automaticallyImplyLeading: false,
@@ -202,7 +202,7 @@ class _exploreExpState extends State<exploreExp> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           maxHeight: 100,
                           minHeight: 32,
                           maxWidth: 100,
@@ -247,7 +247,7 @@ class _exploreExpState extends State<exploreExp> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       ListTile(
-                                        visualDensity: VisualDensity(
+                                        visualDensity: const VisualDensity(
                                             horizontal: 1, vertical: -1),
                                         contentPadding: const EdgeInsets.only(
                                             left: 5, right: 23),
@@ -269,9 +269,9 @@ class _exploreExpState extends State<exploreExp> {
                                                 .titleMedium)),
                                         trailing: Container(
                                           width: 30,
-                                          alignment:
-                                              AlignmentDirectional(-10, 0.9),
-                                          child: Icon(
+                                          alignment: const AlignmentDirectional(
+                                              -10, 0.9),
+                                          child: const Icon(
                                               Icons.keyboard_arrow_down_sharp),
                                         ),
                                       ),
@@ -279,7 +279,7 @@ class _exploreExpState extends State<exploreExp> {
                                   ),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               GestureDetector(
                                 onTap: () {
                                   globalservice.navigate(
@@ -295,15 +295,16 @@ class _exploreExpState extends State<exploreExp> {
                                   child: badges.Badge(
                                     badgeContent: Text(
                                       orderRepo.orderList.length.toString(),
-                                      style: TextStyle(fontSize: 10),
+                                      style: const TextStyle(fontSize: 10),
                                     ),
                                     showBadge: true,
-                                    badgeAnimation: badges.BadgeAnimation.slide(
-                                        animationDuration: Duration(
-                                          seconds: 1,
-                                        ),
-                                        curve: Curves.bounceInOut),
-                                    child: Icon(Icons.shopping_cart),
+                                    badgeAnimation:
+                                        const badges.BadgeAnimation.slide(
+                                            animationDuration: Duration(
+                                              seconds: 1,
+                                            ),
+                                            curve: Curves.bounceInOut),
+                                    child: const Icon(Icons.shopping_cart),
                                   ),
                                 ),
                               ),
@@ -434,7 +435,7 @@ class _exploreExpState extends State<exploreExp> {
                 //     children: [...maleCategoryList],
                 //   ),
                 // ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.asset(
@@ -602,7 +603,7 @@ class _exploreExpState extends State<exploreExp> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
-                MySliderTest(),
+                const MySliderTest(),
                 const SizedBox(
                   height: 25,
                 ),

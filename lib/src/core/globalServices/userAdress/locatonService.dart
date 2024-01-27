@@ -60,7 +60,7 @@ class UserCurrentLocation extends GetxController {
     message == "denied"
         ? Get.defaultDialog(
             title: 'Permission Denied',
-            content: Text("Please enable location to continue."),
+            content: const Text("Please enable location to continue."),
             textConfirm: 'OK',
             confirmTextColor: Colors.blue,
             onConfirm: () {
@@ -70,7 +70,7 @@ class UserCurrentLocation extends GetxController {
           )
         : Get.defaultDialog(
             title: 'Permission Denied forever',
-            content: Text(
+            content: const Text(
                 "Please enable location in application setting to continue."),
             textConfirm: 'OK',
             confirmTextColor: Colors.blue,
@@ -125,27 +125,6 @@ class UserCurrentLocation extends GetxController {
           desiredAccuracy: LocationAccuracy.best);
     }
 
-    // if (locationPermission == LocationPermission.denied) {
-    //   await requestLocationPermission();
-    //   //locationPermission = await Geolocator.requestPermission();
-    //   // if (locationPermission == LocationPermission.denied) {
-    //   //   showPermissionDeniedDialog();
-    //   //   //locationPermission = await Geolocator.requestPermission();
-    //   //   // Permissions are denied, next time you could try
-    //   //   // requesting permissions again (this is also where
-    //   //   // Android's shouldShowRequestPermissionRationale
-    //   //   // returned true. According to Android guidelines
-    //   //   // your App should show an explanatory UI now.
-    //   //   //locationAccessRequest.value = false;
-    //   //   //return Future.error('Location permissions are denied');
-    //   // }
-    // } else if (locationPermission == LocationPermission.deniedForever) {
-    //   showPermissionDeniedDialog();
-    //   // Permissions are denied forever, handle appropriately.
-    //   // return Future.error(
-    //   //     'Location permissions are permanently denied, we cannot request permissions.');
-    // }
-
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
   }
@@ -159,7 +138,7 @@ class UserCurrentLocation extends GetxController {
 
   @override
   void onReady() {
-    Future.delayed(Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 0), () {
       //globalservice.showLoader();
 
       loaddata();

@@ -16,7 +16,7 @@ class _policicesState extends State<policices> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Policices"),
+        title: const Text("Policices"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -32,25 +32,25 @@ class _policicesState extends State<policices> {
                 child: ListTile(
                   title: Text("Privacy Policy",
                       style: Theme.of(context).textTheme.headlineMedium),
-                  leading: Icon(Icons.policy),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  leading: const Icon(Icons.policy),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
                 ),
                 onTap: () {
-                  globalService.navigate(context, privacyPolicy());
+                  globalService.navigate(context, const privacyPolicy());
                 },
               ),
-              Divider(
+              const Divider(
                 thickness: 0.8,
               ),
               GestureDetector(
                 child: ListTile(
                   title: Text("Refund Policy",
                       style: Theme.of(context).textTheme.headlineMedium),
-                  leading: Icon(Icons.library_books_outlined),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  leading: const Icon(Icons.library_books_outlined),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
                 ),
                 onTap: () {
-                  globalService.navigate(context, RefundPolicy());
+                  globalService.navigate(context, const RefundPolicy());
                 },
               )
             ],

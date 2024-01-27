@@ -74,9 +74,10 @@ class TestCardWidget extends StatelessWidget {
           // shape: Theme.of(context).cardTheme.shape,
           decoration: BoxDecoration(
               border: Border.all(
-                  color: Color.fromARGB(255, 213, 213, 213).withOpacity(0.3)),
+                  color: const Color.fromARGB(255, 213, 213, 213)
+                      .withOpacity(0.3)),
               color: Theme.of(context).colorScheme.background,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   // bottomLeft: Radius.circular(35.0),
                   // topRight: Radius.circular(25.0),
                   bottomLeft: Radius.circular(15.0),
@@ -88,7 +89,7 @@ class TestCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10.0, right: 10, top: 10),
                 child: Row(
                   children: [
                     ClipOval(
@@ -105,7 +106,7 @@ class TestCardWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Expanded(
@@ -135,7 +136,8 @@ class TestCardWidget extends StatelessWidget {
               // const SizedBox(height: 16.0),
 
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -161,7 +163,8 @@ class TestCardWidget extends StatelessWidget {
               //   height: 20,
               // ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Row(
                   children: [
                     Icon(
@@ -199,14 +202,14 @@ class TestCardWidget extends StatelessWidget {
               // ),
               // Divider(),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10)),
                   color: Color.fromARGB(223, 252, 245, 226),
                 ),
-                padding:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, bottom: 10, top: 10),
                 height: 45,
                 child: Row(
                   children: [
@@ -263,12 +266,12 @@ class TestCardWidget extends StatelessWidget {
                     // SizedBox(
                     //   width: 15,
                     // ),
-                    Spacer(),
+                    const Spacer(),
                     Link(
                       text: "Details",
                       navigate: CardDetailPage(test: test),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Container(
@@ -328,12 +331,12 @@ class TestCardWidget extends StatelessWidget {
                         //   size: 20,
                         // ),
                         child: isTestSelected
-                            ? Text(
+                            ? const Text(
                                 "BOOKED",
                                 style: TextStyle(
                                     fontSize: 12, fontWeight: FontWeight.w500),
                               )
-                            : Text(
+                            : const Text(
                                 "BOOK",
                                 style: TextStyle(
                                     fontSize: 12, fontWeight: FontWeight.w500),
@@ -342,7 +345,7 @@ class TestCardWidget extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           // fixedSize: Size(10, 10),
                           // maximumSize: Size(10, 10),
-                          padding: EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           foregroundColor: isTestSelected
                               ? Theme.of(context).colorScheme.onPrimary
                               : Theme.of(context).colorScheme.tertiary,

@@ -25,7 +25,7 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     )..repeat(reverse: true);
 
     _animation = Tween<double>(
@@ -43,7 +43,7 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -53,22 +53,22 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
             // color: Color.fromARGB(255, 54, 138, 235),
             // colorBlendMode: BlendMode.color,
           ),
-          SizedBox(height: 4.0),
+          const SizedBox(height: 4.0),
           Text(
             widget.title,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium!
-                .copyWith(color: Color.fromARGB(232, 241, 47, 47)),
+                .copyWith(color: const Color.fromARGB(232, 241, 47, 47)),
           ),
-          SizedBox(height: 4.0),
+          const SizedBox(height: 4.0),
           GestureDetector(
             onTap: () {
-              globalservice.navigate(context, SearchBarPage());
+              globalservice.navigate(context, const SearchBarPage());
             },
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Center(
                 child: Container(
                   width: 250,
@@ -86,7 +86,7 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
                             top: 5,
                             left: _animation.value,
                             height: BorderSide.strokeAlignCenter,
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_circle_right_rounded,
                               color: Color.fromARGB(255, 255, 255, 255),
                             ),
@@ -100,7 +100,8 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
                               .textTheme
                               .headlineMedium!
                               .copyWith(
-                                  color: Color.fromARGB(255, 255, 255, 255)),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255)),
                         ),
                       ),
                     ],
@@ -109,7 +110,7 @@ class _NoOrdersFoundCardState extends State<NoOrdersFoundCard>
               ),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
         ],
       ),
     );

@@ -21,14 +21,14 @@ class _ConfirmState extends State<Confirm> {
     return Container(
       width: 400,
       height: 150,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -36,14 +36,14 @@ class _ConfirmState extends State<Confirm> {
                 'Confirmation',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              SizedBox(height: 4),
-              Divider(), // Add a horizontal line to separate title and body
+              const SizedBox(height: 4),
+              const Divider(), // Add a horizontal line to separate title and body
               // SizedBox(height: 8),
               Text(
                 widget.headerText,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -90,7 +90,7 @@ class _ConfirmState extends State<Confirm> {
                           backgroundColor:
                               MaterialStateProperty.resolveWith<Color?>(
                             (Set<MaterialState> states) {
-                              return Color.fromARGB(255, 238, 94, 94);
+                              return const Color.fromARGB(255, 238, 94, 94);
                               // Default color
                             },
                           ),

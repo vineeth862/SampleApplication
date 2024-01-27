@@ -34,7 +34,7 @@ class _RefundPolicyState extends State<RefundPolicy> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Refund Ploicy"),
+            title: const Text("Refund Ploicy"),
             backgroundColor: Theme.of(context).colorScheme.onBackground,
           ),
           body: SingleChildScrollView(
@@ -50,6 +50,5 @@ class _RefundPolicyState extends State<RefundPolicy> {
             ),
           )),
     );
-    ;
   }
 }

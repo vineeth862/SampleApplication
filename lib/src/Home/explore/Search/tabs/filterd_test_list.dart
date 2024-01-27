@@ -23,7 +23,7 @@ class TestListScreen extends StatelessWidget {
         : Column(children: [
             Container(
               alignment: Alignment.bottomLeft,
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: searchState.input.isEmpty
                   ? const Text(
                       "Popular Tests",

@@ -46,12 +46,13 @@ class _InitialAdressState extends State<InitialAdress> {
                   child: Row(
                     children: [
                       InkWell(
-                        child: Icon(Icons.keyboard_double_arrow_down_rounded),
+                        child: const Icon(
+                            Icons.keyboard_double_arrow_down_rounded),
                         onTap: () {
                           globalservice.navigate(context, HomePage());
                         },
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Expanded(
                         child: Text(
                           "Choose Your Location",
@@ -74,10 +75,10 @@ class _InitialAdressState extends State<InitialAdress> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Divider(
+                const Divider(
                   height: 3,
                 ),
                 Padding(
@@ -94,7 +95,7 @@ class _InitialAdressState extends State<InitialAdress> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 10),
                               //isCollapsed: true,
                               helperText: ' ',
@@ -117,7 +118,7 @@ class _InitialAdressState extends State<InitialAdress> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Container(
@@ -133,7 +134,8 @@ class _InitialAdressState extends State<InitialAdress> {
                                     // Future.delayed(Duration(seconds: 2), () {});
                                     // globalservice.hideLoader();
                                     globalservice.showLoader();
-                                    Future.delayed(Duration(seconds: 2), () {
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () {
                                       //globalservice.hideLoader();
                                       Get.back();
                                       myController.pinCodeExists.value
@@ -148,7 +150,7 @@ class _InitialAdressState extends State<InitialAdress> {
                                     //LocationNotAvailable();
                                   }
                                 },
-                                child: Text("Check"),
+                                child: const Text("Check"),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       Theme.of(context).colorScheme.tertiary),
@@ -166,7 +168,7 @@ class _InitialAdressState extends State<InitialAdress> {
                 Visibility(
                   visible: !isWidgetVisible,
                   child: addressOperation(
-                    routeDetails: InitialAdress(),
+                    routeDetails: const InitialAdress(),
                   ),
                 ),
                 Visibility(

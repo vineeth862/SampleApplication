@@ -15,7 +15,7 @@ class _SupportState extends State<Support> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Help or Support",
           // style: Theme.of(context).textTheme.headlineLarge,
         ),
@@ -37,7 +37,7 @@ class _SupportState extends State<Support> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -50,19 +50,19 @@ class _SupportState extends State<Support> {
                     "+91-9663383095",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.call_outlined,
                     color: Color.fromARGB(255, 48, 158, 77),
                     size: 25,
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
                 ),
               ),
               // SizedBox(
               //   width: 80,
               // ),
               //Spacer(),
-              Divider(
+              const Divider(
                 thickness: 0.7,
               ),
               GestureDetector(
@@ -74,12 +74,12 @@ class _SupportState extends State<Support> {
                     "support@medcaph.com",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.mail_outlined,
                     color: Color.fromARGB(255, 48, 158, 77),
                     size: 25,
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded),
                 ),
               )
             ],
