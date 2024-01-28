@@ -29,15 +29,16 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   GlobalService globalservice = GlobalService();
   late SelectedOrderState selectedOrder;
   List<Order> orders = [];
+  bool show = false;
 
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
     final orderRepo = OrderRepository();
     await orderRepo.fetchAllOrders(orderIds, widget.from);
-    globalservice.hideLoader();
     setState(() {
       orders = orderRepo.orderList;
-      // globalservice.hideLoader();
+      globalservice.hideLoader();
+      show = true;
     });
   }
 
@@ -137,7 +138,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                   const SizedBox(
                     height: 10,
                   ),
-                  orders.length == 0
+                  orders.length == 0 && show
                       ? SizedBox(
                           height: MediaQuery.of(context).size.height *
                               0.83, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
