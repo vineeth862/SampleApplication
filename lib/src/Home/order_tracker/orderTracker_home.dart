@@ -163,15 +163,23 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                       : 2,
                               childAspectRatio:
                                   MediaQuery.of(context).size.width < 600
-                                      ? 1.4
-                                      : 1.8, // number of items in each row
+                                      ? 1.2
+                                      : 1.6, // number of items in each row
                               mainAxisSpacing: 4.0, // spacing between rows
                               crossAxisSpacing: 16.0, // spacing between columns
                             ),
                             itemCount: orders
                                 .length, //GET THE COUNT OF BOOKING DONE BY USER AND UPDATE HERE
                             itemBuilder: (context, index) {
-                              return orderTrackerCard(order: orders[index]);
+                              return orderTrackerCard(
+                                order: orders[index],
+                                removeOrder: (order) {
+                                  globalservice.showLoader();
+                                  selectedOrder
+                                      .removeOrderFromCart(order.orderNumber);
+                                  this.loadData();
+                                },
+                              );
                               // return Column(
                               //   children: [
                               //     Container(

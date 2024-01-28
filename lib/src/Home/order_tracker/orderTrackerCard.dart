@@ -9,8 +9,8 @@ import 'package:sample_application/src/core/globalServices/global_service.dart';
 
 class orderTrackerCard extends StatefulWidget {
   Order order;
-
-  orderTrackerCard({super.key, required this.order});
+  Function(Order order) removeOrder;
+  orderTrackerCard({super.key, required this.order, required this.removeOrder});
 
   @override
   State<orderTrackerCard> createState() => _orderTrackerCardState();
@@ -118,10 +118,11 @@ class _orderTrackerCardState extends State<orderTrackerCard> {
                     : GestureDetector(
                         onTap: () {},
                         child: TextButton.icon(
-                          icon: Icon(Icons.delete),
-                          label: Text("Remove"),
-                          onPressed: () {},
-                        ),
+                            icon: Icon(Icons.delete),
+                            label: Text("Remove"),
+                            onPressed: () {
+                              widget.removeOrder(widget.order);
+                            }),
                       )),
             Row(
               children: [
