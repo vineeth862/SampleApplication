@@ -5,6 +5,7 @@ import 'package:sample_application/src/Home/order_tracker/confirmation-allert.da
 import 'package:sample_application/src/core/Provider/selected_order_provider.dart';
 import 'package:sample_application/src/core/Provider/selected_test_provider.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
+import 'package:sample_application/src/core/globalServices/payment/serviceScreen.dart';
 import 'package:sample_application/src/core/helper_widgets/price_container.dart';
 import 'package:sample_application/src/core/helper_widgets/slot-booking-card.dart';
 
@@ -610,8 +611,9 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                     ),
                                     ElevatedButton(
                                         onPressed: () async {
-                                          paymentService
-                                              .startEasyUpiPaymentTransaction();
+                                          this.globalservice.navigate(context, ServiceScreen(order:));
+                                          // paymentService
+                                          //     .startEasyUpiPaymentTransaction();
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Theme.of(context)
