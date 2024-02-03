@@ -322,7 +322,7 @@ class _WelcomesigninState extends State<Welcomesignin> {
 
                             OtpPhoneWidget(user: user),
 
-                            TimerBottomSheet(),
+                            TimerBottomSheet(user: user),
                           ],
                         ),
                       ),

@@ -1,8 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:sample_application/src/Home/models/user/user.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
 
 class TimerBottomSheet extends StatefulWidget {
+  final user;
+  TimerBottomSheet({
+    required User this.user,
+  });
   @override
   _TimerBottomSheetState createState() => _TimerBottomSheetState();
 }
@@ -21,7 +27,7 @@ class _TimerBottomSheetState extends State<TimerBottomSheet> {
     // Implement your logic to resend OTP here
     // For example, you can call an API to request a new OTP
     // After requesting, reset the timer and hide the Resend button
-    //AuthenticationRepository.instance.PhoneNumberAuth(user.mobile!);
+    AuthenticationRepository.instance.PhoneNumberAuth(widget.user.mobile!);
     setState(() {
       _timerDuration = 60;
       isResendVisible = false;
