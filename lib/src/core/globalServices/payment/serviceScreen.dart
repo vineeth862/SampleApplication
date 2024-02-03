@@ -1,18 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../Home/models/order/order.dart';
+import '../../../Home/models/order/payment.dart';
 import '../../../Home/order_tracker/orderTracker_progress.dart';
+import '../../Provider/selected_order_provider.dart';
+import '../../Provider/selected_test_provider.dart';
 import '../global_service.dart';
 
-class ServiceScreen extends StatefulWidget {
+class ServiceScreen extends StatelessWidget {
   Order order;
-  ServiceScreen({ required this.order});
-  @override
-  _ServiceScreenState createState() => _ServiceScreenState();
-}
-
-class _ServiceScreenState extends State<ServiceScreen> {
+  ServiceScreen(
+      {required this.order,
+      required this.selectedOrder,
+      required this.selectedTest});
   GlobalService globalservice = GlobalService();
+  SelectedOrderState selectedOrder;
+  SelectedTestState selectedTest;
+
   int _counter = 0;
 
   @override
@@ -36,8 +42,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Payment Successful",style: TextStyle(color: Colors.green,fontSize: 25)),
-                  Icon(IconData(0xf635, fontFamily: 'MaterialIcons'),size: 30,color: Colors.green,)]),
+                    children: [
+                      Text("Payment Successful",
+                          style: TextStyle(color: Colors.green, fontSize: 25)),
+                      Icon(
+                        IconData(0xf635, fontFamily: 'MaterialIcons'),
+                        size: 30,
+                        color: Colors.green,
+                      )
+                    ]),
 
                 // Spacer(),
                 SizedBox(height: 100),
@@ -54,9 +67,43 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 SizedBox(height: 30),
 
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.tertiary),
-                  onPressed: () {
-                    globalservice.navigate(context, OrderTrackingScreen(order: widget.order));
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.tertiary),
+                  onPressed: () async {
+                    Order order = selectedOrder.getOrder;
+                    Payment payment = Payment(
+                        amount: order.totalPrice!,
+                        brn: "B12345",
+                        cardType: "CREDIT_CARD",
+                        merchantId: "PGTESTPAYUAT",
+                        merchantTransactionId: "1703918305948",
+                        paymentMode: "CARD",
+                        pgTransactionId: "PG2207221432267522530776",
+                        status: true,
+                        statusLabel: "Your payment is successful.",
+                        transactionDate: "2023-12-30 12:14:19.360465",
+                        transactionId: "T2312301213401074655068");
+                    payment.transactionDate = DateTime.now().toString();
+                    order.payment == null
+                        ? order.payment = [payment]
+                        : order.payment?.add(payment);
+
+                    order.statusCode = 2;
+                    order.statusLabel = "Order Placed";
+                    var tempOrder = json.decode(json.encode(order));
+                    selectedOrder.setOrder = order;
+
+                    if (order.orderNumber != null) {
+                      await selectedOrder.createOrder();
+                      // setState(() {
+                      selectedOrder.resetOrder();
+                      selectedTest.removeAllTest();
+                      selectedTest.removeAllPackage();
+                      // });
+                    }
+                    // globalService.showLoader();
+                    Get.offAll(
+                        OrderTrackingScreen(order: Order.fromJson(tempOrder)));
                   },
                   child: Text('Proceed'),
                 ),

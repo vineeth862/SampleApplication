@@ -447,6 +447,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             Container(
+                              padding: EdgeInsets.all(0),
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color:

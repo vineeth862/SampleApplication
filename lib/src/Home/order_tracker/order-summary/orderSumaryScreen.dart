@@ -611,7 +611,14 @@ class _OrderSummaryScreenState extends State<OrderSummaryScreen> {
                                     ),
                                     ElevatedButton(
                                         onPressed: () async {
-                                          this.globalservice.navigate(context, ServiceScreen(order:));
+                                          this.globalservice.navigate(
+                                              context,
+                                              ServiceScreen(
+                                                order: order,
+                                                selectedOrder:
+                                                    this.selectedOrder,
+                                                selectedTest: this.selectedTest,
+                                              ));
                                           // paymentService
                                           //     .startEasyUpiPaymentTransaction();
                                         },
