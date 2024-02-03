@@ -109,6 +109,12 @@ class SelectedOrderState extends ChangeNotifier {
     UserRepository().addOrderIdsToUser(order.orderNumber, false);
   }
 
+  removeOrderFromCart(orderNumber) async {
+    await _db.collection("order").doc(orderNumber).delete();
+    notifyListeners();
+    UserRepository().addOrderIdsToUser(orderNumber, false);
+  }
+
   Future<String> fetchStatus(statusCode) async {
     final statusObj = await _db
         .collection("masterData")

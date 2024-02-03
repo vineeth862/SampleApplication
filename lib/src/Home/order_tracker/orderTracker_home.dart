@@ -29,15 +29,16 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
   GlobalService globalservice = GlobalService();
   late SelectedOrderState selectedOrder;
   List<Order> orders = [];
+  bool show = false;
 
   loadData() async {
     final orderIds = await UserRepository().getOrderIds();
     final orderRepo = OrderRepository();
     await orderRepo.fetchAllOrders(orderIds, widget.from);
-    globalservice.hideLoader();
     setState(() {
       orders = orderRepo.orderList;
-      // globalservice.hideLoader();
+      globalservice.hideLoader();
+      show = true;
     });
   }
 
@@ -137,7 +138,7 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                   const SizedBox(
                     height: 10,
                   ),
-                  orders.length == 0
+                  orders.length == 0 && show
                       ? SizedBox(
                           height: MediaQuery.of(context).size.height *
                               0.83, //DONT CHANGE THIS HEIGHT VALUE NEED TO TEST
@@ -163,15 +164,23 @@ class _OrderTrackerHomeState extends State<OrderTrackerHome> {
                                       : 2,
                               childAspectRatio:
                                   MediaQuery.of(context).size.width < 600
-                                      ? 1.4
-                                      : 1.8, // number of items in each row
+                                      ? 1.2
+                                      : 1.6, // number of items in each row
                               mainAxisSpacing: 4.0, // spacing between rows
                               crossAxisSpacing: 16.0, // spacing between columns
                             ),
                             itemCount: orders
                                 .length, //GET THE COUNT OF BOOKING DONE BY USER AND UPDATE HERE
                             itemBuilder: (context, index) {
-                              return orderTrackerCard(order: orders[index]);
+                              return orderTrackerCard(
+                                order: orders[index],
+                                removeOrder: (order) {
+                                  globalservice.showLoader();
+                                  selectedOrder
+                                      .removeOrderFromCart(order.orderNumber);
+                                  this.loadData();
+                                },
+                              );
                               // return Column(
                               //   children: [
                               //     Container(
