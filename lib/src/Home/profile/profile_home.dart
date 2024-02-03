@@ -5,12 +5,14 @@ import 'package:sample_application/src/Home/profile/edit_profile.dart';
 import 'package:sample_application/src/Home/profile/policies.dart';
 import 'package:sample_application/src/Home/profile/support.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/logout.dart';
+import 'package:sample_application/src/core/globalServices/authentication/auth_validation/welcome_signin.dart';
 import 'package:sample_application/src/core/globalServices/checkOnlineConnectivity.dart';
 import 'package:sample_application/src/core/globalServices/authentication/onboarding/onboarding.dart';
 import 'package:sample_application/src/core/globalServices/authentication/user_repository.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
 import 'package:sample_application/src/core/globalServices/userAdress/widgets/addressbook.dart';
 
+import '../../core/globalServices/authentication/auth_validation/authentication_repository.dart';
 import '../models/user/user.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -33,6 +35,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
         userName = sampleDatatemp.userName;
       }
     });
+  }
+
+  void showLogoutConfirmation(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Are you sure you want to logout?',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Perform logout logic here
+                  // For demonstration purposes, we just print a message
+
+                  AuthenticationRepository.instance.logout();
+                  globalservice.navigate(context, Welcomesignin());
+                },
+                child: const Text('Yes'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+
+                  // Close the bottom sheet
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -287,8 +328,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const policices()),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
-                      _CustomTextButton('assets/images/lagout.png', "Log Out",
-                          const LogoutScreen()),
+                      // _CustomTextButton('assets/images/lagout.png', "Log Out",
+                      //     const LogoutScreen()),
+                      InkWell(
+                        onTap: () {
+                          showLogoutConfirmation(context);
+                        },
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  Image.asset(
+                                    'assets/images/lagout.png',
+                                    height: 30,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Text("Log Out"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       const Divider(
                           color: Colors.black, thickness: 0.2, height: 1),
                     ],
