@@ -38,8 +38,8 @@ class ServiceScreen extends StatelessWidget {
                   "./assets/images/payment-service-not-available.png",
                   height: 150,
                 ),
-                SizedBox(height: 30),
-                Row(
+                const SizedBox(height: 30),
+                const Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -53,18 +53,18 @@ class ServiceScreen extends StatelessWidget {
                     ]),
 
                 // Spacer(),
-                SizedBox(height: 100),
-                Text(
+                const SizedBox(height: 100),
+                const Text(
                   'Thank you for choosing MedcapH.',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
-                Text(
+                const Text(
                   'Payments are currently not being Accepted !',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -105,7 +105,7 @@ class ServiceScreen extends StatelessWidget {
                     Get.offAll(
                         OrderTrackingScreen(order: Order.fromJson(tempOrder)));
                   },
-                  child: Text('Proceed'),
+                  child: const Text('Proceed'),
                 ),
               ],
             ),
