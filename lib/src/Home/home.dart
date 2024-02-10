@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/doctor_consultation.dart/home-care-services.dart';
 import 'package:sample_application/src/Home/explore/explore.dart';
-import 'package:sample_application/src/Home/home_service.dart';
 import 'package:sample_application/src/Home/order_tracker/order-summary/orderSumaryScreen.dart';
 import 'package:sample_application/src/Home/order_tracker/orderTracker_home.dart';
 import 'package:sample_application/src/core/globalServices/global_service.dart';
@@ -25,7 +24,6 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   bool shouldCallInit = true;
-  HomeService homeService = HomeService();
   GlobalService globalservice = GlobalService();
   var Controller = Get.put(UserCurrentLocation());
   final myController = Get.find<UserCurrentLocation>();

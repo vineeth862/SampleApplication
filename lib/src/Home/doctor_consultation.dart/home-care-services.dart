@@ -1,161 +1,192 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
-class HomeCareServices extends StatelessWidget {
-  const HomeCareServices({super.key});
+class HomeCareServices extends StatefulWidget {
+  const HomeCareServices({Key? key}) : super(key: key);
+
+  @override
+  State<HomeCareServices> createState() => _HomeCareServicesState();
+}
+
+class _HomeCareServicesState extends State<HomeCareServices> {
+  int index = 0;
+  final onboardingController = PageController(initialPage: 0);
+
+  // Method to change the index of the selected page
+  void changePageIndex(int newIndex) {
+    setState(() {
+      index = newIndex;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      // appBar: AppBar(
-      //     title: Text(
-      //   "Home Care Services",
-      //   style: Theme.of(context)
-      //       .textTheme
-      //       .headlineMedium!
-      //       .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-      // )),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(193, 255, 245, 236),
+        body: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-
-            Stack(children: [
-              // Center(
-              //   child: ClipRRect(
-              //     borderRadius: BorderRadius.circular(50),
-              //     child: Image.asset(
-              //       "./assets/images/launching.gif",
-              //       //height: MediaQuery.of(context).size.width * ,
-              //       width: MediaQuery.of(context).size.width * 0.6,
-              //     ),
-              //   ),
-              // ),
-              // Positioned(
-              //   child: Text(
-              //     "Home Care Servies",
-              //     style: Theme.of(context).textTheme.headlineLarge,
-              //   ),
-              //   left: 10,
-              //   right: 10,
-              // ),
-              Positioned(
-                child: Text(
-                  "Launching Soon.......!",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                bottom: 0,
-                left: 10,
-              )
-            ]),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Text(
-            //     "LAUNCHING",
-            //     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-            //         color: Theme.of(context).colorScheme.primary, fontSize: 30),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(0.0),
-            //   child: Text(
-            //     "SOON..!",
-            //     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-            //         color: Theme.of(context).colorScheme.primary, fontSize: 30),
-            //   ),
-            // ),
-
-            // const EdgeInsets.only(bottom: 8.0, left: 8),
-            // Container(
-            //   width: double.infinity,
-            //   color: Color.fromARGB(255, 164, 223, 248),
-            //   child: Expanded(
-            //     child: Text(
-            //       "Coming Soon.....!",
-            //       style: Theme.of(context).textTheme.headlineLarge!.copyWith(),
-            //     ),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 0.0, right: 0, top: 0),
-            //   child: ClipRRect(
-            //     borderRadius: BorderRadius.circular(10),
-            //     child: Image.asset(
-            //       "./assets/images/coming_soon.png",
-            //       height: 150,
-            //       width: MediaQuery.of(context).size.width * 1,
-            //     ),
-            //   ),
-            // ),
-            SizedBox(height: 0),
-
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 10.0, right: 10, top: 0),
-            //   child: ClipRRect(
-            //     borderRadius: BorderRadius.circular(10),
-            //     child: Image.asset(
-            //       "./assets/images/homecare1.png",
-            //       //height: MediaQuery.of(context).size.width * ,
-            //       width: MediaQuery.of(context).size.width * 1,
-            //     ),
-            //   ),
-            // ),
-            // Center(
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(15.0),
-            //     child: Row(
-            //       children: [
-            //         ClipRRect(
-            //           borderRadius: BorderRadius.circular(60),
-            //           child: Image.asset(
-            //             "./assets/images/Our loved ones are provided.png",
-            //             //height: MediaQuery.of(context).size.width * ,
-            //             width: MediaQuery.of(context).size.width * 0.25,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           width: 5,
-            //         ),
-            //         ClipRRect(
-            //           borderRadius: BorderRadius.circular(60),
-            //           child: Image.asset(
-            //             "./assets/images/second.png",
-            //             //height: MediaQuery.of(context).size.width * ,
-            //             width: MediaQuery.of(context).size.width * 0.25,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           width: 5,
-            //         ),
-            //         ClipRRect(
-            //           borderRadius: BorderRadius.circular(60),
-            //           child: Image.asset(
-            //             "./assets/images/third.png",
-            //             //height: MediaQuery.of(context).size.width * ,
-            //             width: MediaQuery.of(context).size.width * 0.25,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "./assets/images/Services to be offered.png",
-                  //height: MediaQuery.of(context).size.width * ,
-                  width: MediaQuery.of(context).size.width * 1,
-                ),
+            Container(
+                // margin: EdgeInsets.only(top: 10),
+                alignment: Alignment.bottomCenter,
+                width: 350.0,
+                height: MediaQuery.of(context).size.height * 0.16,
+                child: DefaultTextStyle(
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                    fontFamily: 'Agne',
+                  ),
+                  child: AnimatedTextKit(
+                    totalRepeatCount: 1,
+                    isRepeatingAnimation: false,
+                    repeatForever: false,
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                          "We're Expanding! Look Forward To New Medical Services.",
+                          textAlign: TextAlign.center,
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(
+                                  fontSize: 25,
+                                  color:
+                                      Theme.of(context).colorScheme.primary)),
+                    ],
+                    onTap: () {
+                      print("Tap Event");
+                    },
+                  ),
+                )),
+            Expanded(
+              child: Stack(
+                children: [
+                  PageView(
+                    controller: onboardingController,
+                    allowImplicitScrolling: true,
+                    onPageChanged: (value) {
+                      changePageIndex(value);
+                    },
+                    children: [
+                      OnBoardingPage(
+                        image: "assets/images/home-nurse-care.png",
+                        title: "Nurse Care @ Home",
+                        subtitle:
+                            "Bringing healthcare to your doorstep. Our dedicated nurses provide professional and compassionate care at home, ensuring your comfort and well-being.",
+                      ),
+                      OnBoardingPage(
+                        image: "assets/images/home-doctor-visit.png",
+                        title: "Doctor Home Visit",
+                        subtitle:
+                            "Skip the wait, get timely medical attention with our Doctor Home Visit service.",
+                      ),
+                      OnBoardingPage(
+                        image: "assets/images/home-physiotherapy-care.png",
+                        title: "Physiotherapy @ Home",
+                        subtitle:
+                            "Stay comfortable while working towards recovery with our Physiotherapy at Home.",
+                      ),
+                    ],
+                  ),
+                  OnBoardingNavigation(
+                    onboardingController: onboardingController,
+                    pageCount: 3,
+                    currentIndex: index,
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
-    ));
+    );
+  }
+}
+
+class OnBoardingNavigation extends StatelessWidget {
+  const OnBoardingNavigation({
+    Key? key,
+    required this.onboardingController,
+    required this.pageCount,
+    required this.currentIndex,
+  }) : super(key: key);
+
+  final PageController onboardingController;
+  final int pageCount;
+  final int currentIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      margin: const EdgeInsets.only(bottom: 40),
+      child: SmoothPageIndicator(
+        controller: onboardingController,
+        count: pageCount,
+        effect: ExpandingDotsEffect(
+          activeDotColor: Theme.of(context).colorScheme.primary,
+          dotWidth: 5,
+          radius: 5,
+          dotHeight: 5,
+        ),
+        onDotClicked: (index) {
+          onboardingController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class OnBoardingPage extends StatelessWidget {
+  OnBoardingPage(
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.subtitle})
+      : super(key: key);
+
+  String image, title, subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Image.asset(
+                image,
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width * 1,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Center(
+                child: Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.subtitle1,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ])));
   }
 }

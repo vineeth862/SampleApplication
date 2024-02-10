@@ -228,12 +228,20 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
               pinned: true,
               centerTitle: false,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+            SliverGrid.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount:
+                      MediaQuery.of(context).size.width < 600 ? 1 : 2,
+                  childAspectRatio: MediaQuery.of(context).size.width < 600
+                      ? 2.30
+                      : 2.37, // number of items in each row
+                  mainAxisSpacing: 4.0, // spacing between rows
+                  crossAxisSpacing: 16.0, // spacing between columns
+                ),
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    padding: const EdgeInsets.only(top: 8, left: 5, right: 8),
                     child: TestCardWidget(
                         isTest: false,
                         title: list[index].name,
@@ -269,10 +277,52 @@ class _FilteredLabCardlistPage extends State<FilteredLabCardlistPage> {
                               ));
                         }),
                   );
-                },
-                childCount: list.length,
-              ),
-            ),
+                }),
+            // SliverList(
+            //   delegate: SliverChildBuilderDelegate(
+            //     (BuildContext context, int index) {
+            //       return Padding(
+            //         padding:
+            //             const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            //         child: TestCardWidget(
+            //             isTest: false,
+            //             title: list[index].name,
+            //             test: list[index].testObject,
+            //             cardName: list[index].labName,
+            //             price: list[index].price,
+            //             isTestSelected: isTestSelected(list[index].testObject),
+            //             tapOnButton: (test) {
+            //               Order order = selectedOrder.getOrder;
+            //               onBookButton(list[index].testObject, order);
+
+            //               if (selectedTest!.getSelectedPackage.length == 0 &&
+            //                   selectedTest!.getSelectedTest.length == 0) {
+            //               } else if (order.statusCode == 1) {
+            //                 Get.off(() => OrderSummaryScreen());
+            //               } else if (globalservice.getLength(order.tests) > 0 ||
+            //                   globalservice.getLength(order.packages) > 0) {
+            //                 //globalservice.navigate(context, StepOneToBookTest());
+            //               } else {
+            //                 Get.off(() => SearchBarPage());
+            //               }
+
+            //               if (selectedTest.getSelectedTest.isEmpty &&
+            //                   selectedTest.getSelectedPackage.isEmpty) {
+            //                 selectedTest.setDetailExpanded(false);
+            //               }
+            //             },
+            //             tapOnCard: (value) {
+            //               globalservice.navigate(
+            //                   context,
+            //                   CardDetailPage(
+            //                     test: list[index].testObject,
+            //                   ));
+            //             }),
+            //       );
+            //     },
+            //     childCount: list.length,
+            //   ),
+            // ),
           ],
         ),
         Positioned(

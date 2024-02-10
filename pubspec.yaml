@@ -85,6 +85,7 @@ dev_dependencies:
   smooth_page_indicator: ^1.1.0
   get_storage: ^2.1.1
   connectivity: ^3.0.6
+  animated_text_kit: ^4.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -102,7 +103,7 @@ flutter:
     # - assets/images/Lab_Single_Person.jpg
     # - assets/images/Lab_two_people.jpg
     # - assets/images/rotation.png
-    # - assets/images/user.png
+    - assets/images/user.png
     # - assets/images/home_flash_image.png
     # - assets/images/flask.jpg
     # - assets/images/why-us1.png
@@ -152,6 +153,10 @@ flutter:
     - assets/images/paymentDone.gif
     - assets/images/editProfile.gif
     - assets/images/payment-service-not-available.png
+    - assets/images/home-nurse-care.png
+    - assets/images/home-doctor-visit.png
+    - assets/images/home-physiotherapy-care.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
