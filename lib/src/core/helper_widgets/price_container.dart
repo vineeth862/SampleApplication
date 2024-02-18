@@ -22,6 +22,7 @@ class Price extends StatelessWidget {
     return Row(
       children: <Widget>[
         Container(
+          height: 35,
           child: Row(
             children: [
               isTotalPricePresent!
