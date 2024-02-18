@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/firebase_options.dart';
@@ -12,15 +11,14 @@ import 'package:sample_application/src/core/globalServices/authentication/auth_v
 import 'package:sample_application/src/core/globalServices/userAdress/locatonService.dart';
 import 'src/core/themes/themedata.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()))
-      .then((value) => Get.put(UserCurrentLocation()));
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => SearchListState()),
     ChangeNotifierProvider(create: (_) => SelectedTestState()),
@@ -35,16 +33,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //FlutterNativeSplash.remove();
     return GetMaterialApp(
-      title: 'Sample Application',
-      theme: theme,
-      themeMode: ThemeMode.light,
-      home: const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
+        title: 'Sample Application',
+        theme: theme,
+        themeMode: ThemeMode.light,
+        home: SplashScreen());
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 1), () async {
+      await Firebase.initializeApp(
+              options: DefaultFirebaseOptions.currentPlatform)
+          .then((value) => Get.put(AuthenticationRepository()))
+          .then((value) => Get.put(UserCurrentLocation()));
+    });
+    return AnimatedSplashScreen(
+        duration: 5500,
+        splash: SvgPicture.asset("assets/images/logo.svg",
+            semanticsLabel: 'Medcaph Logo'),
+        nextScreen: Container(),
+        splashIconSize: double.maxFinite,
+        animationDuration: Duration(milliseconds: 2300),
+        splashTransition: SplashTransition.scaleTransition,
+        // pageTransitionType: PageTransitionType.topToBottomJoined,
+        backgroundColor: Color.fromARGB(255, 251, 251, 251));
   }
 }

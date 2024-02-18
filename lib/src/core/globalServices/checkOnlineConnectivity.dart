@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:sample_application/src/core/globalServices/authentication/auth_validation/authentication_repository.dart';
@@ -47,7 +48,10 @@ class _ConnectivityCheckerState extends State<ConnectivityChecker> {
                 // );
                 AuthenticationRepository.instance.screenRedirect();
               });
-              return CircularProgressIndicator(); // Optional loading indicator while redirecting
+              return Center(
+                child: SvgPicture.asset("assets/images/logo.svg",
+                    semanticsLabel: 'Medcaph Logo'),
+              ); // Optional loading indicator while redirecting
             } else {
               // Device is offline, show a dialog
               return Column(
