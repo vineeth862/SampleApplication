@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_application/src/Home/explore/Search/search_field.dart';
@@ -203,15 +204,13 @@ class _exploreExpState extends State<exploreExp> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(
-                          maxHeight: 100,
+                          maxHeight: 45,
                           minHeight: 32,
-                          maxWidth: 100,
+                          maxWidth: 45,
                           minWidth: 10,
                         ),
-                        child: Image.asset(
-                          './assets/images/logo.png',
-                          height: 10,
-                        ),
+                        child: SvgPicture.asset("assets/images/logo.svg",
+                            semanticsLabel: 'Medcaph Logo'),
                       ),
                     ),
                   ],

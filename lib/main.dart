@@ -15,16 +15,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => SearchListState()),
-    ChangeNotifierProvider(create: (_) => SelectedTestState()),
-    ChangeNotifierProvider(create: (_) => SelectedOrderState()),
-    ChangeNotifierProvider(create: (_) => AppState())
-  ], child: const MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,32 +23,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //FlutterNativeSplash.remove();
-    return GetMaterialApp(
-        title: 'Sample Application',
-        theme: theme,
-        themeMode: ThemeMode.light,
-        home: SplashScreen());
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => SearchListState()),
+      ChangeNotifierProvider(create: (_) => SelectedTestState()),
+      ChangeNotifierProvider(create: (_) => SelectedOrderState()),
+      ChangeNotifierProvider(create: (_) => AppState())
+    ], child: SplashScreen());
   }
 }
 
 class SplashScreen extends StatelessWidget {
+  storageInit() async {
+    await GetStorage.init();
+  }
+
   @override
   Widget build(BuildContext context) {
+    storageInit();
     Future.delayed(Duration(seconds: 1), () async {
       await Firebase.initializeApp(
               options: DefaultFirebaseOptions.currentPlatform)
           .then((value) => Get.put(AuthenticationRepository()))
           .then((value) => Get.put(UserCurrentLocation()));
     });
-    return AnimatedSplashScreen(
-        duration: 5500,
-        splash: SvgPicture.asset("assets/images/logo.svg",
-            semanticsLabel: 'Medcaph Logo'),
-        nextScreen: Container(),
-        splashIconSize: double.maxFinite,
-        animationDuration: Duration(milliseconds: 2300),
-        splashTransition: SplashTransition.scaleTransition,
-        // pageTransitionType: PageTransitionType.topToBottomJoined,
-        backgroundColor: Color.fromARGB(255, 251, 251, 251));
+    return GetMaterialApp(
+        title: 'Sample Application',
+        theme: theme,
+        themeMode: ThemeMode.light,
+        home: AnimatedSplashScreen(
+            duration: 5500,
+            splash: SvgPicture.asset("assets/images/logo.svg",
+                semanticsLabel: 'Medcaph Logo'),
+            nextScreen: Container(),
+            splashIconSize: double.maxFinite,
+            animationDuration: Duration(milliseconds: 2300),
+            splashTransition: SplashTransition.scaleTransition,
+            // pageTransitionType: PageTransitionType.topToBottomJoined,
+            backgroundColor: Color.fromARGB(255, 251, 251, 251)));
   }
 }

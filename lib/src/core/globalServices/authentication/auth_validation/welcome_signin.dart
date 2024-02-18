@@ -63,14 +63,14 @@ class _WelcomesigninState extends State<Welcomesignin> {
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                  top: 0,
-                  right: 0,
+                  top: 10,
+                  right: 15,
                   child: GestureDetector(
                     onTap: () {
                       globalservice.navigate(context, HomePage());
                     },
-                    child: OutlinedButton(
-                      onPressed: () {
+                    child: GestureDetector(
+                      onTap: () {
                         globalservice.navigate(context, HomePage());
                       },
                       child: Text(
@@ -78,17 +78,27 @@ class _WelcomesigninState extends State<Welcomesignin> {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
-                            .copyWith(color: Colors.white),
+                            .copyWith(
+                                shadows: [
+                              Shadow(color: Colors.black12, blurRadius: 2),
+                              Shadow(
+                                  color: const Color.fromARGB(31, 62, 61, 61),
+                                  blurRadius: 2)
+                            ],
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                                color: Color.fromARGB(255, 67, 66, 66)),
                       ),
-                      style: OutlinedButton.styleFrom(
-                        shape: CircleBorder(
-                            // borderRadius: BorderRadius.circular(
-                            //     20.0), // Set the border radius value
-                            ),
-                        backgroundColor: Color.fromARGB(207, 0, 0, 0),
-                        fixedSize: Size(5, 5),
-                        //padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                      ),
+                      // statesController: OutlinedButton.styleFrom() ,
+                      // style: OutlinedButton.styleFrom(
+                      // shape: CircleBorder(
+                      // borderRadius: BorderRadius.circular(
+                      //     20.0), // Set the border radius value
+                      // ),
+                      // backgroundColor: Color.fromARGB(207, 0, 0, 0),
+                      // fixedSize: Size(5, 5),
+                      //padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                      // ),
                     ),
                   ),
                 ),
