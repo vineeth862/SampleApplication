@@ -45,18 +45,18 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDtTuxQyeEo2_hiJi2-HbBuni2qCbn2Jgo',
-    appId: '1:69814635759:web:1bf96c26e34fef5aaedf1a',
+    appId: '1:69814635759:web:19a8365776b6c065aedf1a',
     messagingSenderId: '69814635759',
     projectId: 'experimentdatabase-87de1',
     authDomain: 'experimentdatabase-87de1.firebaseapp.com',
     databaseURL: 'https://experimentdatabase-87de1-default-rtdb.firebaseio.com',
     storageBucket: 'experimentdatabase-87de1.appspot.com',
-    measurementId: 'G-2JB8ZHKL7S',
+    measurementId: 'G-6LDNRQXFV1',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB4oT4KQgOSOuevGjJV12sNw60gZGUx7iA',
-    appId: '1:69814635759:android:f977d43a7def8af1aedf1a',
+    appId: '1:69814635759:android:dfca09e14afc93a1aedf1a',
     messagingSenderId: '69814635759',
     projectId: 'experimentdatabase-87de1',
     databaseURL: 'https://experimentdatabase-87de1-default-rtdb.firebaseio.com',
@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
     projectId: 'experimentdatabase-87de1',
     databaseURL: 'https://experimentdatabase-87de1-default-rtdb.firebaseio.com',
     storageBucket: 'experimentdatabase-87de1.appspot.com',
-    androidClientId: '69814635759-niukbnku7v0k0vu8v079ce7dss5thmd6.apps.googleusercontent.com',
+    androidClientId: '69814635759-gl1l3fcl45hn99a5dv48l2arnuhe7it1.apps.googleusercontent.com',
     iosClientId: '69814635759-b3gjerr7ippta8dcubac5c6flffi7rso.apps.googleusercontent.com',
     iosBundleId: 'com.example.sampleApplication',
   );
@@ -82,7 +82,7 @@ class DefaultFirebaseOptions {
     projectId: 'experimentdatabase-87de1',
     databaseURL: 'https://experimentdatabase-87de1-default-rtdb.firebaseio.com',
     storageBucket: 'experimentdatabase-87de1.appspot.com',
-    androidClientId: '69814635759-niukbnku7v0k0vu8v079ce7dss5thmd6.apps.googleusercontent.com',
+    androidClientId: '69814635759-gl1l3fcl45hn99a5dv48l2arnuhe7it1.apps.googleusercontent.com',
     iosClientId: '69814635759-b3gjerr7ippta8dcubac5c6flffi7rso.apps.googleusercontent.com',
     iosBundleId: 'com.example.sampleApplication',
   );
