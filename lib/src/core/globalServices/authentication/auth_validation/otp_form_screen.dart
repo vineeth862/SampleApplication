@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -6,6 +8,7 @@ import 'package:telephony/telephony.dart';
 
 import '../../../../Home/models/user/user.dart';
 import 'package:pinput/pinput.dart';
+import 'package:sms_user_consent/sms_user_consent.dart';
 
 class OtpPhoneWidget extends StatefulWidget {
   final User user;
@@ -25,27 +28,43 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
   //var Controller = Get.put(otpController());
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  // @override
+  // void initState() {
+  //   telephony.listenIncomingSms(
+  //     onNewMessage: (SmsMessage message) {
+  //       String sms = message.body.toString();
+
+  //       if (message.body!
+  //           .contains('experimentdatabase-87de1.firebaseapp.com')) {
+  //         String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
+  //         //otpbox.set(otpcode.split(""));
+  //         pinController.setText(otpcode.toString());
+  //         setState(() {
+  //           // refresh UI
+  //           pinController.setText(otpcode.toString().substring(0, 6));
+  //         });
+  //       } else {
+  //         print("error");
+  //       }
+  //     },
+  //     listenInBackground: false,
+  //   );
+  // }
+  SmsUserConsent smsUserConsent = SmsUserConsent();
   @override
   void initState() {
-    telephony.listenIncomingSms(
-      onNewMessage: (SmsMessage message) {
-        String sms = message.body.toString();
+    super.initState();
+    if (Platform.isAndroid) {
+      smsUserConsent.requestSms();
+      onSmsReceived();
+    }
+  }
 
-        if (message.body!
-            .contains('experimentdatabase-87de1.firebaseapp.com')) {
-          String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
-          //otpbox.set(otpcode.split(""));
-          pinController.setText(otpcode.toString());
-          setState(() {
-            // refresh UI
-            pinController.setText(otpcode.toString().substring(0, 6));
-          });
-        } else {
-          print("error");
-        }
-      },
-      listenInBackground: false,
-    );
+  ///Initialising the smsUserConsent
+  Future<void> onSmsReceived() async {
+    smsUserConsent = SmsUserConsent(
+        phoneNumberListener: () => setState(() {}),
+        smsListener: () => setState(() {}));
   }
 
   @override
@@ -65,6 +84,11 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
         border: Border.all(color: borderColor),
       ),
     );
+    var receivedSms = smsUserConsent.receivedSms ?? '';
+    var smsOTP = receivedSms.replaceAll(new RegExp(r'[^0-9]'), '');
+    if (smsOTP.isNotEmpty) {
+      pinController.text = smsOTP.toString().substring(0, 6);
+    }
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -99,11 +123,11 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
             //   return value == '2222' ? null : 'Pin is incorrect';
             // },
             hapticFeedbackType: HapticFeedbackType.lightImpact,
-            onCompleted: (pin) {
-              debugPrint('onCompleted: $pin');
-              otp = pin;
-              otpController.instance.verifyOtpController(otp, widget.user);
-            },
+            // onCompleted: (pin) {
+            //   debugPrint('onCompleted: $pin');
+            //   otp = pin;
+            //   otpController.instance.verifyOtpController(otp, widget.user);
+            // },
             onChanged: (value) {
               debugPrint('onChanged: $value');
             },
@@ -140,7 +164,8 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
           ),
           ElevatedButton(
               onPressed: () {
-                otpController.instance.verifyOtpController(otp, widget.user);
+                otpController.instance
+                    .verifyOtpController(pinController.text, widget.user);
               },
               child: Text("Submit"))
         ],

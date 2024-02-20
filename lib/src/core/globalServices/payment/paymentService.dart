@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:easy_upi_payment/easy_upi_payment.dart';
+// import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:get/get.dart';
 import "package:http/http.dart" as http;
 import 'package:crypto/crypto.dart';
@@ -131,23 +131,23 @@ class PaymentService {
   }
 
   startEasyUpiPaymentTransaction() async {
-    final res = await EasyUpiPaymentPlatform.instance
-        .startPayment(
-      EasyUpiPaymentModel(
-        payeeVpa: 'Q720679555@ybl',
-        payeeName: 'MedcapH',
-        // amount: double.parse(order.totalPrice.toString()),
-        amount: 1.0,
-        description: 'Testing payment',
-      ),
-    )
-        .then((value) async {
-      updateOrder(value, true);
-    }).catchError((err) {
-      Get.back();
-      CustomSnackbar.showSnackbar('Transaction failed');
-      //Get.snackbar("Failed", "Transaction failed");
-    });
+    // final res = await EasyUpiPaymentPlatform.instance
+    //     .startPayment(
+    //   EasyUpiPaymentModel(
+    //     payeeVpa: 'Q720679555@ybl',
+    //     payeeName: 'MedcapH',
+    //     // amount: double.parse(order.totalPrice.toString()),
+    //     amount: 1.0,
+    //     description: 'Testing payment',
+    //   ),
+    // )
+    //     .then((value) async {
+    //   updateOrder(value, true);
+    // }).catchError((err) {
+    //   Get.back();
+    //   CustomSnackbar.showSnackbar('Transaction failed');
+    //   //Get.snackbar("Failed", "Transaction failed");
+    // });
   }
 
   updateOrder(result, isUPI) async {

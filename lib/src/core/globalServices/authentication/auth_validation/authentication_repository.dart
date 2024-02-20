@@ -9,6 +9,7 @@ import 'package:sample_application/src/core/globalServices/authentication/onboar
 import '../../../../Home/home.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -64,6 +65,7 @@ class AuthenticationRepository extends GetxController {
       codeAutoRetrievalTimeout: (verificationId) {
         this.verificationId.value = verificationId;
       },
+      timeout: Duration(seconds: 0),
       verificationFailed: (e) {
         if (e.code == "invalid-phone-number") {
           Get.snackbar("Error", "Phone Number is not valid");

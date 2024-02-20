@@ -64,10 +64,11 @@ dependencies:
   google_fonts: ^4.0.4
   cc_avenue: ^1.0.3
   upi_india: ^3.0.1
-  easy_upi_payment: ^0.1.5
+  # easy_upi_payment: ^0.1.5
   another_stepper: ^1.2.2
   phonepe_payment_sdk: ^1.0.4
   crypto: ^3.0.3
+  sms_user_consent: ^0.1.0
   
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ dev_dependencies:
   get_storage: ^2.1.1
   connectivity: ^3.0.6
   animated_text_kit: ^4.2.2
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

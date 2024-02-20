@@ -82,5 +82,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.3"
+    // implementation "dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.3"
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
 }
