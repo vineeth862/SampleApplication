@@ -48,9 +48,12 @@ class _ConnectivityCheckerState extends State<ConnectivityChecker> {
                 // );
                 AuthenticationRepository.instance.screenRedirect();
               });
-              return Center(
-                child: SvgPicture.asset("assets/images/logo.svg",
-                    semanticsLabel: 'Medcaph Logo'),
+              return Container(
+                child: Center(
+                  child: SvgPicture.asset("assets/images/logo.svg",
+                      semanticsLabel: 'Medcaph Logo'),
+                ),
+                // color: Color.fromARGB(255, 255, 240,223)
               ); // Optional loading indicator while redirecting
             } else {
               // Device is offline, show a dialog

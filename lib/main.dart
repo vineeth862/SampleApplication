@@ -51,14 +51,15 @@ class SplashScreen extends StatelessWidget {
         theme: theme,
         themeMode: ThemeMode.light,
         home: AnimatedSplashScreen(
-            duration: 5500,
-            splash: SvgPicture.asset("assets/images/logo.svg",
-                semanticsLabel: 'Medcaph Logo'),
-            nextScreen: Container(),
-            splashIconSize: double.maxFinite,
-            animationDuration: Duration(milliseconds: 2300),
-            splashTransition: SplashTransition.scaleTransition,
-            // pageTransitionType: PageTransitionType.topToBottomJoined,
-            backgroundColor: Color.fromARGB(255, 251, 251, 251)));
+          duration: 5500,
+          splash: SvgPicture.asset("assets/images/logo.svg",
+              semanticsLabel: 'Medcaph Logo'),
+          nextScreen: Container(),
+          splashIconSize: double.maxFinite,
+          animationDuration: Duration(milliseconds: 2300),
+          splashTransition: SplashTransition.scaleTransition,
+          // pageTransitionType: PageTransitionType.topToBottomJoined,
+          // backgroundColor: Color.fromARGB(255, 255, 240, 223)
+        ));
   }
 }
