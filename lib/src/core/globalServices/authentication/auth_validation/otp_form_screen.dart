@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -6,7 +8,7 @@ import 'package:telephony/telephony.dart';
 
 import '../../../../Home/models/user/user.dart';
 import 'package:pinput/pinput.dart';
-// import 'package:sms_user_consent/sms_user_consent.dart';
+import 'package:sms_user_consent/sms_user_consent.dart';
 
 class OtpPhoneWidget extends StatefulWidget {
   final User user;
@@ -48,22 +50,22 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
   //     listenInBackground: false,
   //   );
   // }
-  // SmsUserConsent smsUserConsent = SmsUserConsent();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if (Platform.isAndroid) {
-  //     smsUserConsent.requestSms();
-  //     onSmsReceived();
-  //   }
-  // }
+  SmsUserConsent smsUserConsent = SmsUserConsent();
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) {
+      smsUserConsent.requestSms();
+      onSmsReceived();
+    }
+  }
 
-  // ///Initialising the smsUserConsent
-  // Future<void> onSmsReceived() async {
-  //   smsUserConsent = SmsUserConsent(
-  //       phoneNumberListener: () => setState(() {}),
-  //       smsListener: () => setState(() {}));
-  // }
+  ///Initialising the smsUserConsent
+  Future<void> onSmsReceived() async {
+    smsUserConsent = SmsUserConsent(
+        phoneNumberListener: () => setState(() {}),
+        smsListener: () => setState(() {}));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +84,11 @@ class _OtpPhoneWidgetState extends State<OtpPhoneWidget>
         border: Border.all(color: borderColor),
       ),
     );
-    // var receivedSms = smsUserConsent.receivedSms ?? '';
-    // var smsOTP = receivedSms.replaceAll(new RegExp(r'[^0-9]'), '');
-    // if (smsOTP.isNotEmpty) {
-    //   pinController.text = smsOTP.toString().substring(0, 6);
-    // }
+    var receivedSms = smsUserConsent.receivedSms ?? '';
+    var smsOTP = receivedSms.replaceAll(new RegExp(r'[^0-9]'), '');
+    if (smsOTP.isNotEmpty) {
+      pinController.text = smsOTP.toString().substring(0, 6);
+    }
     return SingleChildScrollView(
       child: Column(
         children: [

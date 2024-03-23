@@ -168,6 +168,42 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:69814635759:android:a542310d945b274daedf1a",
+        "android_client_info": {
+          "package_name": "com.medcaph.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69814635759-rdgt4ncmlssebf5o912vnj8ekmc98o23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4oT4KQgOSOuevGjJV12sNw60gZGUx7iA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69814635759-rdgt4ncmlssebf5o912vnj8ekmc98o23.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69814635759-b3gjerr7ippta8dcubac5c6flffi7rso.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sampleApplication"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:69814635759:android:859430322f5e9d7daedf1a",
         "android_client_info": {
           "package_name": "com.medcaph.sample_application"

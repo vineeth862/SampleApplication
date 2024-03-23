@@ -1181,6 +1181,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  sms_user_consent:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "1a0ad63dff9fdaa5c9ce9f56bf52f00075e1986b"
+      url: "https://github.com/ctnataman/sms_user_consent"
+    source: git
+    version: "0.1.1"
   source_gen:
     dependency: transitive
     description:

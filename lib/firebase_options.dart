@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB4oT4KQgOSOuevGjJV12sNw60gZGUx7iA',
-    appId: '1:69814635759:android:dfca09e14afc93a1aedf1a',
+    appId: '1:69814635759:android:a542310d945b274daedf1a',
     messagingSenderId: '69814635759',
     projectId: 'experimentdatabase-87de1',
     databaseURL: 'https://experimentdatabase-87de1-default-rtdb.firebaseio.com',
